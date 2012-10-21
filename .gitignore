@@ -1,0 +1,4 @@
+#Gitignore for swimv2 project
+
+# OS specific stuff (e.g. Linux backup files, file manager stuff, ...)
+*~
