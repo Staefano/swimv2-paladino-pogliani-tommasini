@@ -55,3 +55,6 @@ local.properties
 
 # Maven stuff
 target/**
+
+# added by Maven integration for eclipse
+pom.properties
