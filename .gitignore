@@ -54,7 +54,7 @@ local.properties
 *.launch
 
 # Maven stuff
-target/**
+target/
 
 # added by Maven integration for eclipse
 pom.properties
