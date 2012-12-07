@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>it.polimi</groupId>
+   <artifactId>swimv2</artifactId>
+   <version>1.0-SNAPSHOT</version>
+   <packaging>pom</packaging>
+   <name>swimv2 application</name>
+
+   <modules>
+      <module>swimv2-ejb</module>
+      <module>swimv2-web</module>
+      <module>swimv2-ear</module>
+   </modules>
+    
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+   </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.6</source>
+                        <target>1.6</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-ejb-plugin</artifactId>
+                    <configuration>
+                        <ejbVersion>3.0</ejbVersion>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jboss-maven-plugin</artifactId>
+<!--                    <version>1.5.0</version> -->
+                    <inherited>true</inherited>
+                    <configuration>
+                        <jbossHome>${env.JBOSS_HOME}</jbossHome>
+                        <serverName>default</serverName>                 
+                        <fileName>${project.build.directory}/${project.build.finalName}.ear</fileName>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencyManagement>
+        <dependencies>
+        
+            <!-- Define the version of the EJB jar so that we don't need to 
+            repeat ourselves in every module -->
+         <dependency>
+            <groupId>it.polimi</groupId>
+            <artifactId>swimv2-ejb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>ejb</type>
+         </dependency>
+
+         <!-- Define the version of the WAR so that we don't need to repeat 
+            ourselves in every module -->
+         <dependency>
+            <groupId>it.polimi</groupId>
+            <artifactId>swimv2-web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <type>war</type>
+            <scope>compile</scope>
+         </dependency>
+        
+        
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.8</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.faces</groupId>
+                <artifactId>jsf-api</artifactId>
+                <version>1.2_02</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.faces</groupId>
+                <artifactId>jsf-impl</artifactId>
+                <version>1.2-b19</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.ejb</groupId>
+                <artifactId>ejb-api</artifactId>
+                <version>3.0</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+    </dependencies>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven.java.net</id>
+            <name>Java.net Maven2 Repository</name>
+            <url>http://download.java.net/maven/2</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <repositories>
+    <repository>
+        <id>jboss</id>
+        <url>http://repository.jboss.com/maven2</url>
+    </repository>
+    <repository>
+    <id>java.net</id>
+    <url>http://download.java.net/maven/2/</url>
+</repository>
+    </repositories>
+
+</project>
