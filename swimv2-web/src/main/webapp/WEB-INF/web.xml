@@ -4,34 +4,4 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>ProvaServlet</display-name>
-    <servlet-name>ProvaServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.ProvaServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ProvaServlet</servlet-name>
-    <url-pattern>/servlet/ProvaServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>AddUser</display-name>
-    <servlet-name>AddUser</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.AddUser</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AddUser</servlet-name>
-    <url-pattern>/add-user</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ViewUsersServlet</display-name>
-    <servlet-name>ViewUsersServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.ViewUsersServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewUsersServlet</servlet-name>
-    <url-pattern>/view-users</url-pattern>
-  </servlet-mapping>
 </web-app>
