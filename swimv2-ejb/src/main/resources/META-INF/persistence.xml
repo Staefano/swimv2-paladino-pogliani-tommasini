@@ -9,6 +9,8 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<class>it.polimi.swimv2.entity.User</class>
 		<class>it.polimi.swimv2.entity.Administrator</class>
 		<class>it.polimi.swimv2.entity.Notification</class>
+		<class>it.polimi.swimv2.entity.Ability</class>
+		<class>it.polimi.swimv2.entity.Feedback</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>
