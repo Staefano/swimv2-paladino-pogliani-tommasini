@@ -21,6 +21,7 @@ public class Notification implements Serializable {
 	private int id;
 	private Timestamp timestamp;
 	private String ability;
+	private User user1_id;
 	private User user2_id;
 	private static final long serialVersionUID = 1L;
 	private NotificationType type;
@@ -61,6 +62,12 @@ public class Notification implements Serializable {
 	}
 	public void setType(NotificationType type) {
 		this.type = type;
+	}
+	public User getUser1_id() {
+		return user1_id;
+	}
+	public void setUser1_id(User user1_id) {
+		this.user1_id = user1_id;
 	}
    
 }
