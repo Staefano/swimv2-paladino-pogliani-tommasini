@@ -5,14 +5,9 @@ import java.lang.String;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
-/**
- * Entity implementation class for Entity: Message
- *
- */
 @Entity
 
 public class Message implements Serializable {
-
 	
 	@Id private int id;
 	private Timestamp timestamp;
