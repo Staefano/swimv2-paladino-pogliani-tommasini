@@ -11,6 +11,11 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<class>it.polimi.swimv2.entity.AbilityRequest</class>
 		<class>it.polimi.swimv2.entity.PendingUser</class>
 		<class>it.polimi.swimv2.entity.Friendship</class>
+		<class>it.polimi.swimv2.entity.Ability</class>
+		<class>it.polimi.swimv2.entity.Feedback</class>
+		<class>it.polimi.swimv2.entity.HelpRequest</class>
+		<class>it.polimi.swimv2.entity.Message</class>
+		<class>it.polimi.swimv2.entity.Notification</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>
