@@ -8,6 +8,9 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<jta-data-source>java:/SwimDS</jta-data-source>
 		<class>it.polimi.swimv2.entity.User</class>
 		<class>it.polimi.swimv2.entity.Administrator</class>
+		<class>it.polimi.swimv2.entity.AbilityRequest</class>
+		<class>it.polimi.swimv2.entity.PendingUser</class>
+		<class>it.polimi.swimv2.entity.Friendship</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>
