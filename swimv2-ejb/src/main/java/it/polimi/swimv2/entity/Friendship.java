@@ -4,10 +4,6 @@ import it.polimi.swimv2.entity.User;
 import java.io.Serializable;
 import javax.persistence.*;
 
-/**
- * Entity implementation class for Entity: Friendship
- *
- */
 @Entity @IdClass(FriendshipId.class)
 
 public class Friendship implements Serializable {
@@ -18,6 +14,7 @@ public class Friendship implements Serializable {
 	private boolean is_direct;
 	private static final long serialVersionUID = 1L;
 
+	
 	public Friendship() {
 		super();
 	}   
