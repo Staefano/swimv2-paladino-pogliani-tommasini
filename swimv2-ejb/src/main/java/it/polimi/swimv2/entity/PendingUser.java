@@ -4,21 +4,17 @@ import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
 
-/**
- * Entity implementation class for Entity: PendingUser
- *
- */
 @Entity
 
 public class PendingUser implements Serializable {
-
-	   
+   
 	@Id
 	private String email;
 	private String confirmCode;
 	private String passwordHash;
 	private static final long serialVersionUID = 1L;
 
+	
 	public PendingUser() {
 		super();
 	}   

@@ -5,17 +5,11 @@ import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
 
-
-/**
- * Entity implementation class for Entity: Feedback
- *
- */
 @Entity
-
 public class Feedback implements Serializable {
 
-	   
 	@Id
+	@GeneratedValue
 	private int id;
 	private int evaluation;
 	private String String;
@@ -24,21 +18,24 @@ public class Feedback implements Serializable {
 
 	public Feedback() {
 		super();
-	}   
+	}
+
 	public int getId() {
 		return this.id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
-	}   
+	}
+
 	public int getEvaluation() {
 		return this.evaluation;
 	}
 
 	public void setEvaluation(int evaluation) {
 		this.evaluation = evaluation;
-	}   
+	}
+
 	public String getString() {
 		return this.String;
 	}
@@ -46,11 +43,13 @@ public class Feedback implements Serializable {
 	public void setString(String String) {
 		this.String = String;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
-   
+
 }

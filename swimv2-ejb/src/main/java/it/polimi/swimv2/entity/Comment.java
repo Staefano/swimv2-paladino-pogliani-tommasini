@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
-public class Message implements Serializable {
+public class Comment implements Serializable {
 
 	@Id
 	@GeneratedValue
@@ -19,9 +19,9 @@ public class Message implements Serializable {
 	private User sender;
 
 	@OneToOne
-	private User receiver;
+	private HelpRequest helprequest;
 
-	public Message() {
+	public Comment() {
 		super();
 	}
 
@@ -50,19 +50,19 @@ public class Message implements Serializable {
 	}
 
 	public User getSender() {
-		return this.sender;
+		return sender;
 	}
 
 	public void setSender(User sender) {
 		this.sender = sender;
 	}
 
-	public User getReceiver() {
-		return this.receiver;
+	public HelpRequest getHelprequest() {
+		return helprequest;
 	}
 
-	public void setReceiver(User receiver) {
-		this.receiver = receiver;
+	public void setHelprequest(HelpRequest helprequest) {
+		this.helprequest = helprequest;
 	}
 
 }
