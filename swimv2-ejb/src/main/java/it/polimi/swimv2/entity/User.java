@@ -31,6 +31,29 @@ public class User implements Serializable {
 		inverseJoinColumns = { @JoinColumn(name = "ability") } )
 	private Set<Ability> abilities;
 	
+	/*vanno messe?
+	@OneToMany(mappedBy = "tgtuser")
+	private Set<Notification> notifications;
+
+	@OneToMany(mappedBy = "sender")
+	private Set<AbilityRequest> abRequests;
+
+	@OneToMany(mappedBy = "sender")
+	private Set<Message> sentMessages;
+
+	@OneToMany(mappedBy = "receiver")
+	private Set<Message> receivedMessages;
+
+	@OneToMany(mappedBy = "sender")
+	private Set<HelpRequest> askedHelps;
+
+	@OneToMany(mappedBy = "receiver")
+	private Set<HelpRequest> givenHelps;
+	
+	perche' dal progetto logico non mi sembra che user tenga
+	traccia di questi dati...
+	*/
+	
 	public User() {
 		super();
 	}
