@@ -6,15 +6,16 @@ public class FriendshipId implements Serializable {
 	
 	private static final long serialVersionUID = 6684163541032025055L;
 
-	private User user1;
-	private User user2;
-
+	/* fields referencing User primary keys */
+	private int user1;
+	private int user2;
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((user1 == null) ? 0 : user1.hashCode());
-		result = prime * result + ((user2 == null) ? 0 : user2.hashCode());
+		result = prime * result + user1;
+		result = prime * result + user2;
 		return result;
 	}
 	@Override
@@ -23,20 +24,14 @@ public class FriendshipId implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof FriendshipId))
 			return false;
 		FriendshipId other = (FriendshipId) obj;
-		if (user1 == null) {
-			if (other.user1 != null)
-				return false;
-		} else if (!user1.equals(other.user1))
+		if (user1 != other.user1)
 			return false;
-		if (user2 == null) {
-			if (other.user2 != null)
-				return false;
-		} else if (!user2.equals(other.user2))
+		if (user2 != other.user2)
 			return false;
 		return true;
 	}
-
+	
 }

@@ -5,11 +5,13 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity @IdClass(FriendshipId.class)
-
 public class Friendship implements Serializable {
 	
-	@Id	private User user1;
-	@Id	private User user2;
+	@ManyToOne @Id 
+	private User user1;
+	
+	@ManyToOne @Id 
+	private User user2;
 	
 	private boolean is_direct;
 	private static final long serialVersionUID = 1L;
