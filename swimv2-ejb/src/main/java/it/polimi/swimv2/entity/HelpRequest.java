@@ -31,10 +31,11 @@ public class HelpRequest implements Serializable {
 	@OneToOne(optional = true)
 	private Feedback receiverFeedback;
 
-	// manytomany unidirezionale dato che ability non tiene traccia della
-	// helprequest
+	// manytomany unidirezionale dato che ability non tiene traccia della helprequest
 	@ManyToMany
-	@JoinTable(name = "HelpRequestAbility", joinColumns = { @JoinColumn(name = "request") }, inverseJoinColumns = { @JoinColumn(name = "ability") })
+	@JoinTable(name = "HelpRequestAbility", 
+				joinColumns = { @JoinColumn(name = "request") }, 
+				inverseJoinColumns = { @JoinColumn(name = "ability") })
 	private Set<Ability> abilities;
 
 	public HelpRequest() {
@@ -105,4 +106,32 @@ public class HelpRequest implements Serializable {
 		this.timestamp = timestamp;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof HelpRequest))
+			return false;
+		HelpRequest other = (HelpRequest) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "HelpRequest [id=" + id + ", subject=" + subject + ", status="
+				+ status + ", timestamp=" + timestamp + " ...]";
+	}
+	
 }

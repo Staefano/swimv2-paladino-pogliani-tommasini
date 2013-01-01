@@ -65,4 +65,33 @@ public class Comment implements Serializable {
 		this.helprequest = helprequest;
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", timestamp=" + timestamp + ", text="
+				+ text + ", sender=" + sender + ", helprequest=" + helprequest
+				+ "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Comment))
+			return false;
+		Comment other = (Comment) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 }

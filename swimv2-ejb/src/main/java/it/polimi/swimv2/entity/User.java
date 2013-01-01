@@ -15,7 +15,10 @@ public class User implements Serializable {
 	private int id;
 	private String name;
 	private String surname;
+	
+	@Column(unique=true)
 	private String email;
+	
 	private String passwordHash;
 	private Date birthdate;
 	private String website;
@@ -30,29 +33,6 @@ public class User implements Serializable {
 		joinColumns = { @JoinColumn(name = "user") },
 		inverseJoinColumns = { @JoinColumn(name = "ability") } )
 	private Set<Ability> abilities;
-	
-	/*vanno messe?
-	@OneToMany(mappedBy = "tgtuser")
-	private Set<Notification> notifications;
-
-	@OneToMany(mappedBy = "sender")
-	private Set<AbilityRequest> abRequests;
-
-	@OneToMany(mappedBy = "sender")
-	private Set<Message> sentMessages;
-
-	@OneToMany(mappedBy = "receiver")
-	private Set<Message> receivedMessages;
-
-	@OneToMany(mappedBy = "sender")
-	private Set<HelpRequest> askedHelps;
-
-	@OneToMany(mappedBy = "receiver")
-	private Set<HelpRequest> givenHelps;
-	
-	perche' dal progetto logico non mi sembra che user tenga
-	traccia di questi dati...
-	*/
 	
 	public User() {
 		super();
@@ -158,6 +138,15 @@ public class User implements Serializable {
 		if (id != other.id)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", surname=" + surname
+				+ ", email=" + email + ", passwordHash=" + passwordHash
+				+ ", birthdate=" + birthdate + ", website=" + website
+				+ ", location=" + location + ", minibio=" + minibio
+				+ ", description=" + description + "]";
 	}
 
 }

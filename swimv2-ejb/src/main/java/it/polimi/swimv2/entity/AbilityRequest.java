@@ -63,4 +63,33 @@ public class AbilityRequest implements Serializable {
 		this.sender = sender;
 	}
 
+	@Override
+	public String toString() {
+		return "AbilityRequest [id=" + id + ", ability=" + ability
+				+ ", timestamp=" + timestamp + ", comment=" + comment
+				+ ", sender=" + sender + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof AbilityRequest))
+			return false;
+		AbilityRequest other = (AbilityRequest) obj;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+
 }
