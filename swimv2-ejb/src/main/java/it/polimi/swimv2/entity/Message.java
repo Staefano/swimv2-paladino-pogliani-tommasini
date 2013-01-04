@@ -3,6 +3,7 @@ package it.polimi.swimv2.entity;
 import java.io.Serializable;
 import java.lang.String;
 import java.sql.Timestamp;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,6 +24,14 @@ public class Message implements Serializable {
 
 	public Message() {
 		super();
+	}
+	
+	public Message(User from, User to, String text) {
+		setSender(from);
+		setReceiver(to);
+		setText(text);
+		/* TODO should we move this to EJBs??? */
+		setTimestamp(new Timestamp(System.currentTimeMillis()));
 	}
 
 	public int getId() {

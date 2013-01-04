@@ -6,7 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 
 /**
  * Performs operations related to password hashing and salting
@@ -20,7 +20,7 @@ public class HashService {
 		try {
 			MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
 			digest.update(token.getBytes(ENCODING));
-			return Base64.encodeBase64URLSafeString(digest.digest());
+			return Hex.encodeHexString(digest.digest());
 		} catch (NoSuchAlgorithmException e) {
 			throw new ServerErrorException(
 					"Error hashing password - no such algorithm");
@@ -31,7 +31,7 @@ public class HashService {
 	}
 
 	public boolean compareWithHash(String unhashed, String hashed) {
-		return hash(unhashed) == hashed;
+		return hash(unhashed).equals(hashed);
 	}
 	
 }
