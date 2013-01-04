@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private String name;
 	private String surname;
