@@ -5,6 +5,11 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="AbilityRequest.findByName",
+			query="SELECT a FROM AbilityRequest a WHERE a.ability = :name")
+})
+
 public class AbilityRequest implements Serializable {
 
 	@Id
