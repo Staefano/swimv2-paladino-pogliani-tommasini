@@ -121,6 +121,10 @@ public class User implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public boolean isAdmin() {
+		return false;
+	}
 
 	@Override
 	public int hashCode() {

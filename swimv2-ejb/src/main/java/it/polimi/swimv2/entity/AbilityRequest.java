@@ -16,7 +16,7 @@ public class AbilityRequest implements Serializable {
 	private String comment;
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
+	@ManyToOne
 	private User sender;
 
 	public AbilityRequest() {

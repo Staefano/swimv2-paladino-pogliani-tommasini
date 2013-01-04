@@ -15,10 +15,10 @@ public class Message implements Serializable {
 	private String text;
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
+	@ManyToOne
 	private User sender;
 
-	@OneToOne
+	@ManyToOne
 	private User receiver;
 
 	public Message() {

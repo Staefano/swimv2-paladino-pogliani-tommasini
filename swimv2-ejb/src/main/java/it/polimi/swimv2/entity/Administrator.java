@@ -12,5 +12,10 @@ public class Administrator extends User implements Serializable {
 	public Administrator() {
 		super();
 	}
+	
+	@Override
+	public boolean isAdmin() {
+		return true;
+	}
 
 }

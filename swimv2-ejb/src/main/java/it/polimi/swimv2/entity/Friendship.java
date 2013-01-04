@@ -4,36 +4,47 @@ import it.polimi.swimv2.entity.User;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@Entity @IdClass(FriendshipId.class)
+@Entity
+@IdClass(FriendshipId.class)
 public class Friendship implements Serializable {
-	
-	@ManyToOne @Id 
+
+	@Id
+	private int user1_id;
+
+	@Id	
+	private int user2_id;
+
+	@ManyToOne 
+	@JoinColumn(name = "user1")
 	private User user1;
-	
-	@ManyToOne @Id 
+
+	@ManyToOne 
+	@JoinColumn(name = "user2")
 	private User user2;
-	
+
 	private boolean is_direct;
 	private static final long serialVersionUID = 1L;
 
-	
 	public Friendship() {
 		super();
-	}   
+	}
+
 	public User getUser1() {
 		return this.user1;
 	}
 
 	public void setUser1(User user1) {
 		this.user1 = user1;
-	}   
+	}
+
 	public User getUser2() {
 		return this.user2;
 	}
 
 	public void setUser2(User user2) {
 		this.user2 = user2;
-	}   
+	}
+
 	public boolean getIs_direct() {
 		return this.is_direct;
 	}
@@ -41,7 +52,7 @@ public class Friendship implements Serializable {
 	public void setIs_direct(boolean is_direct) {
 		this.is_direct = is_direct;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -50,6 +61,7 @@ public class Friendship implements Serializable {
 		result = prime * result + ((user2 == null) ? 0 : user2.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -74,10 +86,8 @@ public class Friendship implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Friendship [user1=" + user1 + ", user2=" + user2
+		return "Friendship [user1=" + user1_id + ", user2=" + user2
 				+ ", is_direct=" + is_direct + "]";
 	}
-	
-	
-   
+
 }

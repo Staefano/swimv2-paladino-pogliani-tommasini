@@ -2,20 +2,24 @@ package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 public class FriendshipId implements Serializable {
 	
 	private static final long serialVersionUID = 6684163541032025055L;
 
 	/* fields referencing User primary keys */
-	private int user1;
-	private int user2;
+	@Column(name="user1")
+	private int user1_id;
+	@Column(name="user2")
+	private int user2_id;
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + user1;
-		result = prime * result + user2;
+		result = prime * result + user1_id;
+		result = prime * result + user2_id;
 		return result;
 	}
 	@Override
@@ -27,9 +31,9 @@ public class FriendshipId implements Serializable {
 		if (!(obj instanceof FriendshipId))
 			return false;
 		FriendshipId other = (FriendshipId) obj;
-		if (user1 != other.user1)
+		if (user1_id != other.user1_id)
 			return false;
-		if (user2 != other.user2)
+		if (user2_id != other.user2_id)
 			return false;
 		return true;
 	}

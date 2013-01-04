@@ -20,7 +20,7 @@ public class Notification implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private NotificationType type;
 
-	@OneToOne
+	@ManyToOne
 	private User tgtuser;
 
 	public Notification() {

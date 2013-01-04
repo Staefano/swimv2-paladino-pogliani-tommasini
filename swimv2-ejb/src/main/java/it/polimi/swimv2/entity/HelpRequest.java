@@ -19,10 +19,10 @@ public class HelpRequest implements Serializable {
 	private Timestamp timestamp;
 	private static final long serialVersionUID = 1L;
 
-	@OneToOne
+	@ManyToOne
 	private User sender;
 
-	@OneToOne
+	@ManyToOne
 	private User receiver;
 
 	@OneToOne(optional = true)
