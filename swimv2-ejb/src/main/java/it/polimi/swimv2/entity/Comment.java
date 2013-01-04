@@ -6,20 +6,22 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
-public class AbilityRequest implements Serializable {
+public class Comment implements Serializable {
 
 	@Id
 	@GeneratedValue
 	private int id;
-	private String ability;
 	private Timestamp timestamp;
-	private String comment;
+	private String text;
 	private static final long serialVersionUID = 1L;
 
 	@OneToOne
 	private User sender;
 
-	public AbilityRequest() {
+	@OneToOne
+	private HelpRequest helprequest;
+
+	public Comment() {
 		super();
 	}
 
@@ -31,14 +33,6 @@ public class AbilityRequest implements Serializable {
 		this.id = id;
 	}
 
-	public String getAbility() {
-		return this.ability;
-	}
-
-	public void setAbility(String ability) {
-		this.ability = ability;
-	}
-
 	public Timestamp getTimestamp() {
 		return this.timestamp;
 	}
@@ -47,12 +41,12 @@ public class AbilityRequest implements Serializable {
 		this.timestamp = timestamp;
 	}
 
-	public String getComment() {
-		return this.comment;
+	public String getText() {
+		return this.text;
 	}
 
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 	public User getSender() {
@@ -63,13 +57,21 @@ public class AbilityRequest implements Serializable {
 		this.sender = sender;
 	}
 
-	@Override
-	public String toString() {
-		return "AbilityRequest [id=" + id + ", ability=" + ability
-				+ ", timestamp=" + timestamp + ", comment=" + comment
-				+ ", sender=" + sender + "]";
+	public HelpRequest getHelprequest() {
+		return helprequest;
 	}
 
+	public void setHelprequest(HelpRequest helprequest) {
+		this.helprequest = helprequest;
+	}
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", timestamp=" + timestamp + ", text="
+				+ text + ", sender=" + sender + ", helprequest=" + helprequest
+				+ "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -84,9 +86,9 @@ public class AbilityRequest implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof AbilityRequest))
+		if (!(obj instanceof Comment))
 			return false;
-		AbilityRequest other = (AbilityRequest) obj;
+		Comment other = (Comment) obj;
 		if (id != other.id)
 			return false;
 		return true;

@@ -3,21 +3,16 @@ package it.polimi.swimv2.entity;
 import java.io.Serializable;
 import java.lang.String;
 import javax.persistence.*;
-import it.polimi.swimv2.entity.User;
-/**
- * Entity implementation class for Entity: Ability
- *
- */
+
 @Entity
 
 public class Ability implements Serializable {
-
 	   
 	@Id
 	private String name;
-	private User user;
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	public Ability() {
 		super();
 	}   
@@ -28,11 +23,31 @@ public class Ability implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public User getUser() {
-		return user;
+	
+	@Override
+	public String toString() {
+		return "Ability [name=" + name + "]";
 	}
-	public void setUser(User user) {
-		this.user = user;
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		return prime + ((name == null) ? 0 : name.hashCode());
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null || !(obj instanceof Ability))
+			return false;
+		Ability other = (Ability) obj;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
 	}
    
 }
