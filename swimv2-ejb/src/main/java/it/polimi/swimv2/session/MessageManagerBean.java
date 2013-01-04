@@ -25,10 +25,10 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 	// all the messages or with a limitation???
 	@SuppressWarnings("unchecked")
 	public List<Message> getByUsername(User from, User to) {
-		final String Q = "from Message m " +
+		final String query = "from Message m " +
 				"where m.sender = :from and m.receiver = :to " +
 				"order by m.timestamp desc";
-		Query q = manager.createQuery(Q);
+		Query q = manager.createQuery(query);
 		q.setParameter("from",  from);
 		q.setParameter("to", to);
 		return (List<Message>) q.getResultList();

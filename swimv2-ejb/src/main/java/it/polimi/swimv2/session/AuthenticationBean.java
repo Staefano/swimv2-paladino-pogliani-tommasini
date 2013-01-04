@@ -20,7 +20,8 @@ import javax.persistence.Query;
 @Stateless
 public class AuthenticationBean implements AuthenticationBeanRemote {
 	
-	@EJB EmailServiceLocal emailer;
+	@EJB 
+	private EmailServiceLocal emailer;
 	
 	@PersistenceContext(unitName="swimv2")
 	private EntityManager manager;
@@ -42,9 +43,11 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		q.setParameter("email", username);
 		try {
 			User u = (User) q.getSingleResult();
-			if(hasher.compareWithHash(password, u.getPasswordHash())) 
+			if(hasher.compareWithHash(password, u.getPasswordHash())) { 
 				return u;
-			else throw new NoSuchUserException();
+			} else {
+				throw new NoSuchUserException();
+			}
 		} catch(NoResultException e) {
 			throw new NoSuchUserException();
 		}

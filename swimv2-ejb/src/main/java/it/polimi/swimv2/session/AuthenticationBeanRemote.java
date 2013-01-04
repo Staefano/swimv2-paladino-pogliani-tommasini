@@ -14,8 +14,8 @@ public interface AuthenticationBeanRemote {
 
 	void register(String email, String password) throws NotUniqueException;
 
-	public boolean checkConfirmCode(String token);
+	boolean checkConfirmCode(String token);
 
-	public void completeRegistration(String token, User user) 
+	void completeRegistration(String token, User user) 
 			throws NoSuchUserException;
 }

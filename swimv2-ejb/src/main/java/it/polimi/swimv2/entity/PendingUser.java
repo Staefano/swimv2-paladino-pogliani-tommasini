@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import javax.persistence.*;
 
 @Entity
@@ -63,18 +62,20 @@ public class PendingUser implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof PendingUser)) {
 			return false;
-		if (!(obj instanceof PendingUser))
-			return false;
+		}
 		PendingUser other = (PendingUser) obj;
 		if (email == null) {
-			if (other.email != null)
+			if (other.email != null) {
 				return false;
-		} else if (!email.equals(other.email))
+			}
+		} else if (!email.equals(other.email)) {
 			return false;
+		}
 		return true;
 	}
 	

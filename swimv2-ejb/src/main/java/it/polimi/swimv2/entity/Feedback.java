@@ -2,7 +2,6 @@ package it.polimi.swimv2.entity;
 
 import it.polimi.swimv2.enums.Role;
 import java.io.Serializable;
-import java.lang.String;
 import javax.persistence.*;
 
 @Entity
@@ -12,7 +11,7 @@ public class Feedback implements Serializable {
 	@GeneratedValue
 	private int id;
 	private int evaluation;
-	private String String;
+	private String string;
 	private Role role;
 	private static final long serialVersionUID = 1L;
 
@@ -37,11 +36,11 @@ public class Feedback implements Serializable {
 	}
 
 	public String getString() {
-		return this.String;
+		return this.string;
 	}
 
-	public void setString(String String) {
-		this.String = String;
+	public void setString(String string) {
+		this.string = string;
 	}
 
 	public Role getRole() {
@@ -55,7 +54,7 @@ public class Feedback implements Serializable {
 	@Override
 	public String toString() {
 		return "Feedback [id=" + id + ", evaluation=" + evaluation
-				+ ", String=" + String + ", role=" + role + "]";
+				+ ", String=" + string + ", role=" + role + "]";
 	}
 	
 	@Override
@@ -68,15 +67,16 @@ public class Feedback implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Feedback)) {
 			return false;
-		if (!(obj instanceof Feedback))
-			return false;
+		}
 		Feedback other = (Feedback) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		return true;
 	}
 

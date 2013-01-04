@@ -10,31 +10,33 @@ public class FriendshipId implements Serializable {
 
 	/* fields referencing User primary keys */
 	@Column(name="user1")
-	private int user1_id;
+	private int user1Id;
 	@Column(name="user2")
-	private int user2_id;
+	private int user2Id;
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + user1_id;
-		result = prime * result + user2_id;
+		result = prime * result + user1Id;
+		result = prime * result + user2Id;
 		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof FriendshipId)) {
 			return false;
-		if (!(obj instanceof FriendshipId))
-			return false;
+		}
 		FriendshipId other = (FriendshipId) obj;
-		if (user1_id != other.user1_id)
+		if (user1Id != other.user1Id) {
 			return false;
-		if (user2_id != other.user2_id)
+		}
+		if (user2Id != other.user2Id) {
 			return false;
+		}
 		return true;
 	}
 	

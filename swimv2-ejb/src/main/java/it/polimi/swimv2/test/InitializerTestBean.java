@@ -21,7 +21,7 @@ public class InitializerTestBean<Message> implements InitializerTestBeanRemote {
 	@PersistenceContext(unitName="swimv2") 
 	private EntityManager em;
 	
-	User[] predef = new User[4];
+	private User[] predef = new User[4];
 	
 	@PostConstruct
 	public void loadUsers() {
@@ -71,8 +71,9 @@ public class InitializerTestBean<Message> implements InitializerTestBeanRemote {
 	}
 
 	public void createPredefinedUsers() {
-		for(User u : predef)
+		for(User u : predef) {
 			em.merge(u);
+		}
 	}
 	
 }

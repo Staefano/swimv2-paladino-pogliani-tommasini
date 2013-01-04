@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 public class EmailService implements EmailServiceLocal {
 
 	@Resource(mappedName = "java:/Mail")
-	Session mailSession;
+	private Session mailSession;
 	
 	@Resource(mappedName = "swimv2-configuration")
 	private Properties configProperties;
