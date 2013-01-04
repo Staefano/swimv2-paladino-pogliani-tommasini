@@ -2,6 +2,7 @@ package it.polimi.swimv2.test;
 
 import static org.junit.Assert.*;
 
+import it.polimi.swimv2.session.AuthenticationBean;
 import it.polimi.swimv2.session.AuthenticationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
@@ -13,7 +14,7 @@ public class AuthenticationTest extends BaseTest {
 	
 	@Test
 	public void testPasswordChecking() throws Exception {
-		AuthenticationBeanRemote ab = lookup("AuthenticationBean");
+		AuthenticationBeanRemote ab = lookup(AuthenticationBean.class);
 		User donald = ab
 				.checkCredentials("donald.duck@example.com", "paperino");
 		assertNotNull(donald);

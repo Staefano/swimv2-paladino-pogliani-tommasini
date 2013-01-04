@@ -12,9 +12,8 @@ public class BaseTest {
 	
 	protected static InitialContext ctx;
 	
-	@SuppressWarnings("unchecked")
-	protected static <T> T lookup(String bean) throws NamingException {
-		return (T) ctx.lookup("swimv2-ear/"+bean+"/remote");
+	protected static <T,Q> T lookup(Class<Q> cl) throws NamingException {
+		return (T) ctx.lookup("swimv2-ear/"+cl.getSimpleName()+"/remote");
 	}
 	
 	@BeforeClass
@@ -24,13 +23,13 @@ public class BaseTest {
 	 	env.setProperty("java.naming.provider.url", "localhost:1099");
 	 	env.setProperty("java.naming.factory.url.pkgs", "org.jboss.naming");
 	 	ctx = new InitialContext(env);
-	 	InitializerTestBeanRemote init = lookup("InitializerTestBean");
+	 	InitializerTestBeanRemote init = lookup(InitializerTestBean.class);
 	 	init.createPredefinedUsers();
 	}
 	
 	@AfterClass
 	public static void teardown() throws NamingException {
-		InitializerTestBeanRemote init = lookup("InitializerTestBean");
+		InitializerTestBeanRemote init = lookup(InitializerTestBean.class);
 		init.deletePredefinedUsers();
 	}
 
