@@ -5,7 +5,10 @@ import java.lang.String;
 import javax.persistence.*;
 
 @Entity
-
+@NamedQueries({
+	@NamedQuery(name="PendingUser.findByToken",
+		query="SELECT x FROM PendingUser x WHERE x.confirmCode = :token")
+})
 public class PendingUser implements Serializable {
    
 	@Id
@@ -20,13 +23,21 @@ public class PendingUser implements Serializable {
 	public PendingUser() {
 		super();
 	}   
+	
+	public PendingUser(String email, String hash, String token) {
+		this.email = email;
+		this.passwordHash = hash;
+		this.confirmCode = token;
+	}
+	
 	public String getEmail() {
 		return this.email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}   
+	}
+	
 	public String getConfirmCode() {
 		return this.confirmCode;
 	}

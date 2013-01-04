@@ -8,6 +8,10 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="User.findByEmail", 
+			query="SELECT x FROM User x WHERE x.email = :email")
+})
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
