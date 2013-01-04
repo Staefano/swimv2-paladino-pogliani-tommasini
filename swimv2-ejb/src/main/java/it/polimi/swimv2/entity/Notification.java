@@ -9,6 +9,12 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="Notification.findBytgtUser",
+			query="SELECT x FROM Notification x WHERE x.tgtuser = :user")
+
+})
+
 public class Notification implements Serializable {
 
 	@Id

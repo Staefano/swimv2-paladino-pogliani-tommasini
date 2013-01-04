@@ -9,6 +9,17 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="HelpRequest.findByHelper",
+			query="SELECT x FROM HelpRequest x WHERE x.receiver = :helper"),
+	
+	@NamedQuery(name="HelpRequest.findByAsker",
+			query="SELECT x FROM HelpRequest x WHERE x.sender = :asker"),
+	
+	@NamedQuery(name="HelpRequest.findByStatus",
+	query="SELECT x FROM HelpRequest x WHERE x.status = :status")
+
+})
 public class HelpRequest implements Serializable {
 
 	@Id
