@@ -27,8 +27,13 @@ public class UserBean implements UserBeanRemote {
 
 		Query q = manager.createNamedQuery("User.findByID");
 		q.setParameter("id", u.getId());
-		return null;
-		// TODO Come si comporta la screen? addabilitY?
+		try{
+			return (User) q.getSingleResult();
+			
+		}
+		catch(NoResultException nre){
+			throw new NoSuchUserException();
+		}
 	}
 
 	@Override
@@ -79,6 +84,7 @@ public class UserBean implements UserBeanRemote {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Notification> getNotifications(User u)
 			throws NoSuchUserException {
@@ -92,6 +98,7 @@ public class UserBean implements UserBeanRemote {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getOpenedHelpRequest(User u)
 			throws NoSuchUserException {
@@ -107,6 +114,7 @@ public class UserBean implements UserBeanRemote {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getClosedHelpRequest(User u)
 			throws NoSuchUserException {
