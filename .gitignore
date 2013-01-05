@@ -47,14 +47,23 @@ local.properties
 .settings/
 .loadpath
 
+# IntelliJ Idea stuff
+.idea/
+*.iml
+*.iws
+
+
 # External tool builders
 .externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
 *.launch
 
-# Maven stuff
+# Compiled files
 target/
+
+# Log files
+log/
 
 # added by Maven integration for eclipse
 pom.properties
