@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Date;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private String name;
 	private String surname;
@@ -136,15 +135,16 @@ public class User implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof User)) {
 			return false;
-		if (!(obj instanceof User))
-			return false;
+		}
 		User other = (User) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		return true;
 	}
 

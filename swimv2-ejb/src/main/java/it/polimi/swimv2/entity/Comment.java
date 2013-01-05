@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
@@ -82,16 +81,18 @@ public class Comment implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Comment)) {
 			return false;
-		if (!(obj instanceof Comment))
-			return false;
+		}
 		Comment other = (Comment) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
-		return true;
+		} else {
+			return true;
+		}
 	}
 
 }

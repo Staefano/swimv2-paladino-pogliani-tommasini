@@ -1,11 +1,15 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name="AbilityRequest.findByName",
+			query="SELECT a FROM AbilityRequest a WHERE a.ability = :name")
+})
+
 public class AbilityRequest implements Serializable {
 
 	@Id
@@ -80,16 +84,18 @@ public class AbilityRequest implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof AbilityRequest)) {
 			return false;
-		if (!(obj instanceof AbilityRequest))
-			return false;
+		}
 		AbilityRequest other = (AbilityRequest) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
-		return true;
+		} else {
+			return true;
+		}
 	}
 
 }

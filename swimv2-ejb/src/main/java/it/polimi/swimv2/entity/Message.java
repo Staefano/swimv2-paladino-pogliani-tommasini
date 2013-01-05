@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Timestamp;
 
 import javax.persistence.*;
@@ -27,11 +26,10 @@ public class Message implements Serializable {
 	}
 	
 	public Message(User from, User to, String text) {
-		setSender(from);
-		setReceiver(to);
-		setText(text);
-		/* TODO should we move this to EJBs??? */
-		setTimestamp(new Timestamp(System.currentTimeMillis()));
+		this.sender = from;
+		this.receiver = to;
+		this.text = text;
+		this.timestamp = new Timestamp(System.currentTimeMillis());
 	}
 
 	public int getId() {
@@ -84,15 +82,16 @@ public class Message implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Message)) {
 			return false;
-		if (!(obj instanceof Message))
-			return false;
+		}
 		Message other = (Message) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		return true;
 	}
 

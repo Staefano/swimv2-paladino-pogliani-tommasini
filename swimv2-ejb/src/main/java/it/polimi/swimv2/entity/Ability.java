@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import java.io.Serializable;
-import java.lang.String;
 import javax.persistence.*;
 
 @Entity
@@ -37,16 +36,18 @@ public class Ability implements Serializable {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null || !(obj instanceof Ability))
+		} else if (!(obj instanceof Ability)) {
 			return false;
+		}
 		Ability other = (Ability) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		return true;
 	}
    

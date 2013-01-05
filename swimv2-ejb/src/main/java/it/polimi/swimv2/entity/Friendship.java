@@ -9,10 +9,10 @@ import javax.persistence.*;
 public class Friendship implements Serializable {
 
 	@Id
-	private int user1_id;
+	private int user1Id;
 
 	@Id	
-	private int user2_id;
+	private int user2Id;
 
 	@ManyToOne 
 	@JoinColumn(name = "user1")
@@ -22,7 +22,7 @@ public class Friendship implements Serializable {
 	@JoinColumn(name = "user2")
 	private User user2;
 
-	private boolean is_direct;
+	private boolean isDirect;
 	private static final long serialVersionUID = 1L;
 
 	public Friendship() {
@@ -45,12 +45,12 @@ public class Friendship implements Serializable {
 		this.user2 = user2;
 	}
 
-	public boolean getIs_direct() {
-		return this.is_direct;
+	public boolean isDirect() {
+		return this.isDirect;
 	}
 
-	public void setIs_direct(boolean is_direct) {
-		this.is_direct = is_direct;
+	public void setDirect(boolean isDirect) {
+		this.isDirect = isDirect;
 	}
 
 	@Override
@@ -64,30 +64,34 @@ public class Friendship implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Friendship)) {
 			return false;
-		if (!(obj instanceof Friendship))
-			return false;
+		}
 		Friendship other = (Friendship) obj;
 		if (user1 == null) {
-			if (other.user1 != null)
+			if(other.user1 != null) {
 				return false;
-		} else if (!user1.equals(other.user1))
+			}
+		} else if (!user1.equals(other.user1)) {
 			return false;
+		}
 		if (user2 == null) {
-			if (other.user2 != null)
+			if (other.user2 != null) {
 				return false;
-		} else if (!user2.equals(other.user2))
+			}
+		} else if (!user2.equals(other.user2)) {
 			return false;
+		}			
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Friendship [user1=" + user1_id + ", user2=" + user2
-				+ ", is_direct=" + is_direct + "]";
+		return "Friendship [user1=" + user1Id + ", user2=" + user2
+				+ ", is_direct=" + isDirect + "]";
 	}
 
 }

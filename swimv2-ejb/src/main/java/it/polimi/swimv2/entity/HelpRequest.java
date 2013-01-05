@@ -2,7 +2,6 @@ package it.polimi.swimv2.entity;
 
 import it.polimi.swimv2.enums.RequestStatus;
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -127,15 +126,16 @@ public class HelpRequest implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof HelpRequest)) {
 			return false;
-		if (!(obj instanceof HelpRequest))
-			return false;
+		}
 		HelpRequest other = (HelpRequest) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		return true;
 	}
 

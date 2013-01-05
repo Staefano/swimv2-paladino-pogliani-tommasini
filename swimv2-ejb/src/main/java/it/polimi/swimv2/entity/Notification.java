@@ -4,7 +4,6 @@ import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
 
 import java.io.Serializable;
-import java.lang.String;
 import java.sql.Timestamp;
 import javax.persistence.*;
 
@@ -17,13 +16,19 @@ import javax.persistence.*;
 
 public class Notification implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private int id;
 	private Timestamp timestamp;
 	private String ability;
-	private User user1_id;
-	private User user2_id;
-	private static final long serialVersionUID = 1L;
+	
+	@ManyToOne 
+	private User user1;
+	
+	@ManyToOne
+	private User user2;
+
 	private NotificationType type;
 
 	@ManyToOne
@@ -57,12 +62,12 @@ public class Notification implements Serializable {
 		this.ability = ability;
 	}
 
-	public User getUser2_id() {
-		return this.user2_id;
+	public User getUser2() {
+		return this.user2;
 	}
 
-	public void setUser2_id(User user2_id) {
-		this.user2_id = user2_id;
+	public void setUser2(User user2) {
+		this.user2 = user2;
 	}
 
 	public NotificationType getType() {
@@ -72,11 +77,11 @@ public class Notification implements Serializable {
 	public void setType(NotificationType type) {
 		this.type = type;
 	}
-	public User getUser1_id() {
-		return user1_id;
+	public User getUser1() {
+		return user1;
 	}
-	public void setUser1_id(User user1_id) {
-		this.user1_id = user1_id;
+	public void setUser1(User user1) {
+		this.user1 = user1;
 	}
    
 
@@ -98,22 +103,23 @@ public class Notification implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (!(obj instanceof Notification)) {
 			return false;
-		if (!(obj instanceof Notification))
-			return false;
+		}
 		Notification other = (Notification) obj;
-		if (id != other.id)
+		if (id != other.id) {
 			return false;
+		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Notification [id=" + id + ", timestamp=" + timestamp
-				+ ", ability=" + ability + ", user2_id=" + user2_id + ", type="
+				+ ", ability=" + ability + ", user2_id=" + user2 + ", type="
 				+ type + ", tgtuser=" + tgtuser + "]";
 	}
 
