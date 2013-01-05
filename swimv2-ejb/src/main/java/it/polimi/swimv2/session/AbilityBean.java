@@ -9,13 +9,13 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 @Stateless
 public class AbilityBean implements AbilityBeanRemote {
 
-	@PersistenceUnit(name="swimv2")
+    @PersistenceContext(unitName="swimv2")
 	EntityManager manager;
 	
 	@Override
@@ -29,7 +29,7 @@ public class AbilityBean implements AbilityBeanRemote {
 
 	@Override
 	public List<AbilityRequest> retrievePendingRequests() {
-		Query q = manager.createQuery("SELECT a FROM AbiltyRequest a ORDER BY a.timestamp DESC");
+		Query q = manager.createQuery("SELECT a FROM AbilityRequest a ORDER BY a.timestamp DESC");
 		@SuppressWarnings("unchecked")
 		List<AbilityRequest> l = q.getResultList();
 		return l;

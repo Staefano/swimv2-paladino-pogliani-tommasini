@@ -14,8 +14,8 @@ public class EmailService implements EmailServiceLocal {
 	@Resource(mappedName = "java:/Mail")
 	private Session mailSession;
 	
-	@Resource(mappedName = "swimv2-configuration")
-	private Properties configProperties;
+	// @Resource(mappedName = "swimv2-configuration")
+	// private Properties configProperties;
 
 	// TODO make the URL dynamic
 	private static final String INNER_PATH = "/confirmation?token=";
@@ -23,11 +23,10 @@ public class EmailService implements EmailServiceLocal {
 	private String url;
 	
 	public EmailService() {
-		if(configProperties != null) {
+		/*if(configProperties != null) {
 			url = configProperties.getProperty("swimv2.basicurl");
-		}
-		if (url == null) url = BASIC_URL;
-		url += INNER_PATH;
+		}*/
+		url = BASIC_URL + INNER_PATH;
 	}
 
 	public void sendEmail(String toAddress, String subj,  String text) 
