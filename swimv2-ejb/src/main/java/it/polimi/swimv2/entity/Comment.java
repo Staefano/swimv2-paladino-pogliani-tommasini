@@ -5,6 +5,10 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({ 
+	@NamedQuery(name = "HelpRequest.findByID", query = "SELECT x FROM Comment x WHERE x.helprequest = :helprequest"), 
+	
+})
 public class Comment implements Serializable {
 
 	@Id
@@ -70,7 +74,7 @@ public class Comment implements Serializable {
 				+ text + ", sender=" + sender + ", helprequest=" + helprequest
 				+ "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,3 +100,4 @@ public class Comment implements Serializable {
 	}
 
 }
+>>>>>>> da9ff4df623598719608a65101f1718bcc1d29fa

@@ -8,6 +8,17 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+
+		@NamedQuery(name = "HelpRequest.findHRByID", query = "SELECT x FROM HelpRequest x WHERE x.id = :id"),
+
+		@NamedQuery(name = "HelpRequest.findByHelper", query = "SELECT x FROM HelpRequest x WHERE x.receiver = :helper"),
+
+		@NamedQuery(name = "HelpRequest.findByAsker", query = "SELECT x FROM HelpRequest x WHERE x.sender = :asker"),
+
+		@NamedQuery(name = "HelpRequest.findByStatus", query = "SELECT x FROM HelpRequest x WHERE x.status = :status")
+
+})
 public class HelpRequest implements Serializable {
 
 	@Id
@@ -16,6 +27,15 @@ public class HelpRequest implements Serializable {
 	private String subject;
 	private RequestStatus status;
 	private Timestamp timestamp;
+
+	public Set<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(Set<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
@@ -30,11 +50,10 @@ public class HelpRequest implements Serializable {
 	@OneToOne(optional = true)
 	private Feedback receiverFeedback;
 
-	// manytomany unidirezionale dato che ability non tiene traccia della helprequest
+	// manytomany unidirezionale dato che ability non tiene traccia della
+	// helprequest
 	@ManyToMany
-	@JoinTable(name = "HelpRequestAbility", 
-				joinColumns = { @JoinColumn(name = "request") }, 
-				inverseJoinColumns = { @JoinColumn(name = "ability") })
+	@JoinTable(name = "HelpRequestAbility", joinColumns = { @JoinColumn(name = "request") }, inverseJoinColumns = { @JoinColumn(name = "ability") })
 	private Set<Ability> abilities;
 
 	public HelpRequest() {
@@ -133,5 +152,10 @@ public class HelpRequest implements Serializable {
 		return "HelpRequest [id=" + id + ", subject=" + subject + ", status="
 				+ status + ", timestamp=" + timestamp + " ...]";
 	}
-	
+
+	public boolean isOpened() {
+
+		return (status.equals(RequestStatus.WAITING) || status
+				.equals(RequestStatus.ACCEPTED));
+	}
 }

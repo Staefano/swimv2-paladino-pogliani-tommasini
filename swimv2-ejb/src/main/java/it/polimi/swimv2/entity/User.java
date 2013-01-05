@@ -157,4 +157,12 @@ public class User implements Serializable {
 				+ ", description=" + description + "]";
 	}
 
+	public Set<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(Set<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
 }
