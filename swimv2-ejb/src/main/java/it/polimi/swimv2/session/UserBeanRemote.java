@@ -13,7 +13,7 @@ import javax.ejb.Remote;
 @Remote
 public interface UserBeanRemote {
 
-	User editProfile(User u) throws NoSuchUserException;
+	void editProfile(User u) throws NoSuchUserException;
 
 	List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException;
 

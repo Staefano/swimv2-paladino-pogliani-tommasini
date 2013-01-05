@@ -23,17 +23,10 @@ public class UserBean implements UserBeanRemote {
 	private EntityManager manager;
 
 	@Override
-	public User editProfile(User u) throws NoSuchUserException {
+	public void editProfile(User newUser) throws NoSuchUserException {
 
-		Query q = manager.createNamedQuery("User.findByID");
-		q.setParameter("id", u.getId());
-		try{
-			return (User) q.getSingleResult();
-			
-		}
-		catch(NoResultException nre){
-			throw new NoSuchUserException();
-		}
+		manager.merge(newUser);
+		
 	}
 
 	@Override

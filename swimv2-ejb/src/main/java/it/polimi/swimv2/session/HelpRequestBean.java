@@ -28,6 +28,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 			Ability[] abilties) {
 
 		HelpRequest hr = new HelpRequest();
+		
 		HashSet<Ability> setAbility = new HashSet<Ability>();
 
 		hr.setReceiver(receiver);
@@ -109,7 +110,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 			}
 			
 			manager.persist(f);
-			manager.persist(hr);
+			manager.merge(hr);
 
 		} else
 			throw new ClosedHelpRequestException();
