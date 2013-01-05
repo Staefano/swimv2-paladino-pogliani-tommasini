@@ -10,8 +10,6 @@ import it.polimi.swimv2.session.AbilityBean;
 import it.polimi.swimv2.session.AbilityBeanRemote;
 import it.polimi.swimv2.session.AuthenticationBean;
 import it.polimi.swimv2.session.AuthenticationBeanRemote;
-import it.polimi.swimv2.session.MessageManagerBean;
-import it.polimi.swimv2.session.MessageManagerBeanRemote;
 
 import org.junit.Test;
 
@@ -19,10 +17,11 @@ public class AbilityTest extends BaseTest {
 	
 	@Test
 	public void testAbility() throws Exception {
+
 		AuthenticationBeanRemote ab = lookup(AuthenticationBean.class);
 		User donald = ab.checkCredentials("donald.duck@example.com",  "paperino");
 		User scrooge = ab.checkCredentials("scrooge.mcduck@example.com", "paperondepaperoni");
-		
+
 		AbilityBeanRemote bean = lookup(AbilityBean.class);
 		
 		int origSize = 0; // bean.retrievePendingRequests().size();
@@ -39,6 +38,8 @@ public class AbilityTest extends BaseTest {
 		AbilityRequest tester = null;
 		AbilityRequest adventurer = null;
 		for(AbilityRequest req : reqs) {
+            String str = req.getSender().getName() + " " + req.getSender().getSurname() + " : " + req.getAbility() + ", " + req.getTimestamp().toString();
+            System.out.println(str);
 			if(req.getAbility().equals("money swimmer")) {
 				swimmer = req;
 			} else if(req.getAbility().equals("matress tester")) {
