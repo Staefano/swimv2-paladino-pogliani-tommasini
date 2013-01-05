@@ -8,7 +8,6 @@ import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -29,7 +28,7 @@ public class UserBean implements UserBeanRemote {
 		Query q = manager.createNamedQuery("User.findByID");
 		q.setParameter("id", u.getId());
 		return null;
-		// TODO Come si comporta la screen?
+		// TODO Come si comporta la screen? addabilitY?
 	}
 
 	@Override
