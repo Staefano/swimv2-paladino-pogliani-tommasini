@@ -1,23 +1,20 @@
 package it.polimi.swimv2.servlet;
 
+import it.polimi.swimv2.webutils.Controller;
+import it.polimi.swimv2.webutils.Navigation;
+
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class LogoutServlet extends HttpServlet {
+public class LogoutServlet extends Controller {
 
 	private static final long serialVersionUID = 1103591206119674852L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
-    	doGet(request, response);
-    }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().setAttribute("user",  null);
-    	request.getSession().invalidate();
-    	response.sendRedirect("home");
+ 	@Override
+	protected void get(Navigation nav) throws IOException, ServletException {
+		nav.setLogout();
+		nav.redirect("home");
+		
 	}
 
 }
