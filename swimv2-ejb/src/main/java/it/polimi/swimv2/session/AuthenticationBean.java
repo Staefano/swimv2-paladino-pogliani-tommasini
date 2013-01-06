@@ -37,6 +37,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		rsg = new RandomStringGenerator(TOKEN_LENGTH);
 	}
 	
+	@Override
 	public User checkCredentials(String username, String password) 
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("User.findByEmail");
@@ -54,6 +55,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		
 	}
 	
+	@Override
 	public void register(String email, String password) throws NotUniqueException {
 		String token = rsg.nextString();
 		PendingUser pending = new PendingUser(email, 
@@ -70,6 +72,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		}
 	}
 	
+	@Override
 	public boolean checkConfirmCode(String token) {
 		Query q = manager.createNamedQuery("PendingUser.findByToken");
 		q.setParameter("token", token);
@@ -81,7 +84,8 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		}
 	}
 	
-	public void completeRegistration(String token, User user) 
+	@Override
+	public User completeRegistration(String token, User user) 
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("PendingUser.findByToken");
 		q.setParameter("token", token);
@@ -91,6 +95,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 			user.setPasswordHash(pu.getPasswordHash());
 			manager.persist(user);
 			manager.remove(pu);
+			return user;
 		} catch(NoResultException e) {
 			throw new NoSuchUserException(); // sicuri che e' solo perche' non c'e' l'utente???
 		}

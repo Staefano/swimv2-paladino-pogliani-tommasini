@@ -20,6 +20,9 @@ public class HomeServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 9004320551305682450L;
 	
+	private static final String INDEX_JSP = "/WEB-INF/index.jsp";
+	private static final String PERSONALAREA_JSP = "/WEB-INF/personalarea.jsp";
+	
 	@EJB
     private AuthenticationBeanRemote auth;
 
@@ -37,10 +40,9 @@ public class HomeServlet extends HttpServlet {
         } else {
         	doGet(request, response);
         }
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
     
-    private void processLogin(String user, String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void processLogin(String user, String password, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		if (password == null) {
 			request.setAttribute("wrongLogin", true);
 			return;
@@ -48,14 +50,15 @@ public class HomeServlet extends HttpServlet {
 		try {
 			User u = auth.checkCredentials(user, password);
 			request.getSession().setAttribute("user", u);
-			response.sendRedirect("user-area");
+			request.getRequestDispatcher(PERSONALAREA_JSP).forward(request, response);
 		} catch (NoSuchUserException nsue) {
 			request.setAttribute("wrongLogin", true);
+			request.getRequestDispatcher(INDEX_JSP).forward(request, response);
 		}
 	}
 
 	private void processRegistration(String user, String password,
-			HttpServletRequest request, HttpServletResponse response) {
+			HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setAttribute("toggleRegistration", true);
 		if (password == null) {
 			request.setAttribute("formNotCompleted", true);
@@ -67,14 +70,14 @@ public class HomeServlet extends HttpServlet {
 		} catch (NotUniqueException e) {
 			request.setAttribute("alreadyRegistered", true);
 		}
-
+		request.getRequestDispatcher(INDEX_JSP).forward(request, response);
 	}
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	if(request.getSession().getAttribute("user") != null) {
-    		response.sendRedirect("user-area");
+    		request.getRequestDispatcher(PERSONALAREA_JSP).forward(request, response);
     	} else {
-    		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+    		request.getRequestDispatcher(INDEX_JSP).forward(request, response);
     	}
     }
 }
