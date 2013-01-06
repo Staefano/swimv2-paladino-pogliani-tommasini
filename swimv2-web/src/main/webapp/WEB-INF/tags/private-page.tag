@@ -27,7 +27,7 @@
 
 	</div>
 	<!-- TODO include locally jquery, we don't want to depend upon external stuff! -->
-	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
