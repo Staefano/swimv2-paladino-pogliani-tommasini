@@ -13,15 +13,23 @@
 		<servlet-class>it.polimi.swimv2.servlet.HomeServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>RegistrationServlet</servlet-name>
-		<servlet-class>it.polimi.swimv2.servlet.RegistrationServlet</servlet-class>
+		<servlet-name>ConfirmationServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.ConfirmationServlet</servlet-class>
+	</servlet>
+		<servlet>
+		<servlet-name>LogoutServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.LogoutServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/home</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>RegistrationServlet</servlet-name>
+		<servlet-name>ConfirmationServlet</servlet-name>
 		<url-pattern>/confirmation</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>LogoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 </web-app>
