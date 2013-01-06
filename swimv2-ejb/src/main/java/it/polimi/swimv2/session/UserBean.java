@@ -122,4 +122,15 @@ public class UserBean implements UserBeanRemote {
 		}
 	}
 
+	@Override
+	public List<User> searchUser(String name, String Surname)
+			throws NoSuchUserException {
+		
+		Query q = manager.createNamedQuery("User.searchUsers");
+		@SuppressWarnings("unchecked")
+		List<User> users = q.getResultList();
+		
+		return users;
+	}
+
 }
