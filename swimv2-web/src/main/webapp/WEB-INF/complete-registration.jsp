@@ -31,7 +31,7 @@
 				email, or request another token by registering again to the website.</p>
 		</c:if>
 		<c:if test="${!wrongToken}">
-		
+
 			<c:if test="${formError}">
 				There was an error processing the form. Please, complete all the required fields and submit the form again
 			</c:if>
@@ -39,12 +39,15 @@
 			Thank you for registering to SWIMv2. Please complete your registration
 			by inserting your personal data.
 			
-			<form method="post" style="margin-top:1em;">
+			<form method="post" style="margin-top: 1em;">
 				<fieldset>
-					<label>Name *</label> <input type="text" name="name" placeholder="John">
-					<label>Surname *</label> <input type="text" name="surname" placeholder="Smith">
-					<input type="hidden" name="token" value="${token}">
-					<button type="submit" class="btn">Submit</button>
+					<label>Name *</label> <input type="text" name="name"
+						placeholder="John"> <label>Surname *</label> <input
+						type="text" name="surname" placeholder="Smith"> <input
+						type="hidden" name="token" value="${token}">
+					<div class="form-actions">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
 				</fieldset>
 			</form>
 

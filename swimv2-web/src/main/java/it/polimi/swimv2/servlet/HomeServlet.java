@@ -44,7 +44,11 @@ public class HomeServlet extends Controller {
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
+		if(nav.getParam("error") != null && nav.getParam("error").equals("permission")) {
+			nav.setAttribute("accessDenied", true);
+		}
 		if (nav.getRole() != AccessRole.UNREGISTERED) {
+			// TODO sara' da sistemare!
 			nav.fwd(PERSONALAREA_JSP);
 		} else {
 			nav.fwd(INDEX_JSP);
@@ -70,14 +74,16 @@ public class HomeServlet extends Controller {
 			Navigation nav) throws IOException, ServletException {
 		nav.setAttribute("toggleRegistration", true);
 		if (password == null) {
-			nav.setAttribute("formNotCompleted", true);
+			nav.setAttribute("registrationOutcome", 4);
 			return;
 		}
-
 		try {
 			auth.register(user, password);
+			nav.setAttribute("registrationOutcome", 1);
 		} catch (NotUniqueException e) {
-			nav.setAttribute("alreadyRegistered", true);
+			nav.setAttribute("registrationOutcome", 3);
+		} catch (Exception e) { // TODO this is quite ugly ;)
+			nav.setAttribute("registrationOutcome", 2);
 		}
 		nav.fwd(INDEX_JSP);
 	}

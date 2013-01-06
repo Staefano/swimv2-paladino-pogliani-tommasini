@@ -13,7 +13,7 @@ public class LogoutServlet extends Controller {
  	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 		nav.setLogout();
-		nav.redirect("home");
+		nav.redirect("/");
 		
 	}
 
