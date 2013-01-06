@@ -8,20 +8,20 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="User.findByEmail", 
-			query="SELECT x FROM User x WHERE x.email = :email")
-})
+		@NamedQuery(name = "User.findByEmail", query = "SELECT x FROM User x WHERE x.email = :email"),
+		@NamedQuery(name = "User.getUserByID", query = "SELECT x FROM User x WHERE x.id = :id") })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private int id;
 	private String name;
 	private String surname;
-	
-	@Column(unique=true)
+
+	@Column(unique = true)
 	private String email;
-	
+
 	private String passwordHash;
 	private Date birthdate;
 	private String website;
@@ -32,11 +32,9 @@ public class User implements Serializable {
 
 	// manytomany unidirezionale dato che ability non tiene traccia dell'user
 	@ManyToMany
-	@JoinTable(name = "UserAbility",
-		joinColumns = { @JoinColumn(name = "user") },
-		inverseJoinColumns = { @JoinColumn(name = "ability") } )
+	@JoinTable(name = "UserAbility", joinColumns = { @JoinColumn(name = "user") }, inverseJoinColumns = { @JoinColumn(name = "ability") })
 	private Set<Ability> abilities;
-	
+
 	public User() {
 		super();
 	}
@@ -120,7 +118,7 @@ public class User implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public boolean isAdmin() {
 		return false;
 	}
