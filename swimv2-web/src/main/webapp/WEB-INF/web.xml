@@ -16,9 +16,13 @@
 		<servlet-name>ConfirmationServlet</servlet-name>
 		<servlet-class>it.polimi.swimv2.servlet.ConfirmationServlet</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>LogoutServlet</servlet-name>
 		<servlet-class>it.polimi.swimv2.servlet.LogoutServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UserProfile</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.UserProfile</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
@@ -31,5 +35,9 @@
 	<servlet-mapping>
 		<servlet-name>LogoutServlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UserProfile</servlet-name>
+		<url-pattern>/profile</url-pattern>
 	</servlet-mapping>
 </web-app>

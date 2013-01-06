@@ -96,7 +96,6 @@ public class HelpRequestBean implements HelpRequestRemote {
 			Feedback f = new Feedback();
 			f.setEvaluation(value);
 			f.setString(comment);
-
 			if (user.equals(hr.getReceiver())) {
 				f.setRole(Role.ASKER);
 				hr.setAskerFeedback(f);
