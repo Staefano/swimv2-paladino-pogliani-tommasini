@@ -13,7 +13,6 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -23,6 +22,7 @@ public class UserBean implements UserBeanRemote {
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
 
+	
 	@Override
 	public void editProfile(User newUser) throws NoSuchUserException {
 
@@ -124,11 +124,11 @@ public class UserBean implements UserBeanRemote {
 	}
 
 	@Override
-	public User getUserByID(String id) throws NoSuchUserException {
+	public User getUserByID(int id) throws NoSuchUserException {
 		
 		Query q = manager.createNamedQuery("User.getUserByID");
+		q.setParameter("id", id);
 		try{
-			q.setParameter("id", id);
 			return (User) q.getSingleResult();
 		}catch(NoResultException nre){
 			throw new NoSuchUserException();
