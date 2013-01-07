@@ -22,6 +22,7 @@ public class UserBean implements UserBeanRemote {
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
 
+	
 	@Override
 	public void editProfile(User newUser) throws NoSuchUserException {
 
@@ -120,6 +121,21 @@ public class UserBean implements UserBeanRemote {
 		} catch (NoResultException nre) {
 			throw new NoSuchUserException();
 		}
+	}
+
+	@Override
+	public User getUserByID(int id) throws NoSuchUserException {
+		
+		Query q = manager.createNamedQuery("User.getUserByID");
+		q.setParameter("id", id);
+		try{
+			return (User) q.getSingleResult();
+		}catch(NoResultException nre){
+			throw new NoSuchUserException();
+		}
+		
+		
+		
 	}
 
 }

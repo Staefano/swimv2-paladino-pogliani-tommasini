@@ -1,28 +1,14 @@
-<!doctype html>
+<%@ page language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<html>
-    <head>
-        <title>SWIM version 2</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-        
-        <!-- TODO to be moved in a separate .css file -->
-        <style type="text/css">
-            #swim-general-header {
-                margin-top: 2em;
-                margin-bottom: 1em;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-        
-            <div id="swim-general-header">
-                <h3 class="muted">Hello, personal area!</h3>
-            </div>
-
-        </div>
-        <!-- TODO include locally jquery, we don't want to depend upon external stuff! -->
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-    </body>
-</html>
+<t:private-page user="${user}" title="SWIMv2 - Personal Area">
+	<jsp:attribute name="header">
+		<h1>Welcome to the user area!</h1>
+	</jsp:attribute>
+	<jsp:body>
+	<p>
+		I'm the (dummy) content of this page.
+	</p>
+	</jsp:body>
+</t:private-page>

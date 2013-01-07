@@ -1,5 +1,7 @@
 package it.polimi.swimv2.session;
 
+import java.util.List;
+
 import it.polimi.swimv2.entity.PendingUser;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
@@ -11,7 +13,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.mail.MessagingException;
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -37,6 +38,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		rsg = new RandomStringGenerator(TOKEN_LENGTH);
 	}
 	
+	@Override
 	public User checkCredentials(String username, String password) 
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("User.findByEmail");
@@ -51,25 +53,34 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		} catch(NoResultException e) {
 			throw new NoSuchUserException();
 		}
-		
 	}
 	
+	@Override
 	public void register(String email, String password) throws NotUniqueException {
+		if(userExists(email)) {
+			throw new NotUniqueException();
+		}
+
 		String token = rsg.nextString();
-		PendingUser pending = new PendingUser(email, 
-				hasher.hash(password), token);
-		// TODO check token uniqueness, otherwise generate another one!!! FIXME
+		PendingUser existing = manager.find(PendingUser.class, email);
+		if(existing == null) {
+			PendingUser pending = new PendingUser(email, hasher.hash(password), token);
+			// TODO check token uniqueness, otherwise generate another one!!! FIXME
+			manager.persist(pending);
+		} else {
+			existing.setPasswordHash(hasher.hash(password));
+			token = existing.getConfirmCode();
+			manager.merge(existing);
+		}
+
 		try {
 			emailer.sendConfirmationEmail(email,  token);
-			manager.persist(pending);
-		} catch(EntityExistsException eee) {
-			throw new NotUniqueException();
 		} catch(MessagingException me) {
-			// FIXME Change the exception!
 			throw new RuntimeException("Cannot send the email! " + me.getMessage());
 		}
 	}
 	
+	@Override
 	public boolean checkConfirmCode(String token) {
 		Query q = manager.createNamedQuery("PendingUser.findByToken");
 		q.setParameter("token", token);
@@ -81,7 +92,8 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		}
 	}
 	
-	public void completeRegistration(String token, User user) 
+	@Override
+	public User completeRegistration(String token, User user) 
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("PendingUser.findByToken");
 		q.setParameter("token", token);
@@ -91,8 +103,21 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 			user.setPasswordHash(pu.getPasswordHash());
 			manager.persist(user);
 			manager.remove(pu);
+			return user;
 		} catch(NoResultException e) {
-			throw new NoSuchUserException(); // sicuri che e' solo perche' non c'e' l'utente???
+			throw new NoSuchUserException(); // TODO sicuri che e' solo perche' non c'e' l'utente???
+		}
+	}
+	
+	private boolean userExists(String email) {
+		Query q = manager.createNamedQuery("User.findByEmail");
+		q.setParameter("email", email);
+		@SuppressWarnings("unchecked")
+		List<User> l = q.getResultList();
+		if( l !=null && l.size() != 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 

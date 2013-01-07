@@ -16,6 +16,9 @@ public interface AuthenticationBeanRemote {
 
 	boolean checkConfirmCode(String token);
 
-	void completeRegistration(String token, User user) 
+	// complete the registration by merging the User coming from the
+	// client with data saved along with the token
+	// returns the complete User.
+	User completeRegistration(String token, User user) 
 			throws NoSuchUserException;
 }
