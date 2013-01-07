@@ -67,3 +67,6 @@ log/
 
 # added by Maven integration for eclipse
 pom.properties
+
+# import.sql for populating Hibernate DB
+import.sql
