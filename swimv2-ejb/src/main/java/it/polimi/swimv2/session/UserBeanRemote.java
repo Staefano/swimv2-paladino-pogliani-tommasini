@@ -12,7 +12,7 @@ import javax.ejb.Remote;
 
 @Remote
 public interface UserBeanRemote {
-	
+
 	User getUserByID(int id) throws NoSuchUserException;
 
 	void editProfile(User u) throws NoSuchUserException;
@@ -26,4 +26,9 @@ public interface UserBeanRemote {
 	List<HelpRequest> getOpenedHelpRequest(User u) throws NoSuchUserException;;
 
 	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;;
+
+	List<HelpRequest> getProvidedHelpRequest(User u) throws NoSuchUserException;;
+
+	List<HelpRequest> getReceivedHelpRequest(User u) throws NoSuchUserException;;
+
 }
