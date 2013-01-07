@@ -145,4 +145,32 @@ public class UserBean implements UserBeanRemote {
 		return q.getResultList();
 	}
 
+	@Override
+	public List<HelpRequest> getProvidedHelpRequest(User u)
+			throws NoSuchUserException {
+		Query q = manager.createNamedQuery("HelpRequest.findByHelper");
+		try {
+			q.setParameter("helper", u);
+			q.setParameter("status", RequestStatus.CLOSED);
+			return (List<HelpRequest>) q.getResultList();
+
+		} catch (NoResultException nre) {
+			throw new NoSuchUserException();
+		}
+	}
+
+	@Override
+	public List<HelpRequest> getReceivedHelpRequest(User u)
+			throws NoSuchUserException {
+		Query q = manager.createNamedQuery("HelpRequest.findByAsker");
+		try {
+			q.setParameter("asker", u);
+			q.setParameter("status", RequestStatus.CLOSED);
+			return (List<HelpRequest>) q.getResultList();
+
+		} catch (NoResultException nre) {
+			throw new NoSuchUserException();
+		}
+	}
+
 }

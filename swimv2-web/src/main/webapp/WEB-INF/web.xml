@@ -31,6 +31,10 @@
 		<servlet-name>PeopleSearchResults</servlet-name>
 		<servlet-class>it.polimi.swimv2.servlet.PeopleSearchResults</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>MessageServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.MessageServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/home</url-pattern>
@@ -54,5 +58,9 @@
 	<servlet-mapping>
 		<servlet-name>PeopleSearchResults</servlet-name>
 		<url-pattern>/search-user</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MessageServlet</servlet-name>
+		<url-pattern>/MessageServlet</url-pattern>
 	</servlet-mapping>
 </web-app>

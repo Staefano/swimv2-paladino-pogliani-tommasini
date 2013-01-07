@@ -1,12 +1,15 @@
 package it.polimi.swimv2.servlet;
 
+import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.AuthenticationBean;
-import it.polimi.swimv2.session.UserBean;
 import it.polimi.swimv2.session.UserBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.webutils.Controller;
+import it.polimi.swimv2.webutils.Navigation;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -17,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class UserProfile
  */
-public class UserProfile extends HttpServlet {
+public class UserProfile extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -35,34 +38,42 @@ public class UserProfile extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+	@Override
+	protected void get(Navigation nav) throws IOException, ServletException {
 
 		String id = "1";// request.getParameter("userId");
 		try {
-			User u = ubr.getUserByID(Integer.parseInt(id));
-			request.setAttribute("name", u.getName());
-			request.setAttribute("surname", u.getSurname());
 
-			request.getRequestDispatcher("WEB-INF/userprofile.jsp").forward(
-					request, response);
+			User u = ubr.getUserByID(Integer.parseInt(id));
+			nav.setAttribute("user", u);
+			// nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
+			// nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
+
+			HelpRequest hr1 = new HelpRequest();
+			hr1.setSubject("hr1prov");
+			HelpRequest hr2 = new HelpRequest();
+			hr2.setSubject("hr2prov");
+			HelpRequest hr3 = new HelpRequest();
+			hr3.setSubject("hr3rec");
+			HelpRequest hr4 = new HelpRequest();
+			hr4.setSubject("hr4rec");
+			List<HelpRequest> provList = new ArrayList<HelpRequest>();
+			List<HelpRequest> receivList = new ArrayList<HelpRequest>();
+			provList.add(hr1);
+			provList.add(hr2);
+			receivList.add(hr3);
+			receivList.add(hr4);
+
+			nav.setAttribute("providedList", provList);
+			nav.setAttribute("receivedList", receivList);
+
+			nav.fwd("WEB-INF/userprofile.jsp");
 		} catch (NoSuchUserException nsue) {
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request,
-					response);
+			nav.fwd("WEB-INF/error.jsp");
 
 		}
-
-		
-
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
 
 }
