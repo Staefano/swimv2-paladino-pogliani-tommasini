@@ -125,17 +125,24 @@ public class UserBean implements UserBeanRemote {
 
 	@Override
 	public User getUserByID(int id) throws NoSuchUserException {
-		
 		Query q = manager.createNamedQuery("User.getUserByID");
 		q.setParameter("id", id);
-		try{
+		try {
 			return (User) q.getSingleResult();
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			throw new NoSuchUserException();
 		}
-		
-		
-		
+	}
+
+	@Override @SuppressWarnings("unchecked")
+	public List<User> searchUser(String queryString) {
+		// TODO be a little more flexible while querying...
+		Query q = manager.createQuery("" +
+				"SELECT x FROM User x " +
+				"WHERE CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) " +
+				"LIKE :query");
+		q.setParameter("query", queryString.toLowerCase().trim());
+		return q.getResultList();
 	}
 
 }

@@ -53,6 +53,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PeopleSearchResults</servlet-name>
-		<url-pattern>/PeopleSearchResults</url-pattern>
+		<url-pattern>/search-user</url-pattern>
 	</servlet-mapping>
 </web-app>

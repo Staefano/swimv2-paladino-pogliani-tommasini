@@ -25,5 +25,7 @@ public interface UserBeanRemote {
 
 	List<HelpRequest> getOpenedHelpRequest(User u) throws NoSuchUserException;;
 
-	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;;
+	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;
+
+	List<User> searchUser(String queryString);
 }

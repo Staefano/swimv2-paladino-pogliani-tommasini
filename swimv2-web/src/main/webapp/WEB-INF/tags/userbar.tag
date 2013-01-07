@@ -9,8 +9,8 @@
 			<a class="brand" href="${pageContext.request.contextPath}/">SWIMv2</a> <span
 				class="navbar-text pull-left" style="padding-right: 1em;">Hi,
 				${user.name} ${user.surname} </span>
-			<form class="navbar-search pull-left">
-				<input type="text" class="search-query" placeholder="Search people">
+			<form class="navbar-search pull-left" action="search-user" method="get" >
+				<input type="text" class="search-query" placeholder="Search people" name="search" value="${param.search}">
 			</form>
 			<ul class="nav pull-right">
 				<c:if test="${user.admin}">

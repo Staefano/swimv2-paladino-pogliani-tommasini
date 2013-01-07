@@ -1,58 +1,40 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.UserBean;
-import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.UserBeanRemote;
+import it.polimi.swimv2.webutils.AccessRole;
+import it.polimi.swimv2.webutils.Controller;
+import it.polimi.swimv2.webutils.Navigation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class PeopleSearchResults
- */
-public class PeopleSearchResults extends HttpServlet {
+public class PeopleSearchResults extends Controller {
 	private static final long serialVersionUID = 1L;
-	
-	UserBean userBean = new UserBean();
-	
-    public PeopleSearchResults() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		String name = request.getParameter("name");
-		String surname = request.getParameter("surname");
-		
-		try {
-			List<User> users = userBean.searchUser(name, surname);
-			request.setAttribute("usersList", users);
-		} catch (NoSuchUserException e) {
-			request.setAttribute("No users found!", "message");
-		}
-		*/
-		
-		//in mancanza di un db popolato... provo a vedere se la pagina si vede!
-		List<User> users = new ArrayList<User>();
-		User user = new User();
-		user.setName("Nome");
-		user.setSurname("Cognome");
-		users.add(user);
-			
-		request.setAttribute("usersList", users);
-		
-		request.getRequestDispatcher("/WEB-INF/peoplesearchresults.jsp").forward(request, response);
+	@EJB
+	UserBeanRemote userBean;
+
+	public PeopleSearchResults() {
+		super(AccessRole.USER);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+	@Override
+	protected void get(Navigation nav) throws IOException, ServletException {
+		String queryString = nav.getParam("search");
+		if (queryString == null || queryString.isEmpty()) {
+			nav.setAttribute("outcome", "emptyField");
+		} else {
+			List<User> users = userBean.searchUser(queryString);
+			nav.setAttribute("usersList", users);
+			if(users == null || users.size() == 0) {
+				nav.setAttribute("oucome", "noUserFound");
+			}
+		}
+		nav.fwd("/WEB-INF/peoplesearchresults.jsp");
 	}
 
 }

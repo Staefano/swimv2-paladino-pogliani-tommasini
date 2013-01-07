@@ -15,15 +15,7 @@
 		<c:choose>
 			<c:when test="${found}">
 				<c:forEach items="${results}" var="curUser">
-				            
-                <div class="thumbnail">
-                  <!-- TODO image and the rest... -->
-                  <div class="caption">
-                    <h3><a href="profile?id=${curUser.id}">${curUser.name} ${curUser.surname}</a></h3>
-                    <p>${curUser.minibio}</p>
-                  </div>
-                </div>
-                
+                	<t:single-result user="${curUser}"/>
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
