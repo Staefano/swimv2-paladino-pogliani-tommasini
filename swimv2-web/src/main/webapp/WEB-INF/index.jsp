@@ -8,16 +8,15 @@
 	<c:if test="${accessDenied}">
 		<div class="alert alert-error">Permission denied. Please log in again</div>
 	</c:if>
-
-	<div class="span7 hero-unit">
+	<div class="row">
+	<div class="span6 hero-unit">
 		<h1>SWIMv2</h1>
 		<p>The Small World Hypotesis Machine, reloaded</p>
 		<h2>Search for help!</h2>
 		<p>What kind of ability are you looking for?</p>
-		<form class="input-prepend input-append">
-			<span class="add-on"><i class="icon-search"></i></span> <input
-			id="abilities" class="span5" type="text"
-			placeholder="cooker, plumber">
+		<form class="input-prepend input-append" action="search" method="get">
+			<span class="add-on"><i class="icon-search"></i></span> 
+			<input name="abilities" class="span5" type="text" placeholder="cooker, plumber">
 			<button type="submit" class="btn btn-primary">Find help!</button>
 		</form>
 	</div>
@@ -82,6 +81,7 @@
 			</form>
 			</div>
 		</div>
+	</div>
 	</div>
 	</jsp:body>
 </t:public-page>

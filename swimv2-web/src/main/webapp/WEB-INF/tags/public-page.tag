@@ -24,17 +24,13 @@
 	</head>
 <body>
 	<div class="container">
-
 		<div id="swim-general-header">
 			<h3>
 				<a class="muted" href="${pageContext.request.contextPath}">SWIMv2</a>
 			</h3>
 		</div>
-
-		<div class="row">
-			<jsp:invoke fragment="header" />
-			<jsp:doBody />
-		</div>
+		<jsp:invoke fragment="header" />
+		<jsp:doBody />
 	</div>
 	<!-- TODO include locally jquery, we don't want to depend upon external stuff! -->
 	<script src="js/jquery-latest.js"></script>

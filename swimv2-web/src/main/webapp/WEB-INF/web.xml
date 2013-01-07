@@ -23,6 +23,10 @@
 		<servlet-name>UserProfile</servlet-name>
 		<servlet-class>it.polimi.swimv2.servlet.UserProfile</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>SearchForHelpServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.SearchForHelpServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/home</url-pattern>
@@ -38,5 +42,9 @@
 	<servlet-mapping>
 		<servlet-name>UserProfile</servlet-name>
 		<url-pattern>/profile</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SearchForHelpServlet</servlet-name>
+		<url-pattern>/search</url-pattern>
 	</servlet-mapping>
 </web-app>
