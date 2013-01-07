@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>project-name-war</display-name>
-  <welcome-file-list>
-    <welcome-file>home</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>HomeServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.HomeServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>RegistrationServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.RegistrationServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HomeServlet</servlet-name>
-    <url-pattern>/home</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>RegistrationServlet</servlet-name>
-    <url-pattern>/confirmation</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>PeopleSearchResults</display-name>
-    <servlet-name>PeopleSearchResults</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.PeopleSearchResults</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>PeopleSearchResults</servlet-name>
-    <url-pattern>/PeopleSearchResults</url-pattern>
-  </servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>project-name-war</display-name>
+
+	<welcome-file-list>
+		<welcome-file>home</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<servlet-name>HomeServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.HomeServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>RegistrationServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.RegistrationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>HomeServlet</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>RegistrationServlet</servlet-name>
+		<url-pattern>/confirmation</url-pattern>
+	</servlet-mapping>
 </web-app>
