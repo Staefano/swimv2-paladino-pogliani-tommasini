@@ -1,6 +1,7 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.session.AuthenticationBeanRemote;
+import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -21,6 +22,10 @@ public class HomeServlet extends Controller {
 	private static final String INDEX_JSP = "/WEB-INF/index.jsp";
 	private static final String PERSONALAREA_JSP = "/WEB-INF/personalarea.jsp";
 
+
+	@EJB
+	private NotificationBeanRemote nbr;
+	
 	@EJB
 	private AuthenticationBeanRemote auth;
 

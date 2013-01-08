@@ -36,6 +36,11 @@
 	<a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a>
 	<a href="article?article_id=">modifica</a>
 	<a href="article?article_id=">helprequest</a>
+	
+	<h1>Notifications</h1>
+		<c:forEach var="n" items="${notifications}">
+	<a href="notification?notification_id=">${ n.type}</a>
+		</c:forEach>
 
 
 
