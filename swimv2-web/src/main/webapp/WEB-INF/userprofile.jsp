@@ -33,7 +33,7 @@
 		</div>
 	</div>
 	<a href="article?article_id=">messaggio</a>
-	<a href="article?article_id=">richiesta di amicizia</a>
+	<a href="friendrequest?article_id=">richiesta di amicizia</a>
 	<a href="article?article_id=">modifica</a>
 	<a href="article?article_id=">helprequest</a>
 

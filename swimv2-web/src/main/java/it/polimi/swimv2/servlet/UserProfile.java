@@ -42,7 +42,7 @@ public class UserProfile extends Controller {
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 
-		String id = "1";// request.getParameter("userId");
+		String id = nav.getParam("userId");
 		try {
 
 			User u = ubr.getUserByID(Integer.parseInt(id));

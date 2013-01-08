@@ -5,6 +5,11 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries({
+		@NamedQuery(name = "Friendship.getByUser", query = "SELECT x FROM Friendship x WHERE x.user1Id = :userId"),
+		@NamedQuery(name = "Friendship.isFriend", query = "SELECT x FROM Friendship x WHERE x.user1Id = :user1Id and x.user2Id = :user2Id"),
+
+})
 @IdClass(FriendshipId.class)
 public class Friendship implements Serializable {
 
@@ -23,6 +28,9 @@ public class Friendship implements Serializable {
 	private User user2;
 
 	private boolean isDirect;
+	
+	private boolean isPending;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Friendship() {
@@ -92,6 +100,14 @@ public class Friendship implements Serializable {
 	public String toString() {
 		return "Friendship [user1=" + user1Id + ", user2=" + user2
 				+ ", is_direct=" + isDirect + "]";
+	}
+
+	public boolean isPending() {
+		return isPending;
+	}
+
+	public void setPending(boolean isPending) {
+		this.isPending = isPending;
 	}
 
 }

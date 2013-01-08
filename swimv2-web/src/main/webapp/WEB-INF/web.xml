@@ -62,4 +62,14 @@
     <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/MessageServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FriendRequestServlet</display-name>
+    <servlet-name>FriendRequestServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FriendRequestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FriendRequestServlet</servlet-name>
+    <url-pattern>/FriendRequestServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
