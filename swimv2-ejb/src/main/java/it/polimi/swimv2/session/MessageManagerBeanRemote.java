@@ -11,7 +11,7 @@ import javax.ejb.Remote;
 public interface MessageManagerBeanRemote {
 	void write(User from, User to, String text);
 
-	List<Message> getByUsername(User from, User to);
+	List<Message> getConversation(User from, User to);
 
 	List<Message> getLatestUnread(User to);
 }

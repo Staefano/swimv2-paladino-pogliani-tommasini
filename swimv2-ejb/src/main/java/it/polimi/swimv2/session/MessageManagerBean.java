@@ -22,16 +22,19 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 		manager.persist(m);
 	}
 	
-	// all the messages or with a limitation???
+	// TODO support for pagination???
 	@SuppressWarnings("unchecked")
-	public List<Message> getByUsername(User from, User to) {
-		final String query = "from Message m " +
-				"where m.sender = :from and m.receiver = :to " +
-				"order by m.timestamp desc";
-		Query q = manager.createQuery(query);
-		q.setParameter("from",  from);
-		q.setParameter("to", to);
+	public List<Message> getConversation(User user1, User user2) {
+		Query q = manager.createNamedQuery("Message.findConversation");
+		q.setParameter("user1",  user1);
+		q.setParameter("user2", user2);
 		return (List<Message>) q.getResultList();
+	}
+	
+	//TODO change to list of (User, LatestMessage, isUnread
+	// for now returns a list of all the friends of the user! (boh...)
+	public List<User> getConversationIndex() {
+		return null;
 	}
 	
 	// TODO non teniamo traccia degli unread!!!

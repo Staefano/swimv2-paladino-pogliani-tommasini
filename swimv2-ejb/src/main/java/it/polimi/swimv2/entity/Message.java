@@ -5,6 +5,11 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+@NamedQueries({
+	@NamedQuery(name="Message.findConversation", query="" +
+			"SELECT m FROM Message m WHERE (m.sender = :user1 AND m.receiver = :user2) OR " +
+			"(m.sender = :user2 AND m.receiver = :user1) ORDER BY m.timestamp DESC")
+})
 @Entity
 public class Message implements Serializable {
 
