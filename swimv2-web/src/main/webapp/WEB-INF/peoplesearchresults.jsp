@@ -1,20 +1,29 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>People Search Results</title>
-</head>
-<body>
+<t:private-page user="${user}" title="People Search Results">
+	<jsp:attribute name="header">
+		<h1>Search results</h1>
+	</jsp:attribute>
+	<jsp:body>
+		<c:choose>
+		<c:when test="${outcome == 'emptyField'}">
+			<div class="alert alert-block">
+  				Insert, into the above field, the name of the user you are looking for!
+			</div>
+		</c:when>
+		<c:when test="${outcome == 'noUserFound'}">
+			<div class="alert alert-block">
+  				No user found!
+			</div>
+		</c:when>
+		<c:otherwise>
+		<c:forEach items="${usersList}" var="curUser">
+			<t:single-result user="${curUser}" />
+		</c:forEach>
+		</c:otherwise>
+		</c:choose>
 
-	<c:forEach var="u" items="${usersList}">
-		<p>${u.name}</p>
-		<p>${u.surname}</p>
-	</c:forEach>
-
-</body>
-</html>
+	</jsp:body>
+</t:private-page>

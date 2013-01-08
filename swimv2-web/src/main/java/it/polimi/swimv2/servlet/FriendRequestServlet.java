@@ -48,18 +48,14 @@ public class FriendRequestServlet extends Controller {
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 		
-			//ricevo la richiesta
-			//creo la notifica per il ricevente
-			String askerID = nav.getAttribute("asker");
-			String receiverID = nav.getAttribute("receiver");
-		
+			String askerID = nav.getParam("asker");
+			String receiverID = nav.getParam("receiver");
 			try{
 				
 				User receiver = ubr.getUserByID(Integer.parseInt(receiverID));
 				User asker = ubr.getUserByID(Integer.parseInt(askerID));
-				fsbr.createPendingFriendship(asker, receiver);
 				nbr.notifyFriendshipRequest(asker, receiver);
-				
+				nav.fwd("/");
 
 			}catch(NoSuchUserException nsue){
 				

@@ -21,14 +21,16 @@ public interface UserBeanRemote {
 
 	List<Feedback> getAskerFeedbacks(User u) throws NoSuchUserException;
 
-	List<Notification> getNotifications(User u) throws NoSuchUserException;;
+	List<Notification> getNotifications(User u) throws NoSuchUserException;
 
-	List<HelpRequest> getOpenedHelpRequest(User u) throws NoSuchUserException;;
+	List<HelpRequest> getOpenedHelpRequest(User u) throws NoSuchUserException;
 
-	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;;
+	List<User> searchUser(String queryString);
 
-	List<HelpRequest> getProvidedHelpRequest(User u) throws NoSuchUserException;;
+	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;
 
-	List<HelpRequest> getReceivedHelpRequest(User u) throws NoSuchUserException;;
+	List<HelpRequest> getProvidedHelpRequest(User u) throws NoSuchUserException;
+
+	List<HelpRequest> getReceivedHelpRequest(User u) throws NoSuchUserException;
 
 }

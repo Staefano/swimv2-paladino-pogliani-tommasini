@@ -29,7 +29,6 @@ public class Friendship implements Serializable {
 
 	private boolean isDirect;
 	
-	private boolean isPending;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -102,12 +101,5 @@ public class Friendship implements Serializable {
 				+ ", is_direct=" + isDirect + "]";
 	}
 
-	public boolean isPending() {
-		return isPending;
-	}
-
-	public void setPending(boolean isPending) {
-		this.isPending = isPending;
-	}
 
 }

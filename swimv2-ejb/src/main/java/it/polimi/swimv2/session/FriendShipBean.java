@@ -34,14 +34,13 @@ public class FriendShipBean implements FriendShipBeanRemote {
 	}
 
 	@Override
-	public void createPendingFriendship(User asker, User receiver) {
+	public void createFriendship(User asker, User receiver) {
 
 		Friendship f = new Friendship();
 		
 		if(!(isFriend(asker, receiver))){
 			f.setUser1(asker);
 			f.setUser2(receiver);
-			f.setPending(true);
 			manager.persist(f);
 		}
 		
@@ -67,10 +66,5 @@ public class FriendShipBean implements FriendShipBeanRemote {
 		
 	}
 
-	@Override
-	public void confirmFriendship(Friendship f) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

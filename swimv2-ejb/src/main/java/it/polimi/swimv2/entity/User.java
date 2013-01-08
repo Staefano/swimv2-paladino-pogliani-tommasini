@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "User.findByEmail", query = "SELECT x FROM User x WHERE x.email = :email"),
 		@NamedQuery(name = "User.getUserByID", query = "SELECT x FROM User x WHERE x.id = :id"),
-		@NamedQuery(name="User.searchUsers",query="SELECT x FROM User x WHERE x.name = :name AND x.surname = :surname")
+		// @NamedQuery(name="User.searchUsers",query="SELECT x FROM User x WHERE x.name = :name AND x.surname = :surname")
 })
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

@@ -10,9 +10,7 @@ public interface FriendShipBeanRemote {
 	
 	public List<Friendship> getFriendship(User u);
 	
-	public void createPendingFriendship(User asker, User receiver);
-	
-	public void confirmFriendship(Friendship f);
+	public void createFriendship(User asker, User receiver);
 	
 	public boolean isFriend(User asker, User receiver);
 	
