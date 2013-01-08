@@ -1,31 +1,26 @@
 package it.polimi.swimv2.servlet;
 
-import it.polimi.swimv2.entity.Friendship;
 import it.polimi.swimv2.entity.Message;
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.FriendShipBeanRemote;
 import it.polimi.swimv2.session.MessageManagerBeanRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
+import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.exceptions.OperationFailedException;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 
-/**
- * Servlet implementation class MessageServlet
- */
 public class MessageServlet extends Controller {
 	private static final long serialVersionUID = 1L;
     
 	@EJB MessageManagerBeanRemote messages;
 	@EJB UserBeanRemote users;
-	@EJB FriendShipBeanRemote friends;
 	
 	private static final String MESSAGES_JSP = "WEB-INF/messages/messages.jsp";
 	private static final String CONVERSATION_JSP = "WEB-INF/messages/conversation.jsp"; 
@@ -38,36 +33,48 @@ public class MessageServlet extends Controller {
 	protected void get(Navigation nav) throws IOException, ServletException {
 		String conversation = nav.getParam("conversation");
 		try {
-			 processSpecificConversation(nav, Integer.parseInt(conversation));
+			int id = Integer.parseInt(conversation);
+			processSpecificConversation(nav, users.getUserByID(id));
 		} catch(NumberFormatException nfe) {
+			processConversationList(nav);
+		} catch(NoSuchUserException e) {
 			processConversationList(nav);
 		}
 	}
 
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
-		// with post parameters --> send a message (and then return the conversation...)
-		// TODO to be done!!!
-		nav.fwd(MESSAGES_JSP);
+		String uid = nav.getParam("to");
+		String text = nav.getParam("text");
+		try {
+			int userId = Integer.parseInt(uid);
+			User other = users.getUserByID(userId);
+			messages.write(nav.getLoggedUser(), other, text);
+			processSpecificConversation(nav, other);
+		} catch(NumberFormatException nfe) {
+			processConversationList(nav);
+		} catch(OperationFailedException ofe) {
+			processConversationList(nav);
+		}
 	}
 	
-	private void processSpecificConversation(Navigation nav, int id) throws IOException, ServletException {
+	private void processSpecificConversation(Navigation nav, User other) throws IOException, ServletException {
 		try {
 			// TODO if the user is a friend of the other one, else throw something!!!
-			User other = users.getUserByID(id);
+			// TODO make messages as read... (done right in the getConversation method???)
 			List<Message> messageList = messages.getConversation(nav.getLoggedUser(), other);
 			nav.setAttribute("otherUser", other);
 			nav.setAttribute("messages", messageList);
 			nav.fwd(CONVERSATION_JSP);
 		} catch(Exception e) {
-			// TODO
+			throw new ServletException(e);
 		}
 	}
 	
 	private void processConversationList(Navigation nav) throws IOException, ServletException {
-		List<User> allFriends = friends.getFriends(nav.getLoggedUser());
-		nav.setAttribute("userList",  allFriends);
-		nav.fwd(MESSAGES_JSP);		
+		List<User> people = messages.getUsersWithConversations(nav.getLoggedUser());
+		nav.setAttribute("userList", people);
+		nav.fwd(MESSAGES_JSP);
 	}
 
 }
