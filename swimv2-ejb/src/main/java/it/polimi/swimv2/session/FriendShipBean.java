@@ -1,6 +1,5 @@
 package it.polimi.swimv2.session;
 
-import it.polimi.swimv2.entity.Comment;
 import it.polimi.swimv2.entity.Friendship;
 import it.polimi.swimv2.entity.User;
 
@@ -25,7 +24,7 @@ public class FriendShipBean implements FriendShipBeanRemote {
 	@Override
 	public List<Friendship> getFriendship(User u) {
 		
-		Query q = manager.createNamedQuery("Friendship.getByUSer");
+		Query q = manager.createNamedQuery("Friendship.getByUser");
 		q.setParameter("userId", u.getId());
 
 		@SuppressWarnings("unchecked")
