@@ -136,16 +136,12 @@ public class UserBean implements UserBeanRemote {
 
 	@Override @SuppressWarnings("unchecked")
 	public List<User> searchUser(String queryString) {
-		// TODO be a little more flexible while querying...
-		Query q = manager.createQuery("" +
-				"SELECT x FROM User x " +
-				"WHERE CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) " +
-				"LIKE :query");
-		q.setParameter("query", queryString.toLowerCase().trim());
+		Query q = manager.createNamedQuery("User.searchUser");
+		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
 		return q.getResultList();
 	}
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public List<HelpRequest> getProvidedHelpRequest(User u)
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("HelpRequest.findByHelper");
@@ -158,7 +154,7 @@ public class UserBean implements UserBeanRemote {
 		}
 	}
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public List<HelpRequest> getReceivedHelpRequest(User u)
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("HelpRequest.findByAsker");
