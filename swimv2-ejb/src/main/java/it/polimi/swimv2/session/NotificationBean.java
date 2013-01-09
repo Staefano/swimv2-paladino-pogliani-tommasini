@@ -1,12 +1,12 @@
 package it.polimi.swimv2.session;
 
-import java.util.List;
+import it.polimi.swimv2.entity.AbilityRequest;
 
+import java.util.List;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
 
-import javax.ejb.CreateException;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -14,9 +14,6 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-/**
- * Session Bean implementation class NotificationBean
- */
 @Stateless
 @Local(NotificationBeanRemote.class)
 public class NotificationBean implements NotificationBeanRemote {
@@ -24,9 +21,6 @@ public class NotificationBean implements NotificationBeanRemote {
 	@PersistenceContext(unitName = "swimv2")
 	EntityManager manager;
 
-	/**
-	 * Default constructor.
-	 */
 	public NotificationBean() {
 		// TODO Auto-generated constructor stub
 	}
@@ -70,8 +64,14 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyAbilityAccepted(User asker) {
-		// TODO Auto-generated method stub
+	public Notification notifyAbilityAccepted(AbilityRequest request) {
+		
+		Notification n = new Notification();
+		n.setType(NotificationType.ABILITY_ACCCEPTED);
+		n.setAbility(request.getAbility());
+		n.setTgtuser(request.getSender());
+		//TODO n.setTimestamp(timestamp);
+		manager.persist(n);
 		return null;
 	}
 
@@ -118,4 +118,5 @@ public class NotificationBean implements NotificationBeanRemote {
 			// TODO da sistemare
 		}
 	}
+
 }

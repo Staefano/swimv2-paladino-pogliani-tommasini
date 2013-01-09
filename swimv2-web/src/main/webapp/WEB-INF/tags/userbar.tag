@@ -14,7 +14,7 @@
 			</form>
 			<ul class="nav pull-right">
 				<c:if test="${user.admin}">
-					<li><a href="administer">Administer</a></li>
+					<li><a href="admin">Administer</a></li>
 				</c:if>
 				<li><a href="logout">Logout</a></li>
 			</ul>
