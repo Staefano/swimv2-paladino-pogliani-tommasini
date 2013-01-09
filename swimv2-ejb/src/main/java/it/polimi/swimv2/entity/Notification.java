@@ -18,7 +18,7 @@ public class Notification implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private Timestamp timestamp;
 	private String ability;

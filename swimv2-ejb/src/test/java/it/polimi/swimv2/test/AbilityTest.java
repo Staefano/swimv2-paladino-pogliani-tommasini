@@ -48,8 +48,6 @@ public class AbilityTest extends BaseTest {
 				adventurer = req;
 			}
 		}
-		bean.approveAbility(swimmer);
-		assertEquals(origSize + 3, bean.retrievePendingRequests().size());
 		// TODO check if really approved ;)
 		bean.rejectAbility(adventurer);
 		assertEquals(origSize + 1, bean.retrievePendingRequests().size());

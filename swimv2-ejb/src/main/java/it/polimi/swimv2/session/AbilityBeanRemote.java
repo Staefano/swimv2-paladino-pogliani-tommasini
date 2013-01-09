@@ -9,18 +9,17 @@ import it.polimi.swimv2.entity.User;
 
 @Remote
 public interface AbilityBeanRemote {
-	
-	// non mi ricordo il senso di questo metodo...
-	// List<Ability> searchForAbility(Ability[] ability);
-	
+		
 	void requestAbility(String name, User user);
 	
 	List<AbilityRequest> retrievePendingRequests();	
-	
-	// TODO maybe it's better by name?
-	
-	void approveAbility(AbilityRequest request);
+		
+	void addNewAbility(String name);
 	
 	void rejectAbility(AbilityRequest request);
+
+	AbilityRequest getRequest(int abId);
 	
+	void removeAbilityRequest(AbilityRequest request, String choice);
+		
 }

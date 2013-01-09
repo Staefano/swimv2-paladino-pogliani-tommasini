@@ -1,5 +1,6 @@
 package it.polimi.swimv2.session;
 
+import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 
@@ -13,6 +14,6 @@ public interface NotificationBeanRemote {
 
 	public Notification notifyAbilityRequest(User asker);
 
-	public Notification notifyAbilityAccepted(User asker);
+	public Notification notifyAbilityAccepted(AbilityRequest request);
 
 }

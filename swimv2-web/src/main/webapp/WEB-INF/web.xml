@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
@@ -34,6 +35,14 @@
 		<servlet-name>FriendRequestServlet</servlet-name>
 		<servlet-class>it.polimi.swimv2.servlet.FriendRequestServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AdminServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.AdminServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>AbilityManagerServlet</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.AbilityManagerServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>HomeServlet</servlet-name>
 		<url-pattern>/home</url-pattern>
@@ -61,5 +70,13 @@
 	<servlet-mapping>
 		<servlet-name>FriendRequestServlet</servlet-name>
 		<url-pattern>/friendrequest</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AdminServlet</servlet-name>
+		<url-pattern>/admin</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>AbilityManagerServlet</servlet-name>
+		<url-pattern>/abilitymanager</url-pattern>
 	</servlet-mapping>
 </web-app>
