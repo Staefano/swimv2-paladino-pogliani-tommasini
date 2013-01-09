@@ -2,10 +2,12 @@ package it.polimi.swimv2.session;
 
 import it.polimi.swimv2.entity.Message;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.exceptions.OperationFailedException;
 
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.EJB;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,26 +19,48 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 	@PersistenceContext(unitName="swimv2")
 	private EntityManager manager;
 	
-	public void write(User from, User to, String text) {
+	@EJB
+	private FriendShipBeanRemote friendshipBean;
+	
+	public void write(User from, User to, String text) throws OperationFailedException {
+		if(!friendshipBean.isFriend(from,  to)) {
+			throw new OperationFailedException("sender and receiver are not friends!");
+		}
 		Message m = new Message(from, to, text);
 		manager.persist(m);
 	}
 	
-	// all the messages or with a limitation???
-	@SuppressWarnings("unchecked")
-	public List<Message> getByUsername(User from, User to) {
-		final String query = "from Message m " +
-				"where m.sender = :from and m.receiver = :to " +
-				"order by m.timestamp desc";
-		Query q = manager.createQuery(query);
-		q.setParameter("from",  from);
-		q.setParameter("to", to);
-		return (List<Message>) q.getResultList();
+	// TODO support for pagination???
+	@Override @SuppressWarnings("unchecked")
+	public List<Message> getConversation(User current, User other) {
+		Query q = manager.createNamedQuery("Message.findConversation");
+		q.setParameter("user1", current);
+		q.setParameter("user2", other);
+		List<Message> ret = q.getResultList();
+		markAllAsRead(ret, current);
+		return ret;
 	}
 	
-	// TODO non teniamo traccia degli unread!!!
-	public List<Message> getLatestUnread(User to) {
-		return null;
+	@Override @SuppressWarnings("unchecked")
+	public List<User> getUsersWithConversations(User current) {
+		Query q = manager.createNamedQuery("Message.findUsersWithConversations");
+		q.setParameter("user", current);
+		return (List<User>) q.getResultList();
 	}
-
+	
+	@Override @SuppressWarnings("unchecked")
+	public List<User> getUnreadConversations(User current) {
+		Query q = manager.createNamedQuery("Message.findUnreadConversations");
+		q.setParameter("user", current);
+		return (List<User>) q.getResultList();
+	}
+	
+	private void markAllAsRead(List<Message> ret, User current) {
+		for(Message msg : ret) {
+			if(!msg.isMsgRead() && msg.getReceiver().equals(current)) {
+				msg.setMsgRead(true);
+				manager.merge(msg);
+			}
+		}
+	}
 }

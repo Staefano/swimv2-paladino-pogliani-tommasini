@@ -9,11 +9,10 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="Notification.findBytgtUser",
-			query="SELECT x FROM Notification x WHERE x.tgtuser = :user")
+		@NamedQuery(name = "Notification.findBytgtUser", query = "SELECT x FROM Notification x WHERE x.tgtUser = :user"),
+
 
 })
-
 public class Notification implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,18 +20,16 @@ public class Notification implements Serializable {
 	@Id @GeneratedValue
 	private int id;
 	private Timestamp timestamp;
+
 	private String ability;
-	
-	@ManyToOne 
-	private User user1;
-	
-	@ManyToOne
-	private User user2;
 
 	private NotificationType type;
 
 	@ManyToOne
-	private User tgtuser;
+	private User srcUser;
+
+	@ManyToOne
+	private User tgtUser;
 
 	public Notification() {
 		super();
@@ -62,14 +59,6 @@ public class Notification implements Serializable {
 		this.ability = ability;
 	}
 
-	public User getUser2() {
-		return this.user2;
-	}
-
-	public void setUser2(User user2) {
-		this.user2 = user2;
-	}
-
 	public NotificationType getType() {
 		return type;
 	}
@@ -77,20 +66,21 @@ public class Notification implements Serializable {
 	public void setType(NotificationType type) {
 		this.type = type;
 	}
-	public User getUser1() {
-		return user1;
+
+	public User getSrcUser() {
+		return srcUser;
 	}
-	public void setUser1(User user1) {
-		this.user1 = user1;
+
+	public void setSrcUser(User user) {
+		this.srcUser = user;
 	}
-   
 
 	public User getTgtuser() {
-		return tgtuser;
+		return tgtUser;
 	}
 
 	public void setTgtuser(User tgtuser) {
-		this.tgtuser = tgtuser;
+		this.tgtUser = tgtuser;
 	}
 
 	@Override
@@ -119,8 +109,8 @@ public class Notification implements Serializable {
 	@Override
 	public String toString() {
 		return "Notification [id=" + id + ", timestamp=" + timestamp
-				+ ", ability=" + ability + ", user2_id=" + user2 + ", type="
-				+ type + ", tgtuser=" + tgtuser + "]";
+				+ ", ability=" + ability + ", user2_id=" + srcUser + ", type="
+				+ type + ", tgtuser=" + tgtUser + "]";
 	}
 
 }

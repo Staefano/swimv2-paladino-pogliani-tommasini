@@ -1,6 +1,8 @@
 package it.polimi.swimv2.session;
 
 import it.polimi.swimv2.entity.AbilityRequest;
+
+import java.util.List;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
@@ -8,7 +10,9 @@ import it.polimi.swimv2.enums.NotificationType;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 @Stateless
 @Local(NotificationBeanRemote.class)
@@ -26,8 +30,8 @@ public class NotificationBean implements NotificationBeanRemote {
 
 		Notification n = new Notification();
 		n.setType(NotificationType.FRIENDSHIP_RECEIVED);
-		n.setUser1(asker);
-		n.setUser2(receiver);
+		n.setSrcUser(asker);
+		n.setTgtuser(receiver);
 		//TODO timestamp
 		manager.persist(n);
 		return n;
@@ -35,9 +39,21 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyFriendshipAccepted(User asker, User receiver) {
-		// TODO Auto-generated method stub
-		return null;
+	public Notification notifyFriendshipAccepted(User replier, Notification request) {
+		
+		Notification n = new Notification();
+		//quello che aveva chiesto l'amicizia
+		n.setTgtuser(request.getSrcUser());
+		//quello che sta rispondendo
+		n.setSrcUser(replier);
+		n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
+		//metto la nuova
+		manager.persist(n);
+		//tolgo la vecchia
+		manager.remove(request);
+		return n;
+	
+	
 	}
 
 	@Override
@@ -57,4 +73,21 @@ public class NotificationBean implements NotificationBeanRemote {
 		manager.persist(n);
 		return null;
 	}
+
+	@Override
+	public List<Notification> getNotifications(String u) {
+		Query q = manager.createNamedQuery("Notification.findBytgtUser");
+		q.setParameter("user", Integer.parseInt(u));
+		try{
+			@SuppressWarnings("unchecked")
+			List<Notification> notifications = (List<Notification>) q.getResultList();
+			return notifications;
+		
+		}catch(NoResultException nre){
+			//TODO
+			return null;
+		}
+		
+	}
+
 }

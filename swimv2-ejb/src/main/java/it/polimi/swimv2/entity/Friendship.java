@@ -6,9 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "Friendship.getByUser", query = "SELECT x FROM Friendship x WHERE x.user1Id = :userId"),
-		@NamedQuery(name = "Friendship.isFriend", query = "SELECT x FROM Friendship x WHERE x.user1Id = :user1Id and x.user2Id = :user2Id"),
-
+		@NamedQuery(name = "Friendship.getByUser", query = "SELECT x FROM Friendship x WHERE x.user1 = :user OR x.user2 = :user"),
+		@NamedQuery(name = "Friendship.isFriend", query = "SELECT x FROM Friendship x WHERE (x.user1 = :user1 AND x.user2 = :user2) OR (x.user1 = :user2 AND x.user2 = :user1)")
 })
 @IdClass(FriendshipId.class)
 public class Friendship implements Serializable {

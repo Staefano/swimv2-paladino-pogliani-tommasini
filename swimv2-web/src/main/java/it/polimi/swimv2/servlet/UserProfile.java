@@ -1,6 +1,7 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.webutils.Controller;
@@ -27,7 +28,9 @@ public class UserProfile extends Controller {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	@EJB
+	private NotificationBeanRemote nbr;
+	
 	@EJB
 	private UserBeanRemote ubr;
 
@@ -38,7 +41,7 @@ public class UserProfile extends Controller {
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-
+		
 		String id = nav.getParam("id");
 		try {
 
@@ -46,6 +49,7 @@ public class UserProfile extends Controller {
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
+			nav.setAttribute("notifications", nbr.getNotifications("id"));
 
 			nav.fwd("WEB-INF/userprofile.jsp");
 		} catch (NoSuchUserException nsue) {

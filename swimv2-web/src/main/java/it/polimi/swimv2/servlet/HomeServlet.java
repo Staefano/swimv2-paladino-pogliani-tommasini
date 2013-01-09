@@ -1,6 +1,7 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.session.AuthenticationBeanRemote;
+import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -19,8 +20,11 @@ public class HomeServlet extends Controller {
 	private static final long serialVersionUID = 9004320551305682450L;
 
 	private static final String INDEX_JSP = "/WEB-INF/index.jsp";
-	private static final String PERSONALAREA_JSP = "/WEB-INF/personalarea.jsp";
 
+
+	@EJB
+	private NotificationBeanRemote nbr;
+	
 	@EJB
 	private AuthenticationBeanRemote auth;
 
@@ -48,8 +52,7 @@ public class HomeServlet extends Controller {
 			nav.setAttribute("accessDenied", true);
 		}
 		if (nav.getRole() != AccessRole.UNREGISTERED) {
-			// TODO sara' da sistemare!
-			nav.fwd(PERSONALAREA_JSP);
+			nav.fwd("/personal");
 		} else {
 			nav.fwd(INDEX_JSP);
 		}
@@ -63,7 +66,7 @@ public class HomeServlet extends Controller {
 		}
 		try {
 			nav.setLogin(auth.checkCredentials(user, password));
-			nav.fwd(PERSONALAREA_JSP);
+			nav.redirect("/");
 		} catch (NoSuchUserException nsue) {
 			nav.setAttribute("wrongLogin", true);
 			nav.fwd(INDEX_JSP);

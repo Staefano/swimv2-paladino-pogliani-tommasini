@@ -5,15 +5,32 @@ import java.sql.Timestamp;
 
 import javax.persistence.*;
 
+@NamedQueries({
+	@NamedQuery(name="Message.findConversation", query="" +
+			"SELECT m FROM Message m WHERE (m.sender = :user1 AND m.receiver = :user2) OR " +
+			"(m.sender = :user2 AND m.receiver = :user1) ORDER BY m.timestamp DESC"),
+	// TODO just hints on what needs to be done... 
+	/* given a user, returns the set of all users having conversations with unread msgs (for the homepage???) */
+	@NamedQuery(name="Message.findUnreadConversations", query="" + 
+			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE m.receiver = :user AND m.msgRead = false " + 
+			"ORDER BY m.timestamp DESC"),
+	@NamedQuery(name="Message.findUsersWithConversations", query="" + 
+			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE " +
+			"u <> :user AND (m.receiver = :user OR m.sender = :user) " +
+			"ORDER BY m.timestamp DESC")
+})
 @Entity
 public class Message implements Serializable {
+
+	private static final long serialVersionUID = 4032235999683631118L;
 
 	@Id
 	@GeneratedValue
 	private int id;
 	private Timestamp timestamp;
 	private String text;
-	private static final long serialVersionUID = 1L;
+	@Column(columnDefinition = "bit default false")
+	private boolean msgRead;
 
 	@ManyToOne
 	private User sender;
@@ -70,6 +87,14 @@ public class Message implements Serializable {
 
 	public void setReceiver(User receiver) {
 		this.receiver = receiver;
+	}
+	
+	public void setMsgRead(boolean read) {
+		this.msgRead = true;
+	}
+	
+	public boolean isMsgRead() {
+		return this.msgRead;
 	}
 
 	@Override
