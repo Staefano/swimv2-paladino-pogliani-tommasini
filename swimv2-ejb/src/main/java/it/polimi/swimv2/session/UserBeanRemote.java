@@ -15,7 +15,7 @@ public interface UserBeanRemote {
 
 	User getUserByID(int id) throws NoSuchUserException;
 
-	void editProfile(User u) throws NoSuchUserException;
+	User editProfile(User u, String name, String surname, String website, String birthdate, String location, String minibio, String description) throws NoSuchUserException;
 
 	List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException;
 
@@ -32,5 +32,6 @@ public interface UserBeanRemote {
 	List<HelpRequest> getProvidedHelpRequest(User u) throws NoSuchUserException;
 
 	List<HelpRequest> getReceivedHelpRequest(User u) throws NoSuchUserException;
+
 
 }

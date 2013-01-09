@@ -47,7 +47,7 @@
 		<c:forEach var="n" items="${notifications}">
 		<div class="well">
 			<c:if test="${n.type=='FRIENDSHIP_ACCEPTED'}">
-			<p>Your friendship request to user <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved </p>
+			<p>Your friendship request to user<a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved </p>
           	<a href="readnotification?notification_id=${n.id}"><button
 							class="btn btn-success" type="button">Mark as Read</button></a>			
 			</c:if>
