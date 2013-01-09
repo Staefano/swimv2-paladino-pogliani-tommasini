@@ -36,7 +36,9 @@
 	</div>
 	<c:if test="${user.id != profile.id }">
 		<ul>
-		<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a></li>
+		<c:if test="${showFR}">
+				<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a></li>
+		</c:if>
 		<li><a href="message?">messaggio</a></li>
 		<li><a href="helprequest?">helprequest</a></li>
 		</ul>

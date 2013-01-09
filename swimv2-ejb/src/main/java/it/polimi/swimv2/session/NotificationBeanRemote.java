@@ -19,6 +19,8 @@ public interface NotificationBeanRemote {
 	Notification notifyFriendshipRequest(User asker, User receiver);
 
 	Notification notifyAbilityRequest(User asker);
+	
+	boolean isPending(User user1, User user2);
 
 	void notifyAbilityAccepted(AbilityRequest request);
 

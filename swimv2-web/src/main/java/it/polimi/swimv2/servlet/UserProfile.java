@@ -1,6 +1,7 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.FriendShipBeanRemote;
 import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
@@ -33,6 +34,8 @@ public class UserProfile extends Controller {
 	
 	@EJB
 	private UserBeanRemote ubr;
+	@EJB
+	private FriendShipBeanRemote friendshipBean;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -46,6 +49,9 @@ public class UserProfile extends Controller {
 		try {
 
 			User u = ubr.getUserByID(Integer.parseInt(id));
+			System.err.println(nbr.isPending(nav.getLoggedUser(), u));
+		nav.setAttribute("showFR", !(friendshipBean.isFriend(nav.getLoggedUser(), u) || nbr.isPending(nav.getLoggedUser(), u)));
+			
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));

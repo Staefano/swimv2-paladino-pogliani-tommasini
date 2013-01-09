@@ -128,4 +128,16 @@ public class NotificationBean implements NotificationBeanRemote {
 		}
 	}
 
+	@Override
+	public boolean isPending(User user1, User user2) {
+
+		Query q = manager.createNamedQuery("Notification.isPending");
+		q.setParameter("user1", user1);
+		q.setParameter("user2", user2);
+		q.setParameter("type", NotificationType.FRIENDSHIP_RECEIVED);
+		int count = ( (Long) q.getSingleResult() ).intValue();
+		return count==1;
+		
+	}
+
 }
