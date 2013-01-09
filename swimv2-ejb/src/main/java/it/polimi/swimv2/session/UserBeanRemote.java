@@ -33,4 +33,6 @@ public interface UserBeanRemote {
 
 	List<HelpRequest> getReceivedHelpRequest(User u) throws NoSuchUserException;
 
+	void setImage(User user, byte[] img, String mimeType);
+
 }

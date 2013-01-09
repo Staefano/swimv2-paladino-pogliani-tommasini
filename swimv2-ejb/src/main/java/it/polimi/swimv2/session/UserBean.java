@@ -4,6 +4,7 @@ import it.polimi.swimv2.entity.Feedback;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.entity.UserImage;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
@@ -165,6 +166,21 @@ public class UserBean implements UserBeanRemote {
 		} catch (NoResultException nre) {
 			throw new NoSuchUserException();
 		}
+	}
+	
+	@Override
+	public void setImage(User user, byte[] img, String mimeType) {
+		// todo controlli sull'immagine, ridimensionamento & co...
+		UserImage image = new UserImage(mimeType, img);
+		// remove the old image and substitute it with the new one
+		User jpaUser = manager.find(User.class, user.getId());
+		UserImage old = jpaUser.getImage();
+		manager.persist(image);
+		jpaUser.setImage(image);
+		if(old != null) {
+			manager.remove(old);
+		}
+		manager.merge(jpaUser);
 	}
 
 }
