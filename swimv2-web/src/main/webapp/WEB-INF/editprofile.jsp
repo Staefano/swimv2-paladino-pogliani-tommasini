@@ -4,14 +4,14 @@
 
 <t:private-page user="${user}" title="SWIMv2 - Edit Profile">
 	<jsp:body>
-	<form name="editprofile" method="post" action="editprofile">
+	<form name="editprofile" method="post" action="editprofile" enctype="multipart/form-data">
 
 		<p>
-			<b>Nome:</b>
+			<b>Name:</b>
 		</p>
 		<input type="text" name="name">
 		<p>
-			<b>Cognome:</b>
+			<b>Surname:</b>
 		</p>
 
 		<input type="text" name="surname">
@@ -24,13 +24,13 @@
 		<p>
 		
 			<p>
-			<b>BirthDate</b>
+			<b>Birth date:</b>
 		</p>
 		<input type="text" name="birthdate">
 		<p>
 		
 			<p>
-			<b>location:</b>
+			<b>Location:</b>
 		</p>
 		<input type="text" name="location">
 		<p>
@@ -45,6 +45,7 @@
 		</p>
 		<textarea rows="4" cols="50">
 		</textarea>
+		<input type="file" id="file" name="file">
 		<input type="submit" value="Submit" id="Submit">
 	</form>
 

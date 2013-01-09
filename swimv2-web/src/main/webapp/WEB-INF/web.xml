@@ -117,8 +117,6 @@
     <url-pattern>/readnotification</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>EditProfile</display-name>
     <servlet-name>EditProfile</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.EditProfile</servlet-class>
   </servlet>

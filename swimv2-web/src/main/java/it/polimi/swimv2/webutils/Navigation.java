@@ -1,6 +1,7 @@
 package it.polimi.swimv2.webutils;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.webutils.exception.NavigationException;
 
 import java.io.IOException;
 import java.util.List;
@@ -83,17 +84,20 @@ public class Navigation {
 		}
 	}
 	
-	public List<FileItem> getUploadedFiles() throws FileUploadException {
+	public MultipartFormProcesser getMultipart() throws NavigationException {
 		// Create a factory for disk-based file items
 		FileItemFactory factory = new DiskFileItemFactory();
-
 		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
-
 		// Parse the request
-		@SuppressWarnings("unchecked")
-		List<FileItem> items = upload.parseRequest(request);
-		return items;
+		try {
+			@SuppressWarnings("unchecked")
+			List<FileItem> items = upload.parseRequest(request);
+			return new MultipartFormProcesser(items);
+		} catch (FileUploadException e) {
+			throw new NavigationException(e);
+		}
 	}
+
 	
 }
