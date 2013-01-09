@@ -9,14 +9,18 @@
 	<jsp:body>
 	<p>
 		
-	<div class="well well-small">
+	
+		
+		<div class="well well-small">
 		Your precious ability doesn't exist? Request it!
 		<form class="form-horizontal" method="post" action="abilityrequest">
   			<div class="control-group">
-  				<input type="text" placeholder="Ability Name" class="input-medium search-query" name="name">
+  				<input type="text" placeholder="Ability Name"
+						class="input-medium search-query" name="name">
   			</div>
   			<div class="control-group">
-  				<input type="text" placeholder="Short Comment" class="input-medium search-query" name="comment">
+  				<input type="text" placeholder="Short Comment"
+						class="input-medium search-query" name="comment">
   			</div>
   			<button type="submit" class="btn btn-small btn-primary">Send Request</button>
 		</form>
@@ -29,7 +33,8 @@
 		
 		<ul>
 		<c:forEach var="u" items="${usersWithUnread}">
-			<li><a href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
+			<li><a
+					href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
 		</c:forEach>
 		</ul>
 		
@@ -39,14 +44,29 @@
 
 		<h1>Notifications</h1>
 		<c:forEach var="n" items="${notifications}">
-			<c:if test="${n.type!='FRIENDSHIP_RECEIVED'}">
-			<a href="readnotification?notification_id=${n.id}">Mark as Read  ${ n.id}</a>
+			<c:if test="${n.type=='FRIENDSHIP_ACCEPTED'}">
+			<p>Your friendship request to user   ${ n.srcUser.name}  ${ n.srcUser.surname} was approved </p>
+          	<a href="readnotification?notification_id=${n.id}"><button
+						class="btn btn-success" type="button">Mark as Read</button></a>			
+			</c:if>
+			<c:if test="${n.type=='ABILITY_ACCCEPTED'}">
+			<p>Your ability request was approved now you can add ${n.ability } to your ability</p>
+			                	<a href="readnotification?notification_id=${n.id}"><button
+						class="btn btn-success" type="button">Mark as Read</button></a>
+			</c:if>
+			<c:if test="${n.type=='ABILITY_REJECTED'}">
+			<p>Your ability request was rejected  ${n.ability } is not a valid ability in SWIMv2</p>
+          	<a href="readnotification?notification_id=${n.id}"><button
+						class="btn btn-success" type="button">Mark as Read</button></a>
 			</c:if>
 			<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}">
 					<p>Friendship Request from  ${n.srcUser.name}  ${n.srcUser.surname}</p>
-					<a href="friendshipaccepted?notification_id=${n.id}">Accept</a>
-					<a href="friendshiprefused?notification_id=${n.id}">Refuse</a>
+					<a  href="friendshipaccepted?notification_id=${n.id}"><button
+							class="btn btn-success" type="button">Approve </button></a>
+                	<a href="friendshiprefused?notification_id=${n.id}"><button
+							class="btn btn-danger" type="button">Refuse </button></a>
 			</c:if>
+		
 		</c:forEach>
 	</jsp:body>
 </t:private-page>

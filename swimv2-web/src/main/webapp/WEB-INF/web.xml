@@ -104,7 +104,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FriendshipRefused</servlet-name>
-    <url-pattern>/FriendshipRefused</url-pattern>
+    <url-pattern>/friendshiprefused</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

@@ -3,7 +3,6 @@ package it.polimi.swimv2.entity;
 import it.polimi.swimv2.entity.User;
 import java.io.Serializable;
 
-import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity
@@ -14,18 +13,18 @@ import javax.persistence.*;
 @IdClass(FriendshipId.class)
 public class Friendship implements Serializable {
 
-	@Id
+	@Id @Column(name="user1", insertable = false, updatable = false)
 	private int user1Id;
 
-	@Id	
+	@Id	@Column(name ="user2", insertable = false, updatable = false)
 	private int user2Id;
 
 	@ManyToOne 
-	@JoinColumn(name = "user1")
+	@JoinColumn(name = "user1", insertable = false, updatable = false)
 	private User user1;
 
 	@ManyToOne 
-	@JoinColumn(name = "user2")
+	@JoinColumn(name = "user2", insertable = false, updatable = false)
 	private User user2;
 
 	private boolean isDirect;

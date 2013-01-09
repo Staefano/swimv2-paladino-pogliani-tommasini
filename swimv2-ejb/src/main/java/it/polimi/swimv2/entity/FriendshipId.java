@@ -9,9 +9,9 @@ public class FriendshipId implements Serializable {
 	private static final long serialVersionUID = 6684163541032025055L;
 
 	/* fields referencing User primary keys */
-	@Column(name="user1")
+	@Column(name="user1", insertable = false, updatable = false)
 	private int user1Id;
-	@Column(name="user2")
+	@Column(name="user2", insertable = false, updatable = false)
 	private int user2Id;
 	
 	@Override
