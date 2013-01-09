@@ -48,6 +48,13 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 		return (List<User>) q.getResultList();
 	}
 	
+	@Override @SuppressWarnings("unchecked")
+	public List<User> getUnreadConversations(User current) {
+		Query q = manager.createNamedQuery("Message.findUnreadConversations");
+		q.setParameter("user", current);
+		return (List<User>) q.getResultList();
+	}
+	
 	private void markAllAsRead(List<Message> ret, User current) {
 		for(Message msg : ret) {
 			if(!msg.isMsgRead() && msg.getReceiver().equals(current)) {

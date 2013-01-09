@@ -70,4 +70,14 @@
     <servlet-name>MessageServlet</servlet-name>
     <url-pattern>/messages</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PersonalAreaServlet</display-name>
+    <servlet-name>PersonalAreaServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.PersonalAreaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PersonalAreaServlet</servlet-name>
+    <url-pattern>/personal</url-pattern>
+  </servlet-mapping>
 </web-app>

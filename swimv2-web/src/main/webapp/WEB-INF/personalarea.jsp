@@ -10,6 +10,19 @@
 	<p>
 		I'm the (dummy) content of this page.
 		
+		<h1>Messages</h1>
+		<c:if test="${empty usersWithUnread}">
+			You don't have unread messages
+		</c:if>
+		
+		<ul>
+		<c:forEach var="u" items="${usersWithUnread}">
+			<li><a href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
+		</c:forEach>
+		</ul>
+		
+		<p><a href="${pageContext.servletContext.contextPath}/messages">All messages...</a></p>
+		
 		
 		<h1>Notifications</h1>
 		<c:forEach var="n" items="${notifications}">

@@ -36,4 +36,6 @@ public interface MessageManagerBeanRemote {
 	 */
 	List<User> getUsersWithConversations(User current);
 
+	List<User> getUnreadConversations(User current);
+
 }

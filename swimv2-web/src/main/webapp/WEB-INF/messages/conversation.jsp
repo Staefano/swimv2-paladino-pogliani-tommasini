@@ -12,7 +12,6 @@
 		<c:forEach var="msg" items="${messages}">
 			<h3>${msg.sender.name} ${msg.sender.surname}</h3>
 			<p>${msg.text}</p>
-			
 		</c:forEach>
 		
 		<form method="post">

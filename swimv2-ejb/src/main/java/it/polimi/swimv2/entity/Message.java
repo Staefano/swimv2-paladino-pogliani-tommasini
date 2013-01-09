@@ -11,7 +11,7 @@ import javax.persistence.*;
 			"(m.sender = :user2 AND m.receiver = :user1) ORDER BY m.timestamp DESC"),
 	// TODO just hints on what needs to be done... 
 	/* given a user, returns the set of all users having conversations with unread msgs (for the homepage???) */
-	@NamedQuery(name="Message.findUsersWithUnread", query="" + 
+	@NamedQuery(name="Message.findUnreadConversations", query="" + 
 			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE m.receiver = :user AND m.msgRead = false " + 
 			"ORDER BY m.timestamp DESC"),
 	@NamedQuery(name="Message.findUsersWithConversations", query="" + 
