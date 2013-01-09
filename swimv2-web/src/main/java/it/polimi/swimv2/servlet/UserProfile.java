@@ -49,7 +49,6 @@ public class UserProfile extends Controller {
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
-			nav.setAttribute("notifications", nbr.getNotifications("id"));
 
 			nav.fwd("WEB-INF/userprofile.jsp");
 		} catch (NoSuchUserException nsue) {

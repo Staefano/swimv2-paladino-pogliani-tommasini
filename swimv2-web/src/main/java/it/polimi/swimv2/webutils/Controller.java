@@ -20,6 +20,8 @@ public abstract class Controller extends HttpServlet {
 
 	private final AccessRole minimumRole;
 	
+	protected String BASEPATH = "/";
+	
 	public Controller() {
 		this(AccessRole.UNREGISTERED);
 	}

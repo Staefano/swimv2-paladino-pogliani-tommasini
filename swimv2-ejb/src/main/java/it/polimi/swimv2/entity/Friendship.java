@@ -2,6 +2,8 @@ package it.polimi.swimv2.entity;
 
 import it.polimi.swimv2.entity.User;
 import java.io.Serializable;
+
+import javax.annotation.Generated;
 import javax.persistence.*;
 
 @Entity
@@ -48,7 +50,23 @@ public class Friendship implements Serializable {
 	}
 
 	public void setUser2(User user2) {
-		this.user2 = user2;
+		this.user2= user2;
+	}
+
+	public int getUser1Id() {
+		return user1Id;
+	}
+
+	public void setUser1Id(int user1Id) {
+		this.user1Id = user1Id;
+	}
+
+	public int getUser2Id() {
+		return user2Id;
+	}
+
+	public void setUser2Id(int user2Id) {
+		this.user2Id = user2Id;
 	}
 
 	public boolean isDirect() {

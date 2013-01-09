@@ -38,28 +38,29 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setType(NotificationType.FRIENDSHIP_RECEIVED);
 		n.setSrcUser(asker);
 		n.setTgtuser(receiver);
-		//TODO timestamp
+		// TODO timestamp
 		manager.persist(n);
 		return n;
 
 	}
 
 	@Override
-	public Notification notifyFriendshipAccepted(User replier, Notification request) {
-		
+	public Notification notifyFriendshipAccepted(User replier,
+			String notificationID) {
+
 		Notification n = new Notification();
-		//quello che aveva chiesto l'amicizia
+		Notification request = getByID(notificationID);
+		// quello che aveva chiesto l'amicizia
 		n.setTgtuser(request.getSrcUser());
-		//quello che sta rispondendo
+		// quello che sta rispondendo
 		n.setSrcUser(replier);
 		n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
-		//metto la nuova
+		// metto la nuova
 		manager.persist(n);
-		//tolgo la vecchia
+		// tolgo la vecchia
 		manager.remove(request);
 		return n;
-	
-	
+
 	}
 
 	@Override
@@ -75,18 +76,46 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public List<Notification> getNotifications(String u) {
+	public List<Notification> getNotifications(User u) {
 		Query q = manager.createNamedQuery("Notification.findBytgtUser");
-		q.setParameter("user", Integer.parseInt(u));
-		try{
+		q.setParameter("user", u);
+		try {
 			@SuppressWarnings("unchecked")
-			List<Notification> notifications = (List<Notification>) q.getResultList();
+			List<Notification> notifications = (List<Notification>) q
+					.getResultList();
 			return notifications;
-		
-		}catch(NoResultException nre){
-			//TODO
+
+		} catch (NoResultException nre) {
+			// TODO
 			return null;
 		}
-		
+
+	}
+
+	@Override
+	public Notification getByID(String id) {
+
+		Query q = manager.createNamedQuery("Notification.findByID");
+		q.setParameter("id", Integer.parseInt(id));
+		try {
+			return (Notification) q.getSingleResult();
+		} catch (NoResultException nre) {
+			// TODO da sistemare
+			return null;
+		}
+	}
+
+	@Override
+	public void deleteNotification(String notificationId) {
+		Query q = manager.createNamedQuery("Notification.findByID");
+		q.setParameter("id", Integer.parseInt(notificationId));
+
+		try {
+
+			manager.remove((Notification) q.getSingleResult());
+
+		} catch (NoResultException nre) {
+			// TODO da sistemare
+		}
 	}
 }

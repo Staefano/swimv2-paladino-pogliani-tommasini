@@ -13,6 +13,7 @@ public class Navigation {
 	HttpServletRequest request;
 	HttpServletResponse response;
 	
+	
 	public Navigation(HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;

@@ -8,6 +8,9 @@
 	</jsp:attribute>
 	<jsp:body>
 	<p>
+		
+		
+		
 		<h1>Messages</h1>
 		<c:if test="${empty usersWithUnread}">
 			You don't have unread messages
@@ -19,11 +22,20 @@
 		</c:forEach>
 		</ul>
 		
-		<p><a href="${pageContext.servletContext.contextPath}/messages">All messages...</a></p>
+		<p>
+			<a href="${pageContext.servletContext.contextPath}/messages">All messages...</a>
+		</p>
 
 		<h1>Notifications</h1>
 		<c:forEach var="n" items="${notifications}">
-	<a href="notification?notification_id=">${ n.type}</a>
+			<c:if test="${n.type!='FRIENDSHIP_RECEIVED'}">
+			<a href="readnotification?notification_id=${n.id}">Mark as Read  ${ n.id}</a>
+			</c:if>
+			<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}">
+					<p>Friendship Request from  ${n.srcUser.name}  ${n.srcUser.surname}</p>
+					<a href="friendshipaccepted?notification_id=${n.id}">Accept</a>
+					<a href="friendshiprefused?notification_id=${n.id}">Refuse</a>
+			</c:if>
 		</c:forEach>
 	</jsp:body>
 </t:private-page>

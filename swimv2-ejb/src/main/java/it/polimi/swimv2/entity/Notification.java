@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Notification.findBytgtUser", query = "SELECT x FROM Notification x WHERE x.tgtUser = :user"),
+		@NamedQuery(name = "Notification.findByID", query = "SELECT x FROM Notification x WHERE x.id = :id"),
 
 
 })
@@ -17,7 +18,7 @@ public class Notification implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id @GeneratedValue
 	private int id;
 	private Timestamp timestamp;
 

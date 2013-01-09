@@ -19,8 +19,7 @@ import javax.servlet.ServletException;
  */
 public class FriendRequestServlet extends Controller {
 	private static final long serialVersionUID = 1L;
-       
-	
+
 	@EJB
 	private UserBeanRemote ubr;
 	@EJB
@@ -28,44 +27,45 @@ public class FriendRequestServlet extends Controller {
 	@EJB
 	private NotificationBeanRemote nbr;
 
-    /**
-     * @see Controller#Controller()
-     */
-    public FriendRequestServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
-    public FriendRequestServlet(AccessRole role) {
-        super(role);
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see Controller#Controller()
+	 */
+	public FriendRequestServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
+	/**
+	 * @see Controller#Controller(AccessRole)
+	 */
+	public FriendRequestServlet(AccessRole role) {
+		super(role);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-		
-			String askerID = nav.getParam("asker");
-			String receiverID = nav.getParam("receiver");
-			try{
-				
+
+		String askerID = nav.getParam("asker");
+		String receiverID = nav.getParam("receiver");
+
+		if (!(askerID.equals(receiverID))) {
+			try {
+
 				User receiver = ubr.getUserByID(Integer.parseInt(receiverID));
 				User asker = ubr.getUserByID(Integer.parseInt(askerID));
 				nbr.notifyFriendshipRequest(asker, receiver);
 				nav.fwd("/");
 
-			}catch(NoSuchUserException nsue){
-				
-				//TODO gestirla
-				
-			}
-			
-			
-		
-		
-	}
+			} catch (NoSuchUserException nsue) {
 
+				// TODO gestirla
+				nav.fwd("WEB-INF/error.jsp");
+			}
+		} else {
+			nav.fwd("WEB-INF/error.jsp");
+
+		}
+
+	}
 }

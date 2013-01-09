@@ -23,24 +23,23 @@
 		</div>
 		<div>
 			<c:forEach var="hrp" items="${providedList}">
-			<p>${hrr.subject }</p>
+				<p>${hrr.subject }</p>
 			</c:forEach>
 		</div>
 		<div>
 			<c:forEach var="hrr" items="${receivedList}">
-			<p>${hrr.subject }</p>
+				<p>${hrr.subject }</p>
 			</c:forEach>
 		</div>
 	</div>
-	<a href="article?article_id=">messaggio</a>
-	<a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a>
-	<a href="article?article_id=">modifica</a>
-	<a href="article?article_id=">helprequest</a>
-	
-	<h1>Notifications</h1>
-		<c:forEach var="n" items="${notifications}">
-	<a href="notification?notification_id=">${ n.type}</a>
-		</c:forEach>
+	<c:if test="${user.id != profile.id }">
+		<a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a>
+		<a href="message?">messaggio</a>
+		<a href="helprequest?">helprequest</a>
+	</c:if>
+	<c:if test="${user.id == profile.id }">
+	<a href="editprofile">modifica</a>
+	</c:if>
 
 
 
