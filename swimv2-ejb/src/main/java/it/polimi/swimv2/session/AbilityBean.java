@@ -10,6 +10,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -23,9 +24,10 @@ public class AbilityBean implements AbilityBeanRemote {
 	NotificationBeanRemote notificationBean;
 
 	@Override
-	public void requestAbility(String name, User user) {
+	public void requestAbility(String name, String comment, User user) {
 		AbilityRequest request = new AbilityRequest();
 		request.setAbility(name);
+		request.setComment(comment);
 		request.setSender(user);
 		request.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		manager.persist(request);
@@ -78,11 +80,25 @@ public class AbilityBean implements AbilityBeanRemote {
 			if (choice.equals("approve")) {
 				notificationBean.notifyAbilityAccepted(r);
 			} else {
-				// TODO notificationBean.notifyAbilityRejected(request);
+				notificationBean.notifyAbilityRejected(r);
 			}
 			manager.remove(r);
 		}
 
+	}
+
+	@Override
+	public boolean alreadyExist(String ability) {
+		Query q = manager.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
+		q.setParameter("name", ability);
+		
+		try{
+			q.getSingleResult();
+		} catch (NoResultException nre) {
+			return false;
+		}
+		
+		return true;
 	}
 
 }

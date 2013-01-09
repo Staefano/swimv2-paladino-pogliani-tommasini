@@ -14,6 +14,13 @@
   				<strong>Success!</strong> The ability ${abName} has been added!
 			</div>
 		</c:if>
+		<c:if test="${message == 'already'}">
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>Warning!</strong> The ability ${abName} already exists!
+			</div>
+		</c:if>
+		
 		<form class="form-search" method="get" action="admin">
   			<input type="text" class="input-medium search-query" name="ability">
   			<button type="submit" class="btn btn-primary">Add New Ability</button>
@@ -31,8 +38,7 @@
   				<strong>Success!</strong> The ability ${abName} has been rejected!
 			</div>
 		</c:if>
-		
-		
+
 		<c:choose>
 			<c:when test="${found}">
 				<c:forEach var="abReq" items="${results}">

@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Edit Profile</title>
-</head>
-<body>
+<%@ page language="java"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
+
+<t:private-page user="${user}" title="SWIMv2 - Edit Profile">
+	<jsp:body>
 	<form name="editprofile" method="post" action="editprofile">
 
 		<p>
@@ -25,22 +22,25 @@
 		</p>
 		<input type="text" name="website">
 		<p>
-		<p>
+		
+			<p>
 			<b>BirthDate</b>
 		</p>
 		<input type="text" name="birthdate">
 		<p>
-		<p>
+		
+			<p>
 			<b>location:</b>
 		</p>
 		<input type="text" name="location">
 		<p>
-		<p>
+		
+			<p>
 			<b>Minibio:</b>
 		</p>
 		<textarea rows="4" cols="50">
 		</textarea>
-<p>
+		<p>
 			<b>Description:</b>
 		</p>
 		<textarea rows="4" cols="50">
@@ -48,5 +48,5 @@
 		<input type="submit" value="Submit" id="Submit">
 	</form>
 
-</body>
-</html>
+	</jsp:body>
+</t:private-page>

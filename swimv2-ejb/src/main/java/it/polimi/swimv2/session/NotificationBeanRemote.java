@@ -20,7 +20,9 @@ public interface NotificationBeanRemote {
 
 	Notification notifyAbilityRequest(User asker);
 
-	Notification notifyAbilityAccepted(AbilityRequest request);
+	void notifyAbilityAccepted(AbilityRequest request);
+
+	void notifyAbilityRejected(AbilityRequest request);
 
 
 }

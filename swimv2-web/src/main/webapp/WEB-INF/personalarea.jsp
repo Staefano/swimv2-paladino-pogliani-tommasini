@@ -9,7 +9,18 @@
 	<jsp:body>
 	<p>
 		
-		
+	<div class="well well-small">
+		Your precious ability doesn't exist? Request it!
+		<form class="form-horizontal" method="post" action="abilityrequest">
+  			<div class="control-group">
+  				<input type="text" placeholder="Ability Name" class="input-medium search-query" name="name">
+  			</div>
+  			<div class="control-group">
+  				<input type="text" placeholder="Short Comment" class="input-medium search-query" name="comment">
+  			</div>
+  			<button type="submit" class="btn btn-small btn-primary">Send Request</button>
+		</form>
+	</div>
 		
 		<h1>Messages</h1>
 		<c:if test="${empty usersWithUnread}">

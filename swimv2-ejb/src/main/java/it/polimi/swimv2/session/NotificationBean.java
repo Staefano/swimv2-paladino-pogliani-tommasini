@@ -2,6 +2,7 @@ package it.polimi.swimv2.session;
 
 import it.polimi.swimv2.entity.AbilityRequest;
 
+import java.sql.Timestamp;
 import java.util.List;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
@@ -64,17 +65,25 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyAbilityAccepted(AbilityRequest request) {
-		
+	public void notifyAbilityAccepted(AbilityRequest request) {
 		Notification n = new Notification();
 		n.setType(NotificationType.ABILITY_ACCCEPTED);
 		n.setAbility(request.getAbility());
 		n.setTgtuser(request.getSender());
-		//TODO n.setTimestamp(timestamp);
+		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		manager.persist(n);
-		return null;
 	}
 
+	@Override
+	public void notifyAbilityRejected(AbilityRequest request) {
+		Notification n = new Notification();
+		n.setType(NotificationType.ABILITY_REJECTED);
+		n.setAbility(request.getAbility());
+		n.setTgtuser(request.getSender());
+		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
+		manager.persist(n);		
+	}
+	
 	@Override
 	public List<Notification> getNotifications(User u) {
 		Query q = manager.createNamedQuery("Notification.findBytgtUser");

@@ -10,7 +10,7 @@ import it.polimi.swimv2.entity.User;
 @Remote
 public interface AbilityBeanRemote {
 		
-	void requestAbility(String name, User user);
+	void requestAbility(String name, String comment, User user);
 	
 	List<AbilityRequest> retrievePendingRequests();	
 		
@@ -21,5 +21,7 @@ public interface AbilityBeanRemote {
 	AbilityRequest getRequest(int abId);
 	
 	void removeAbilityRequest(AbilityRequest request, String choice);
-		
+
+	boolean alreadyExist(String ability);
+	
 }

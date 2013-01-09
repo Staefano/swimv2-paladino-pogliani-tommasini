@@ -28,9 +28,14 @@ public class AdminServlet extends Controller {
 		// Add new Ability
 		String ability = nav.getParam("ability");
 		if (ability != null) {
-			abilityBean.addNewAbility(ability);
-			nav.setAttribute("message", "new");
-			nav.setAttribute("abName", ability);
+			if (abilityBean.alreadyExist(ability)) {
+				nav.setAttribute("message", "already");
+				nav.setAttribute("abName", ability);
+			} else {
+				abilityBean.addNewAbility(ability);
+				nav.setAttribute("message", "new");
+				nav.setAttribute("abName", ability);
+			}
 		}
 
 		// Approve or reject AbilityRequest
@@ -40,7 +45,8 @@ public class AdminServlet extends Controller {
 			AbilityRequest request = abilityBean.getRequest(abId);
 			String abName = request.getAbility();
 
-			if (choice.equals("approve")) {
+			if (choice.equals("approve")
+					&& !(abilityBean.alreadyExist(abName))) {
 				abilityBean.addNewAbility(request.getAbility());
 			}
 			abilityBean.removeAbilityRequest(request, choice);

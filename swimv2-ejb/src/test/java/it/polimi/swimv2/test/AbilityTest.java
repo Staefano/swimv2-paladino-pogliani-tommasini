@@ -26,11 +26,11 @@ public class AbilityTest extends BaseTest {
 		
 		int origSize = 0; // bean.retrievePendingRequests().size();
 				
-		bean.requestAbility("money swimmer", scrooge);
-		bean.requestAbility("matress tester", donald);
+		bean.requestAbility("money swimmer", "comment", scrooge);
+		bean.requestAbility("matress tester", "comment", donald);
 		// two users requesting the same ability, ok, if one accepts the other one accepts too!
-		bean.requestAbility("adventurer", scrooge);
-		bean.requestAbility("adventurer", donald);
+		bean.requestAbility("adventurer", "comment", scrooge);
+		bean.requestAbility("adventurer", "comment", donald);
 		
 		List<AbilityRequest> reqs = bean.retrievePendingRequests();
 		assertEquals(reqs.size(), origSize + 4);
