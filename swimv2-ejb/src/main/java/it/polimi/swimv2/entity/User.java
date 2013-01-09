@@ -32,6 +32,10 @@ public class User implements Serializable {
 	private String location;
 	private String minibio;
 	private String description;
+	
+	@OneToOne
+	private UserImage image;
+	
 	private static final long serialVersionUID = 1L;
 
 	// manytomany unidirezionale dato che ability non tiene traccia dell'user
@@ -121,6 +125,14 @@ public class User implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public UserImage getImage() {
+		return this.image;
+	}
+	
+	public void setImage(UserImage image) {
+		this.image = image;
 	}
 
 	public boolean isAdmin() {

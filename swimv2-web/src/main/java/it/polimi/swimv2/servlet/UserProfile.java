@@ -49,8 +49,7 @@ public class UserProfile extends Controller {
 		try {
 
 			User u = ubr.getUserByID(Integer.parseInt(id));
-			System.err.println(nbr.isPending(nav.getLoggedUser(), u));
-		nav.setAttribute("showFR", !(friendshipBean.isFriend(nav.getLoggedUser(), u) || nbr.isPending(nav.getLoggedUser(), u)));
+			nav.setAttribute("showFR", !(friendshipBean.isFriend(nav.getLoggedUser(), u) || nbr.isPending(nav.getLoggedUser(), u)));
 			
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));

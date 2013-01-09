@@ -17,6 +17,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<class>it.polimi.swimv2.entity.PendingUser</class>
 		<class>it.polimi.swimv2.entity.AbilityRequest</class>
 		<class>it.polimi.swimv2.entity.Comment</class>
+		<class>it.polimi.swimv2.entity.UserImage</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
 		</properties>

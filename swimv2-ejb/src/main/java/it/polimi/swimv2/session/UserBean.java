@@ -23,14 +23,6 @@ public class UserBean implements UserBeanRemote {
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
 
-	
-	@Override
-	public void editProfile(User newUser) throws NoSuchUserException {
-
-		manager.merge(newUser);
-		
-	}
-
 	@Override
 	public List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException {
 
@@ -135,14 +127,16 @@ public class UserBean implements UserBeanRemote {
 		}
 	}
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<User> searchUser(String queryString) {
 		Query q = manager.createNamedQuery("User.searchUser");
 		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
 		return q.getResultList();
 	}
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<HelpRequest> getProvidedHelpRequest(User u)
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("HelpRequest.findByHelper");
@@ -155,7 +149,8 @@ public class UserBean implements UserBeanRemote {
 		}
 	}
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<HelpRequest> getReceivedHelpRequest(User u)
 			throws NoSuchUserException {
 		Query q = manager.createNamedQuery("HelpRequest.findByAsker");
@@ -181,6 +176,39 @@ public class UserBean implements UserBeanRemote {
 			manager.remove(old);
 		}
 		manager.merge(jpaUser);
+	}
+
+	@Override
+	public User editProfile(User u, String name, String surname,
+			String website, String birthdate, String location, String minibio,
+			String description) throws NoSuchUserException {
+
+		if (name != null)
+			if (!(u.getName().equals(name)))
+				u.setName(name);
+		if (surname != null)
+			if (!(u.getSurname().equals(surname)))
+				u.setSurname(surname);
+		if (website != null)
+			if (!(website.equals(u.getWebsite())))
+				u.setWebsite(website);
+		if (location != null)
+			if (!(location.equals(u.getLocation())))
+				u.setLocation(location);
+		if (description != null)
+			if (!(description.equals(u.getDescription())))
+					
+				u.setDescription(description);
+		if (minibio != null)
+			if (!(minibio.equals(u.getMinibio())))
+				u.setMinibio(minibio);
+		// TODO gestire la dataif(!(u.getBirthdate().equals(birthdate))&&
+		// !(birthdate.isEmpty()) && !(birthdate.equals(null)))
+		// u.setBirthdate(Integer.parseInt(birthdate));
+
+		manager.merge(u);
+		return u;
+
 	}
 
 }

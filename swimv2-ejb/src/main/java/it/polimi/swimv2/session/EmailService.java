@@ -1,7 +1,5 @@
 package it.polimi.swimv2.session;
 
-import java.util.Properties;
-
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.mail.*;

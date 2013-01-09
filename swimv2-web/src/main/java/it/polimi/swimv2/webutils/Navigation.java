@@ -44,6 +44,7 @@ public class Navigation {
 		return (User) request.getSession().getAttribute("user");
 	}
 	
+	
 	public void setLogin(User u) {
 		request.getSession().setAttribute("user", u);
 	}
