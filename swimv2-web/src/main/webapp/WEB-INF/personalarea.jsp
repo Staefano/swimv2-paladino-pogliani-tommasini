@@ -8,8 +8,6 @@
 	</jsp:attribute>
 	<jsp:body>
 	<p>
-		I'm the (dummy) content of this page.
-		
 		<h1>Messages</h1>
 		<c:if test="${empty usersWithUnread}">
 			You don't have unread messages
@@ -22,8 +20,7 @@
 		</ul>
 		
 		<p><a href="${pageContext.servletContext.contextPath}/messages">All messages...</a></p>
-		
-		
+
 		<h1>Notifications</h1>
 		<c:forEach var="n" items="${notifications}">
 	<a href="notification?notification_id=">${ n.type}</a>
