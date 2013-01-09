@@ -16,6 +16,8 @@
 				<c:if test="${user.admin}">
 					<li><a href="admin">Administer</a></li>
 				</c:if>
+					<li><a href="editprofile">Edit Profile</a></li>
+				
 				<li><a href="logout">Logout</a></li>
 			</ul>
 		</div>

@@ -1,16 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<div>
-		<div>
+
+<t:private-page user="${user}" title="SWIMv2 - Profile Page">
+	<jsp:attribute name="header">
+		<h1>Welcome to the user area!</h1>
+	</jsp:attribute>
+	<jsp:body>
+<div>
+<img class="profile_img"
+				src="${pageContext.request.contextPath}/img/unknown-profile.jpg"
+				width="300px" style="float:left" />
+
+		<div style="float:left">
 			<h1>Profile of</h1>
 			<h1>${profile.name}</h1>
 			<h1>${profile.surname}</h1>
@@ -33,15 +35,12 @@
 		</div>
 	</div>
 	<c:if test="${user.id != profile.id }">
-		<a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a>
-		<a href="message?">messaggio</a>
-		<a href="helprequest?">helprequest</a>
+		<ul>
+		<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a></li>
+		<li><a href="message?">messaggio</a></li>
+		<li><a href="helprequest?">helprequest</a></li>
+		</ul>
 	</c:if>
-	<c:if test="${user.id == profile.id }">
-	<a href="editprofile">modifica</a>
-	</c:if>
 
-
-
-</body>
-</html>
+	</jsp:body>
+</t:private-page>
