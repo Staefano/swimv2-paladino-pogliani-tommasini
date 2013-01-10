@@ -5,6 +5,7 @@ import it.polimi.swimv2.session.FriendShipBeanRemote;
 import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
 
@@ -17,14 +18,15 @@ public class UserProfile extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	public UserProfile() {
-		super();
-		// TODO Auto-generated constructor stub
+		super(AccessRole.USER);
 	}
+	
 	@EJB
 	private NotificationBeanRemote nbr;
 	
 	@EJB
 	private UserBeanRemote ubr;
+	
 	@EJB
 	private FriendShipBeanRemote friendshipBean;
 
@@ -48,6 +50,4 @@ public class UserProfile extends Controller {
 
 		}
 	}
-
-
 }

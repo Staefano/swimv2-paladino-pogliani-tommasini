@@ -3,7 +3,6 @@ package it.polimi.swimv2.webutils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -26,23 +25,22 @@ public class MultipartFormProcesser {
 	 * @param nav The Navigation object
 	 */
 	public void process() {
-		// Process the uploaded items
-		Iterator<FileItem> iter = files.iterator();
-		while (iter.hasNext()) {
-		    FileItem item = iter.next();
+		for(FileItem item : files) {
 		    if (item.isFormField()) {
-		    	map.put(item.getName(), item.getName());//TODO item.getString
+		    	map.put(item.getFieldName(), item.getString());
 		    } else {
-		    	// TODO should we check here for imageSize < maximum size?
-		    	// check with apache commons implementation for performance issues & c...
-		    	imageSize = item.getSize();
-		    	try {
-					imageIs = item.getInputStream();
-				} catch (IOException e) {
-					imageIs = null;
-					imageSize = 0;
-				}
+		    	processFile(item);
 		    }
+		}
+	}
+
+	private void processFile(FileItem item) {
+		imageSize = item.getSize();
+		try {
+			imageIs = item.getInputStream();
+		} catch (IOException e) {
+			imageIs = null;
+			imageSize = 0;
 		}
 	}
 	

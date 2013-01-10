@@ -34,17 +34,16 @@
 					</div>	
 	
 	<div class="container">
-					<div class="left" style="float: left" width="30%"
-				background="Black">
+					<div class="span3" style="float: left" >
 								<img class="profile_img"
-					src="${pageContext.request.contextPath}/img/unknown-profile.jpg"
+					src="${pageContext.request.contextPath}/images/profile?user=${user.id}"
 					width="220px" height="330px" />
 								<p>${profile.birthdate}</p>
 								<p>${profile.email}</p>
 								<p>${profile.website}</p>
 								<p>${profile.location}</p>
 					</div>
-					<div class="central" style="float: left" width="60%">
+					<div class="span5" style="float: left" >
 
 								<div style="float: left">
 									<p>${profile.minibio}</p>
@@ -56,8 +55,7 @@
 								
 								</div>
 					</div>
-					<div class="right" style="float: left" width="30%"
-				background="Black">
+					<div class="span4" style="float: left" >
 								<c:forEach var="hrp" items="${providedList}">
 									<p>${hrr.subject }</p>
 								</c:forEach>

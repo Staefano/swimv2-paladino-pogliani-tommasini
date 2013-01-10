@@ -10,10 +10,12 @@ import it.polimi.swimv2.webutils.MultipartFormProcesser;
 import it.polimi.swimv2.webutils.Navigation;
 import it.polimi.swimv2.webutils.exception.NavigationException;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.ejb.EJB;
+import javax.imageio.ImageIO;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
@@ -22,19 +24,21 @@ public class EditProfile extends Controller implements Servlet {
 
 	@EJB
 	private UserBeanRemote ubr;
-	
-	private static final long MAX_ALLOWED_SIZE = 1024 * 1024 * 3; // 3 MB
+
+	private static final long MAX_ALLOWED_SIZE = 1024 * 1024 * 5; // 5 MB
 	private static final int AVATAR_WIDTH_PX = 200;
 	private static final int AVATAR_HEIGHT_PX = 200;
 	private static final String MIMETYPE = "image/png";
 
+	private static final String EDITPROFILE_JSP = "WEB-INF/editprofile.jsp";
+	
 	public EditProfile() {
 		super(AccessRole.USER);
 	}
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-		nav.fwd("WEB-INF/editprofile.jsp");
+		nav.fwd(EDITPROFILE_JSP);
 	}
 
 	@Override
@@ -58,22 +62,40 @@ public class EditProfile extends Controller implements Servlet {
 		String description = form.getValue("description");
 
 		try {
-			nav.setLogin(ubr.editProfile(nav.getLoggedUser(), name, surname,
-					website, birthdate, location, minibio, description));
-			uploadUserImage(nav.getLoggedUser(), form.getFile(), form.getFileSize());
-			// TODO TODO TODO HANDLE USER IMAGE UPLOAD FAILING (now it's too late to do so...)
-		} catch (NoSuchUserException e) {
-			// TODO Auto-generated catch block
+			User updated = ubr.editProfile(nav.getLoggedUser(), name, surname,
+					website, birthdate, location, minibio, description);
+			nav.setLogin(updated);
+
+			uploadUserImage(updated, form.getFile(), form.getFileSize());
+			nav.redirect("/");
+		} catch (NoSuchUserException u) {
+			nav.setAttribute("error", "form");
+			nav.fwd(EDITPROFILE_JSP);
+		} catch(NoImageUploadedException noimg) {
+			if(form.getFileSize() != 0) {
+				nav.setAttribute("error", "imageupload");
+				nav.fwd(EDITPROFILE_JSP);
+			} else {
+				nav.redirect("/");
+			}
 		}
-		nav.fwd(BASEPATH);
 	}
-	
-	private void uploadUserImage(User user, InputStream file, long size) throws IOException {
-		if(size <= MAX_ALLOWED_SIZE && user != null) {
-			byte[] resized = ImageUtils.getScaledInstance(AVATAR_WIDTH_PX, AVATAR_HEIGHT_PX, file);
+
+	private void uploadUserImage(User user, InputStream file, long size)
+			throws NoImageUploadedException {
+		if(file == null || size > MAX_ALLOWED_SIZE || user == null) {
+			throw new NoImageUploadedException();
+		}
+		System.out.println(size);
+		try {
+			BufferedImage img = ImageIO.read(file);
+			if(img == null) {
+				throw new NoImageUploadedException();
+			}
+			byte[] resized = ImageUtils.getScaledInstance(AVATAR_WIDTH_PX, AVATAR_HEIGHT_PX, img);
 			ubr.setImage(user, resized, MIMETYPE);
-		} else {
-			// TODO do something...
+		} catch (IOException e) {
+			throw new NoImageUploadedException();
 		}
 	}
 
