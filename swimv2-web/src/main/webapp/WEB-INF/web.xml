@@ -174,4 +174,11 @@
     <servlet-name>AddComment</servlet-name>
     <url-pattern>/addcomment</url-pattern>
   </servlet-mapping>
+      <servlet-name>UserImageServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.UserImageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserImageServlet</servlet-name>
+    <url-pattern>/images/profile</url-pattern>
+  </servlet-mapping>
 </web-app>
