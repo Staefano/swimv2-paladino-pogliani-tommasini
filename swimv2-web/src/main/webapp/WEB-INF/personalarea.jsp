@@ -12,13 +12,13 @@
 					<div class="well well-small">
 						<h1>Open Providing HelpRequests</h1>
 						<c:forEach var="hr" items="${openProvidingHR}">
-							<t:open-hr hr="${hr}"/>
+							<t:providing-hr hr="${hr}"/>
 						</c:forEach>
 					</div>
 										<div class="well well-small">
-						<h1>Open Receiving HelpRequests</h1>
+						<h1>Open Incoming HelpRequests</h1>
 						<c:forEach var="hr" items="${openReceivingHR}">
-							<t:closed-hr hr="${hr}"/>						
+							<t:asking-hr hr="${hr}"/>						
 						</c:forEach>
 					</div>
 					<div class="well well-small" style="float: left">

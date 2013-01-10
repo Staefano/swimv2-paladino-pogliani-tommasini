@@ -20,16 +20,15 @@
 										class="btn btn-danger" type="button">Refuse </button></a>
 	</c:if>
 	<c:if test="${hr.status == 'ACCEPTED'}">
-												complete the work to give the feedback<br>
+												complete the work to receive the feedback<br>
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
-										<a
-									href="closehelprequest?hrid=${hr.id}"><button
-										class="btn btn-danger" type="button">Close and give a Feedback </button></a>
+										
 										
 											</c:if>
 	<c:if test="${hr.status == 'ZOMBIE'}">
-												the user you help hasn't give you the feedback yet <a href="comment?hr_id=${hr.id}"><button
-										class="btn btn-info" type="button">Expand all comments </button></a> <br>
+												all work is done, you should give the feedback to the user you help <a href="comment?hr_id=${hr.id}"><button
+										class="btn btn-info" type="button">Expand all comments </button></a> <br><a href="feedback?hr_id=${hr.id}&role=helper"><button
+										class="btn btn-success" type="button">Leave the Feedback</button></a>
 											</c:if>
 </p>

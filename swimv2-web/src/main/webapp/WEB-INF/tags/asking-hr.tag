@@ -16,13 +16,14 @@
 												the hr was accepted <br>
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
-												
+										<a
+									href="feedback?hr_id=${hr.id}&role=asker"><button
+										class="btn btn-success" type="button">Close and give a Feedback </button></a>		
 	</c:if>
 	<c:if test="${hr.status == 'ZOMBIE'}">
 												the user is waiting for your feedback <br>
 												<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
-										<a href="leavefeedback?hr_id=${hr.id}"><button
-										class="btn btn-success" type="button">Leave the Feedback</button></a>
+										
 	</c:if>
 </p>

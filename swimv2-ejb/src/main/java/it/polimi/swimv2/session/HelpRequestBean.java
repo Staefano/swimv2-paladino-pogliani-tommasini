@@ -29,6 +29,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 	public HelpRequest askForHelp(User sender, User receiver, String subject,
 			List<Ability> abilties) {
 
+		
 		HelpRequest hr = new HelpRequest();
 
 		HashSet<Ability> setAbility = new HashSet<Ability>();
@@ -128,6 +129,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 		q.setParameter("helper", u); 
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
+		q.setParameter("zombie", RequestStatus.ZOMBIE);
 
 		try{
 			return (List<HelpRequest>) q.getResultList();
@@ -157,12 +159,13 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<HelpRequest> getOpenReceivedHR(User u) {
+	public List<HelpRequest> getOpenRequestedHR(User u) {
 
 		Query q = manager.createNamedQuery("HelpRequest.findOpenedByAsker");
 		q.setParameter("asker", u); 
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
+		q.setParameter("zombie", RequestStatus.ZOMBIE);
 
 		try{
 			return (List<HelpRequest>) q.getResultList();
@@ -174,7 +177,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<HelpRequest> getClosedReceiveddHR(User u) {
+	public List<HelpRequest> getClosedRequestedHR(User u) {
 
 		Query q = manager.createNamedQuery("HelpRequest.findClosedByAsker");
 		q.setParameter("asker", u); 
@@ -220,4 +223,33 @@ public class HelpRequestBean implements HelpRequestRemote {
 		
 		
 	}
+
+	@Override
+	public void addFeedbakc(HelpRequest hr, int evaluation, String comment, Role role)
+			throws ClosedHelpRequestException {
+		
+		if(!(hr.equals(RequestStatus.CLOSED))){
+			Feedback f = new Feedback();
+			f.setEvaluation(evaluation);
+			f.setString(comment);
+			f.setRole(role);
+			
+			if(role.equals(Role.ASKER)){
+				
+				hr.setAskerFeedback(f);
+				hr.setStatus(RequestStatus.ZOMBIE);
+	
+			}else if(role.equals(Role.HELPER)){
+				hr.setReceiverFeedback(f);
+				hr.setStatus(RequestStatus.CLOSED);
+	
+			}
+			
+			 manager.persist(f);
+			 manager.merge(hr);
+		}
+		else throw new ClosedHelpRequestException();
+		
+	}
+
 }
