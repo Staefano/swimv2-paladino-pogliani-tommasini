@@ -2,6 +2,7 @@ package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.session.AbilityBeanRemote;
+import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
@@ -18,6 +19,8 @@ public class AdminServlet extends Controller {
 
 	@EJB
 	AbilityBeanRemote abilityBean;
+	@EJB
+	NotificationBeanRemote notificationBean;
 
 	public AdminServlet() {
 		super(AccessRole.ADMIN);
@@ -49,6 +52,7 @@ public class AdminServlet extends Controller {
 					&& !(abilityBean.alreadyExist(abName))) {
 				abilityBean.addNewAbility(request.getAbility());
 			}
+			notificationBean.notifyAbilityChoice(request, choice);
 			abilityBean.removeAbilityRequest(request, choice);
 			nav.setAttribute("message", choice);
 			nav.setAttribute("abName", abName);

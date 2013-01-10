@@ -7,7 +7,6 @@ import it.polimi.swimv2.entity.User;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -19,9 +18,6 @@ public class AbilityBean implements AbilityBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	EntityManager manager;
-
-	@EJB
-	NotificationBeanRemote notificationBean;
 
 	@Override
 	public void requestAbility(String name, String comment, User user) {
@@ -77,11 +73,6 @@ public class AbilityBean implements AbilityBeanRemote {
 	public void removeAbilityRequest(AbilityRequest request, String choice) {
 		List<AbilityRequest> reqs = getWithSameName(request);
 		for (AbilityRequest r : reqs) {
-			if (choice.equals("approve")) {
-				notificationBean.notifyAbilityAccepted(r);
-			} else {
-				notificationBean.notifyAbilityRejected(r);
-			}
 			manager.remove(r);
 		}
 

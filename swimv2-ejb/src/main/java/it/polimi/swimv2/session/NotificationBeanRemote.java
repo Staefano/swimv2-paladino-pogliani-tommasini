@@ -28,5 +28,7 @@ public interface NotificationBeanRemote {
 
 	void notifyAdminPromotion(User user);
 
+	void notifyAbilityChoice(AbilityRequest request, String choice);
+
 
 }

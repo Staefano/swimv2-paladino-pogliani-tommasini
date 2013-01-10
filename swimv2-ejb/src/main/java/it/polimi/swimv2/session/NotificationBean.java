@@ -83,6 +83,26 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		manager.persist(n);
 	}
+	
+	@Override
+	public void notifyAbilityChoice(AbilityRequest request, String choice) {
+		List<AbilityRequest> reqs = getWithSameName(request);
+		for (AbilityRequest r : reqs) {
+			if (choice.equals("approve")) {
+				notifyAbilityAccepted(r);
+			} else {
+				notifyAbilityRejected(r);
+			}
+		}
+	}
+	
+	private List<AbilityRequest> getWithSameName(AbilityRequest request) {
+		Query q = manager.createNamedQuery("AbilityRequest.findByName");
+		q.setParameter("name", request.getAbility());
+		@SuppressWarnings("unchecked")
+		List<AbilityRequest> reqs = q.getResultList();
+		return reqs;
+	}
 
 	@Override
 	public List<Notification> getNotifications(User u) {
