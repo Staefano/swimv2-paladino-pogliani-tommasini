@@ -8,17 +8,14 @@
 	</jsp:attribute>
 	<jsp:body>
 		
+		<a href="#sendMessage" role="button" class="btn" data-toggle="modal">Write new</a>
 	
 		<c:forEach var="msg" items="${messages}">
 			<h3>${msg.sender.name} ${msg.sender.surname}</h3>
 			<p>${msg.text}</p>
 		</c:forEach>
-		
-		<form method="post">
-			<textarea name="text"></textarea>
-			<input type="hidden" name="to" value="${otherUser.id}">
-			<button type="submit">Submit</button>
-		</form>
+	
+		<t:sendmessage-popup to="${otherUser}" />
 	
 	</jsp:body>
 </t:private-page>

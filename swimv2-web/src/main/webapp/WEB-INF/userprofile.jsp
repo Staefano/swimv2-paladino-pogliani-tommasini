@@ -20,7 +20,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="span3">
-			<img class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${profile.id}" width="220px" height="330px" />
+			<img class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${profile.id}" />
 			<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
 				<li><i class="icon-user"></i> ${profile.name} ${profile.surname}</li>
 				<li><i class="icon-home"></i> <a href="http://${profile.website}">${profile.website}</a></li>
@@ -66,7 +66,7 @@
 					<c:if test="${showFR}">
 						<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}">Add as friend</a></li>
 					</c:if>
-					<li><a href="message?">Send message</a></li>
+					<li><a href="#sendMessage" data-toggle="modal">Send Message</a></li>
 					<li><a href="helprequest?receiver=${profile.id}">Ask help!</a></li>
 					</ul>
 				</c:if>		
@@ -74,5 +74,10 @@
 		</div>
 	</div>
 	</div>
+	
+	<c:if test="${user.id != profile.id}">
+		<t:sendmessage-popup to="${profile}" />
+	</c:if>
+	
 	</jsp:body>
 </t:private-page>
