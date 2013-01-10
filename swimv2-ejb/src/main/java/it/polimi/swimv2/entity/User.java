@@ -1,5 +1,7 @@
 package it.polimi.swimv2.entity;
 
+import it.polimi.swimv2.enums.UserRole;
+
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
@@ -32,7 +34,7 @@ public class User implements Serializable {
 	private String location;
 	private String minibio;
 	private String description;
-	private boolean isAdmin;
+	private UserRole role;
 	
 	@OneToOne
 	private UserImage image;
@@ -137,7 +139,10 @@ public class User implements Serializable {
 	}
 
 	public boolean isAdmin() {
-		return isAdmin;
+		if(role == UserRole.ADMIN) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -180,8 +185,12 @@ public class User implements Serializable {
 		this.abilities = abilities;
 	}
 
-	public void setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public UserRole getUserRole() {
+		return role;
+	}
+
+	public void setUserRole(UserRole role) {
+		this.role = role;
 	}
 
 }
