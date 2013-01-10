@@ -39,4 +39,7 @@ public interface UserBeanRemote {
 	void promoteAdmin(User user);
 
 	byte[] getImage(int userId) throws NoResultFoundException;
+
+	int addUserAbility(User user, String chosenAb);
+
 }

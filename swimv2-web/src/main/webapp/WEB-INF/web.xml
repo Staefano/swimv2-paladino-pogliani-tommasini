@@ -137,8 +137,6 @@
     <url-pattern>/promote</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>HelpRequestServlet</display-name>
     <servlet-name>HelpRequestServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.HelpRequestServlet</servlet-class>
   </servlet>
@@ -147,13 +145,15 @@
     <url-pattern>/helprequest</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>UserImageServlet</display-name>
     <servlet-name>UserImageServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.UserImageServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UserImageServlet</servlet-name>
     <url-pattern>/images/profile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchAbilityServlet</servlet-name>
+    <url-pattern>/searchability</url-pattern>
   </servlet-mapping>
 </web-app>

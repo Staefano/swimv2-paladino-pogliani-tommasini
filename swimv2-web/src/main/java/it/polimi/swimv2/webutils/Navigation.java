@@ -61,6 +61,10 @@ public class Navigation {
 		return (T) request.getParameter(name);
 	}
 	
+	public String[] getParamValues(String name){
+		return  request.getParameterValues(name);
+	}
+	
 	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String name) {
 		return (T) request.getAttribute(name);

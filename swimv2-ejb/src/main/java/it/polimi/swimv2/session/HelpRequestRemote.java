@@ -10,7 +10,7 @@ import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 
 public interface HelpRequestRemote {
 
-	HelpRequest askForHelp(User sender, User receiver, String subject, Ability[] abilties);
+	HelpRequest askForHelp(User sender, User receiver, String subject, List<Ability> abilties);
 
 	List<Comment> getComments(HelpRequest hr);
 
@@ -20,4 +20,7 @@ public interface HelpRequestRemote {
 	void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException;;
 			//TODO aggiunto un user che invia il messaggio
+
+
+	List<HelpRequest> getHelpRequest(User u);
 }

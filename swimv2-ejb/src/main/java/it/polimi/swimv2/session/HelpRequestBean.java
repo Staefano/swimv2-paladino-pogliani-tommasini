@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -25,10 +26,10 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@Override
 	public HelpRequest askForHelp(User sender, User receiver, String subject,
-			Ability[] abilties) {
+			List<Ability> abilties) {
 
 		HelpRequest hr = new HelpRequest();
-		
+
 		HashSet<Ability> setAbility = new HashSet<Ability>();
 
 		hr.setReceiver(receiver);
@@ -83,7 +84,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 		@SuppressWarnings("unchecked")
 		List<Comment> comments = q.getResultList();
-		return comments; //TODO bisogna catchare l'eccezione di no result?
+		return comments; // TODO bisogna catchare l'eccezione di no result?
 
 	}
 
@@ -99,15 +100,17 @@ public class HelpRequestBean implements HelpRequestRemote {
 			if (user.equals(hr.getReceiver())) {
 				f.setRole(Role.ASKER);
 				hr.setAskerFeedback(f);
-				//If the user who is giving the feedback is the receiver of the hr
-				//the feedbackrole should be "asker"
+				// If the user who is giving the feedback is the receiver of the
+				// hr
+				// the feedbackrole should be "asker"
 			} else if (user.equals(hr.getSender())) {
 				f.setRole(Role.HELPER);
 				hr.setReceiverFeedback(f);
-				//If the user who is giving the feedback is the sender of the hr
-				//the feedbackrole should be "helper"
+				// If the user who is giving the feedback is the sender of the
+				// hr
+				// the feedbackrole should be "helper"
 			}
-			
+
 			manager.persist(f);
 			manager.merge(hr);
 
@@ -116,4 +119,21 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HelpRequest> getHelpRequest(User u) {
+		
+		Query q = manager.createNamedQuery("HelpRequest.findOpendByHelper");
+		q.setParameter("helper", u); 
+		q.setParameter("accepted", RequestStatus.ACCEPTED);
+		q.setParameter("waiting", RequestStatus.WAITING);
+
+		try{
+			return (List<HelpRequest>) q.getResultList();
+		}catch(NoResultException nre){
+			return null;
+		}
+		
+		
+	}
 }

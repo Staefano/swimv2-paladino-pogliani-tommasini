@@ -5,15 +5,34 @@
 <t:private-page user="${user}" title="SWIMv2 - Profile Page">
 	<jsp:attribute name="header">
 		<h1>Profile of ${profile.name} ${profile.surname}</h1>
-		<c:if test="${user.admin && profile.admin == false}">
-			<a href="promote?profileId=${profile.id}"><button
-					class="btn btn-success" type="button">Promote to Admin</button></a>
-		</c:if>
-		<c:if test="${user.admin && profile.admin}">
-			<div class="alert alert-info">This User is an Admin</div>
+		<c:if test="${user.id != profile.id }">
+			<c:if test="${user.admin && profile.admin == false}">
+				<a href="promote?profileId=${profile.id}"><button
+						class="btn btn-success" type="button">Promote to Admin</button></a>
+			</c:if>
+			<c:if test="${user.admin && profile.admin}">
+				<div class="alert alert-info">This User is an Admin</div>
+			</c:if>
 		</c:if>
 	</jsp:attribute>
 	<jsp:body>
+				
+					<div class="well">
+						Ability of ${user.name }:
+						<c:forEach var="ab" items="${abilitiesList}">
+							<span class="badge badge-info">${ab.name}</span>
+						</c:forEach>
+						<div>
+						<c:if test="${user.id == profile.id }">
+							<form class="navbar-search pull-left" action="searchability"
+								method="get">
+								<input type="text" class="search-query" placeholder="Search ability to add"
+									name="searchAb">
+							</form>
+						</c:if>
+						</div>
+					</div>	
+	
 	<div class="container">
 					<div class="span3" style="float: left" >
 								<img class="profile_img"
@@ -53,7 +72,7 @@
 								href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a></li>
 								</c:if>
 								<li><a href="message?">messaggio</a></li>
-								<li><a href="helprequest?">helprequest</a></li>
+								<li><a href="helprequest?receiver=${profile.id}">helprequest</a></li>
 								</ul>
 							</c:if>
 					

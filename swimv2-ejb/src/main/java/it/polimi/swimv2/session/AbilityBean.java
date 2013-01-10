@@ -5,7 +5,9 @@ import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.User;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -80,16 +82,58 @@ public class AbilityBean implements AbilityBeanRemote {
 
 	@Override
 	public boolean alreadyExist(String ability) {
-		Query q = manager.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
+		Query q = manager
+				.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
 		q.setParameter("name", ability);
-		
-		try{
+
+		try {
 			q.getSingleResult();
 		} catch (NoResultException nre) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
+	@Override
+	public List<Ability> getAbilities(String[] abilityNames) {
+
+		List<Ability> abilities = new ArrayList<Ability>();
+		Query q = manager
+				.createQuery("SELECT a FROM Ability a WHERE a.name=:name");
+		for (String aName : abilityNames) {
+			
+			q.setParameter("name", aName);
+			
+			try {
+				abilities.add((Ability) q.getSingleResult());
+			} catch (NoResultException nre) {
+				// TODO gestire
+			}
+
+		}
+		
+		return abilities;
+
+	}
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Ability> searchAbility(String queryString, User user) {
+		Query q = manager.createNamedQuery("Ability.searchAbility");
+		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
+		
+		List<Ability> searchAbs = q.getResultList();
+		Set<Ability> userAbs = user.getAbilities();
+		List<Ability> abilities = new ArrayList<Ability>();
+		
+		for(Ability ab: searchAbs) {
+			if(!(userAbs.contains(ab))) {
+				abilities.add(ab);
+			}
+		}
+		
+		return abilities;
+	}
+	
 }

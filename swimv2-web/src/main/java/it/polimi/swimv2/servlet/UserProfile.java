@@ -13,9 +13,6 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 public class UserProfile extends Controller {
 	private static final long serialVersionUID = 1L;
@@ -45,7 +42,8 @@ public class UserProfile extends Controller {
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
-
+			nav.setAttribute("abilitiesList", u.getAbilities());
+			
 			nav.fwd("WEB-INF/userprofile.jsp");
 		} catch (NoSuchUserException nsue) {
 			nav.fwd("WEB-INF/error.jsp");
