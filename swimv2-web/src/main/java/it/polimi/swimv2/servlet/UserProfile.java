@@ -31,7 +31,6 @@ public class UserProfile extends Controller {
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 		
-		User user = nav.getLoggedUser();
 		String id = nav.getParam("id");
 		try {
 
