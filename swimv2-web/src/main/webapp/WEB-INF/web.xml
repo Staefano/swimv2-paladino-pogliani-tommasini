@@ -52,6 +52,10 @@
     <servlet-name>NewAbilityRequestServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.NewAbilityRequestServlet</servlet-class>
   </servlet>
+  <servlet>
+		<servlet-name>PromoteAdmin</servlet-name>
+		<servlet-class>it.polimi.swimv2.servlet.PromoteAdmin</servlet-class>
+	</servlet>
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/home</url-pattern>
@@ -128,4 +132,8 @@
     <servlet-name>NewAbilityRequestServlet</servlet-name>
     <url-pattern>/abilityrequest</url-pattern>
   </servlet-mapping>
+  	<servlet-mapping>
+		<servlet-name>PromoteAdmin</servlet-name>
+		<url-pattern>/promote</url-pattern>
+	</servlet-mapping>
 </web-app>

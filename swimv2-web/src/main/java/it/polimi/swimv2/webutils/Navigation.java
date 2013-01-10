@@ -87,13 +87,11 @@ public class Navigation {
 	public MultipartFormProcesser getMultipart() throws NavigationException {
 		// Create a factory for disk-based file items
 		FileItemFactory factory = new DiskFileItemFactory();
-		// Create a new file upload handlers
-		
+		// Create a new file upload handler
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		// Parse the request
 		try {
 			@SuppressWarnings("unchecked")
-			
 			List<FileItem> items = upload.parseRequest(request);
 			return new MultipartFormProcesser(items);
 		} catch (FileUploadException e) {

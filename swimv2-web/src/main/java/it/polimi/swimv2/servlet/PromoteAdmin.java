@@ -1,7 +1,6 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -19,8 +18,6 @@ public class PromoteAdmin extends Controller {
 
 	@EJB
 	UserBeanRemote userBean;
-	@EJB 
-	NotificationBeanRemote notificationBean;
 
 	public PromoteAdmin() {
 		super(AccessRole.ADMIN);
@@ -33,7 +30,6 @@ public class PromoteAdmin extends Controller {
 		try {
 			User user = userBean.getUserByID(userId);
 			userBean.promoteAdmin(user);
-			notificationBean.notifyAdminPromotion(user);
 			nav.setAttribute("message", true);
 			nav.setAttribute("profile", user);
 		} catch (NoSuchUserException e) {
