@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.HelpRequestRemote;
 import it.polimi.swimv2.session.MessageManagerBeanRemote;
 import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -22,6 +23,7 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 
 	@EJB MessageManagerBeanRemote messageBean;
 	@EJB NotificationBeanRemote notificationBean;
+	@EJB HelpRequestRemote hrBean;
 
     public PersonalAreaServlet() {
         super(AccessRole.USER);
@@ -35,6 +37,7 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 		List<User> usersWithUnread = messageBean.getUnreadConversations(loggedUser);
 		nav.setAttribute("notifications", notificationBean.getNotifications(loggedUser));
 		nav.setAttribute("usersWithUnread",  usersWithUnread);
+		nav.setAttribute("openHR", hrBean.getHelpRequest(loggedUser));
 		nav.fwd(PERSONALAREA_JSP);
 	}
 

@@ -4,7 +4,7 @@
 
 <t:private-page user="${user}" title="SWIMv2 - Profile Page">
 	<jsp:attribute name="header">
-		<h1>Welcome to the user area!</h1>
+		<h1>Profile of ${profile.name} ${profile.surname}</h1>
 		<c:if test="${user.admin && profile.admin == false}">
 			<a href="promote?profileId=${profile.id}"><button
 					class="btn btn-success" type="button">Promote to Admin</button></a>
@@ -26,7 +26,6 @@
 								<p>${profile.location}</p>
 					</div>
 					<div class="central" style="float: left" width="60%">
-								<h1>Profile of ${profile.name} ${profile.surname}</h1>
 
 								<div style="float: left">
 									<p>${profile.minibio}</p>
@@ -56,7 +55,7 @@
 								href="friendrequest?asker=${user.id}&receiver=${profile.id}">richiesta di amicizia</a></li>
 								</c:if>
 								<li><a href="message?">messaggio</a></li>
-								<li><a href="helprequest?">helprequest</a></li>
+								<li><a href="helprequest?receiver=${profile.id}">helprequest</a></li>
 								</ul>
 							</c:if>
 					

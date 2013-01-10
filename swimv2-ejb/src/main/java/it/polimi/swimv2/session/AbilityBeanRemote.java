@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.User;
 
@@ -23,5 +24,7 @@ public interface AbilityBeanRemote {
 	void removeAbilityRequest(AbilityRequest request, String choice);
 
 	boolean alreadyExist(String ability);
+	
+	List<Ability> getAbilities(String[] abilityNames);
 	
 }
