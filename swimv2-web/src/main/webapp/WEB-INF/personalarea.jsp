@@ -10,9 +10,15 @@
 		<div>
 				<div>
 					<div class="well well-small">
-						<h1>HelpRequests</h1>
-						<c:forEach var="hr" items="${openHR}">
-							<p>${hr.subject}</p>
+						<h1>Open Providing HelpRequests</h1>
+						<c:forEach var="hr" items="${openProvidingHR}">
+							<t:open-hr hr="${hr}"/>
+						</c:forEach>
+					</div>
+										<div class="well well-small">
+						<h1>Open Receiving HelpRequests</h1>
+						<c:forEach var="hr" items="${openReceivingHR}">
+							<t:closed-hr hr="${hr}"/>						
 						</c:forEach>
 					</div>
 					<div class="well well-small" style="float: left">
@@ -63,13 +69,13 @@
 										href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> </p> 
 										<a href="friendshipaccepted?notification_id=${n.id}"><button
 										class="btn btn-success" type="button">Approve </button></a>
-					                	<a href="friendshiprefused?notification_id=${n.id}"><button
+					                	<a
+									href="friendshiprefused?notification_id=${n.id}"><button
 										class="btn btn-danger" type="button">Refuse </button></a>
 								</c:if>
 								</div>
 							</c:forEach>
 					</div>
-									<span></span>
 				</div>
 		 </div>
 	</jsp:body>

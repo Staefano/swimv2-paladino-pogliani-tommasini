@@ -17,11 +17,15 @@ import javax.persistence.*;
 		@NamedQuery(name = "HelpRequest.findByAsker", query = "SELECT x FROM HelpRequest x WHERE x.sender = :asker"),
 
 		@NamedQuery(name = "HelpRequest.findByStatus", query = "SELECT x FROM HelpRequest x WHERE x.status = :status"),
+
+		@NamedQuery(name = "HelpRequest.findOpenedByHelper", query = "SELECT x FROM HelpRequest x WHERE (x.receiver = :helper) AND (x.status =:accepted OR x.status=:waiting)"),
+
+		@NamedQuery(name = "HelpRequest.findClosedByHelper", query = "SELECT x FROM HelpRequest x WHERE (x.receiver = :helper) AND (x.status =:closed)"),
 		
-		@NamedQuery(name = "HelpRequest.findOpendByHelper", query = "SELECT x FROM HelpRequest x WHERE (x.receiver = :helper) AND (x.status =:accepted OR x.status=:waiting)")	
-		
-		
-		
+		@NamedQuery(name = "HelpRequest.findOpenedByAsker", query = "SELECT x FROM HelpRequest x WHERE (x.sender = :asker) AND (x.status =:accepted OR x.status=:waiting)"),
+
+		@NamedQuery(name = "HelpRequest.findClosedByAsker", query = "SELECT x FROM HelpRequest x WHERE (x.sender = :asker) AND (x.status =:closed)")
+
 })
 public class HelpRequest implements Serializable {
 
