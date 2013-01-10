@@ -1,5 +1,6 @@
 package it.polimi.swimv2.session;
 
+import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.Feedback;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
@@ -11,7 +12,9 @@ import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -23,7 +26,10 @@ public class UserBean implements UserBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
-
+	
+	@EJB
+	AbilityBeanRemote abilityBean;
+	
 	@Override
 	public List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException {
 
@@ -218,6 +224,21 @@ public class UserBean implements UserBeanRemote {
 	public void promoteAdmin(User user) {
 		user.setUserRole(UserRole.ADMIN);
 		manager.merge(user);		
+	}
+
+	@Override
+	public int addUserAbility(User user, String chosenAb) {
+		
+		Query q = manager.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
+		q.setParameter("name", chosenAb);
+		Ability ability = (Ability) q.getSingleResult();
+		
+		Set<Ability> userAbilities = user.getAbilities();
+		userAbilities.add(ability);
+		user.setAbilities(userAbilities);
+		manager.merge(user);
+		
+		return user.getId();
 	}
 
 }

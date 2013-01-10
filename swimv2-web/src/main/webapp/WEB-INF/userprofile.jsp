@@ -16,19 +16,22 @@
 		</c:if>
 	</jsp:attribute>
 	<jsp:body>
-				<c:if test="${user.id == profile.id }">
+				
 					<div class="well">
-						<p>Your Ability</p>
+						Ability of ${user.name }:
 						<c:forEach var="ab" items="${abilitiesList}">
-							<p>${ab.name }</p>
+							<span class="badge badge-info">${ab.name}</span>
 						</c:forEach>
-						<form class="navbar-search pull-left" action="searchability"
-							method="get">
-							<input type="text" class="search-query" placeholder="Search ability"
-								name="search" value="${param.search}">
-						</form>
+						<div>
+						<c:if test="${user.id == profile.id }">
+							<form class="navbar-search pull-left" action="searchability"
+								method="get">
+								<input type="text" class="search-query" placeholder="Search ability to add"
+									name="searchAb">
+							</form>
+						</c:if>
+						</div>
 					</div>	
-				</c:if>
 	
 	<div class="container">
 					<div class="left" style="float: left" width="30%"

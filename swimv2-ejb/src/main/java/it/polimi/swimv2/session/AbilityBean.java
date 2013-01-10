@@ -7,6 +7,7 @@ import it.polimi.swimv2.entity.User;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -118,10 +119,21 @@ public class AbilityBean implements AbilityBeanRemote {
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Ability> searchAbility(String queryString) {
+	public List<Ability> searchAbility(String queryString, User user) {
 		Query q = manager.createNamedQuery("Ability.searchAbility");
 		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
-		return q.getResultList();
+		
+		List<Ability> searchAbs = q.getResultList();
+		Set<Ability> userAbs = user.getAbilities();
+		List<Ability> abilities = new ArrayList<Ability>();
+		
+		for(Ability ab: searchAbs) {
+			if(!(userAbs.contains(ab))) {
+				abilities.add(ab);
+			}
+		}
+		
+		return abilities;
 	}
 	
 }

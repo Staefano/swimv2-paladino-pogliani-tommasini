@@ -37,4 +37,6 @@ public interface UserBeanRemote {
 	
 	void promoteAdmin(User user);
 
+	int addUserAbility(User user, String chosenAb);
+
 }

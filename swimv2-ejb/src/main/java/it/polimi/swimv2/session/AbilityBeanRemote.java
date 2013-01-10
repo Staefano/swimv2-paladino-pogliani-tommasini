@@ -27,6 +27,6 @@ public interface AbilityBeanRemote {
 	
 	List<Ability> getAbilities(String[] abilityNames);
 
-	List<Ability> searchAbility(String queryString);
+	List<Ability> searchAbility(String queryString, User user);
 	
 }
