@@ -5,11 +5,21 @@
 <t:private-page user="${user}" title="SWIMv2 - Profile Page">
 	<jsp:attribute name="header">
 		<h1>Welcome to the user area!</h1>
+		<c:if test="${user.admin && profile.admin == false}">
+			<a href="promote?profileId=${profile.id}"><button
+					class="btn btn-success" type="button">Promote to Admin</button></a>
+		</c:if>
+		<c:if test="${user.admin && profile.admin}">
+			<div class="alert alert-info">This User is an Admin</div>
+		</c:if>
 	</jsp:attribute>
 	<jsp:body>
 	<div class="container">
-					<div class="left" style="float: left" width="30%" background="Black">
-								<img class="profile_img" src="${pageContext.request.contextPath}/img/unknown-profile.jpg"	width="220px" height="330px"/>
+					<div class="left" style="float: left" width="30%"
+				background="Black">
+								<img class="profile_img"
+					src="${pageContext.request.contextPath}/img/unknown-profile.jpg"
+					width="220px" height="330px" />
 								<p>${profile.birthdate}</p>
 								<p>${profile.email}</p>
 								<p>${profile.website}</p>
@@ -18,17 +28,18 @@
 					<div class="central" style="float: left" width="60%">
 								<h1>Profile of ${profile.name} ${profile.surname}</h1>
 
-								<div style="float: left" >
+								<div style="float: left">
 									<p>${profile.minibio}</p>
 								</div>
 								
-								<div style="float: left" >
+								<div style="float: left">
 								
 									<p>${profile.description}</p>
 								
 								</div>
 					</div>
-					<div class="right" style="float: left" width="30%" background="Black">
+					<div class="right" style="float: left" width="30%"
+				background="Black">
 								<c:forEach var="hrp" items="${providedList}">
 									<p>${hrr.subject }</p>
 								</c:forEach>

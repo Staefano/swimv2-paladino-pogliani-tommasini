@@ -211,4 +211,10 @@ public class UserBean implements UserBeanRemote {
 
 	}
 
+	@Override
+	public void promoteAdmin(User user) {
+		user.setAdmin(true);
+		manager.merge(user);
+	}
+
 }
