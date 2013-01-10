@@ -46,8 +46,12 @@ public class FeedbackServlet extends Controller implements Servlet {
 			String comment = nav.getParam("comment");
 			
 			try {
-					
-					hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(hr_id)), evaluation, comment, Role.valueOf(role));
+					if(role.equals("helper")){
+						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(hr_id)), evaluation, comment, Role.HELPER);
+					}else if(role.equals("asker")){
+						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(hr_id)), evaluation, comment, Role.ASKER);
+
+					}
 
 			} catch (NoSouchHRException e) {
 				// TODO Auto-generated catch block
