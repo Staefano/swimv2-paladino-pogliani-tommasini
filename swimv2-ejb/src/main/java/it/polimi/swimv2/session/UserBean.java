@@ -12,6 +12,7 @@ import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -23,6 +24,9 @@ public class UserBean implements UserBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
+	
+	@EJB
+	NotificationBeanRemote notificationBean;
 
 	@Override
 	public List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException {
@@ -215,6 +219,7 @@ public class UserBean implements UserBeanRemote {
 	@Override
 	public void promoteAdmin(User user) {
 		user.setUserRole(UserRole.ADMIN);
+		notificationBean.notifyAdminPromotion(user);
 		manager.merge(user);
 	}
 

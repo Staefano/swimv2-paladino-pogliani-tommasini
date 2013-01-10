@@ -26,5 +26,7 @@ public interface NotificationBeanRemote {
 
 	void notifyAbilityRejected(AbilityRequest request);
 
+	void notifyAdminPromotion(User user);
+
 
 }
