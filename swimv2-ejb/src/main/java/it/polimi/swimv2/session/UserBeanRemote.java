@@ -6,6 +6,7 @@ import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.entity.Feedback;
+import it.polimi.swimv2.session.exceptions.NoResultFoundException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
 import javax.ejb.Remote;
@@ -36,4 +37,6 @@ public interface UserBeanRemote {
 	void setImage(User user, byte[] img, String mimeType);
 	
 	void promoteAdmin(User user);
+
+	byte[] getImage(int userId) throws NoResultFoundException;
 }

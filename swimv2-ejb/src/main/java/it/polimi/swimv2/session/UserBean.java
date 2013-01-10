@@ -7,6 +7,7 @@ import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.entity.UserImage;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.UserRole;
+import it.polimi.swimv2.session.exceptions.NoResultFoundException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
@@ -177,6 +178,18 @@ public class UserBean implements UserBeanRemote {
 			manager.remove(old);
 		}
 		manager.merge(jpaUser);
+	}
+	
+	@Override
+	public byte[] getImage(int userId) throws NoResultFoundException {
+		Query q = manager.createNamedQuery("UserImage.getByUserId");
+		q.setParameter("userid",  userId);
+		try {
+			UserImage img = (UserImage) q.getSingleResult();
+			return img.getImage();
+		} catch(NoResultException e) {
+			throw new NoResultFoundException();
+		}
 	}
 
 	@Override
