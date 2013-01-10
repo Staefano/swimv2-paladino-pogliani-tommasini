@@ -35,4 +35,6 @@ public interface UserBeanRemote {
 
 	void setImage(User user, byte[] img, String mimeType);
 
+	void promoteAdmin(User user);
+
 }

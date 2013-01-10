@@ -6,6 +6,7 @@ import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.entity.UserImage;
 import it.polimi.swimv2.enums.RequestStatus;
+import it.polimi.swimv2.enums.UserRole;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
 import java.util.ArrayList;
@@ -212,5 +213,11 @@ public class UserBean implements UserBeanRemote {
 			manager.merge(u);
 			return u;
 		}
+
+	@Override
+	public void promoteAdmin(User user) {
+		user.setUserRole(UserRole.ADMIN);
+		manager.merge(user);		
+	}
 
 }

@@ -81,9 +81,9 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setAbility(request.getAbility());
 		n.setTgtuser(request.getSender());
 		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
-		manager.persist(n);		
+		manager.persist(n);
 	}
-	
+
 	@Override
 	public List<Notification> getNotifications(User u) {
 		Query q = manager.createNamedQuery("Notification.findBytgtUser");
@@ -130,14 +130,21 @@ public class NotificationBean implements NotificationBeanRemote {
 
 	@Override
 	public boolean isPending(User user1, User user2) {
-
 		Query q = manager.createNamedQuery("Notification.isPending");
 		q.setParameter("user1", user1);
 		q.setParameter("user2", user2);
 		q.setParameter("type", NotificationType.FRIENDSHIP_RECEIVED);
-		int count = ( (Long) q.getSingleResult() ).intValue();
-		return count==1;
-		
+		int count = ((Long) q.getSingleResult()).intValue();
+		return count == 1;
+	}
+
+	@Override
+	public void notifyAdminPromotion(User user) {
+		Notification n = new Notification();
+		n.setType(NotificationType.ADMIN_PROMOTION);
+		n.setTgtuser(user);
+		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
+		manager.persist(n);
 	}
 
 }
