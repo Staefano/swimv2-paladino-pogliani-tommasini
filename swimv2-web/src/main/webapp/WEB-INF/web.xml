@@ -152,6 +152,10 @@
     <servlet-name>UserImageServlet</servlet-name>
     <url-pattern>/images/profile</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>SearchAbilityServlet</servlet-name>
+  	<servlet-class>it.polimi.swimv2.servlet.SearchAbilityServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>SearchAbilityServlet</servlet-name>
     <url-pattern>/searchability</url-pattern>
