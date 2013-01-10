@@ -21,7 +21,11 @@ public interface HelpRequestRemote {
 
 	void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException;;
-			
+
+	void refuseHR(HelpRequest hr) throws NoSouchHRException;
+
+	void acceptHR(HelpRequest hr) throws NoSouchHRException;
+
 	HelpRequest findByID(int id) throws NoSouchHRException;
 
 	/**

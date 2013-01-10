@@ -13,10 +13,10 @@
 										href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> 
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
-										<a href="accepthelprequest?hr_id=${hr.id}"><button
+										<a href="helprequestanswer?hr_id=${hr.id}&choice=approved"><button
 										class="btn btn-success" type="button">Accept </button></a>
 					                	<a
-									href="refusehelprequest?hrid=${hr.id}"><button
+									href="helprequestanswer?hr_id=${hr.id}&choice=refused"><button
 										class="btn btn-danger" type="button">Refuse </button></a>
 	</c:if>
 	<c:if test="${hr.status == 'ACCEPTED'}">

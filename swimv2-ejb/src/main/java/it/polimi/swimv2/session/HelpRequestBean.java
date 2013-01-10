@@ -201,4 +201,23 @@ public class HelpRequestBean implements HelpRequestRemote {
 			throw new NoSouchHRException();
 		}
 	}
+
+	@Override
+	public void refuseHR(HelpRequest hr) throws NoSouchHRException {
+		
+		hr.setStatus(RequestStatus.DENIED);
+		manager.merge(hr);
+		
+		
+		
+	}
+
+	@Override
+	public void acceptHR(HelpRequest hr) throws NoSouchHRException {
+
+		hr.setStatus(RequestStatus.ACCEPTED);
+		manager.merge(hr);
+		
+		
+	}
 }
