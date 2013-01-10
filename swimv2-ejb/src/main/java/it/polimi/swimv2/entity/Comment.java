@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({ 
-	@NamedQuery(name = "HelpRequest.findByID", query = "SELECT x FROM Comment x WHERE x.helprequest = :helprequest"), 
+	@NamedQuery(name = "Comment.getByHelpRequest", query = "SELECT x FROM Comment x WHERE x.helprequest = :hr"), 
 	
 })
 public class Comment implements Serializable {

@@ -154,4 +154,24 @@
     <servlet-name>SearchAbilityServlet</servlet-name>
     <url-pattern>/searchability</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Comment</display-name>
+    <servlet-name>Comment</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.Comment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Comment</servlet-name>
+    <url-pattern>/comment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddComment</display-name>
+    <servlet-name>AddComment</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.AddComment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddComment</servlet-name>
+    <url-pattern>/addcomment</url-pattern>
+  </servlet-mapping>
 </web-app>

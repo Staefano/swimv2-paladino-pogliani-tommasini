@@ -5,6 +5,7 @@ import it.polimi.swimv2.entity.Comment;
 import it.polimi.swimv2.entity.Feedback;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
+import it.polimi.swimv2.session.exceptions.NoSouchHRException;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.Role;
@@ -121,9 +122,9 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<HelpRequest> getHelpRequest(User u) {
+	public List<HelpRequest> getOpenProvidedHR(User u) {
 		
-		Query q = manager.createNamedQuery("HelpRequest.findOpendByHelper");
+		Query q = manager.createNamedQuery("HelpRequest.findOpenedByHelper");
 		q.setParameter("helper", u); 
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
@@ -135,5 +136,69 @@ public class HelpRequestBean implements HelpRequestRemote {
 		}
 		
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HelpRequest> getClosedProvidedHR(User u) {
+
+		Query q = manager.createNamedQuery("HelpRequest.findClosedByHelper");
+		q.setParameter("helper", u); 
+		q.setParameter("closed", RequestStatus.CLOSED);
+
+		try{
+			return (List<HelpRequest>) q.getResultList();
+		}catch(NoResultException nre){
+			return null;
+		}
+	
+	
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HelpRequest> getOpenReceivedHR(User u) {
+
+		Query q = manager.createNamedQuery("HelpRequest.findOpenedByAsker");
+		q.setParameter("asker", u); 
+		q.setParameter("accepted", RequestStatus.ACCEPTED);
+		q.setParameter("waiting", RequestStatus.WAITING);
+
+		try{
+			return (List<HelpRequest>) q.getResultList();
+		}catch(NoResultException nre){
+			return null;
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<HelpRequest> getClosedReceiveddHR(User u) {
+
+		Query q = manager.createNamedQuery("HelpRequest.findClosedByAsker");
+		q.setParameter("asker", u); 
+		q.setParameter("closed", RequestStatus.CLOSED);
+
+		try{
+			return (List<HelpRequest>) q.getResultList();
+		}catch(NoResultException nre){
+			return null;
+		}
+	
+	}
+
+	@Override
+	public HelpRequest findByID(int id) throws NoSouchHRException {
+
+		Query q = manager.createNamedQuery("HelpRequest.findHRByID");
+		q.setParameter("id", id); 
+		
+		try{
+			return (HelpRequest) q.getSingleResult();
+			
+		}catch(NoResultException nre){
+			throw new NoSouchHRException();
+		}
 	}
 }

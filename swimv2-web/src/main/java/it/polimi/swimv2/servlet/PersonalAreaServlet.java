@@ -37,7 +37,9 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 		List<User> usersWithUnread = messageBean.getUnreadConversations(loggedUser);
 		nav.setAttribute("notifications", notificationBean.getNotifications(loggedUser));
 		nav.setAttribute("usersWithUnread",  usersWithUnread);
-		nav.setAttribute("openHR", hrBean.getHelpRequest(loggedUser));
+		nav.setAttribute("openProvidingHR", hrBean.getOpenProvidedHR(loggedUser));
+		nav.setAttribute("openReceivingHR", hrBean.getOpenReceivedHR(loggedUser));
+
 		nav.fwd(PERSONALAREA_JSP);
 	}
 
