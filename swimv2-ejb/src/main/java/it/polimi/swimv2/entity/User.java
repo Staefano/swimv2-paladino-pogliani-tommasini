@@ -42,7 +42,7 @@ public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	// manytomany unidirezionale dato che ability non tiene traccia dell'user
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "UserAbility", joinColumns = { @JoinColumn(name = "user") }, inverseJoinColumns = { @JoinColumn(name = "ability") })
 	private Set<Ability> abilities;
 
