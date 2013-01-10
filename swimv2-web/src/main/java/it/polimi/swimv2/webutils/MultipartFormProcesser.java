@@ -31,7 +31,7 @@ public class MultipartFormProcesser {
 		while (iter.hasNext()) {
 		    FileItem item = iter.next();
 		    if (item.isFormField()) {
-		    	map.put(item.getName(), item.getString());
+		    	map.put(item.getName(), item.getName());//TODO item.getString
 		    } else {
 		    	// TODO should we check here for imageSize < maximum size?
 		    	// check with apache commons implementation for performance issues & c...

@@ -1,5 +1,7 @@
 package it.polimi.swimv2.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +15,7 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
 	@NamedQuery(name="UserImage.getByUserId", query="SELECT u.image FROM User u WHERE u.id = :userid")
 })
-public class UserImage {
+public class UserImage implements Serializable{
 	
 	// argh...
 	@Id @GeneratedValue

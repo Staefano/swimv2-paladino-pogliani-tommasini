@@ -162,7 +162,7 @@ public class UserBean implements UserBeanRemote {
 			throw new NoSuchUserException();
 		}
 	}
-	
+
 	@Override
 	public void setImage(User user, byte[] img, String mimeType) {
 		// todo controlli sull'immagine, ridimensionamento & co...
@@ -172,7 +172,7 @@ public class UserBean implements UserBeanRemote {
 		UserImage old = jpaUser.getImage();
 		manager.persist(image);
 		jpaUser.setImage(image);
-		if(old != null) {
+		if (old != null) {
 			manager.remove(old);
 		}
 		manager.merge(jpaUser);
@@ -182,33 +182,35 @@ public class UserBean implements UserBeanRemote {
 	public User editProfile(User u, String name, String surname,
 			String website, String birthdate, String location, String minibio,
 			String description) throws NoSuchUserException {
-
-		if (name != null)
+		if (name != null) {
 			if (!(u.getName().equals(name)))
 				u.setName(name);
-		if (surname != null)
+		}
+		if (surname != null) {
 			if (!(u.getSurname().equals(surname)))
-				u.setSurname(surname);
-		if (website != null)
-			if (!(website.equals(u.getWebsite())))
-				u.setWebsite(website);
-		if (location != null)
-			if (!(location.equals(u.getLocation())))
-				u.setLocation(location);
-		if (description != null)
-			if (!(description.equals(u.getDescription())))
-					
-				u.setDescription(description);
-		if (minibio != null)
-			if (!(minibio.equals(u.getMinibio())))
-				u.setMinibio(minibio);
-		// TODO gestire la dataif(!(u.getBirthdate().equals(birthdate))&&
-		// !(birthdate.isEmpty()) && !(birthdate.equals(null)))
-		// u.setBirthdate(Integer.parseInt(birthdate));
+				u.setSurname(surname);}
+			if (website != null) {
+				if (!(website.equals(u.getWebsite())))
+					u.setWebsite(website);
+			}
+			if (location != null) {
+				if (!(location.equals(u.getLocation())))
+					u.setLocation(location);
+			}
+			if (description != null) {
+				if (!(description.equals(u.getDescription())))
+					u.setDescription(description);
+			}
+			if (minibio != null) {
+				if (!(minibio.equals(u.getMinibio())))
+					u.setMinibio(minibio);
+			}
+			// TODO gestire la dataif(!(u.getBirthdate().equals(birthdate))&&
+			// !(birthdate.isEmpty()) && !(birthdate.equals(null)))
+			// u.setBirthdate(Integer.parseInt(birthdate));
 
-		manager.merge(u);
-		return u;
-
-	}
+			manager.merge(u);
+			return u;
+		}
 
 }

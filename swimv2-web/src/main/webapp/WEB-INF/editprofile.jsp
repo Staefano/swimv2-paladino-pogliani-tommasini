@@ -38,13 +38,14 @@
 			<p>
 			<b>Minibio:</b>
 		</p>
-		<textarea rows="4" cols="50">
+		<textarea name="minibio" rows="4" cols="50">
 		</textarea>
 		<p>
 			<b>Description:</b>
 		</p>
-		<textarea rows="4" cols="50">
+		<textarea name="description" rows="4" cols="50">
 		</textarea>
+		
 		<input type="file" id="file" name="file">
 		<input type="submit" value="Submit" id="Submit">
 	</form>
