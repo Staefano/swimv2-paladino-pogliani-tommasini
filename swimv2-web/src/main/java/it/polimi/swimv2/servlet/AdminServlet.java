@@ -27,7 +27,7 @@ public class AdminServlet extends Controller {
 
 		// Add new Ability
 		String ability = nav.getParam("ability");
-		if (ability != null) {
+		if (isOk(ability)) {
 			if (abilityBean.alreadyExist(ability)) {
 				nav.setAttribute("message", "already");
 				nav.setAttribute("abName", ability);
@@ -63,6 +63,16 @@ public class AdminServlet extends Controller {
 			nav.setAttribute("results", results);
 		}
 		nav.fwd("/WEB-INF/admin.jsp");
+	}
+	
+	boolean isOk(String ability) {
+		if(ability != null) {
+			if(ability.equals("")) {
+				return false;
+			}
+			return true;
+		}
+		return false;
 	}
 
 }

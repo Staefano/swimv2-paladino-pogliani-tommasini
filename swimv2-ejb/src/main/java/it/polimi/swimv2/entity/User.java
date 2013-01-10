@@ -32,6 +32,7 @@ public class User implements Serializable {
 	private String location;
 	private String minibio;
 	private String description;
+	private boolean isAdmin;
 	
 	@OneToOne
 	private UserImage image;
@@ -136,7 +137,7 @@ public class User implements Serializable {
 	}
 
 	public boolean isAdmin() {
-		return false;
+		return isAdmin;
 	}
 
 	@Override
@@ -177,6 +178,10 @@ public class User implements Serializable {
 
 	public void setAbilities(Set<Ability> abilities) {
 		this.abilities = abilities;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 }

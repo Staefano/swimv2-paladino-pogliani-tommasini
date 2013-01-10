@@ -29,7 +29,7 @@ public class NewAbilityRequestServlet extends Controller {
 		String name = nav.getParam("name");
 		String comment = nav.getParam("comment");
 		
-		if(abilityBean.alreadyExist(name) || name==null) {
+		if(abilityBean.alreadyExist(name) || name==null || name.equals("")) {
 			nav.setAttribute("message", false);
 		} else {
 			abilityBean.requestAbility(name, comment, user);
