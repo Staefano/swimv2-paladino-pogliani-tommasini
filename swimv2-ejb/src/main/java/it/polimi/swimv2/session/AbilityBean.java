@@ -7,7 +7,6 @@ import it.polimi.swimv2.entity.User;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -116,5 +115,13 @@ public class AbilityBean implements AbilityBeanRemote {
 		return abilities;
 
 	}
-
+	
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Ability> searchAbility(String queryString) {
+		Query q = manager.createNamedQuery("Ability.searchAbility");
+		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
+		return q.getResultList();
+	}
+	
 }

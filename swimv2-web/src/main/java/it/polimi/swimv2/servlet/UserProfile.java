@@ -12,19 +12,10 @@ import java.io.IOException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class UserProfile
- */
 public class UserProfile extends Controller {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public UserProfile() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,14 +28,10 @@ public class UserProfile extends Controller {
 	@EJB
 	private FriendShipBeanRemote friendshipBean;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 		
+		User user = nav.getLoggedUser();
 		String id = nav.getParam("id");
 		try {
 
@@ -54,7 +41,8 @@ public class UserProfile extends Controller {
 			nav.setAttribute("profile", u);
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
-
+			nav.setAttribute("abilitiesList", user.getAbilities());
+			
 			nav.fwd("WEB-INF/userprofile.jsp");
 		} catch (NoSuchUserException nsue) {
 			nav.fwd("WEB-INF/error.jsp");

@@ -26,5 +26,7 @@ public interface AbilityBeanRemote {
 	boolean alreadyExist(String ability);
 	
 	List<Ability> getAbilities(String[] abilityNames);
+
+	List<Ability> searchAbility(String queryString);
 	
 }

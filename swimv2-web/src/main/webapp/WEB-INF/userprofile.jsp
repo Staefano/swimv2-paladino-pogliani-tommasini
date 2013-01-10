@@ -5,15 +5,31 @@
 <t:private-page user="${user}" title="SWIMv2 - Profile Page">
 	<jsp:attribute name="header">
 		<h1>Profile of ${profile.name} ${profile.surname}</h1>
-		<c:if test="${user.admin && profile.admin == false}">
-			<a href="promote?profileId=${profile.id}"><button
-					class="btn btn-success" type="button">Promote to Admin</button></a>
-		</c:if>
-		<c:if test="${user.admin && profile.admin}">
-			<div class="alert alert-info">This User is an Admin</div>
+		<c:if test="${user.id != profile.id }">
+			<c:if test="${user.admin && profile.admin == false}">
+				<a href="promote?profileId=${profile.id}"><button
+						class="btn btn-success" type="button">Promote to Admin</button></a>
+			</c:if>
+			<c:if test="${user.admin && profile.admin}">
+				<div class="alert alert-info">This User is an Admin</div>
+			</c:if>
 		</c:if>
 	</jsp:attribute>
 	<jsp:body>
+				<c:if test="${user.id == profile.id }">
+					<div class="well">
+						<p>Your Ability</p>
+						<c:forEach var="ab" items="${abilitiesList}">
+							<p>${ab.name }</p>
+						</c:forEach>
+						<form class="navbar-search pull-left" action="searchability"
+							method="get">
+							<input type="text" class="search-query" placeholder="Search ability"
+								name="search" value="${param.search}">
+						</form>
+					</div>	
+				</c:if>
+	
 	<div class="container">
 					<div class="left" style="float: left" width="30%"
 				background="Black">
