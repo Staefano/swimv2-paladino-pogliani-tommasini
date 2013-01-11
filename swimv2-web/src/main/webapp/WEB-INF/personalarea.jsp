@@ -4,7 +4,13 @@
 
 <t:private-page user="${user}" title="SWIMv2 - Personal Area">
 	<jsp:attribute name="header">
-		<h1>Welcome to the user area!</h1>
+		<h2>Search for help!</h2>
+		<p>What kind of ability are you looking for?</p>
+		<form class="input-prepend input-append" action="search" method="get">
+			<span class="add-on"><i class="icon-search"></i></span> 
+			<input name="abilities" class="span5" type="text" placeholder="cooker, plumber">
+			<button type="submit" class="btn btn-primary">Find help!</button>
+		</form>
 	</jsp:attribute>
 	<jsp:body>
 		<div class="container">
