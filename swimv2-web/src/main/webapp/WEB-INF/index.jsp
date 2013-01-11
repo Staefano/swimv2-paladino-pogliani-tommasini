@@ -34,11 +34,7 @@
 			href="#register" data-toggle="tab">Register</a></li>
 		</ul>
 		<div class="tab-content">
-			<div
-			class="tab-pane <c:if test="${!toggleRegistration}">
-	                         active
-	                     </c:if>"
-			id="login">
+			<div class="tab-pane <c:if test="${!toggleRegistration}">active </c:if>" id="login">
 				<form method="post">
 					<c:if test="${wrongLogin}">
 						<div class="alert alert-error">Wrong username or password</div>
@@ -46,7 +42,8 @@
 					<fieldset>
 						<input type="email" name="user" placeholder="Username" required>
 						<input type="password" name="password" placeholder="Password" required>
-						<button type="submit" class="btn btn-primary">Login</button>
+						Change or reset password
+						<button type="submit" name="login" class="btn btn-primary">Login</button>
 					</fieldset>
 				</form>
 			</div>

@@ -6,17 +6,20 @@ import java.sql.Timestamp;
 import javax.persistence.*;
 
 @NamedQueries({
+	/* NB - those queries are intended from user1 perspective (e.g. they are done by user1) */
 	@NamedQuery(name="Message.findConversation", query="" +
-			"SELECT m FROM Message m WHERE (m.sender = :user1 AND m.receiver = :user2) OR " +
-			"(m.sender = :user2 AND m.receiver = :user1) ORDER BY m.timestamp DESC"),
-	// TODO just hints on what needs to be done... 
-	/* given a user, returns the set of all users having conversations with unread msgs (for the homepage???) */
+			"SELECT m FROM Message m WHERE (m.sender = :user1 AND m.receiver = :user2 AND m.senderDeleted = false) OR " +
+			"(m.sender = :user2 AND m.receiver = :user1 AND m.receiverDeleted = false) ORDER BY m.timestamp DESC"),
 	@NamedQuery(name="Message.findUnreadConversations", query="" + 
-			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE m.receiver = :user AND m.msgRead = false " + 
+			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE m.receiver = :user AND m.msgRead = false AND m.receiverDeleted = false " + 
 			"ORDER BY m.timestamp DESC"),
-	@NamedQuery(name="Message.findUsersWithConversations", query="" + 
+	@NamedQuery(name="Message.findUsersWithReceivedMessages", query="" + 
 			"SELECT DISTINCT u FROM Message m JOIN m.sender u WHERE " +
-			"u <> :user AND (m.receiver = :user OR m.sender = :user) " +
+			"u <> :user AND (m.receiver = :user AND m.receiverDeleted = false) " +
+			"ORDER BY m.timestamp DESC"),
+	@NamedQuery(name="Message.findUsersWithSentMessages", query="" + 
+			"SELECT DISTINCT u FROM Message m JOIN m.receiver u WHERE " +
+			"u <> :user AND (m.sender = :user AND m.senderDeleted = false) " +
 			"ORDER BY m.timestamp DESC")
 })
 @Entity
@@ -27,16 +30,42 @@ public class Message implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
+	
+	/**
+	 * Date and time of the message creation
+	 */
 	private Timestamp timestamp;
+	
+	/**
+	 * Content of the message
+	 */
 	private String text;
+	
+	/**
+	 * Set to true if the message was read (e.g. the conversation window was opened by the receiver at least once)
+	 */
 	@Column(columnDefinition = "bit default false")
 	private boolean msgRead;
-
+	
 	@ManyToOne
 	private User sender;
 
 	@ManyToOne
 	private User receiver;
+
+	/**
+	 * Marks the message as deleted by the user 'sender', and thus it's not displayed in
+	 * any screen shown to the sender
+	 */
+	@Column(columnDefinition = "bit default false")
+	private boolean senderDeleted;
+
+	/**
+	 * Marks the message as deleted by the user 'receiver', and thus it's not displayed
+	 * in any scrren shown to the recipient
+	 */
+	@Column(columnDefinition = "bit default false")
+	private boolean receiverDeleted;
 
 	public Message() {
 		super();
@@ -95,6 +124,22 @@ public class Message implements Serializable {
 	
 	public boolean isMsgRead() {
 		return this.msgRead;
+	}
+	
+	public boolean isSenderDeleted() {
+		return this.senderDeleted;
+	}
+	
+	public void setSenderDeleted(boolean senderDeleted) {
+		this.senderDeleted = senderDeleted;
+	}
+	
+	public boolean isReceiverDeleted() {
+		return this.receiverDeleted;
+	}
+	
+	public void setReceiverDeleted(boolean receiverDeleted) {
+		this.receiverDeleted = receiverDeleted;
 	}
 
 	@Override

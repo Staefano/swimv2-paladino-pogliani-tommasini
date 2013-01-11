@@ -22,7 +22,7 @@ public interface MessageManagerBeanRemote {
 	void write(User from, User to, String text) throws OperationFailedException;
 
 	/**
-	 * Get a list of messages representing an entire conversation between
+	 * Fetch a list of messages representing an entire conversation between
 	 * two users, sorted by the timestamp of the message. Both messages sent
 	 * from current to other are retrieved, and messages are marked as read
 	 * inside the database with the point of view of the current user (e.g. 
@@ -31,11 +31,23 @@ public interface MessageManagerBeanRemote {
 	List<Message> getConversation(User current, User other);
 
 	/**
-	 * Get a list of users that have a conversation with the specified user
+	 * Fetch a list of users that have a conversation with the specified user
 	 * that has non zero messages.
 	 */
 	List<User> getUsersWithConversations(User current);
 
+	/**
+	 * Fetch a list of the conversations targeting the user current with 
+	 * unread messages
+	 */
 	List<User> getUnreadConversations(User current);
+
+	/**
+	 * Delete the conversation between current and other from the
+	 * conversation available when current navigates the application.
+	 * If the conversation is already deleted from the inverse perspective,
+	 * the messages are effectively deleted from the database.
+	 */
+	void deleteConversation(User current, User other);
 
 }
