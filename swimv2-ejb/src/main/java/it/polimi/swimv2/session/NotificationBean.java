@@ -4,6 +4,8 @@ import it.polimi.swimv2.entity.AbilityRequest;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
@@ -165,6 +167,16 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setTgtuser(user);
 		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		manager.persist(n);
+	}
+
+	@Override
+	public void notifyRefusedHelpRe(HelpRequest hr) {
+		Notification n = new Notification();
+		n.setType(NotificationType.HELP_REJECTED);
+		n.setTgtuser(hr.getSender());
+		n.setSrcUser(hr.getReceiver());
+		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
+		manager.persist(n);		
 	}
 
 }

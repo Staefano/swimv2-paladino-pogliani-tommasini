@@ -3,6 +3,8 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.AbilityRequest;
 
 import java.util.List;
+
+import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 
@@ -27,6 +29,8 @@ public interface NotificationBeanRemote {
 	void notifyAbilityRejected(AbilityRequest request);
 
 	void notifyAdminPromotion(User user);
+	
+	void notifyRefusedHelpRe(HelpRequest hr);
 
 	void notifyAbilityChoice(AbilityRequest request, String choice);
 

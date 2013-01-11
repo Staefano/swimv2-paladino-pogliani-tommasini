@@ -52,6 +52,11 @@
 							</c:if>
 							<c:forEach var="n" items="${notifications}">
 							<div class="well">
+								<c:if test="${n.type=='HELP_REJECTED'}">
+								<p>Your Help Request to <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> was refused </p>
+									<a href="readnotification?notification_id=${n.id}"><button
+										class="btn btn-success" type="button">Mark as Read</button></a>
+								</c:if>
 								<c:if test="${n.type=='ADMIN_PROMOTION'}">
 								<p>You have been promoted to Admin!</p>
 									<a href="readnotification?notification_id=${n.id}"><button
