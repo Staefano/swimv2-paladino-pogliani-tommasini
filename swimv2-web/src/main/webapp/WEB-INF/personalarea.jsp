@@ -7,7 +7,7 @@
 		<h1>Welcome to the user area!</h1>
 	</jsp:attribute>
 	<jsp:body>
-		<div>
+		<div class="container-fluid">
 				<div>
 					<div class="well well-small">
 						<h1>Open Providing HelpRequests</h1>
@@ -21,7 +21,8 @@
 							<t:asking-hr hr="${hr}"/>						
 						</c:forEach>
 					</div>
-					<div class="well well-small" style="float: left">
+					<div class="row-fluid">
+					<div class="span6"><div class="well well-small">
 							<h1>Messages</h1>
 							<c:if test="${empty usersWithUnread}">
 								You don't have unread messages
@@ -37,9 +38,12 @@
 							<p>
 								<a href="${pageContext.servletContext.contextPath}/messages">All messages...</a>
 							</p>
-					</div>
-					<div class="well well-small" style="float: left">
+					</div></div>
+					<div class="span6"><div class="well well-small">
 							<h1>Notifications</h1>
+							<c:if test="${empty notifications}">
+								You don't have notifications.
+							</c:if>
 							<c:forEach var="n" items="${notifications}">
 							<div class="well">
 								<c:if test="${n.type=='ADMIN_PROMOTION'}">
@@ -75,6 +79,7 @@
 								</c:if>
 								</div>
 							</c:forEach>
+						</div></div>
 					</div>
 				</div>
 		 </div>
