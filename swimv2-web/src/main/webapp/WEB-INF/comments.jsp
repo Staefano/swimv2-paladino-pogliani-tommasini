@@ -10,21 +10,14 @@
 		<c:forEach var="c" items="${comments}">
 			<t:comment comment="${c}" />
 		</c:forEach>
-		
-		
+
 		<form class="form-horizontal"  name="newcomment" method="post" action="comment">
-		
 		<input type="hidden" name="hr_id" value="${hr.id }">
-				<p>
+		<p>
 			<b>Comment:</b>
 		</p>
-		<textarea name="comment" rows="4" cols="50">
-		</textarea>
-		
-		
-		
-		<input
-					type="submit"  value="Comment">
+		<textarea name="comment" rows="4" cols="50"></textarea>
+		<input type="submit"  value="Comment">
 		</form>	
 	
 	</jsp:body>
