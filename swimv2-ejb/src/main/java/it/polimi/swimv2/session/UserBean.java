@@ -8,6 +8,8 @@ import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.UserRole;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.remote.AbilityBeanRemote;
+import it.polimi.swimv2.session.remote.UserBeanRemote;
 
 import java.sql.Date;
 import java.text.ParseException;

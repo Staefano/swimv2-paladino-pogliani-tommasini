@@ -1,6 +1,7 @@
 package it.polimi.swimv2.session;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.remote.SearchBeanRemote;
 
 import java.util.List;
 

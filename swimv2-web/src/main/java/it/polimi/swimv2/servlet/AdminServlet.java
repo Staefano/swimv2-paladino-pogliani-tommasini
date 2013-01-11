@@ -1,8 +1,8 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.AbilityRequest;
-import it.polimi.swimv2.session.AbilityBeanRemote;
-import it.polimi.swimv2.session.NotificationBeanRemote;
+import it.polimi.swimv2.session.remote.AbilityBeanRemote;
+import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;

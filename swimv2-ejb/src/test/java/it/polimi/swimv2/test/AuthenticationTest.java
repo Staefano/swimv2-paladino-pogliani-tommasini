@@ -3,8 +3,8 @@ package it.polimi.swimv2.test;
 import static org.junit.Assert.*;
 
 import it.polimi.swimv2.session.AuthenticationBean;
-import it.polimi.swimv2.session.AuthenticationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
 
 import org.junit.Test;
 

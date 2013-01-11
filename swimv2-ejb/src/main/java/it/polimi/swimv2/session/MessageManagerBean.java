@@ -3,6 +3,8 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.Message;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.OperationFailedException;
+import it.polimi.swimv2.session.remote.FriendShipBeanRemote;
+import it.polimi.swimv2.session.remote.MessageManagerBeanRemote;
 
 import java.util.List;
 

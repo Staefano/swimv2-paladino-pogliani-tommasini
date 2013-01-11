@@ -3,6 +3,7 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.entity.UserImage;
 import it.polimi.swimv2.session.exceptions.NoResultFoundException;
+import it.polimi.swimv2.session.remote.UserImageBeanRemote;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

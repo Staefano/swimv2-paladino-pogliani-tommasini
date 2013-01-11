@@ -4,6 +4,8 @@ import it.polimi.swimv2.entity.Friendship;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
+import it.polimi.swimv2.session.remote.FriendShipBeanRemote;
+import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 
 import java.util.ArrayList;
 import java.util.List;

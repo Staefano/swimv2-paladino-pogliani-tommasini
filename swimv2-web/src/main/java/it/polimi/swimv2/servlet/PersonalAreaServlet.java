@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.HelpRequestRemote;
-import it.polimi.swimv2.session.MessageManagerBeanRemote;
-import it.polimi.swimv2.session.NotificationBeanRemote;
+import it.polimi.swimv2.session.remote.HelpRequestRemote;
+import it.polimi.swimv2.session.remote.MessageManagerBeanRemote;
+import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;

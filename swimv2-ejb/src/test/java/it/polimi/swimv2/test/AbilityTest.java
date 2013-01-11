@@ -7,9 +7,9 @@ import java.util.List;
 import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.AbilityBean;
-import it.polimi.swimv2.session.AbilityBeanRemote;
 import it.polimi.swimv2.session.AuthenticationBean;
-import it.polimi.swimv2.session.AuthenticationBeanRemote;
+import it.polimi.swimv2.session.remote.AbilityBeanRemote;
+import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
 
 import org.junit.Test;
 

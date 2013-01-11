@@ -3,6 +3,7 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.remote.AbilityBeanRemote;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

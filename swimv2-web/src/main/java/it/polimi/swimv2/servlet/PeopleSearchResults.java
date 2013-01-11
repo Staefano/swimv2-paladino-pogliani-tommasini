@@ -1,7 +1,7 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.UserBeanRemote;
+import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;

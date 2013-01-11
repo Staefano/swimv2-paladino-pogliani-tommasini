@@ -6,6 +6,7 @@ import it.polimi.swimv2.entity.Feedback;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
+import it.polimi.swimv2.session.remote.HelpRequestRemote;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.Role;

@@ -1,7 +1,7 @@
 package it.polimi.swimv2.servlet;
 
-import it.polimi.swimv2.session.UserImageBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoResultFoundException;
+import it.polimi.swimv2.session.remote.UserImageBeanRemote;
 
 import java.io.IOException;
 import java.io.OutputStream;

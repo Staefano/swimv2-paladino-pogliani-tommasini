@@ -3,9 +3,9 @@ package it.polimi.swimv2.test;
 import static org.junit.Assert.assertEquals;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.AuthenticationBean;
-import it.polimi.swimv2.session.AuthenticationBeanRemote;
 import it.polimi.swimv2.session.MessageManagerBean;
-import it.polimi.swimv2.session.MessageManagerBeanRemote;
+import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
+import it.polimi.swimv2.session.remote.MessageManagerBeanRemote;
 
 import org.junit.Test;
 

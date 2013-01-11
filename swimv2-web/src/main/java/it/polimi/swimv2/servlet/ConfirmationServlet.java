@@ -1,8 +1,8 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.AuthenticationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
 

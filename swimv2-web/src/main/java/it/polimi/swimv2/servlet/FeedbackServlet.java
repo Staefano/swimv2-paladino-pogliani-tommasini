@@ -1,9 +1,9 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.enums.Role;
-import it.polimi.swimv2.session.HelpRequestRemote;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
+import it.polimi.swimv2.session.remote.HelpRequestRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;

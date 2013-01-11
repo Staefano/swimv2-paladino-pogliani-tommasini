@@ -1,4 +1,4 @@
-package it.polimi.swimv2.session;
+package it.polimi.swimv2.session.remote;
 
 import java.util.List;
 
