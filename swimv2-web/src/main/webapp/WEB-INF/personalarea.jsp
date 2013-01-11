@@ -124,18 +124,7 @@
 			
 			<div class="span1"></div>
 			
-			<div class="span2">
-				<img class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${profile.id}" />
-				<div class="progress">
-					<div class="bar bar-success" style="width: 60%;"></div>
-					<div class="bar bar-warning" style="width: 30%;"></div>
-					<div class="bar bar-danger" style="width: 10%;"></div>
-				</div>
-				<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
-					<li><i class="icon-user"></i> ${user.name} ${user.surname}</li>
-					<li>${user.minibio}</li>
-				</ul>
-			</div>
+			<t:userinfo user="${user}" />
 			
 			</div>
 		</div>
