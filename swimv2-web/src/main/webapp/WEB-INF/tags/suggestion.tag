@@ -9,6 +9,5 @@
 	<div class="caption">
 		<a
 			href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=indirect">Add ${profile.name} ${profile.surname} as friend</a>
-		</li>
 	</div>
 </div>
