@@ -3,6 +3,7 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.Comment;
 import it.polimi.swimv2.entity.Feedback;
+import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
@@ -18,6 +19,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.sound.midi.SysexMessage;
 
 @Stateless
 public class HelpRequestBean implements HelpRequestRemote {
@@ -208,8 +210,27 @@ public class HelpRequestBean implements HelpRequestRemote {
 	@Override
 	public void refuseHR(HelpRequest hr) throws NoSouchHRException {
 		
-		hr.setStatus(RequestStatus.DENIED);
-		manager.merge(hr);
+		Query commentQuery = manager.createNamedQuery("Comment.getByHelpRequest");
+		commentQuery.setParameter("hr", hr);
+		
+		
+		Query hrQuery = manager.createNamedQuery("HelpRequest.findHRByID");
+		hrQuery.setParameter("id", hr.getId());
+		try{
+			
+			manager.remove(hrQuery.getSingleResult());
+			List<Comment> commentList = (List<Comment>) commentQuery.getResultList();
+			
+			for (Comment comment : commentList) {
+				manager.remove(comment);
+
+			}
+			
+			
+		}catch(NoResultException nre){
+			
+			System.err.println("Notification Bean: The HelpRequest doesn't not exit, deleting has failed");
+		}
 		
 		
 		

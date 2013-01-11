@@ -6,14 +6,14 @@
 
 
 <p>
-<b>${hr.subject}: </b>
+<b>	You asked for help <a href="profile?id=${hr.sender.id}">${hr.sender.name }  ${hr.sender.surname }</a>  : ${hr.subject} <br></b>
 	<c:if test="${hr.status == 'WAITING'}">
-												waiting for a reply... <br>
+												<b>Status:</b> waiting for a reply... <br>
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
 	</c:if>
 	<c:if test="${hr.status == 'ACCEPTED'}">
-												the hr was accepted <br>
+												<b>Status:</b> the hr was accepted <br>
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
 										<a
@@ -21,7 +21,7 @@
 										class="btn btn-success" type="button">Close and give a Feedback </button></a>		
 	</c:if>
 	<c:if test="${hr.status == 'ZOMBIE'}">
-												the user is waiting for your feedback <br>
+												<b>Status:</b> the user is waiting for your feedback <br>
 												<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
 										

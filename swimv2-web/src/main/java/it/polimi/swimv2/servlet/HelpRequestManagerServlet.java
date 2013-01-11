@@ -1,6 +1,8 @@
 package it.polimi.swimv2.servlet;
 
+import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.session.HelpRequestRemote;
+import it.polimi.swimv2.session.NotificationBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
@@ -16,40 +18,44 @@ import javax.servlet.ServletException;
  */
 public class HelpRequestManagerServlet extends Controller {
 	private static final long serialVersionUID = 1L;
-      
-	@EJB HelpRequestRemote hrBean;
-    /**
-     * @see Controller#Controller()
-     */
-    public HelpRequestManagerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
-    public HelpRequestManagerServlet(AccessRole role) {
-        super(role);
-        // TODO Auto-generated constructor stub
-    }
+
+	@EJB
+	HelpRequestRemote hrBean;
+	@EJB
+	NotificationBeanRemote notificationBean;
+
+	/**
+	 * @see Controller#Controller()
+	 */
+	public HelpRequestManagerServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see Controller#Controller(AccessRole)
+	 */
+	public HelpRequestManagerServlet(AccessRole role) {
+		super(role);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-		
+
 		String choice = nav.getParam("choice");
-		String hr_id= nav.getParam("hr_id");
-		
+		String hr_id = nav.getParam("hr_id");
+
 		try {
-			if(choice.equals("approved")){
-				hrBean.acceptHR(hrBean.findByID(Integer.parseInt(hr_id)));
-				
-			}else if(choice.equals("refused")){
-				
-				hrBean.refuseHR(hrBean.findByID(Integer.parseInt(hr_id)));
-				
+			HelpRequest hr = hrBean.findByID(Integer.parseInt(hr_id));
+			if (choice.equals("approved")) {
+				hrBean.acceptHR(hr);
+
+			} else if (choice.equals("refused")) {
+				notificationBean.notifyRefusedHelpRe(hr);
+				hrBean.refuseHR(hr);
 			}
-			
+
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,10 +63,9 @@ public class HelpRequestManagerServlet extends Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		nav.fwd(BASEPATH);
 
-		
 	}
 
 }

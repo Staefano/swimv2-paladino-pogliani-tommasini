@@ -7,9 +7,9 @@
 <!-- TODO image and the rest... -->
 
 <p>
-	<b>${hr.subject}: </b>
+	<b><a href="profile?id=${hr.sender.id}">${hr.sender.name }  ${hr.sender.surname }</a> ask you for help : ${hr.subject}<br> </b>
 	<c:if test="${hr.status == 'WAITING'}">
-												you should answer this hr <br><a
+												<b>Status:</b> you should answer this hr <br><a
 										href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> 
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
@@ -20,14 +20,14 @@
 										class="btn btn-danger" type="button">Refuse </button></a>
 	</c:if>
 	<c:if test="${hr.status == 'ACCEPTED'}">
-												complete the work to receive the feedback<br>
+												<b>Status:</b> complete the work to receive the feedback<br>
 										<a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a>
 										
 										
 											</c:if>
 	<c:if test="${hr.status == 'ZOMBIE'}">
-												all work is done, you should give the feedback to the user you help <a href="comment?hr_id=${hr.id}"><button
+												<b>Status:</b>all work is done, you should give the feedback to the user you help <a href="comment?hr_id=${hr.id}"><button
 										class="btn btn-info" type="button">Expand all comments </button></a> <br><a href="feedback?hr_id=${hr.id}&role=helper"><button
 										class="btn btn-success" type="button">Leave the Feedback</button></a>
 											</c:if>
