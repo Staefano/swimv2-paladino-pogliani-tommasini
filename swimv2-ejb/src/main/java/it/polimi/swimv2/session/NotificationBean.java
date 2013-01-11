@@ -29,10 +29,10 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyFriendshipRequest(User asker, User receiver) {
+	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) {
 
 		Notification n = new Notification();
-		n.setType(NotificationType.FRIENDSHIP_RECEIVED);
+		n.setType(type);
 		n.setSrcUser(asker);
 		n.setTgtuser(receiver);
 		// TODO timestamp
@@ -51,7 +51,9 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setTgtuser(request.getSrcUser());
 		// quello che sta rispondendo
 		n.setSrcUser(replier);
-		n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
+		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
+		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) n.setType(NotificationType.FRIENDSHIP_ACCEPTED_DIRECT);
+		
 		// metto la nuova
 		manager.persist(n);
 		// tolgo la vecchia

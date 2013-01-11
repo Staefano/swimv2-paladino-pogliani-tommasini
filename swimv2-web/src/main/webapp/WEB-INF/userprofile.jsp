@@ -111,7 +111,7 @@
 				<c:if test="${user.id != profile.id }">
 					<ul>
 					<c:if test="${showFR}">
-						<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}">Add as friend</a></li>
+						<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
 					</c:if>
 					<li><a href="#sendMessage" data-toggle="modal">Send Message</a></li>
 					<li><a href="helprequest?receiver=${profile.id}">Ask help!</a></li>

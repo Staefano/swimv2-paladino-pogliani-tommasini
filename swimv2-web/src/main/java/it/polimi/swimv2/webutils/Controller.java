@@ -21,6 +21,7 @@ public abstract class Controller extends HttpServlet {
 	private final AccessRole minimumRole;
 	
 	protected String BASEPATH = "/";
+	protected String ERRORPAGE = "WEB-INF/error.jsp";
 	
 	public Controller() {
 		this(AccessRole.UNREGISTERED);

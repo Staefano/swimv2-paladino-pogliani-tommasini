@@ -7,6 +7,7 @@ import java.util.List;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.enums.NotificationType;
 
 public interface NotificationBeanRemote {
 
@@ -18,7 +19,7 @@ public interface NotificationBeanRemote {
 
 	Notification notifyFriendshipAccepted(User replier, String notificationID);
 
-	Notification notifyFriendshipRequest(User asker, User receiver);
+	Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type);
 
 	Notification notifyAbilityRequest(User asker);
 	

@@ -1,12 +1,10 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.Ability;
-import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.AbilityBeanRemote;
 import it.polimi.swimv2.session.HelpRequestRemote;
 import it.polimi.swimv2.session.UserBeanRemote;
-import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
@@ -74,12 +72,11 @@ public class HelpRequestServlet extends Controller implements Servlet {
 		
 			String subject = nav.getParam("subject");
 			String[] abilities = nav.getParamValues("ability");
-			String comment = nav.getParam("comment");
 			
 			
 			User receiver = userBean.getUserByID(Integer.parseInt((String) nav.getParam("receiver")));
 			if(!(receiver.equals(nav.getLoggedUser()))){
-				HelpRequest hr = hrBean.askForHelp(nav.getLoggedUser(), receiver, subject, abilityBean.getAbilities(abilities));
+				hrBean.askForHelp(nav.getLoggedUser(), receiver, subject, abilityBean.getAbilities(abilities));
 			
 				
 			
