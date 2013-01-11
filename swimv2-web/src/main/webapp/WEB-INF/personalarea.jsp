@@ -15,12 +15,6 @@
 	</jsp:attribute>
 	<jsp:body>
 		<div class="container">
-				<div>
-					<div class="well well-small">
-						<h1>Open Providing HelpRequests</h1>
-						<c:forEach var="hr" items="${openProvidingHR}">
-							<t:providing-hr hr="${hr}" />
-							</c:forEach>
 				<div class="row">
 				<div class="span9">
 					<ul class="nav nav-tabs">
@@ -33,21 +27,15 @@
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openProvidingHR}" begin="0" end="2">
-								<t:providing-hr hr="${hr}" />
+								<t:providing-hr hr="${hr}"/>
 						</c:forEach>
-					</div>
-										<div class="well well-small">
-						<h1>Open Incoming HelpRequests</h1>
-						<c:forEach var="hr" items="${openReceivingHR}">
-							<t:asking-hr hr="${hr}" />		
-							</c:forEach>				
 						</div>
 						<div class="tab-pane" id="tab2">
 							<c:if test="${empty openReceivingHR}">
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openReceivingHR}" begin="0" end="2">
-								<t:asking-hr hr="${hr}" />						
+								<t:asking-hr hr="${hr}"/>						
 						</c:forEach>
 						</div>
 					</div>
@@ -56,28 +44,7 @@
 					
 					<div class="row-fluid">
 					<div class="span6">
-						<div class="well well-small">
-							<h1>Messages</h1>
-							<c:if test="${empty usersWithUnread}">
-								You don't have unread messages
-							</c:if>
-					<div class="span6">
 							
-							<ul>
-							<c:forEach var="u" items="${usersWithUnread}">
-								<li><a
-														href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
-							</c:forEach>
-							</ul>
-							
-							<p>
-								<a href="${pageContext.servletContext.contextPath}/messages">All messages...</a>
-							</p>
-					</div>
-					</div>
-					<div class="span6">
-						<div class="well well-small">
-							<h1>Notifications</h1>
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab1" data-toggle="tab">Messages</a></li>
 						</ul>
@@ -89,7 +56,7 @@
 								<ul>
 									<c:forEach var="u" items="${usersWithUnread}" begin="0" end="2">
 										<li><a
-																href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
+											href="${pageContext.servletContext.contextPath}/messages?conversation=${u.id}">${u.name} ${u.surname}</a></li>
 									</c:forEach>
 								</ul>
 							</div>
@@ -101,6 +68,16 @@
 					
 					
 					
+					<div class="span6">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab1" data-toggle="tab">Notifications</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab1">
+							<c:if test="${empty notifications}">
+								You don't have notifications.
+							</c:if>
+							<c:forEach var="n" items="${notifications}" begin="0" end="2">
 					<div class="span6">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab1" data-toggle="tab">Notifications</a></li>
@@ -166,6 +143,10 @@
 								</div>
 							</c:forEach>
 						</div>
+					</div>
+							</div>
+							</c:forEach>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -180,7 +161,7 @@
 					<div class="bar bar-warning" style="width: 30%;"></div>
 					<div class="bar bar-danger" style="width: 10%;"></div>
 				</div>
-				<ul	style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
+				<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
 					<li><i class="icon-user"></i> ${user.name} ${user.surname}</li>
 					<li>${user.minibio}</li>
 				</ul>
@@ -188,5 +169,4 @@
 			
 			</div>
 		</div>
-	</jsp:body>
 </t:private-page>

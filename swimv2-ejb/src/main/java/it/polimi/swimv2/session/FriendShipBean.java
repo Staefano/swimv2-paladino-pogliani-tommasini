@@ -24,14 +24,6 @@ public class FriendShipBean implements FriendShipBeanRemote {
 	@EJB
 	private NotificationBeanRemote notificationBean;
 
-	// TODO marcello: ho modificato il metodo in questo modo, cambiandone la
-	// signature.
-	// Per le amicizie indirette vedremo,
-	// eviterei di esporre al web tier l'oggetto friendship, e' troppo di basso
-	// livello.
-	// io comunque metterei altri metodi per gestire la cosa, visto che e'
-	// rilevante
-	// soltanto in pochi e particolari casi.
 	@Override
 	public List<User> getFriends(User u) {
 		Query q = manager.createNamedQuery("Friendship.getByUser");
