@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:public-page title="SWIM version 2">
+<t:template title="SWIM version 2">
 	<jsp:attribute name="header">
 		<h1>Confirm your registration</h1>
 	</jsp:attribute>
@@ -31,4 +31,4 @@
 			</form>
 		</c:if>
 	</jsp:body>
-</t:public-page>
+</t:template>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:private-page user="${user}" title="Search Ability Results">
+<t:template user="${user}" title="Search Ability Results">
 	<jsp:attribute name="header">
 		<h1>Search results</h1>
 	</jsp:attribute>
@@ -77,4 +77,4 @@
 		</div>
 
 	</jsp:body>
-</t:private-page>
+</t:template>

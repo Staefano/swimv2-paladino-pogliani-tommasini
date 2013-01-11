@@ -3,7 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<t:private-page user="${user}" title="SWIMv2 - Messages">
+<t:template user="${user}" title="SWIMv2 - Messages">
 	<jsp:attribute name="header">
 		<h1>Messages <small>You and ${otherUser.name} ${otherUser.surname}</small></h1>
 	</jsp:attribute>
@@ -29,4 +29,4 @@
 		<t:sendmessage-popup to="${otherUser}" />
 	
 	</jsp:body>
-</t:private-page>
+</t:template>

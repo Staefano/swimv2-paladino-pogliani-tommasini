@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:public-page title="SWIM - Homepage">
+<t:template title="SWIM - Homepage">
 	<jsp:attribute name="header"></jsp:attribute>
 	<jsp:body>
 	<c:if test="${accessDenied}">
@@ -81,4 +81,4 @@
 	</div>
 	</div>
 	</jsp:body>
-</t:public-page>
+</t:template>

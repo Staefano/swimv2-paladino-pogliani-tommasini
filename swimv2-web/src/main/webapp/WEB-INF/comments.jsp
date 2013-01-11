@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:private-page user="${user}" title="SWIMv2 - Personal Area">
+<t:template user="${user}" title="SWIMv2 - Personal Area">
 	<jsp:attribute name="header">
 		<h1>HelpRequest number ${hr.id } about ${hr.subject}!</h1>
 	</jsp:attribute>
@@ -21,4 +21,4 @@
 		</form>	
 	
 	</jsp:body>
-</t:private-page>
+</t:template>

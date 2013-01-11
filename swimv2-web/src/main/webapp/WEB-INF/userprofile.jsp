@@ -3,7 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="p" tagdir="/WEB-INF/tags/profile"%>
 
-<t:private-page user="${user}" title="SWIMv2 - ${profile.name} ${profile.surname}">
+<t:template user="${user}" title="SWIMv2 - ${profile.name} ${profile.surname}">
 	<jsp:attribute name="header">
 		<h1>${profile.name} ${profile.surname}'s profile</h1>
 		<c:if test="${user.admin && user.id != profile.id }">
@@ -55,4 +55,4 @@
 	</c:if>
 	
 	</jsp:body>
-</t:private-page>
+</t:template>

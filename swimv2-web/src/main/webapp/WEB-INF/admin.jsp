@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:private-page user="${user}" title="SWIMv2 - Admin Area">
+<t:template user="${user}" title="SWIMv2 - Admin Area">
 	<jsp:attribute name="header">
 		<h1>Welcome to the Admin Area!</h1>
 	</jsp:attribute>
@@ -58,4 +58,4 @@
 			</c:otherwise>
 		</c:choose>
 	</jsp:body>
-</t:private-page>
+</t:template>

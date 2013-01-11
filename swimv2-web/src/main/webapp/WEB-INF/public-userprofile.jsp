@@ -3,7 +3,7 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="p" tagdir="/WEB-INF/tags/profile"%>
 
-<t:public-page title="SWIMv2 - ${profile.name} ${profile.surname}">
+<t:template title="SWIMv2 - ${profile.name} ${profile.surname}">
 	<jsp:attribute name="header">
 		<h1>${profile.name} ${profile.surname}'s profile</h1>
 	</jsp:attribute>
@@ -32,4 +32,4 @@
 	</div>
 	
 	</jsp:body>
-</t:public-page>
+</t:template>

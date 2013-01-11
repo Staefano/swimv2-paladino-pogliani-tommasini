@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:private-page user="${user}" title="SWIMv2 - Edit Profile">
+<t:template user="${user}" title="SWIMv2 - Edit Profile">
 	<jsp:body>
 		<form name="feedbackform" method="post" action="feedback">
 					
@@ -29,4 +29,4 @@
 					<input type="submit" value="Submit" id="Submit">
 		</form>
 	</jsp:body>
-</t:private-page>
+</t:template>

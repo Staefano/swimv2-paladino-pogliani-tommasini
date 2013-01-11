@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
-<t:private-page user="${user}" title="SWIMv2 - Personal Area">
+<t:template user="${user}" title="SWIMv2 - Personal Area">
 	<jsp:attribute name="header">
 		<h2>Search for help!</h2>
 		<p>What kind of ability are you looking for?</p>
@@ -159,4 +159,4 @@
 			</div>
 		</div>
 </jsp:body>
-</t:private-page>
+</t:template>

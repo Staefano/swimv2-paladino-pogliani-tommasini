@@ -3,7 +3,7 @@
 <%@ taglib prefix="sfn" uri="http://polimi/swimfn" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-<t:private-page user="${user}" title="SWIMv2 - Messages">
+<t:template user="${user}" title="SWIMv2 - Messages">
 	<jsp:attribute name="header">
 		<h1>Messages</h1>
 	</jsp:attribute>
@@ -24,4 +24,4 @@
 	</div>
 	
 	</jsp:body>
-</t:private-page>
+</t:template>
