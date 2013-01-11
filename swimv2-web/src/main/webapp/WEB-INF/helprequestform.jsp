@@ -21,12 +21,6 @@
 			</c:forEach>
 		</p>
 			
-		<p>
-			<b>Content:</b>
-		</p>
-		<textarea name="comment" rows="4" cols="50">
-		</textarea>
-			<br>
 		
 		<input type="submit" value="Submit" id="Submit">
 	</form>

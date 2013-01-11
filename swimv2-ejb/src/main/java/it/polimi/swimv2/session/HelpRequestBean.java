@@ -3,7 +3,6 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.Comment;
 import it.polimi.swimv2.entity.Feedback;
-import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
@@ -19,7 +18,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.sound.midi.SysexMessage;
 
 @Stateless
 public class HelpRequestBean implements HelpRequestRemote {
@@ -219,6 +217,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 		try{
 			
 			manager.remove(hrQuery.getSingleResult());
+			@SuppressWarnings("unchecked")
 			List<Comment> commentList = (List<Comment>) commentQuery.getResultList();
 			
 			for (Comment comment : commentList) {

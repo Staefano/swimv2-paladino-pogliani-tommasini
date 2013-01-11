@@ -3,6 +3,7 @@ package it.polimi.swimv2.session;
 import it.polimi.swimv2.entity.Friendship;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.enums.NotificationType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +48,12 @@ public class FriendShipBean implements FriendShipBeanRemote {
 		try {
 			Friendship f = new Friendship();
 			Notification n = (Notification) q.getSingleResult();
+			
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) f.setDirect(true);
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) f.setDirect(false);
+		
 			f.setUser1Id(n.getSrcUser().getId());
 			f.setUser2Id(n.getTgtuser().getId());
-			f.setDirect(true);
 			f.setUser1(n.getSrcUser());
 			f.setUser2(n.getTgtuser());
 			manager.persist(f);

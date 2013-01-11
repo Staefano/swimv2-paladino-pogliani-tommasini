@@ -187,4 +187,24 @@
     <servlet-name>FeedbackServlet</servlet-name>
     <url-pattern>/feedback</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FriendSuggestionServlet</display-name>
+    <servlet-name>FriendSuggestionServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FriendSuggestionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FriendSuggestionServlet</servlet-name>
+    <url-pattern>/friendsuggestions</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FriendshipServlet</display-name>
+    <servlet-name>FriendshipServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FriendshipServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FriendshipServlet</servlet-name>
+    <url-pattern>/friendship</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -8,7 +8,8 @@
 		<p>What kind of ability are you looking for?</p>
 		<form class="input-prepend input-append" action="search" method="get">
 			<span class="add-on"><i class="icon-search"></i></span> 
-			<input name="abilities" class="span5" type="text" placeholder="cooker, plumber">
+			<input name="abilities" class="span5" type="text"
+				placeholder="cooker, plumber">
 			<button type="submit" class="btn btn-primary">Find help!</button>
 		</form>
 	</jsp:attribute>
@@ -77,44 +78,73 @@
 								You don't have notifications.
 							</c:if>
 							<c:forEach var="n" items="${notifications}" begin="0" end="2">
+					<div class="span6">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab1" data-toggle="tab">Notifications</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab1">
+							<c:if test="${empty notifications}">
+								You don't have notifications.
+							</c:if>
+							<c:forEach var="n" items="${notifications}" begin="0" end="2">
 							<div class="well">
 								<c:if test="${n.type=='HELP_REJECTED'}">
-									<p>Your Help Request to <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> was refused </p>
-										<a href="readnotification?notification_id=${n.id}"><button
-											class="btn btn-success" type="button">Mark as Read</button></a>
-									</c:if>
+								<p>Your Help Request to <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> was refused </p>
+									<a href="readnotification?notification_id=${n.id}"><button
+																		class="btn btn-success" type="button">Mark as Read</button></a>
+								</c:if>
 								<c:if test="${n.type=='ADMIN_PROMOTION'}">
 								<p>You have been promoted to Admin!</p>
 									<a href="readnotification?notification_id=${n.id}"><button
-										class="btn btn-success" type="button">Mark as Read</button></a>
+																		class="btn btn-success" type="button">Mark as Read</button></a>
 								</c:if>
-								<c:if test="${n.type=='FRIENDSHIP_ACCEPTED'}">
-								<p>Your friendship request to user<a
-										href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved </p>
+								<c:if
+																test="${n.type=='FRIENDSHIP_ACCEPTED' || n.type=='FRIENDSHIP_ACCEPTED_DIRECT' }">
+								<p>Your friendship request to user <a
+																		href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved </p>
+										<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...<br></a>
 					          	<a href="readnotification?notification_id=${n.id}"><button
-										class="btn btn-success" type="button">Mark as Read</button></a>			
+																		class="btn btn-success" type="button">Mark as Read</button></a>			
 								</c:if>
 								<c:if test="${n.type=='ABILITY_ACCCEPTED'}">
 								<p>Your ability request was approved now you can add ${n.ability } to your ability</p>
 								                	<a
-									href="readnotification?notification_id=${n.id}"><button
-										class="btn btn-success" type="button">Mark as Read</button></a>
+																	href="readnotification?notification_id=${n.id}"><button
+																		class="btn btn-success" type="button">Mark as Read</button></a>
 								</c:if>
 								<c:if test="${n.type=='ABILITY_REJECTED'}">
 								<p>Your ability request was rejected  ${n.ability } is not a valid ability in SWIMv2</p>
 					          	<a href="readnotification?notification_id=${n.id}"><button
-										class="btn btn-success" type="button">Mark as Read</button></a>
+																		class="btn btn-success" type="button">Mark as Read</button></a>
 								</c:if>
 								<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}">
-										<p>Friendship Request from  <a
-										href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> </p> 
-										<a href="friendshipaccepted?notification_id=${n.id}"><button
-										class="btn btn-success" type="button">Approve </button></a>
+										<p>Friendship NOT DIRECT Request from  <a
+																		href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> 
+												<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...<br></a>
+																</p> 
+										<a href="friendship?notification_id=${n.id}&answer=accepted"><button
+																		class="btn btn-success" type="button">Approve </button></a>
 					                	<a
-									href="friendshiprefused?notification_id=${n.id}"><button
-										class="btn btn-danger" type="button">Refuse </button></a>
+																	href="friendship?notification_id=${n.id}&answer=refused"><button
+																		class="btn btn-danger" type="button">Refuse </button></a>
+								</c:if>
+																<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
+										<p>Friendship DIRECT Request from  <a
+																		href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>
+												<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...<br></a>
+																</p> 
+										<a href="friendship?notification_id=${n.id}&answer=accepted"><button
+																		class="btn btn-success" type="button">Approve </button></a>
+					                	<a
+																	href="friendship?notification_id=${n.id}&answer=refused"><button
+																		class="btn btn-danger" type="button">Refuse </button></a>
 								</c:if>
 								</div>
+							</c:forEach>
+						</div>
+					</div>
+							</div>
 							</c:forEach>
 							</div>
 						</div>
@@ -128,5 +158,5 @@
 			
 			</div>
 		</div>
-	</jsp:body>
+</jsp:body>
 </t:private-page>
