@@ -7,6 +7,14 @@
 	<jsp:attribute name="header">
 		<h1>Edit profile</h1>
 	</jsp:attribute>
+	<jsp:attribute name="scripts">
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js" charset="UTF-8"></script>
+		<script type="text/javascript">
+			$('#birthdate').datepicker({
+				format : 'dd/mm/yyyy'
+			});
+		</script>
+	</jsp:attribute>
 	<jsp:body>
 	<c:choose>
 		<c:when test="${error == 'imageupload'}">
@@ -35,7 +43,7 @@
 		</div>
 		
 		<label for="birthdate">Date of birth</label>
-		<input type="text" name="birthdate" class="input-block-level" value="<fmt:formatDate value="${user.birthdate}" pattern="dd/MM/yyyy" />">
+		<input type="text" name="birthdate" id="birthdate" class="input-block-level" value="<fmt:formatDate value="${user.birthdate}" pattern="dd/MM/yyyy" />">
 		
 		<label for="location">Where do you live?</label>
 		<input type="text" name="location" class="input-block-level" value="${user.location}">

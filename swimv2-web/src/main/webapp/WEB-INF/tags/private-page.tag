@@ -3,6 +3,7 @@
 <%@attribute name="user" required="true" type="it.polimi.swimv2.entity.User" %>
 <%@attribute name="title" required="true" %>
 <%@attribute name="header" fragment="true"%>
+<%@attribute name="scripts" fragment="true"%>
 
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
@@ -12,6 +13,7 @@
 <head>
 <title>${title}</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/datepicker.css" rel="stylesheet" media="screen">
 </head>
 <body>
 	<t:userbar user="${user}" />
@@ -29,5 +31,6 @@
 	<!-- TODO include locally jquery, we don't want to depend upon external stuff! -->
 	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<jsp:invoke fragment="scripts" />
 </body>
 </html>
