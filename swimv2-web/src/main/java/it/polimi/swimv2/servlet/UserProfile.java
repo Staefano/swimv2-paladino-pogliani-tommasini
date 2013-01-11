@@ -40,6 +40,7 @@ public class UserProfile extends Controller {
 			nav.setAttribute("showFR", !(friendshipBean.isFriend(nav.getLoggedUser(), u) || nbr.isPending(nav.getLoggedUser(), u)));
 			
 			nav.setAttribute("profile", u);
+			nav.setAttribute("friendsList", friendshipBean.getFriends(u));
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
 			

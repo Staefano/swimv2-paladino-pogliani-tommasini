@@ -28,6 +28,14 @@
 				<li><i class="icon-calendar"></i> ${profile.birthdate}</li>
 				<li><i class="icon-globe"></i> ${profile.location}</li>
 			</ul>
+			<div class="well well-small">
+				${profile.name}'s Friends:
+				<ul style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
+					<c:forEach var="fr" items="${friendsList}">
+						<li><a href="profile?id=${fr.id}">${fr.name} ${fr.surname}</a></li>
+					</c:forEach>
+				</ul>
+			</div>
 		</div>
 		<div class="span9">
 			<div class="well" style="margin-left: 1.5em;">
