@@ -73,7 +73,17 @@
 								Empty
 							</c:if>
 							<c:forEach var="hrp" items="${providedList}">
-								<p>${hrr.subject}</p>
+								<p>
+								<c:if test="${hrp.receiverFeedback.evaluation == '0'}">
+									<i class="icon-minus"></i>${hrp.subject}
+								</c:if>
+								<c:if test="${hrp.receiverFeedback.evaluation == '1'}">
+									<i class="icon-asterisk"></i>${hrp.subject}
+								</c:if>
+								<c:if test="${hrp.receiverFeedback.evaluation == '2'}">
+									<i class="icon-plus"></i>${hrp.subject}
+								</c:if>
+								</p>
 							</c:forEach>
 						</div>
 						<div class="tab-pane" id="tab2">
@@ -81,7 +91,17 @@
 								Empty
 							</c:if>
 							<c:forEach var="hrr" items="${receivedList}">
-								<p>${hrr.subject }</p>
+								<p>
+								<c:if test="${hrr.askerFeedback.evaluation == '0'}">
+									<i class="icon-minus"></i>${hrr.subject}
+								</c:if>
+								<c:if test="${hrr.askerFeedback.evaluation == '1'}">
+									<i class="icon-asterisk"></i>${hrr.subject}
+								</c:if>
+								<c:if test="${hrr.askerFeedback.evaluation == '2'}">
+									<i class="icon-plus"></i>${hrr.subject}
+								</c:if>
+								</p>
 							</c:forEach>
 						</div>
 					</div>
