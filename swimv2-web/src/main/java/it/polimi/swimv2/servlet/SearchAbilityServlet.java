@@ -47,6 +47,20 @@ public class SearchAbilityServlet extends Controller {
 			nav.setAttribute("chosenAb", chosenAb);
 		}
 		
+		// ability request
+		String name = nav.getParam("name");
+		String comment = nav.getParam("comment");
+		
+		if (abilityBean.alreadyExist(name)) {
+			nav.setAttribute("message", "failed");
+		} else if(name==null || name.equals("")) {
+			nav.setAttribute("message", "empty");
+		} else {
+			abilityBean.requestAbility(name, comment, user);
+			nav.setAttribute("message", "success");
+		}
+		nav.setAttribute("abName", name);
+		
 		// search results
 		String queryString = nav.getParam("searchAb");
 		if (queryString == null || queryString.isEmpty()) {

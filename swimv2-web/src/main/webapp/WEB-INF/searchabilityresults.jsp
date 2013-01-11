@@ -45,9 +45,25 @@
 		</c:choose>
 		</div>
 		
+		
+		
+		
+		<c:if test="${message == 'success'}">
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>Success!</strong> The ability ${abName} has been requested!
+			</div>
+		</c:if>
+		<c:if test="${message == 'failed'}">
+			<div class="alert alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+  				<strong>Error!</strong> The ability ${abName} already exists or the name field was empty!
+			</div>
+		</c:if>
+		
 		<div class="well well-small">
 			Your precious ability doesn't exist? Request it!
-			<form class="form-horizontal" method="post" action="abilityrequest">
+			<form class="form-horizontal" method="post" action="searchability">
 		  		<div class="control-group">
 		  			<input type="text" placeholder="Ability Name"
 						class="input-medium search-query" name="name">
