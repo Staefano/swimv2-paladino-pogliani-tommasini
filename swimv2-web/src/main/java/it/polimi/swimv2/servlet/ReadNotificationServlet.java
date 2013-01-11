@@ -13,14 +13,14 @@ import javax.servlet.ServletException;
 /**
  * Servlet implementation class ReadNotification
  */
-public class ReadNotification extends Controller {
+public class ReadNotificationServlet extends Controller {
 	private static final long serialVersionUID = 1L;
       
 	@EJB NotificationBeanRemote notificationBean;
     /**
      * @see Controller#Controller()
      */
-    public ReadNotification() {
+    public ReadNotificationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class ReadNotification extends Controller {
     /**
      * @see Controller#Controller(AccessRole)
      */
-    public ReadNotification(AccessRole role) {
+    public ReadNotificationServlet(AccessRole role) {
         super(role);
         // TODO Auto-generated constructor stub
     }

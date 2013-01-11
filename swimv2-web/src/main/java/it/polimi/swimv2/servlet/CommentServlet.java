@@ -17,14 +17,14 @@ import javax.servlet.ServletException;
 /**
  * Servlet implementation class Comment
  */
-public class Comment extends Controller {
+public class CommentServlet extends Controller {
 	private static final long serialVersionUID = 1L;
       
 	@EJB HelpRequestRemote hrBean;
     /**
      * @see Controller#Controller()
      */
-    public Comment() {
+    public CommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,7 @@ public class Comment extends Controller {
     /**
      * @see Controller#Controller(AccessRole)
      */
-    public Comment(AccessRole role) {
+    public CommentServlet(AccessRole role) {
         super(role);
         // TODO Auto-generated constructor stub
     }

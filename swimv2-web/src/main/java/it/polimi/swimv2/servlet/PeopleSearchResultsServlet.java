@@ -12,13 +12,13 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 
-public class PeopleSearchResults extends Controller {
+public class PeopleSearchResultsServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
 	UserBeanRemote userBean;
 
-	public PeopleSearchResults() {
+	public PeopleSearchResultsServlet() {
 		super(AccessRole.USER);
 	}
 

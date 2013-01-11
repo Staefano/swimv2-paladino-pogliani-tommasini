@@ -36,7 +36,7 @@
 			<div class="span3" style="float: left" >
 				<p:feedback providedList="${providedList}" receivedList="${receivedList}" />
 			
-				<c:if test="${user.id != profile.id }">
+				<c:if test="${not empty user && user.id != profile.id}">
 					<ul>
 					<c:if test="${showFR}">
 						<li><a href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
@@ -50,7 +50,7 @@
 	</div>
 	</div>
 	
-	<c:if test="${user.id != profile.id}">
+	<c:if test="${not empty user && user.id != profile.id}">
 		<t:sendmessage-popup to="${profile}" />
 	</c:if>
 	

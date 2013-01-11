@@ -21,7 +21,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
-public class EditProfile extends Controller implements Servlet {
+public class EditProfileServlet extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -36,7 +36,7 @@ public class EditProfile extends Controller implements Servlet {
 
 	private static final String EDITPROFILE_JSP = "WEB-INF/editprofile.jsp";
 	
-	public EditProfile() {
+	public EditProfileServlet() {
 		super(AccessRole.USER);
 	}
 

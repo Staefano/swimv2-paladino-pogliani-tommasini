@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 
-public class UserProfile extends Controller {
+public class UserProfileServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -25,8 +25,7 @@ public class UserProfile extends Controller {
 	@EJB
 	private FriendShipBeanRemote friendshipBean;
 
-	private static final String PROFILE_PUBLIC_JSP = "WEB-INF/public-userprofile.jsp";
-	private static final String PROFILE_PRIVATE_JSP = "WEB-INF/userprofile.jsp";
+	private static final String PROFILE_JSP = "WEB-INF/userprofile.jsp";
 	
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
@@ -44,10 +43,8 @@ public class UserProfile extends Controller {
 			if(isLoggedIn) {
 				boolean friendRequestAllowed = friendshipBean.isRequestAllowed(nav.getLoggedUser(), u);
 				nav.setAttribute("showFR", friendRequestAllowed);
-				nav.fwd(PROFILE_PRIVATE_JSP);
-			} else {
-				nav.fwd(PROFILE_PUBLIC_JSP);
 			}
+			nav.fwd(PROFILE_JSP);
 		} catch (NoSuchUserException nsue) {
 			nav.sendNotFound();
 		} catch (NumberFormatException nfe) {

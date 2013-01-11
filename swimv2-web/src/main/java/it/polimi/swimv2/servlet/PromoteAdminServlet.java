@@ -13,7 +13,7 @@ import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 
-public class PromoteAdmin extends Controller {
+public class PromoteAdminServlet extends Controller {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +22,7 @@ public class PromoteAdmin extends Controller {
 	@EJB
 	NotificationBeanRemote notificationBean;
 
-	public PromoteAdmin() {
+	public PromoteAdminServlet() {
 		super(AccessRole.ADMIN);
 	}
 

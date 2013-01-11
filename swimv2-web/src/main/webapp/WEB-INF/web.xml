@@ -17,16 +17,16 @@
     <servlet-class>it.polimi.swimv2.servlet.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>UserProfile</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.UserProfile</servlet-class>
+    <servlet-name>UserProfileServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.UserProfileServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SearchForHelpServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.SearchForHelpServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>PeopleSearchResults</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.PeopleSearchResults</servlet-class>
+    <servlet-name>PeopleSearchResultsServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.PeopleSearchResultsServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>FriendRequestServlet</servlet-name>
@@ -45,42 +45,26 @@
     <servlet-class>it.polimi.swimv2.servlet.AdminServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>FriendshipAccepted</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.FriendshipAccepted</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>NewAbilityRequestServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.NewAbilityRequestServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>PromoteAdmin</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.PromoteAdmin</servlet-class>
+    <servlet-name>PromoteAdminServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.PromoteAdminServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>SearchAbilityServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.SearchAbilityServlet</servlet-class>
   </servlet>
   <servlet>
-    <display-name>HelpRequestManagerServlet</display-name>
     <servlet-name>HelpRequestManagerServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.HelpRequestManagerServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>EditProfile</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.EditProfile</servlet-class>
+    <servlet-name>EditProfileServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.EditProfileServlet</servlet-class>
   </servlet>
   <servlet>
-    <display-name>FriendshipRefused</display-name>
-    <servlet-name>FriendshipRefused</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.FriendshipRefused</servlet-class>
+    <servlet-name>ReadNotificationServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.ReadNotificationServlet</servlet-class>
   </servlet>
   <servlet>
-    <display-name>ReadNotification</display-name>
-    <servlet-name>ReadNotification</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.ReadNotification</servlet-class>
-  </servlet>
-  <servlet>
-    <display-name>HelpRequestServlet</display-name>
     <servlet-name>HelpRequestServlet</servlet-name>
     <servlet-class>it.polimi.swimv2.servlet.HelpRequestServlet</servlet-class>
   </servlet>
@@ -89,10 +73,22 @@
     <servlet-class>it.polimi.swimv2.servlet.UserImageServlet</servlet-class>
   </servlet>
   <servlet>
-    <display-name>Comment</display-name>
-    <servlet-name>Comment</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.Comment</servlet-class>
+    <servlet-name>CommentServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.CommentServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>FeedbackServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FeedbackServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>FriendSuggestionServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FriendSuggestionServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>FriendshipServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.FriendshipServlet</servlet-class>
+  </servlet>
+
   <servlet-mapping>
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/home</url-pattern>
@@ -106,7 +102,7 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>UserProfile</servlet-name>
+    <servlet-name>UserProfileServlet</servlet-name>
     <url-pattern>/profile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -114,7 +110,7 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>PeopleSearchResults</servlet-name>
+    <servlet-name>PeopleSearchResultsServlet</servlet-name>
     <url-pattern>/search-user</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -134,27 +130,15 @@
     <url-pattern>/admin</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>FriendshipAccepted</servlet-name>
-    <url-pattern>/friendshipaccepted</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>FriendshipRefused</servlet-name>
-    <url-pattern>/friendshiprefused</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>ReadNotification</servlet-name>
+    <servlet-name>ReadNotificationServlet</servlet-name>
     <url-pattern>/readnotification</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>EditProfile</servlet-name>
+    <servlet-name>EditProfileServlet</servlet-name>
     <url-pattern>/editprofile</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>NewAbilityRequestServlet</servlet-name>
-    <url-pattern>/abilityrequest</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>PromoteAdmin</servlet-name>
+    <servlet-name>PromoteAdminServlet</servlet-name>
     <url-pattern>/promote</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -166,7 +150,7 @@
     <url-pattern>/searchability</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>Comment</servlet-name>
+    <servlet-name>CommentServlet</servlet-name>
     <url-pattern>/comment</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
@@ -177,32 +161,14 @@
     <servlet-name>HelpRequestManagerServlet</servlet-name>
     <url-pattern>/helprequestanswer</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FeedbackServlet</display-name>
-    <servlet-name>FeedbackServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.FeedbackServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
     <servlet-name>FeedbackServlet</servlet-name>
     <url-pattern>/feedback</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FriendSuggestionServlet</display-name>
-    <servlet-name>FriendSuggestionServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.FriendSuggestionServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
     <servlet-name>FriendSuggestionServlet</servlet-name>
     <url-pattern>/friendsuggestions</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FriendshipServlet</display-name>
-    <servlet-name>FriendshipServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.FriendshipServlet</servlet-class>
-  </servlet>
   <servlet-mapping>
     <servlet-name>FriendshipServlet</servlet-name>
     <url-pattern>/friendship</url-pattern>
