@@ -10,7 +10,7 @@
 		
 		<div class="container">
 		<form class="navbar-search pull-left" action="searchability" method="get">
-			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb"">
+			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb">
 		</form>
 		</div>
 		
