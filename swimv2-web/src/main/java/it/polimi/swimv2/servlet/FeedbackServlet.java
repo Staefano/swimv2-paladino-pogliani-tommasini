@@ -19,8 +19,8 @@ public class FeedbackServlet extends Controller implements Servlet {
       
 	@EJB HelpRequestRemote hrBean;
     
-    public FeedbackServlet(AccessRole role) {
-        super(role);
+    public FeedbackServlet() {
+        super(AccessRole.USER);
     }
 
 	@Override
