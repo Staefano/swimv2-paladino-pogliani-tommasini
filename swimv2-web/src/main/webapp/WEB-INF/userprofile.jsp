@@ -61,11 +61,11 @@
 				</c:if>
 			</div>
 			<div class="span3" style="float: left" >
-			
-				<div class="tabbable"> <!-- Only required for left/right tabs -->
+				<c:if test="${ !(empty providedList) || !(empty receivedList) }">
+				<div class="tabbable">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
-						<li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+						<li class="active"><a href="#tab1" data-toggle="tab">Provided Help</a></li>
+						<li><a href="#tab2" data-toggle="tab">Received Help</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="tab1">
@@ -106,6 +106,7 @@
 						</div>
 					</div>
 				</div>
+				</c:if>
 			
 				<c:if test="${user.id != profile.id }">
 					<ul>
