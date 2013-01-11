@@ -7,7 +7,7 @@
 		<h1>Welcome to the user area!</h1>
 	</jsp:attribute>
 	<jsp:body>
-		<div class="container-fluid">
+		<div class="container">
 				<div>
 					<div class="well well-small">
 						<h1>Open Providing HelpRequests</h1>

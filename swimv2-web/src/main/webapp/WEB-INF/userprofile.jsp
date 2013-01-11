@@ -61,13 +61,31 @@
 				</c:if>
 			</div>
 			<div class="span3" style="float: left" >
-				<c:forEach var="hrp" items="${providedList}">
-					<p>${hrr.subject }</p>
-				</c:forEach>
-	
-				<c:forEach var="hrr" items="${receivedList}">
-					<p>${hrr.subject }</p>
-				</c:forEach>
+			
+				<div class="tabbable"> <!-- Only required for left/right tabs -->
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#tab1" data-toggle="tab">Section 1</a></li>
+						<li><a href="#tab2" data-toggle="tab">Section 2</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab1">
+							<c:if test="${empty providedList}">
+								Empty
+							</c:if>
+							<c:forEach var="hrp" items="${providedList}">
+								<p>${hrr.subject}</p>
+							</c:forEach>
+						</div>
+						<div class="tab-pane" id="tab2">
+							<c:if test="${empty receivedList }">
+								Empty
+							</c:if>
+							<c:forEach var="hrr" items="${receivedList}">
+								<p>${hrr.subject }</p>
+							</c:forEach>
+						</div>
+					</div>
+				</div>
 			
 				<c:if test="${user.id != profile.id }">
 					<ul>
