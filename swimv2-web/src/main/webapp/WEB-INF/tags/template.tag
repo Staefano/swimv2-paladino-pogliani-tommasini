@@ -56,6 +56,12 @@
 	</c:choose>
 	<script src="js/jquery-latest.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.placeholder.min.js"></script>
+	<script type="text/javascript">
+	$(function() {
+		$('input, textarea').placeholder();
+	})
+	</script>
 	<jsp:invoke fragment="scripts" />
 	</body>
 </html>

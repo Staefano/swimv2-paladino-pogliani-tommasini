@@ -9,7 +9,7 @@
 		<div class="alert alert-error">Permission denied. Please log in again</div>
 	</c:if>
 	<div class="row">
-	<div class="span6 hero-unit">
+	<div class="span7 hero-unit">
 		<h1>SWIMv2</h1>
 		<p>The Small World Hypotesis Machine, reloaded</p>
 		<h2>Search for help!</h2>
