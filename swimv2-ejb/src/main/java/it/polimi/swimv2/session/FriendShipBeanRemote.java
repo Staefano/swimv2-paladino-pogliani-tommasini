@@ -14,7 +14,8 @@ public interface FriendShipBeanRemote {
 	boolean isFriend(User asker, User receiver);
 
 	List<User> getFriends(User u);
-	
+
+	boolean isRequestAllowed(User loggedUser, User u);
 	
 
 }

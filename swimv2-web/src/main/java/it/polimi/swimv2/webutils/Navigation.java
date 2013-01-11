@@ -103,5 +103,10 @@ public class Navigation {
 		}
 	}
 
+	/* send a 404 error. */
+	public void sendNotFound() throws IOException {
+		response.sendError(HttpServletResponse.SC_NOT_FOUND);
+	}
+
 	
 }

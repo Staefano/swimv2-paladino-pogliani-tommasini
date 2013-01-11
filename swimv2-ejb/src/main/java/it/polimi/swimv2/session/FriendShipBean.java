@@ -7,6 +7,7 @@ import it.polimi.swimv2.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -18,15 +19,10 @@ public class FriendShipBean implements FriendShipBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
+	
+	@EJB
+	private NotificationBeanRemote notificationBean;
 
-	// TODO marcello: ho modificato il metodo in questo modo, cambiandone la
-	// signature.
-	// Per le amicizie indirette vedremo,
-	// eviterei di esporre al web tier l'oggetto friendship, e' troppo di basso
-	// livello.
-	// io comunque metterei altri metodi per gestire la cosa, visto che e'
-	// rilevante
-	// soltanto in pochi e particolari casi.
 	@Override
 	public List<User> getFriends(User u) {
 		Query q = manager.createNamedQuery("Friendship.getByUser");
@@ -46,7 +42,6 @@ public class FriendShipBean implements FriendShipBeanRemote {
 
 	@Override
 	public void createFriendship(String notificationSrc, User receiver) {
-		
 		Query q = manager.createNamedQuery("Notification.findByID");
 		q.setParameter("id", Integer.parseInt(notificationSrc));
 		try {
@@ -62,26 +57,24 @@ public class FriendShipBean implements FriendShipBeanRemote {
 			// TODO da sistemare
 			System.err.println("ECCEZIONE NON ESISTE LA NOTIFICA");
 		}		
-		
-
 	}
 
 	@Override
 	public boolean isFriend(User asker, User receiver) {
-
 		Query q = manager.createNamedQuery("Friendship.isFriend");
 		q.setParameter("user1", asker);
 		q.setParameter("user2", receiver);
 
 		try {
 			return (q.getSingleResult() != null);
-
 		} catch (NoResultException nre) {
-
 			return false;
-
 		}
+	}
 
+	@Override
+	public boolean isRequestAllowed(User loggedUser, User targetUser) {
+		return !(isFriend(loggedUser, targetUser) || notificationBean.isPending(loggedUser, targetUser));
 	}
 
 }
