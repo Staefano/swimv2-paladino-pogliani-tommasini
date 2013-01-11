@@ -9,7 +9,21 @@
 					
 					<input type="hidden" name="hr_id" value="${hr}">
 					<input type="hidden" name="role" value="${role}">
-					<input type="text" name="evaluation"">
+					
+
+					<label class="radio inline">
+						<input type="radio" name="evaluation" id="optionsRadios1" value="1" checked>
+							<i class="icon-minus"></i>
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="evaluation" id="optionsRadios2" value="2">
+							<i class="icon-asterisk"></i>
+					</label>
+					<label class="radio inline">
+						<input type="radio" name="evaluation" id="optionsRadios2" value="3">
+							<i class="icon-plus"></i>
+					</label>
+
 					<p><b>Comment:</b></p>
 					<textarea name="comment" rows="4" cols="50"></textarea><br>
 					<input type="submit" value="Submit" id="Submit">

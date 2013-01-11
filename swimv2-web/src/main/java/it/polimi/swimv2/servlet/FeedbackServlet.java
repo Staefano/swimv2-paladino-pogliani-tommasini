@@ -14,27 +14,13 @@ import javax.ejb.EJB;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 
-/**
- * Servlet implementation class FeedbackServlet
- */
 public class FeedbackServlet extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
       
 	@EJB HelpRequestRemote hrBean;
-    /**
-     * @see Controller#Controller()
-     */
-    public FeedbackServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
+    
     public FeedbackServlet(AccessRole role) {
         super(role);
-        // TODO Auto-generated constructor stub
     }
 
 	@Override

@@ -36,14 +36,6 @@ public class HelpRequest implements Serializable {
 	private RequestStatus status;
 	private Timestamp timestamp;
 
-	public Set<Ability> getAbilities() {
-		return abilities;
-	}
-
-	public void setAbilities(Set<Ability> abilities) {
-		this.abilities = abilities;
-	}
-
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
@@ -130,6 +122,14 @@ public class HelpRequest implements Serializable {
 
 	public void setTimestamp(Timestamp timestamp) {
 		this.timestamp = timestamp;
+	}
+	
+	public Set<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(Set<Ability> abilities) {
+		this.abilities = abilities;
 	}
 
 	@Override
