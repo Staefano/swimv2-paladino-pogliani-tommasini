@@ -44,8 +44,8 @@
 						<div class="alert alert-error">Wrong username or password</div>
 					</c:if>
 					<fieldset>
-						<input type="text" name="user" placeholder="Username">
-						<input type="password" name="password" placeholder="Password">
+						<input type="email" name="user" placeholder="Username" required>
+						<input type="password" name="password" placeholder="Password" required>
 						<button type="submit" class="btn btn-primary">Login</button>
 					</fieldset>
 				</form>
@@ -73,8 +73,8 @@
 					</c:when>
 				</c:choose>
 				<fieldset>
-					<input type="text" name="email" placeholder="E-mail address">
-					<input type="password" name="password" placeholder="Password">
+					<input type="email" name="email" placeholder="E-mail address" required>
+					<input type="password" name="password" placeholder="Password" required>
 					<span class="help-block">Complete the fields above to register</span>
 					<button type="submit" class="btn btn-primary">Register</button>
 				</fieldset>

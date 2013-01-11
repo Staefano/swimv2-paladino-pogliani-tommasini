@@ -5,12 +5,13 @@ import it.polimi.swimv2.entity.Feedback;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.entity.UserImage;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.UserRole;
-import it.polimi.swimv2.session.exceptions.NoResultFoundException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -172,66 +173,32 @@ public class UserBean implements UserBeanRemote {
 	}
 
 	@Override
-	public void setImage(User user, byte[] img, String mimeType) {
-		// todo controlli sull'immagine, ridimensionamento & co...
-		UserImage image = new UserImage(mimeType, img);
-		// remove the old image and substitute it with the new one
-		User jpaUser = manager.find(User.class, user.getId());
-		UserImage old = jpaUser.getImage();
-		manager.persist(image);
-		jpaUser.setImage(image);
-		if (old != null) {
-			manager.remove(old);
-		}
-		manager.merge(jpaUser);
-	}
-	
-	@Override
-	public byte[] getImage(int userId) throws NoResultFoundException {
-		Query q = manager.createNamedQuery("UserImage.getByUserId");
-		q.setParameter("userid",  userId);
-		try {
-			UserImage img = (UserImage) q.getSingleResult();
-			return img.getImage();
-		} catch(NoResultException e) {
-			throw new NoResultFoundException();
-		}
-	}
-
-	@Override
-	public User editProfile(User u, String name, String surname,
+	public User editProfile(int userId, String name, String surname,
 			String website, String birthdate, String location, String minibio,
 			String description) throws NoSuchUserException {
-		if (name != null) {
-			if (!(u.getName().equals(name)))
-				u.setName(name);
+		User u = manager.find(User.class, userId);
+		// if the name is null, keep the previous name as it's a mandatory field
+		if (name != null && !name.trim().equals("")) {
+			u.setName(name.trim());
 		}
-		if (surname != null) {
-			if (!(u.getSurname().equals(surname)))
-				u.setSurname(surname);}
-			if (website != null) {
-				if (!(website.equals(u.getWebsite())))
-					u.setWebsite(website);
-			}
-			if (location != null) {
-				if (!(location.equals(u.getLocation())))
-					u.setLocation(location);
-			}
-			if (description != null) {
-				if (!(description.equals(u.getDescription())))
-					u.setDescription(description);
-			}
-			if (minibio != null) {
-				if (!(minibio.equals(u.getMinibio())))
-					u.setMinibio(minibio);
-			}
-			// TODO gestire la dataif(!(u.getBirthdate().equals(birthdate))&&
-			// !(birthdate.isEmpty()) && !(birthdate.equals(null)))
-			// u.setBirthdate(Integer.parseInt(birthdate));
-
-			manager.merge(u);
-			return u;
+		// surname is a mandatory field, so can't be removed
+		if (surname != null && !surname.trim().equals("")) {
+			u.setSurname(surname.trim());
 		}
+		u.setWebsite(website.trim());
+		u.setLocation(location.trim());
+		u.setDescription(description.trim());
+		u.setMinibio(minibio.trim());
+		try {
+			long t = (new SimpleDateFormat("dd/MM/yyyy").parse(birthdate)).getTime();
+			Date date = new Date(t);
+			u.setBirthdate(date);
+		} catch (ParseException iae) {
+			// don't do anything, timestamp is null... in this case we can't
+			// silently fail without reporting to the user
+		}
+		return manager.merge(u);
+	}
 
 	@Override
 	public void promoteAdmin(User user) {

@@ -2,6 +2,7 @@ package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.UserBeanRemote;
+import it.polimi.swimv2.session.UserImageBeanRemote;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
@@ -9,6 +10,7 @@ import it.polimi.swimv2.webutils.ImageUtils;
 import it.polimi.swimv2.webutils.MultipartFormProcesser;
 import it.polimi.swimv2.webutils.Navigation;
 import it.polimi.swimv2.webutils.exception.NavigationException;
+import it.polimi.swimv2.webutils.exception.NoImageUploadedException;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,12 +25,14 @@ public class EditProfile extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private UserBeanRemote ubr;
+	private UserBeanRemote userBean;
+	
+	@EJB
+	private UserImageBeanRemote imageBean;
 
 	private static final long MAX_ALLOWED_SIZE = 1024 * 1024 * 5; // 5 MB
 	private static final int AVATAR_WIDTH_PX = 200;
 	private static final int AVATAR_HEIGHT_PX = 200;
-	private static final String MIMETYPE = "image/png";
 
 	private static final String EDITPROFILE_JSP = "WEB-INF/editprofile.jsp";
 	
@@ -56,44 +60,41 @@ public class EditProfile extends Controller implements Servlet {
 		String name = form.getValue("name");
 		String surname = form.getValue("surname");
 		String website = form.getValue("website");
-		String birthdate = form.getValue("birthdate"); // TODO gestire la data
+		String birthdate = form.getValue("birthdate");
 		String location = form.getValue("location");
 		String minibio = form.getValue("minibio");
 		String description = form.getValue("description");
 
 		try {
-			User updated = ubr.editProfile(nav.getLoggedUser(), name, surname,
+			User updated = userBean.editProfile(nav.getLoggedUser().getId(), name, surname,
 					website, birthdate, location, minibio, description);
 			nav.setLogin(updated);
 
-			uploadUserImage(updated, form.getFile(), form.getFileSize());
+			if(form.getFileSize() > 0) {
+				updated = uploadUserImage(updated, form.getFile(), form.getFileSize());
+			}
 			nav.redirect("/");
 		} catch (NoSuchUserException u) {
 			nav.setAttribute("error", "form");
 			nav.fwd(EDITPROFILE_JSP);
 		} catch(NoImageUploadedException noimg) {
-			if(form.getFileSize() != 0) {
-				nav.setAttribute("error", "imageupload");
-				nav.fwd(EDITPROFILE_JSP);
-			} else {
-				nav.redirect("/");
-			}
+			nav.setAttribute("error", "imageupload");
+			nav.fwd(EDITPROFILE_JSP);
 		}
 	}
 
-	private void uploadUserImage(User user, InputStream file, long size)
+	private User uploadUserImage(User user, InputStream file, long size)
 			throws NoImageUploadedException {
 		if(file == null || size > MAX_ALLOWED_SIZE || user == null) {
 			throw new NoImageUploadedException();
 		}
-		System.out.println(size);
 		try {
 			BufferedImage img = ImageIO.read(file);
 			if(img == null) {
 				throw new NoImageUploadedException();
 			}
 			byte[] resized = ImageUtils.getScaledInstance(AVATAR_WIDTH_PX, AVATAR_HEIGHT_PX, img);
-			ubr.setImage(user, resized, MIMETYPE);
+			return imageBean.setImage(user.getId(), resized);
 		} catch (IOException e) {
 			throw new NoImageUploadedException();
 		}

@@ -13,24 +13,22 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="UserImage.getByUserId", query="SELECT u.image FROM User u WHERE u.id = :userid")
+	@NamedQuery(name="UserImage.getIDByUserId", query="SELECT u.image.id FROM User u WHERE u.id = :userid")
 })
 public class UserImage implements Serializable{
 	
-	// argh...
+	private static final long serialVersionUID = -7569667778615385681L;
+
 	@Id @GeneratedValue
 	private long id;
-	
-	private String mimeType;
 	
 	@Lob @Basic(fetch=FetchType.LAZY)
 	private byte[] image;
 	
 	public UserImage() {}
 	
-	public UserImage(String mimeType, byte[] content) {
+	public UserImage(byte[] content) {
 		this.image = content;
-		this.mimeType = mimeType;
 	}
 	
 	public long getId() {
@@ -39,14 +37,6 @@ public class UserImage implements Serializable{
 	
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getMimeType() {
-		return this.mimeType;
-	}
-	
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
 	}
 	
 	public byte[] getImage() {
