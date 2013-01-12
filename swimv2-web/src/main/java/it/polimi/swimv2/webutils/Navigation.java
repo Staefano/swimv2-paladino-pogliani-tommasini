@@ -19,8 +19,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 public class Navigation {
 	
-	HttpServletRequest request;
-	HttpServletResponse response;
+	private HttpServletRequest request;
+	private HttpServletResponse response;
 	
 	
 	public Navigation(HttpServletRequest request, HttpServletResponse response) {

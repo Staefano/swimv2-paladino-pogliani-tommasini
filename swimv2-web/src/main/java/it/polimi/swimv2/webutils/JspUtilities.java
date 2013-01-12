@@ -2,7 +2,7 @@ package it.polimi.swimv2.webutils;
 
 import java.util.Collection;
 
-public class JspUtilities {
+public final class JspUtilities {
 	
 	private JspUtilities() {  }
 	

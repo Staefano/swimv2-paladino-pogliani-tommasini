@@ -23,7 +23,7 @@ import javax.persistence.Query;
 public class NotificationBean implements NotificationBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
-	EntityManager manager;
+	private EntityManager manager;
 
 	public NotificationBean() {
 		// TODO Auto-generated constructor stub
@@ -52,8 +52,12 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setTgtuser(request.getSrcUser());
 		// quello che sta rispondendo
 		n.setSrcUser(replier);
-		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
-		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) n.setType(NotificationType.FRIENDSHIP_ACCEPTED_DIRECT);
+		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) {
+			n.setType(NotificationType.FRIENDSHIP_ACCEPTED);
+		}
+		if(request.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) {
+			n.setType(NotificationType.FRIENDSHIP_ACCEPTED_DIRECT);
+		}
 		
 		// metto la nuova
 		manager.persist(n);

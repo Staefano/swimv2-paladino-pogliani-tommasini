@@ -23,7 +23,7 @@ public interface HelpRequestRemote {
 	void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException;
 	
-	void addFeedbakc(HelpRequest hr, int evaluation, String comment, Role role)			throws ClosedHelpRequestException;
+	void addFeedback(HelpRequest hr, int evaluation, String comment, Role role)			throws ClosedHelpRequestException;
 
 
 	void refuseHR(HelpRequest hr) throws NoSouchHRException;

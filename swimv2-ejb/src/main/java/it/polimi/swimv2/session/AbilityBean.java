@@ -20,7 +20,7 @@ import javax.persistence.Query;
 public class AbilityBean implements AbilityBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
-	EntityManager manager;
+	private EntityManager manager;
 
 	@Override
 	public void requestAbility(String name, String comment, User user) {

@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class ImageUtils {
+public final class ImageUtils {
 	
 	private ImageUtils() {  }
 
@@ -20,8 +20,8 @@ public class ImageUtils {
 	 */
 	public static byte[] getScaledInstance(int width, int height, BufferedImage img) throws IOException {
 		
-		double mr = width / height;
-		double or = img.getWidth() / img.getHeight();
+		double mr = (double) width / height;
+		double or = (double) img.getWidth() / img.getHeight();
 		double scaleFactor = 0;
 		if(mr > or) {
 			scaleFactor = (float) width / (float) img.getWidth();

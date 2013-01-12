@@ -14,7 +14,7 @@ import javax.persistence.Query;
 public class SearchBean implements SearchBeanRemote {
 
 	@PersistenceContext(unitName="swimv2")
-	EntityManager manager;
+	private EntityManager manager;
 	
 	@Override @SuppressWarnings("unchecked")
 	public List<User> searchForHelp(List<String> abilities) {

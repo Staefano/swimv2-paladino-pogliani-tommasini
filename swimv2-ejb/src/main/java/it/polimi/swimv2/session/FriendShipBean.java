@@ -51,11 +51,13 @@ public class FriendShipBean implements FriendShipBeanRemote {
 			Friendship f = new Friendship();
 			Notification n = (Notification) q.getSingleResult();
 			
-			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT))
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) {
 				f.setDirect(true);
+			}
 			
-			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED))
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) {
 				f.setDirect(false);
+			}
 		
 			f.setUser1Id(n.getSrcUser().getId());
 			f.setUser2Id(n.getTgtuser().getId());

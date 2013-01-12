@@ -223,10 +223,10 @@ public class HelpRequestBean implements HelpRequestRemote {
 	}
 
 	@Override
-	public void addFeedbakc(HelpRequest hr, int evaluation, String comment, Role role)
+	public void addFeedback(HelpRequest hr, int evaluation, String comment, Role role)
 			throws ClosedHelpRequestException {
 		
-		if(!(hr.equals(RequestStatus.CLOSED))){
+		if(hr.getStatus() != RequestStatus.CLOSED) {
 			Feedback f = new Feedback();
 			f.setEvaluation(evaluation);
 			f.setString(comment);

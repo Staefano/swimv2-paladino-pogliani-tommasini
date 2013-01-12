@@ -34,9 +34,9 @@ public class FeedbackServlet extends Controller implements Servlet {
 			
 			try {
 					if(role.equals("helper")){
-						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.HELPER);
+						hrBean.addFeedback(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.HELPER);
 					}else if(role.equals("asker")){
-						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.ASKER);
+						hrBean.addFeedback(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.ASKER);
 
 					}
 

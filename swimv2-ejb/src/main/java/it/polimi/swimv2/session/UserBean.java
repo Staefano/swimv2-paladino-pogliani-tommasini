@@ -32,7 +32,7 @@ public class UserBean implements UserBeanRemote {
 	private EntityManager manager;
 	
 	@EJB
-	AbilityBeanRemote abilityBean;
+	private AbilityBeanRemote abilityBean;
 	
 	@Override
 	public List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException {

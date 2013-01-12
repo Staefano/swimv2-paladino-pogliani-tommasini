@@ -46,12 +46,9 @@ public class Ability implements Serializable {
 		}
 		Ability other = (Ability) obj;
 		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name)) {
-			return false;
-		}
-		return true;
+			return other.name == null;
+		} 
+		return name.equals(other.name);
 	}
    
 }

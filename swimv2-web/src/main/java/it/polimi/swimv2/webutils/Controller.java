@@ -55,7 +55,7 @@ public abstract class Controller extends HttpServlet {
 		}
 	}
 	
-	abstract protected void get(Navigation nav) throws IOException, ServletException;
+	protected abstract void get(Navigation nav) throws IOException, ServletException;
 	
 	protected void post(Navigation nav) throws IOException, ServletException {
 		get(nav);
