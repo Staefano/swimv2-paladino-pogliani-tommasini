@@ -51,18 +51,18 @@ public class FriendShipBean implements FriendShipBeanRemote {
 			Friendship f = new Friendship();
 			Notification n = (Notification) q.getSingleResult();
 			
-			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT)) f.setDirect(true);
-			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED)) f.setDirect(false);
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED_DIRECT))
+				f.setDirect(true);
+			
+			if(n.getType().equals(NotificationType.FRIENDSHIP_RECEIVED))
+				f.setDirect(false);
 		
 			f.setUser1Id(n.getSrcUser().getId());
 			f.setUser2Id(n.getTgtuser().getId());
 			f.setUser1(n.getSrcUser());
 			f.setUser2(n.getTgtuser());
 			manager.persist(f);
-		} catch (NoResultException nre) {
-			// TODO da sistemare
-			System.err.println("ECCEZIONE NON ESISTE LA NOTIFICA");
-		}		
+		} catch (NoResultException nre) {  /* TODO */ }		
 	}
 
 	@Override

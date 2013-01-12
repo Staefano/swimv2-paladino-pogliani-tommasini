@@ -101,12 +101,11 @@ public class NotificationBean implements NotificationBeanRemote {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private List<AbilityRequest> getWithSameName(AbilityRequest request) {
 		Query q = manager.createNamedQuery("AbilityRequest.findByName");
 		q.setParameter("name", request.getAbility());
-		@SuppressWarnings("unchecked")
-		List<AbilityRequest> reqs = q.getResultList();
-		return reqs;
+		return q.getResultList();
 	}
 
 	@Override

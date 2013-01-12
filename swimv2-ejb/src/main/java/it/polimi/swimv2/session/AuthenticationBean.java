@@ -5,6 +5,7 @@ import java.util.List;
 import it.polimi.swimv2.entity.PendingToken;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.TokenType;
+import it.polimi.swimv2.session.exceptions.EmailException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
@@ -51,7 +52,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 	}
 	
 	@Override
-	public void register(String email, String password, String uri) throws NotUniqueException {
+	public void register(String email, String password, String uri) throws NotUniqueException, EmailException {
 		if(userExists(email)) {
 			throw new NotUniqueException();
 		}
@@ -59,17 +60,17 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		try {
 			emailer.sendConfirmationEmail(email,  token, uri);
 		} catch(MessagingException me) {
-			throw new RuntimeException("Cannot send the email! " + me.getMessage());
+			throw new EmailException(me);
 		}
 	}
 	
 	@Override
-	public void requestPasswordReset(String email, String uri) {
+	public void requestPasswordReset(String email, String uri) throws EmailException {
 		String token = createToken(email, null, TokenType.RESETPASSWORD);
 		try {
 			emailer.sendResetEmail(email, token, uri);
 		} catch(MessagingException me) {
-			throw new RuntimeException("Cannot send the email! " + me.getMessage());
+			throw new EmailException(me);
 		}
 	}
 	
@@ -149,11 +150,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		q.setParameter("email", email);
 		@SuppressWarnings("unchecked")
 		List<User> l = q.getResultList();
-		if( l !=null && l.size() != 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return l != null && l.size() != 0;
 	}
 
 }

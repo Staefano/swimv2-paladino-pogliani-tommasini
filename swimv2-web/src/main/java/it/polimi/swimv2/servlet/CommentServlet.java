@@ -20,30 +20,19 @@ import javax.servlet.ServletException;
 public class CommentServlet extends Controller {
 	private static final long serialVersionUID = 1L;
       
-	@EJB HelpRequestRemote hrBean;
-    /**
-     * @see Controller#Controller()
-     */
-    public CommentServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
-    public CommentServlet(AccessRole role) {
-        super(role);
-        // TODO Auto-generated constructor stub
-    }
+	@EJB 
+	private HelpRequestRemote hrBean;
 
+    public CommentServlet() {
+        super(AccessRole.USER);
+    }
     
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 
-		String hr_id = nav.getParam("hr_id");
+		String requestId = nav.getParam("hr_id");
 		try {
-			HelpRequest hr = hrBean.findByID(Integer.parseInt(hr_id));
+			HelpRequest hr = hrBean.findByID(Integer.parseInt(requestId));
 			List<it.polimi.swimv2.entity.Comment> comments = hrBean.getComments(hr);
 			nav.setAttribute("comments", comments);
 			nav.setAttribute("hr", hr);
@@ -63,27 +52,23 @@ public class CommentServlet extends Controller {
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
 		
-		String hr_id = nav.getParam("hr_id");
-		HelpRequest hr;
+		String requestId = nav.getParam("hr_id");
 		try {
-			hr = hrBean.findByID(Integer.parseInt(hr_id));
+			HelpRequest hr = hrBean.findByID(Integer.parseInt(requestId));
 			String comment = nav.getParam("comment");
-			try {
-				hrBean.addComment(hr, comment, nav.getLoggedUser());
-			} catch (ClosedHelpRequestException e) {
-				System.err.println("ERRROR");
-			}
+			hrBean.addComment(hr, comment, nav.getLoggedUser());
 			List<it.polimi.swimv2.entity.Comment> comments = hrBean.getComments(hr);
 			nav.setAttribute("comments", comments);
 			nav.setAttribute("hr", hr);
 			nav.fwd("WEB-INF/comments.jsp");
-			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSouchHRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (ClosedHelpRequestException e) {
+			
 		}
 		
 		

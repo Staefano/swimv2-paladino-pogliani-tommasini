@@ -6,9 +6,6 @@ import java.util.List;
 
 public interface FriendShipBeanRemote {
 	
-	
-	//public List<Friendship> getFriendship(User u);
-	
 	void createFriendship(String notificationSrc, User receiver);
 	
 	boolean isFriend(User asker, User receiver);

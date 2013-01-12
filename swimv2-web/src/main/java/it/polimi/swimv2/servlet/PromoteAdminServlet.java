@@ -18,9 +18,10 @@ public class PromoteAdminServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	UserBeanRemote userBean;
+	private UserBeanRemote userBean;
+	
 	@EJB
-	NotificationBeanRemote notificationBean;
+	private NotificationBeanRemote notificationBean;
 
 	public PromoteAdminServlet() {
 		super(AccessRole.ADMIN);

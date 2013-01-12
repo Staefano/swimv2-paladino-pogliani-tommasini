@@ -3,7 +3,6 @@ package it.polimi.swimv2.servlet;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
-import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
@@ -17,9 +16,6 @@ public class HomeServlet extends Controller {
 	private static final long serialVersionUID = 9004320551305682450L;
 
 	private static final String INDEX_JSP = "/WEB-INF/index.jsp";
-
-	@EJB
-	private NotificationBeanRemote nbr;
 	
 	@EJB
 	private AuthenticationBeanRemote auth;

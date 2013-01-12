@@ -30,7 +30,6 @@ public class HelpRequestBean implements HelpRequestRemote {
 	public HelpRequest askForHelp(User sender, User receiver, String subject,
 			List<Ability> abilties) {
 
-		
 		HelpRequest hr = new HelpRequest();
 
 		HashSet<Ability> setAbility = new HashSet<Ability>();
@@ -41,7 +40,6 @@ public class HelpRequestBean implements HelpRequestRemote {
 		hr.setStatus(RequestStatus.WAITING);
 
 		for (Ability a : abilties) {
-
 			setAbility.add(a);
 		}
 
@@ -74,21 +72,17 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 			manager.persist(c);
 
-		} else
+		} else {
 			throw new ClosedHelpRequestException();
+		}
 
 	}
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public List<Comment> getComments(HelpRequest hr) {
-
 		Query q = manager.createNamedQuery("Comment.getByHelpRequest");
 		q.setParameter("hr", hr);
-
-		@SuppressWarnings("unchecked")
-		List<Comment> comments = q.getResultList();
-		return comments; // TODO bisogna catchare l'eccezione di no result?
-
+		return q.getResultList();
 	}
 
 	@Override
@@ -117,8 +111,9 @@ public class HelpRequestBean implements HelpRequestRemote {
 			manager.persist(f);
 			manager.merge(hr);
 
-		} else
+		} else {
 			throw new ClosedHelpRequestException();
+		}
 
 	}
 
@@ -161,13 +156,12 @@ public class HelpRequestBean implements HelpRequestRemote {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getOpenRequestedHR(User u) {
-
 		Query q = manager.createNamedQuery("HelpRequest.findOpenedByAsker");
 		q.setParameter("asker", u); 
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
 		q.setParameter("zombie", RequestStatus.ZOMBIE);
-
+		
 		try{
 			return (List<HelpRequest>) q.getResultList();
 		}catch(NoResultException nre){
@@ -179,14 +173,12 @@ public class HelpRequestBean implements HelpRequestRemote {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getClosedRequestedHR(User u) {
-
 		Query q = manager.createNamedQuery("HelpRequest.findClosedByAsker");
 		q.setParameter("asker", u); 
 		q.setParameter("closed", RequestStatus.CLOSED);
-
 		try{
 			return (List<HelpRequest>) q.getResultList();
-		}catch(NoResultException nre){
+		} catch(NoResultException nre) {
 			return null;
 		}
 	
@@ -194,7 +186,6 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@Override
 	public HelpRequest findByID(int id) throws NoSouchHRException {
-
 		Query q = manager.createNamedQuery("HelpRequest.findHRByID");
 		q.setParameter("id", id); 
 		
@@ -208,41 +199,27 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 	@Override
 	public void refuseHR(HelpRequest hr) throws NoSouchHRException {
-		
 		Query commentQuery = manager.createNamedQuery("Comment.getByHelpRequest");
 		commentQuery.setParameter("hr", hr);
-		
-		
+
 		Query hrQuery = manager.createNamedQuery("HelpRequest.findHRByID");
 		hrQuery.setParameter("id", hr.getId());
-		try{
-			
+		try {
 			manager.remove(hrQuery.getSingleResult());
 			@SuppressWarnings("unchecked")
 			List<Comment> commentList = (List<Comment>) commentQuery.getResultList();
-			
 			for (Comment comment : commentList) {
 				manager.remove(comment);
-
 			}
-			
-			
-		}catch(NoResultException nre){
-			
-			System.err.println("Notification Bean: The HelpRequest doesn't not exit, deleting has failed");
+		} catch (NoResultException nre) {
+			// Notification Bean: The HelpRequest doesn't not exit, deleting has failed
 		}
-		
-		
-		
 	}
 
 	@Override
 	public void acceptHR(HelpRequest hr) throws NoSouchHRException {
-
 		hr.setStatus(RequestStatus.ACCEPTED);
 		manager.merge(hr);
-		
-		
 	}
 
 	@Override
@@ -269,7 +246,9 @@ public class HelpRequestBean implements HelpRequestRemote {
 			 manager.persist(f);
 			 manager.merge(hr);
 		}
-		else throw new ClosedHelpRequestException();
+		else {
+			throw new ClosedHelpRequestException();
+		}
 		
 	}
 

@@ -5,7 +5,14 @@ public enum AccessRole {
 	UNREGISTERED, USER, ADMIN;
 
 	public boolean geqThan(AccessRole minimumRole) {
-		return (this == ADMIN) || (this == USER) && minimumRole != ADMIN
-				|| (this == UNREGISTERED) && minimumRole == UNREGISTERED;
+		switch(this) {
+		case ADMIN:
+			return true;
+		case USER:
+			return minimumRole != ADMIN;
+		case UNREGISTERED:
+		default:
+			return minimumRole == UNREGISTERED;
+		}
 	}
 }

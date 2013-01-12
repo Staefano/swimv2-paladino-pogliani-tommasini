@@ -27,8 +27,8 @@ public class UserImage implements Serializable{
 	
 	public UserImage() {}
 	
-	public UserImage(byte[] content) {
-		this.image = content;
+	public UserImage(byte[] image) {
+		this.image = image.clone();
 	}
 	
 	public long getId() {
@@ -44,7 +44,7 @@ public class UserImage implements Serializable{
 	}
 	
 	public void setImage(byte[] image) {
-		this.image = image;
+		this.image = image.clone();
 	}
 	
 }

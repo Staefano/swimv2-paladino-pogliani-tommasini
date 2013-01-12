@@ -3,7 +3,6 @@ package it.polimi.swimv2.servlet;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.remote.FriendShipBeanRemote;
-import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
@@ -16,9 +15,6 @@ import javax.servlet.ServletException;
 public class UserProfileServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
-	@EJB
-	private NotificationBeanRemote nbr;
-	
 	@EJB
 	private UserBeanRemote ubr;
 	

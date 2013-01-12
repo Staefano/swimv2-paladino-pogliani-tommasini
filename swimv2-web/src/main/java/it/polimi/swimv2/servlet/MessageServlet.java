@@ -19,8 +19,11 @@ import javax.servlet.ServletException;
 public class MessageServlet extends Controller {
 	private static final long serialVersionUID = 1L;
     
-	@EJB MessageManagerBeanRemote messages;
-	@EJB UserBeanRemote users;
+	@EJB 
+	private MessageManagerBeanRemote messages;
+	
+	@EJB 
+	private UserBeanRemote users;
 	
 	private static final String MESSAGES_JSP = "WEB-INF/messages/messages.jsp";
 	private static final String CONVERSATION_JSP = "WEB-INF/messages/conversation.jsp"; 

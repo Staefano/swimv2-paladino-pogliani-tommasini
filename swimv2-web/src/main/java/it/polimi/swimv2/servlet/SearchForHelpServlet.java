@@ -16,7 +16,7 @@ public class SearchForHelpServlet extends Controller {
 	private static final long serialVersionUID = 1103591206119674852L;
 
 	@EJB
-	SearchBeanRemote bean;
+	private SearchBeanRemote bean;
 
 	private static final String RESULTS_JSP = "WEB-INF/searchHelpResults.jsp";
 	
@@ -40,7 +40,6 @@ public class SearchForHelpServlet extends Controller {
 		String[] ab = queryString.split(",");
 		for(String a : ab) {
 			abilities.add(a.trim());
-			System.out.println(a.trim());
 		}
 		return abilities;
 	}

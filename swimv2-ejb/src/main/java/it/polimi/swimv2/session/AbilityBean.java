@@ -32,13 +32,11 @@ public class AbilityBean implements AbilityBeanRemote {
 		manager.persist(request);
 	}
 
-	@Override
+	@Override @SuppressWarnings("unchecked")
 	public List<AbilityRequest> retrievePendingRequests() {
 		Query q = manager
 				.createQuery("SELECT a FROM AbilityRequest a ORDER BY a.timestamp DESC");
-		@SuppressWarnings("unchecked")
-		List<AbilityRequest> list = q.getResultList();
-		return list;
+		return q.getResultList();
 	}
 
 	@Override
@@ -54,14 +52,6 @@ public class AbilityBean implements AbilityBeanRemote {
 		for (AbilityRequest r : reqs) {
 			manager.remove(r);
 		}
-	}
-
-	private List<AbilityRequest> getWithSameName(AbilityRequest request) {
-		Query q = manager.createNamedQuery("AbilityRequest.findByName");
-		q.setParameter("name", request.getAbility());
-		@SuppressWarnings("unchecked")
-		List<AbilityRequest> reqs = q.getResultList();
-		return reqs;
 	}
 
 	@Override
@@ -118,8 +108,7 @@ public class AbilityBean implements AbilityBeanRemote {
 
 	}
 	
-	@Override
-	@SuppressWarnings("unchecked")
+	@Override @SuppressWarnings("unchecked")
 	public List<Ability> searchAbility(String queryString, User user) {
 		Query q = manager.createNamedQuery("Ability.searchAbility");
 		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
@@ -135,6 +124,13 @@ public class AbilityBean implements AbilityBeanRemote {
 		}
 		
 		return abilities;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<AbilityRequest> getWithSameName(AbilityRequest request) {
+		Query q = manager.createNamedQuery("AbilityRequest.findByName");
+		q.setParameter("name", request.getAbility());
+		return q.getResultList();
 	}
 	
 }

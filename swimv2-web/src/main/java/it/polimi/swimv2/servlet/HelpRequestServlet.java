@@ -24,26 +24,16 @@ public class HelpRequestServlet extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	UserBeanRemote userBean;
+	private UserBeanRemote userBean;
+	
 	@EJB
 	private HelpRequestRemote hrBean;
+	
 	@EJB
 	private AbilityBeanRemote abilityBean;
 
-	/**
-	 * @see Controller#Controller()
-	 */
 	public HelpRequestServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see Controller#Controller(AccessRole)
-	 */
-	public HelpRequestServlet(AccessRole role) {
-		super(role);
-		// TODO Auto-generated constructor stub
+		super(AccessRole.USER);
 	}
 
 	@Override

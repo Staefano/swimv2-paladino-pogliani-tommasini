@@ -16,7 +16,7 @@ public class PeopleSearchResultsServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	UserBeanRemote userBean;
+	private UserBeanRemote userBean;
 
 	public PeopleSearchResultsServlet() {
 		super(AccessRole.USER);

@@ -3,7 +3,6 @@ package it.polimi.swimv2.servlet;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
-import it.polimi.swimv2.session.remote.FriendShipBeanRemote;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -23,25 +22,12 @@ public class FriendRequestServlet extends Controller {
 
 	@EJB
 	private UserBeanRemote ubr;
-	@EJB
-	private FriendShipBeanRemote fsbr;
+
 	@EJB
 	private NotificationBeanRemote nbr;
 
-	/**
-	 * @see Controller#Controller()
-	 */
 	public FriendRequestServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see Controller#Controller(AccessRole)
-	 */
-	public FriendRequestServlet(AccessRole role) {
-		super(role);
-		// TODO Auto-generated constructor stub
+		super(AccessRole.USER);
 	}
 
 	@Override
@@ -69,10 +55,11 @@ public class FriendRequestServlet extends Controller {
 			} catch (NoSuchUserException nsue) {
 
 				// TODO gestirla
-				nav.fwd(ERRORPAGE);
+				nav.sendNotFound();
 			}
 		} else {
-			nav.fwd(ERRORPAGE);
+			// TODO gestirla
+			nav.sendNotFound();
 
 		}
 

@@ -20,8 +20,7 @@ public abstract class Controller extends HttpServlet {
 
 	private final AccessRole minimumRole;
 	
-	protected String BASEPATH = "/";
-	protected String ERRORPAGE = "WEB-INF/error.jsp";
+	protected static final String BASEPATH = "/";
 	
 	public Controller() {
 		this(AccessRole.UNREGISTERED);

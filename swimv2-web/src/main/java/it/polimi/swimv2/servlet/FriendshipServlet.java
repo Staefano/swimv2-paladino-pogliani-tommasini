@@ -17,8 +17,11 @@ import it.polimi.swimv2.webutils.Navigation;
 public class FriendshipServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
-	@EJB NotificationBeanRemote notificationBean;
-	@EJB FriendShipBeanRemote friendshipBean;
+	@EJB 
+	private NotificationBeanRemote notificationBean;
+	
+	@EJB 
+	private FriendShipBeanRemote friendshipBean;
 	
 	/**
 	 * @see Controller#Controller()

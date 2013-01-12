@@ -91,11 +91,7 @@ public class AbilityRequest implements Serializable {
 			return false;
 		}
 		AbilityRequest other = (AbilityRequest) obj;
-		if (id != other.id) {
-			return false;
-		} else {
-			return true;
-		}
+		return id != other.id;
 	}
 
 }

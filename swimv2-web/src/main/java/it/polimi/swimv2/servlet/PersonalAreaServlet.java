@@ -21,9 +21,14 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 
 	private static final String PERSONALAREA_JSP = "/WEB-INF/personalarea.jsp";
 
-	@EJB MessageManagerBeanRemote messageBean;
-	@EJB NotificationBeanRemote notificationBean;
-	@EJB HelpRequestRemote hrBean;
+	@EJB
+	private MessageManagerBeanRemote messageBean;
+	
+	@EJB
+	private NotificationBeanRemote notificationBean;
+	
+	@EJB
+	private HelpRequestRemote hrBean;
 
     public PersonalAreaServlet() {
         super(AccessRole.USER);

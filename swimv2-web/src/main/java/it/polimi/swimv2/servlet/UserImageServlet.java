@@ -17,7 +17,7 @@ public class UserImageServlet extends HttpServlet implements Servlet {
 	private static final long serialVersionUID = 1L;
     
 	@EJB
-	UserImageBeanRemote bean;
+	private UserImageBeanRemote bean;
 	
 	private static final String FALLBACK_PATH = "/img/unknown-profile.jpg";
 	private static final String THIS_ADDRESS = "/images/profile";
@@ -29,8 +29,7 @@ public class UserImageServlet extends HttpServlet implements Servlet {
 			if(user != null) {
 				int imageId = bean.getImageIdByUserId(Integer.parseInt(user));
 				response.sendRedirect(request.getContextPath() + THIS_ADDRESS + "?image=" + imageId);
-			} else {
-				// response.setHeader("Cache-Control", "max-age=3600, must-revalidate"); 
+			} else { 
 				// GRRR Bug in Chrome, it caches the response as a response to the original redirect, so if profile image is changed, it don't get updated...
 				// need to either work around this or use a unique ID in generated pages (eg user.image.id instead of user.id) TODO
 				int id = Integer.parseInt(request.getParameter("image"));

@@ -20,36 +20,24 @@ import javax.servlet.ServletException;
 public class FriendSuggestionServlet extends Controller {
 	private static final long serialVersionUID = 1L;
        
-	@EJB UserBeanRemote userBean;
-	@EJB FriendShipBeanRemote frshpBean;
-    /**
-     * @see Controller#Controller()
-     */
+	@EJB
+	private UserBeanRemote userBean;
+	
+	@EJB
+	private FriendShipBeanRemote frshpBean;
+
     public FriendSuggestionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
-    public FriendSuggestionServlet(AccessRole role) {
-        super(role);
-        // TODO Auto-generated constructor stub
+        super(AccessRole.USER);
     }
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-
-		String user_id  = nav.getParam("id");
+		String userId  = nav.getParam("id");
 		User u;
 		try {
-			u = userBean.getUserByID(Integer.parseInt(user_id));
-			
+			u = userBean.getUserByID(Integer.parseInt(userId));
 			List<User> friends = frshpBean.getFriends(u);
-			
 			nav.setAttribute("friends", friends);
-			
 			nav.fwd("WEB-INF/friendsuggestions.jsp");
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -57,16 +45,7 @@ public class FriendSuggestionServlet extends Controller {
 		} catch (NoSuchUserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 
-
-	@Override
-	protected void post(Navigation nav) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
-	}
-    
-    
 }

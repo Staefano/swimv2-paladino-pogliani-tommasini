@@ -17,37 +17,27 @@ import javax.servlet.ServletException;
  * Servlet implementation class HelpRequestManagerServlet
  */
 public class HelpRequestManagerServlet extends Controller {
+	
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	HelpRequestRemote hrBean;
+	private HelpRequestRemote hrBean;
+	
 	@EJB
-	NotificationBeanRemote notificationBean;
+	private NotificationBeanRemote notificationBean;
 
-	/**
-	 * @see Controller#Controller()
-	 */
 	public HelpRequestManagerServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see Controller#Controller(AccessRole)
-	 */
-	public HelpRequestManagerServlet(AccessRole role) {
-		super(role);
-		// TODO Auto-generated constructor stub
+		super(AccessRole.USER);
 	}
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 
 		String choice = nav.getParam("choice");
-		String hr_id = nav.getParam("hr_id");
+		String requestId = nav.getParam("hr_id");
 
 		try {
-			HelpRequest hr = hrBean.findByID(Integer.parseInt(hr_id));
+			HelpRequest hr = hrBean.findByID(Integer.parseInt(requestId));
 			if (choice.equals("approved")) {
 				hrBean.acceptHR(hr);
 

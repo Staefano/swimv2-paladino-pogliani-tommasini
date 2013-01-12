@@ -2,6 +2,7 @@ package it.polimi.swimv2.test;
 
 import java.util.List;
 
+import it.polimi.swimv2.entity.Message;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.utils.HashService;
 
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * sake of testing EJB classes during early development phases.
  */
 @Stateless
-public class InitializerTestBean<Message> implements InitializerTestBeanRemote {
+public class InitializerTestBean implements InitializerTestBeanRemote {
 	
 	@PersistenceContext(unitName="swimv2") 
 	private EntityManager em;

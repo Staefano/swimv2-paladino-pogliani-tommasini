@@ -17,7 +17,8 @@ import javax.servlet.ServletException;
 public class FeedbackServlet extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
       
-	@EJB HelpRequestRemote hrBean;
+	@EJB 
+	private HelpRequestRemote hrBean;
     
     public FeedbackServlet() {
         super(AccessRole.USER);
@@ -26,16 +27,16 @@ public class FeedbackServlet extends Controller implements Servlet {
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
 	
-			String hr_id = nav.getParam("hr_id");
+			String requestId = nav.getParam("hr_id");
 			String role = nav.getParam("role");
 			int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
 			String comment = nav.getParam("comment");
 			
 			try {
 					if(role.equals("helper")){
-						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(hr_id)), evaluation, comment, Role.HELPER);
+						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.HELPER);
 					}else if(role.equals("asker")){
-						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(hr_id)), evaluation, comment, Role.ASKER);
+						hrBean.addFeedbakc(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.ASKER);
 
 					}
 

@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class ImageUtils {
+	
+	private ImageUtils() {  }
 
 	/**
 	 * Resize an image, if needed, to fit a maxWidth x maxHeight space. If the

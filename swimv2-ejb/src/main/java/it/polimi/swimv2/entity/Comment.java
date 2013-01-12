@@ -92,11 +92,7 @@ public class Comment implements Serializable {
 			return false;
 		}
 		Comment other = (Comment) obj;
-		if (id != other.id) {
-			return false;
-		} else {
-			return true;
-		}
+		return id != other.id;
 	}
 
 }

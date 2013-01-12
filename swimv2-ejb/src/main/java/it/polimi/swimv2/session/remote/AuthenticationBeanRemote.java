@@ -2,6 +2,7 @@ package it.polimi.swimv2.session.remote;
 
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.TokenType;
+import it.polimi.swimv2.session.exceptions.EmailException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 
@@ -26,8 +27,9 @@ public interface AuthenticationBeanRemote {
 	 * @param email the email of the user
 	 * @param password the password of the user
 	 * @throws NotUniqueException if there is another user registered into the system with the same email
+	 * @throws EmailException if the email cannot be sent
 	 */
-	void register(String email, String password, String uri) throws NotUniqueException;
+	void register(String email, String password, String uri) throws NotUniqueException, EmailException;
 
 	/**
 	 * Checks whether the token is valid
@@ -60,6 +62,7 @@ public interface AuthenticationBeanRemote {
 	 * Require a password reset, by storing the useful data inside the database and sending the 
 	 * email containing the registration link
 	 * @param email the email of the user who wants to reset his\her password
+	 * @throws EmailException if the email cannot be sent
 	 */
-	void requestPasswordReset(String email, String uri);
+	void requestPasswordReset(String email, String uri) throws EmailException;
 }

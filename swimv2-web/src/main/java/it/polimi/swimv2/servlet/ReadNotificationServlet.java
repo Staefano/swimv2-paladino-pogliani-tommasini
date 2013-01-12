@@ -16,21 +16,11 @@ import javax.servlet.ServletException;
 public class ReadNotificationServlet extends Controller {
 	private static final long serialVersionUID = 1L;
       
-	@EJB NotificationBeanRemote notificationBean;
-    /**
-     * @see Controller#Controller()
-     */
+	@EJB 
+	private NotificationBeanRemote notificationBean;
+
     public ReadNotificationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-       
-    /**
-     * @see Controller#Controller(AccessRole)
-     */
-    public ReadNotificationServlet(AccessRole role) {
-        super(role);
-        // TODO Auto-generated constructor stub
+        super(AccessRole.USER);
     }
 
 	@Override

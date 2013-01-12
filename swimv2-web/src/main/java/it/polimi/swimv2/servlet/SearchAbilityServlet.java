@@ -20,9 +20,10 @@ public class SearchAbilityServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	AbilityBeanRemote abilityBean;
+	private AbilityBeanRemote abilityBean;
+	
 	@EJB
-	UserBeanRemote userBean;
+	private UserBeanRemote userBean;
 
 	public SearchAbilityServlet() {
 		super(AccessRole.USER);
