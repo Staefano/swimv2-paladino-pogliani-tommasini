@@ -25,14 +25,14 @@ public class SearchForHelpServlet extends Controller {
 		// TODO pagination, anyone?
 		String queryString = nav.getParam("abilities");
 		List<User> results = bean.searchForHelp(generateListOfAbilities(queryString));
-		nav.setAttribute("abilities",  nav.getAttribute("abilities")); // temp
+		nav.setAttribute("abilities",  nav.getParam("abilities")); // revalidate and rebuild the string?
 		if (results == null || results.size() == 0) {
 			nav.setAttribute("found", false);
 		} else {
 			nav.setAttribute("found", true);
 			nav.setAttribute("results", results);
 		}
-		nav.fwd(RESULTS_JSP); // TODO differentiate upon user login status!!!!!!!!!!
+		nav.fwd(RESULTS_JSP);
 	}
 	
 	private List<String> generateListOfAbilities(String queryString) {

@@ -4,7 +4,7 @@
 
 <t:template title="SWIM version 2">
 	<jsp:attribute name="header">
-		<h1>Search results</h1>
+		<h1>Search for help!</h1>
 	</jsp:attribute>
 	<jsp:body>
 		<form class="form-search">
