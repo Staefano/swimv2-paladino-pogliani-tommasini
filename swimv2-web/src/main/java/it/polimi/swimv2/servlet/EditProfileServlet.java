@@ -64,13 +64,15 @@ public class EditProfileServlet extends Controller implements Servlet {
 		String location = form.getValue("location");
 		String minibio = form.getValue("minibio");
 		String description = form.getValue("description");
-
+		boolean removeImage = form.getValue("removeImage") != null && form.getValue("removeImage").equals("yes");
+		
 		try {
 			User updated = userBean.editProfile(nav.getLoggedUser().getId(), name, surname,
 					website, birthdate, location, minibio, description);
 			nav.setLogin(updated);
-
-			if(form.getFileSize() > 0) {
+			if(removeImage) {
+				updated = imageBean.unsetImage(updated);
+			} else if(form.getFileSize() > 0) {
 				updated = uploadUserImage(updated, form.getFile(), form.getFileSize());
 			}
 			nav.redirect("/");

@@ -20,7 +20,6 @@ public class UserImageBean implements UserImageBeanRemote {
 	@Override
 	public User setImage(int userId, byte[] img) {
 		UserImage image = new UserImage(img);
-		// remove the old image and substitute it with the new one
 		User jpaUser = manager.find(User.class, userId);
 		UserImage old = jpaUser.getImage();
 		manager.persist(image);
@@ -55,6 +54,18 @@ public class UserImageBean implements UserImageBeanRemote {
 		} else {
 			throw new NoResultFoundException();
 		}
+	}
+
+	@Override
+	public User unsetImage(User user) {
+		User jpaUser = manager.find(User.class, user.getId());
+		UserImage img = jpaUser.getImage();
+		jpaUser.setImage(null);
+		jpaUser = manager.merge(jpaUser);
+		if(img != null) {
+			manager.remove(img);
+		}
+		return jpaUser;
 	}
 
 }

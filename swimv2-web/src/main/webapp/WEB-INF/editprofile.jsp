@@ -52,18 +52,18 @@
 		<textarea name="minibio" class="input-block-level" rows="5">${user.minibio}</textarea>
 		
 		</div>
-		
-		<div class="span1"></div>
-		<div class="span5">
+
+		<div class="span5 offset1">
 		
 		<label for="file">Profile image (max. 5MB, will be resized and cropped)</label>
 		<input type="file" id="file" name="file">
+		<label class="checkbox"><input type="checkbox" name="removeImage" value="yes">Remove my image</label>
 		<img style="display: block; margin: 0.7em auto;"class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${user.id}" />
 		
 		<label for="description">Extended description</label>
 		<textarea name="description" class="input-block-level" rows="7">${user.description}</textarea>
 		</div>
-		<div class="span1"></div>
+		
 		
 	</div>
 	<div class="form-actions">
