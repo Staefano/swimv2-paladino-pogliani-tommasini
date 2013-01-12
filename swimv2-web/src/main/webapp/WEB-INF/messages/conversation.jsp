@@ -9,13 +9,15 @@
 	</jsp:attribute>
 	<jsp:body>
 		
-		<a href="${pageContext.servletContext.contextPath}/messages" role="button" class="btn" ><li class="icon-chevron-left"></li> All messages</a>
-		<a href="#sendMessage" role="button" class="btn" data-toggle="modal">New message</a>
 		<form method="post" style="display: inline;">
 			<input type="hidden" name="id" value="${otherUser.id}">
-			<button type="submit" name="delete" class="btn">Delete conversation</button>
+			<ul class="swim-page-navigation">
+				<li><a class="btn" href="${pageContext.servletContext.contextPath}/messages" role="button" ><span class="icon-chevron-left"></span> All messages</a>
+				<li><a class="btn" href="#sendMessage" role="button" data-toggle="modal">New message</a></li>
+				<li><button type="submit" name="delete" class="btn">Delete conversation</button></li>
+			</ul>
 		</form>
-	
+
 		<div class="media">
 		<c:forEach var="msg" items="${messages}">
 			<div class="media-body" >

@@ -1,12 +1,12 @@
-<%@tag description="Main template for the SWIMv2 website" pageEncoding="UTF-8"%>
+<%@ tag description="Main template for the SWIMv2 website" pageEncoding="UTF-8" %>
 
-<%@attribute name="title" required="true" %>
-<%@attribute name="header" fragment="true"%>
-<%@attribute name="user" required="false" type="it.polimi.swimv2.entity.User" %>
-<%@attribute name="scripts" fragment="true"%>
+<%@ attribute name="title" required="true" %>
+<%@ attribute name="header" fragment="true" %>
+<%@ attribute name="user" required="false" type="it.polimi.swimv2.entity.User" %>
+<%@ attribute name="scripts" fragment="true" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 
 <!doctype html>
@@ -16,22 +16,7 @@
 		<title>${title}</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="css/datepicker.css" rel="stylesheet" media="screen">
-
-		<!-- TODO to be moved in a separate .css file -->
-		<style type="text/css">
-		#swim-general-header {
-			margin-top: 2em;
-			margin-bottom: 1em;
-		}
-		
-		#swim-general-header a:hover {
-			text-decoration: none;
-		}
-		
-		#privatepage-container {
-			padding-top: 40px;
-		}
-		</style>
+		<link href="css/swimv2.css" rel="stylesheet" media="screen">
 	</head>
 	<body>
 	<c:choose>

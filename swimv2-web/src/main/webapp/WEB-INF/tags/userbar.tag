@@ -6,18 +6,17 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<a class="brand" href="${pageContext.request.contextPath}/">SWIMv2</a>
-			<form class="navbar-search pull-left" action="search-user"
-				method="get">
+			<a class="brand pull-left" href="${pageContext.request.contextPath}/">SWIMv2</a>
+			<p class="navbar-text pull-left">Hi, ${user.name} ${user.surname} </p>
+			<form class="navbar-search" style="margin-left: 1em;" action="search-user" method="get">
 				<input type="text" class="search-query" placeholder="Search people"
 					name="search" value="${param.search}">
 			</form>
 			<ul class="nav pull-right">
-				<li><a href="profile?id=${user.id}">Hi, ${user.name} ${user.surname}</a> </li>
 				<c:if test="${user.admin}">
 					<li><a href="admin">Administer</a></li>
 				</c:if>
-				<li><a href="editprofile">Edit Profile</a></li>
+				<li><a href="profile?id=${user.id}">My profile</a></li>
 				<li><a href="logout">Logout</a></li>
 			</ul>
 		</div>
