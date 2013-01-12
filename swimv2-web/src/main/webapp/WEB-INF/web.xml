@@ -9,8 +9,8 @@
     <servlet-class>it.polimi.swimv2.servlet.HomeServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>ConfirmationServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.ConfirmationServlet</servlet-class>
+    <servlet-name>TokenServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.TokenServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>LogoutServlet</servlet-name>
@@ -94,7 +94,7 @@
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ConfirmationServlet</servlet-name>
+    <servlet-name>TokenServlet</servlet-name>
     <url-pattern>/confirmation</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

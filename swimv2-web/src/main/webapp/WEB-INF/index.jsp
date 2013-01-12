@@ -22,16 +22,8 @@
 	</div>
 	<div class="span3">
 		<ul class="nav nav-tabs">
-			<li
-			<c:if test="${!toggleRegistration}">
-	                         class="active"
-	                     </c:if>><a
-			href="#login" data-toggle="tab">Login</a></li>
-			<li
-			<c:if test="${toggleRegistration}">
-	                             class="active"
-	                         </c:if>><a
-			href="#register" data-toggle="tab">Register</a></li>
+			<li <c:if test="${!toggleRegistration}">class="active"</c:if>><a href="#login" data-toggle="tab">Login</a></li>
+			<li <c:if test="${toggleRegistration}">class="active"</c:if>><a href="#register" data-toggle="tab">Register</a></li>
 		</ul>
 		<div class="tab-content">
 			<div class="tab-pane <c:if test="${!toggleRegistration}">active </c:if>" id="login">
@@ -42,8 +34,8 @@
 					<fieldset>
 						<input type="email" name="user" placeholder="Username" required>
 						<input type="password" name="password" placeholder="Password" required>
-						Change or reset password
 						<button type="submit" name="login" class="btn btn-primary">Login</button>
+						<p style="margin-top:0.5em;"><a href="#pwdreset" data-toggle="modal">Change or reset password</a></p>
 					</fieldset>
 				</form>
 			</div>
@@ -80,5 +72,23 @@
 		</div>
 	</div>
 	</div>
+	
+	<div id="pwdreset" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby=resetLabel aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+		<h3 id="resetLabel">Reset password</h3>
+	</div>
+	<form method="post">
+		<div class="modal-body">
+			<p>To reset the password (or to change it), type your email address. If you are a registered user,
+	an email will be sent to you containing a link which allows to reset your password.</p>
+			<input type="email" name="email" class="input-xlarge" required>
+		</div>
+		<div class="modal-footer">
+			<button name="reset" class="btn btn-primary">Reset password</button>
+		</div>
+	</form>
+</div>
+	
 	</jsp:body>
 </t:template>

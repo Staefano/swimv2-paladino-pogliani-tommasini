@@ -2,8 +2,9 @@ package it.polimi.swimv2.session;
 
 import java.util.List;
 
-import it.polimi.swimv2.entity.PendingUser;
+import it.polimi.swimv2.entity.PendingToken;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.enums.TokenType;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
@@ -40,73 +41,106 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 	}
 	
 	@Override
-	public User checkCredentials(String username, String password) 
-			throws NoSuchUserException {
-		Query q = manager.createNamedQuery("User.findByEmail");
-		q.setParameter("email", username);
-		try {
-			User u = (User) q.getSingleResult();
-			if(hasher.compareWithHash(password, u.getPasswordHash())) { 
-				return u;
-			} else {
-				throw new NoSuchUserException();
-			}
-		} catch(NoResultException e) {
+	public User checkCredentials(String username, String password) throws NoSuchUserException {
+		User u = fetchUser(username);
+		if(hasher.compareWithHash(password, u.getPasswordHash())) { 
+			return u;
+		} else {
 			throw new NoSuchUserException();
 		}
 	}
 	
 	@Override
-	public void register(String email, String password) throws NotUniqueException {
+	public void register(String email, String password, String uri) throws NotUniqueException {
 		if(userExists(email)) {
 			throw new NotUniqueException();
 		}
-
-		String token = rsg.nextString();
-		PendingUser existing = manager.find(PendingUser.class, email);
-		if(existing == null) {
-			PendingUser pending = new PendingUser(email, hasher.hash(password), token);
-			// TODO check token uniqueness, otherwise generate another one!!! FIXME
-			manager.persist(pending);
-		} else {
-			existing.setPasswordHash(hasher.hash(password));
-			token = existing.getConfirmCode();
-			manager.merge(existing);
-		}
-
+		String token = createToken(email, password, TokenType.NEWUSER);
 		try {
-			emailer.sendConfirmationEmail(email,  token);
+			emailer.sendConfirmationEmail(email,  token, uri);
 		} catch(MessagingException me) {
 			throw new RuntimeException("Cannot send the email! " + me.getMessage());
 		}
 	}
 	
 	@Override
-	public boolean checkConfirmCode(String token) {
-		Query q = manager.createNamedQuery("PendingUser.findByToken");
-		q.setParameter("token", token);
+	public void requestPasswordReset(String email, String uri) {
+		String token = createToken(email, null, TokenType.RESETPASSWORD);
 		try {
-			q.getSingleResult();
-			return true;
-		} catch(NoResultException e) {
-			return false;
+			emailer.sendResetEmail(email, token, uri);
+		} catch(MessagingException me) {
+			throw new RuntimeException("Cannot send the email! " + me.getMessage());
 		}
 	}
 	
 	@Override
-	public User completeRegistration(String token, User user) 
-			throws NoSuchUserException {
-		Query q = manager.createNamedQuery("PendingUser.findByToken");
+	public TokenType checkConfirmCode(String token) {
+		try {
+			PendingToken obj = fetchToken(token);
+			return obj.getType();
+		} catch(NoSuchUserException e) {
+			return TokenType.INVALID;
+		}
+	}
+	
+	@Override
+	public User resetPassword(String password, String token) throws NoSuchUserException{
+		PendingToken obj = null;
+		obj = fetchToken(token);
+		if(obj.getType() != TokenType.RESETPASSWORD) {
+			throw new NoSuchUserException();
+		}
+		User u = fetchUser(obj.getEmail());
+		u.setPasswordHash(hasher.hash(password));
+		return manager.merge(u);
+	}
+	
+	@Override
+	public User completeRegistration(String token, User user) throws NoSuchUserException {
+		PendingToken pt = fetchToken(token);
+		if(pt.getType() != TokenType.NEWUSER) {
+			throw new NoSuchUserException();
+		}
+		user.setEmail(pt.getEmail());
+		user.setPasswordHash(pt.getPasswordHash());
+		manager.persist(user);
+		manager.remove(pt);
+		return user;
+	}
+	
+	
+	private String createToken(String email, String password, TokenType type) {
+		String token = rsg.nextString();
+		PendingToken tokenObject = manager.find(PendingToken.class, email);
+		if(tokenObject == null) {
+			tokenObject = new PendingToken(email, token, type);
+			// FIXME check token uniqueness, otherwise generate another one!!!
+			manager.persist(tokenObject);
+		}
+		if(password != null) {
+			tokenObject.setPasswordHash(hasher.hash(password));
+			manager.merge(tokenObject);
+		}
+		return tokenObject.getConfirmCode();
+	}
+	
+	private User fetchUser(String email) throws NoSuchUserException {
+		Query q = manager.createNamedQuery("User.findByEmail");
+		q.setParameter("email", email);
+		try {
+			return (User) q.getSingleResult();
+		} catch(NoResultException e) {
+			throw new NoSuchUserException(e);
+		}
+	}
+	
+	private PendingToken fetchToken(String token) throws NoSuchUserException {
+		Query q = manager.createNamedQuery("PendingToken.findByToken");
 		q.setParameter("token", token);
 		try {
-			PendingUser pu = (PendingUser) q.getSingleResult();
-			user.setEmail(pu.getEmail());
-			user.setPasswordHash(pu.getPasswordHash());
-			manager.persist(user);
-			manager.remove(pu);
-			return user;
-		} catch(NoResultException e) {
-			throw new NoSuchUserException(); // TODO sicuri che e' solo perche' non c'e' l'utente???
+			return (PendingToken) q.getSingleResult();
+		} catch(NoResultException nre) {
+			throw new NoSuchUserException();
 		}
 	}
 	

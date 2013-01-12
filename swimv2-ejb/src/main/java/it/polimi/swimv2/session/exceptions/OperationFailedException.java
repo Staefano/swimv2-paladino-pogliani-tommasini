@@ -12,4 +12,8 @@ public class OperationFailedException extends Exception {
 		super();
 	}
 
+	public OperationFailedException(Throwable e) {
+		super(e);
+	}
+
 }

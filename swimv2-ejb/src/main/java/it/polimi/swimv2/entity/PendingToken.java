@@ -1,32 +1,36 @@
 package it.polimi.swimv2.entity;
 
+import it.polimi.swimv2.enums.TokenType;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-	@NamedQuery(name="PendingUser.findByToken",
-		query="SELECT x FROM PendingUser x WHERE x.confirmCode = :token")
+	@NamedQuery(name="PendingToken.findByToken",
+		query="SELECT x FROM PendingToken x WHERE x.confirmCode = :token")
 })
-public class PendingUser implements Serializable {
+public class PendingToken implements Serializable {
    
 	@Id
 	private String email;
 	
-	@Column(unique=true) 
+	@Column(unique=true)
 	private String confirmCode;
 	
-	private String passwordHash;
+	private TokenType type;
+	
+	private String passwordHash; // only if type = NEWUSER
 	private static final long serialVersionUID = 1L;
 
-	public PendingUser() {
+	public PendingToken() {
 		super();
 	}   
 	
-	public PendingUser(String email, String hash, String token) {
+	public PendingToken(String email, String token, TokenType type) {
 		this.email = email;
-		this.passwordHash = hash;
 		this.confirmCode = token;
+		this.type = type;
 	}
 	
 	public String getEmail() {
@@ -52,6 +56,14 @@ public class PendingUser implements Serializable {
 		this.passwordHash = passwordHash;
 	}
 	
+	public TokenType getType() {
+		return this.type;
+	}
+	
+	public void setTokenType(TokenType type) {
+		this.type = type;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -65,10 +77,10 @@ public class PendingUser implements Serializable {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof PendingUser)) {
+		if (!(obj instanceof PendingToken)) {
 			return false;
 		}
-		PendingUser other = (PendingUser) obj;
+		PendingToken other = (PendingToken) obj;
 		if (email == null) {
 			if (other.email != null) {
 				return false;

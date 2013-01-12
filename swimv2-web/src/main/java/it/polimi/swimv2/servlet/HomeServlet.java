@@ -12,15 +12,11 @@ import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-/**
- * Servlet to manage requests to home page (basic requests plus login)
- */
 public class HomeServlet extends Controller {
 
 	private static final long serialVersionUID = 9004320551305682450L;
 
 	private static final String INDEX_JSP = "/WEB-INF/index.jsp";
-
 
 	@EJB
 	private NotificationBeanRemote nbr;
@@ -30,13 +26,13 @@ public class HomeServlet extends Controller {
 
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
-		// which form has been sent? login => user != null, registration =>
-		// email != null
 		String user = nav.getParam("user");
 		String email = nav.getParam("email");
 		String password = nav.getParam("password");
 
-		if (user != null) {
+		if (nav.getParam("reset") != null && email != null) {
+			processReset(email, nav);
+		} else if (user != null) {
 			processLogin(user, password, nav);
 		} else if (email != null) {
 			processRegistration(email, password, nav);
@@ -58,6 +54,18 @@ public class HomeServlet extends Controller {
 		}
 	}
 
+	private void processReset(String email, Navigation nav) throws IOException, ServletException {
+		String path = nav.getPath();
+		try {
+			auth.requestPasswordReset(email, path);
+		} catch (Exception e) {
+			// non informiamo l'utente se va storto qualcosa!
+		}
+		nav.setAttribute("resetRequested", true);
+		nav.fwd(INDEX_JSP);
+
+	}
+	
 	private void processLogin(String user, String password, Navigation nav)
 			throws IOException, ServletException {
 		if (password == null) {
@@ -81,7 +89,7 @@ public class HomeServlet extends Controller {
 			return;
 		}
 		try {
-			auth.register(user, password);
+			auth.register(user, password, nav.getPath());
 			nav.setAttribute("registrationOutcome", 1);
 		} catch (NotUniqueException e) {
 			nav.setAttribute("registrationOutcome", 3);

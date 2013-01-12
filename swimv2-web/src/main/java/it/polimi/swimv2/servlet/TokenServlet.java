@@ -10,25 +10,32 @@ import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import java.io.IOException;
 
-public class ConfirmationServlet extends Controller {
+public class TokenServlet extends Controller {
 
 	private static final long serialVersionUID = 99537518690284192L;
 
-	private static final String COMPLETEREG_JSP = "/WEB-INF/complete-registration.jsp";
+	private static final String COMPLETEREG_JSP = "/WEB-INF/tokenvalidation.jsp";
 	
 	@EJB
 	private AuthenticationBeanRemote auth;
 
 	protected void post(Navigation nav) throws ServletException, IOException {
-
-		// validate the form and create the user. then redirect to the personalpage
-		// otherwise display an error and go back to this page
+		
+		String password = nav.getParam("password");
+		
+		if(password == null) {
+			confirmRegistration(nav);
+		} else {
+			resetPassword(password, nav);
+		}
+	}
+	
+	private void confirmRegistration(Navigation nav) throws ServletException, IOException {
 		String name = nav.getParam("name");
 		String surname = nav.getParam("surname");
 		String token = nav.getParam("token");
 		
 		try {
-			// draft!
 			User user = new User();
 			user.setName(name);
 			user.setSurname(surname);
@@ -40,17 +47,25 @@ public class ConfirmationServlet extends Controller {
 			nav.setAttribute("formError", true);
 			nav.fwd(COMPLETEREG_JSP);
 		}
+	}
+	
+	private void resetPassword(String password, Navigation nav) throws ServletException, IOException {
+		String token = nav.getParam("token");
+		try {
+			User user = auth.resetPassword(password, token);
+			nav.setLogin(user);
+			nav.redirect("/");
+		} catch (NoSuchUserException e) {
+			nav.setAttribute("formError", true);
+			nav.fwd(COMPLETEREG_JSP);
+		}
 		
 	}
 
 	protected void get(Navigation nav) throws ServletException, IOException {
 		String token = nav.getParam("token");
-
-		if (token == null || !auth.checkConfirmCode(token)) {
-			nav.setAttribute("wrongToken", true);
-		} else {
-			nav.setAttribute("token", token);
-		}
+		nav.setAttribute("tokenOutcome", auth.checkConfirmCode(token));
+		nav.setAttribute("token", token);
 		nav.fwd(COMPLETEREG_JSP);
 		
 	}

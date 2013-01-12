@@ -6,9 +6,12 @@ public class NoSuchUserException extends OperationFailedException {
 		super();
 	}
 	
+	public NoSuchUserException(Throwable e) {
+		super(e);
+	}
+	
 	public NoSuchUserException(String string) {
 		super(string);
-		// TODO Auto-generated constructor stub
 	}
 
 	private static final long serialVersionUID = -3604004037451647187L;

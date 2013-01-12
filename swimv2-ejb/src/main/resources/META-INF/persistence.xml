@@ -13,7 +13,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<class>it.polimi.swimv2.entity.Notification</class>
 		<class>it.polimi.swimv2.entity.User</class>
 		<class>it.polimi.swimv2.entity.Friendship</class>
-		<class>it.polimi.swimv2.entity.PendingUser</class>
+		<class>it.polimi.swimv2.entity.PendingToken</class>
 		<class>it.polimi.swimv2.entity.AbilityRequest</class>
 		<class>it.polimi.swimv2.entity.Comment</class>
 		<class>it.polimi.swimv2.entity.UserImage</class>

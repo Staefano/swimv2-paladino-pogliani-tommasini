@@ -108,5 +108,10 @@ public class Navigation {
 		response.sendError(HttpServletResponse.SC_NOT_FOUND);
 	}
 
+	public String getPath() {
+		return request.getScheme() + "://" + request.getServerName() + ":"
+				+ request.getServerPort() + request.getContextPath();
+	}
+
 	
 }
