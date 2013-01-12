@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>it.polimi</groupId>
 	<artifactId>swimv2</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>swimv2 application</name>
+	<name>SWIMv2: Small World Hypotesis Machine, version 2</name>
 
 	<modules>
 		<module>swimv2-ejb</module>
@@ -40,7 +41,6 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>jboss-maven-plugin</artifactId>
-					<!-- <version>1.5.0</version> -->
 					<inherited>true</inherited>
 					<configuration>
 						<jbossHome>${env.JBOSS_HOME}</jbossHome>
@@ -56,21 +56,17 @@
 	<dependencyManagement>
 		<dependencies>
 
-			<!-- Define the version of the EJB jar so that we don't need to repeat 
-				ourselves in every module -->
 			<dependency>
-				<groupId>it.polimi</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>swimv2-ejb</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<type>ejb</type>
 			</dependency>
 
-			<!-- Define the version of the WAR so that we don't need to repeat ourselves 
-				in every module -->
 			<dependency>
-				<groupId>it.polimi</groupId>
+				<groupId>${project.groupId}</groupId>
 				<artifactId>swimv2-web</artifactId>
-				<version>1.0-SNAPSHOT</version>
+				<version>${project.version}</version>
 				<type>war</type>
 				<scope>compile</scope>
 			</dependency>
