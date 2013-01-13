@@ -20,9 +20,7 @@ public class TokenServlet extends Controller {
 	private AuthenticationBeanRemote auth;
 
 	protected void post(Navigation nav) throws ServletException, IOException {
-		
 		String password = nav.getParam("password");
-		
 		if(password == null) {
 			confirmRegistration(nav);
 		} else {
@@ -42,7 +40,7 @@ public class TokenServlet extends Controller {
 			user = auth.completeRegistration(token, user);
 			// login the user!
 			nav.setLogin(user);
-			nav.redirect("/");
+			nav.redirect("/editprofile");
 		} catch(NoSuchUserException e) {
 			nav.setAttribute("formError", true);
 			nav.fwd(COMPLETEREG_JSP);
