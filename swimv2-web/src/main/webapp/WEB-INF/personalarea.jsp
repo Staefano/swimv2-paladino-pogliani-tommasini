@@ -78,16 +78,6 @@
 								You don't have notifications.
 							</c:if>
 							<c:forEach var="n" items="${notifications}" begin="0" end="2">
-					<div class="span6">
-						<ul class="nav nav-tabs">
-							<li class="active"><a href="#tab1" data-toggle="tab">Notifications</a></li>
-						</ul>
-						<div class="tab-content">
-							<div class="tab-pane active" id="tab1">
-							<c:if test="${empty notifications}">
-								You don't have notifications.
-							</c:if>
-							<c:forEach var="n" items="${notifications}" begin="0" end="2">
 							<div class="well">
 								<c:if test="${n.type=='HELP_REJECTED'}">
 								<p>Your Help Request to <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> was refused </p>
@@ -141,11 +131,7 @@
 																		class="btn btn-danger" type="button">Refuse </button></a>
 								</c:if>
 								</div>
-							</c:forEach>
-						</div>
-					</div>
-							</div>
-							</c:forEach>
+							</c:forEach><!--  -->
 							</div>
 						</div>
 					</div>
