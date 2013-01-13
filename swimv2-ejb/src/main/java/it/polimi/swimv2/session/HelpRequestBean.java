@@ -31,51 +31,33 @@ public class HelpRequestBean implements HelpRequestRemote {
 			List<Ability> abilties) {
 
 		HelpRequest hr = new HelpRequest();
-
 		HashSet<Ability> setAbility = new HashSet<Ability>();
-
 		hr.setReceiver(receiver);
 		hr.setSender(sender);
 		hr.setSubject(subject);
 		hr.setStatus(RequestStatus.WAITING);
-
 		for (Ability a : abilties) {
 			setAbility.add(a);
 		}
-
 		hr.setAbilities(setAbility);
-
-		Comment c = new Comment();
-
-		c.setHelprequest(hr);
-		c.setSender(sender);
-		c.setText(subject);
-
-		manager.persist(c);
 		manager.persist(hr);
-
 		return hr;
-
 	}
 
 	@Override
 	public void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException {
-
+		// for simplicity at the web tier level, if comment == null, does nothing
 		Comment c = new Comment();
-
-		if (hr.isOpened()) {
-
+		if(!hr.isOpened()) {
+			throw new ClosedHelpRequestException();
+		}
+		if(comment != null && !comment.trim().isEmpty()) {
 			c.setSender(sender);
 			c.setHelprequest(hr);
 			c.setText(comment);
-
 			manager.persist(c);
-
-		} else {
-			throw new ClosedHelpRequestException();
 		}
-
 	}
 
 	@Override @SuppressWarnings("unchecked")
