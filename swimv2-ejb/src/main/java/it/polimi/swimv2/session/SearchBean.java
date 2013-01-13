@@ -18,9 +18,14 @@ public class SearchBean implements SearchBeanRemote {
 	
 	@Override @SuppressWarnings("unchecked")
 	public List<User> searchForHelp(List<String> abilities) {
-		String qlString = "SELECT u FROM User u, IN (u.abilities) a WHERE a.name IN (:abilities)"; 
-		Query q = manager.createQuery(qlString);
-		q.setParameter("abilities", abilities);
+		String query = "SELECT u FROM User u where 1=1";
+		for(int i = 1; i <= abilities.size(); i++) {
+			query += " AND ?" + i + " MEMBER OF u.abilities";
+		}
+		Query q = manager.createQuery(query);
+		for(int i = 1; i <= abilities.size(); i++) {
+			q.setParameter(i, abilities.get(i-1));
+		}
 		return q.getResultList();
 	}
 	

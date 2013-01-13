@@ -19,6 +19,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 		<class>it.polimi.swimv2.entity.UserImage</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name = "hibernate.show_sql" value = "true" />
 		</properties>
 	</persistence-unit>
 </persistence>

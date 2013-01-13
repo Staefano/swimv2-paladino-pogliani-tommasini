@@ -13,11 +13,7 @@ public class Ability implements Serializable {
 	@Id
 	private String name;
 	private static final long serialVersionUID = 1L;
-	
-	
-	public Ability() {
-		super();
-	}   
+
 	public String getName() {
 		return this.name;
 	}
