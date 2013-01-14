@@ -7,7 +7,10 @@
 <div class="thumbnail">
 	<!-- TODO image and the rest... -->
 	<div class="caption">
-		<a
-			href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=indirect">Add ${profile.name} ${profile.surname} as friend</a>
+		<c:if test="${user!=profile}">
+			<a
+				href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=indirect">Add
+				${profile.name} ${profile.surname} as friend</a>
+		</c:if>
 	</div>
 </div>

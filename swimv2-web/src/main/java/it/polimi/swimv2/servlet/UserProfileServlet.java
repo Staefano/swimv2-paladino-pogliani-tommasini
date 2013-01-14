@@ -39,6 +39,7 @@ public class UserProfileServlet extends Controller {
 			if(isLoggedIn) {
 				nav.setAttribute("showFR", friendshipBean.isRequestAllowed(nav.getLoggedUser(), u));
 				nav.setAttribute("showMSG", friendshipBean.isFriend(nav.getLoggedUser(), u));
+				nav.setAttribute("showFirends", friendshipBean.isDirect(nav.getLoggedUser(), u));
 			}
 			nav.fwd(PROFILE_JSP);
 		} catch (NoSuchUserException nsue) {

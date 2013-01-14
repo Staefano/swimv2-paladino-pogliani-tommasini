@@ -85,4 +85,18 @@ public class FriendShipBean implements FriendShipBeanRemote {
 		return !(isFriend(loggedUser, targetUser) || notificationBean.isPending(loggedUser, targetUser));
 	}
 
+	@Override
+	public boolean isDirect(User u1, User u2) {
+		Query q = manager.createNamedQuery("Friendship.isDirect");
+		q.setParameter("user1", u1);
+		q.setParameter("user2", u2);
+		q.setParameter("isDirect", true);
+
+		try {
+			return ((Friendship) q.getSingleResult() != null);
+		} catch (NoResultException nre) {
+			return false;
+		}
+	}
+
 }

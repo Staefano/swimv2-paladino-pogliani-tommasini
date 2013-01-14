@@ -9,7 +9,6 @@ import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
-import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
 import it.polimi.swimv2.session.exceptions.OperationFailedException;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 

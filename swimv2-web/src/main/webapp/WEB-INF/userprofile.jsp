@@ -3,9 +3,14 @@
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="p" tagdir="/WEB-INF/tags/profile"%>
 
-<t:template user="${user}" title="SWIMv2 - ${profile.name} ${profile.surname}">
+<t:template user="${user}"
+	title="SWIMv2 - ${profile.name} ${profile.surname}">
 	<jsp:attribute name="header">
-		<h1>${profile.name} ${profile.surname}'s profile <c:if test="${profile.admin}"><small>admin</small></c:if></h1>
+		<h1>${profile.name} ${profile.surname}'s profile <c:if
+				test="${profile.admin}">
+				<small>admin</small>
+			</c:if>
+		</h1>
 	</jsp:attribute>
 	<jsp:body>
 				
@@ -13,7 +18,9 @@
 	<div class="row">
 		<div class="span3">
 			<p:left-badge profile="${profile}" />
-			<p:friendlist profile="${profile}" friends="${friendsList}" />
+			<c:if test="${showFirends || user==profile}">
+				<p:friendlist profile="${profile}" friends="${friendsList}" />
+			</c:if>
 		</div>
 		<div class="span9">
 			<c:if test="${not empty user}">
@@ -21,10 +28,12 @@
 				<c:when test="${user != profile}">
 					<ul class="swim-page-navigation pull-right">
 					<c:if test="${user.admin && !profile.admin }">
-						<li><a class="btn btn-success" href="promote?profileId=${profile.id}">Promote to Admin</a></li>
+						<li><a class="btn btn-success"
+											href="promote?profileId=${profile.id}">Promote to Admin</a></li>
 					</c:if>
 					<c:if test="${showFR}">
-						<li><a class="btn" href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
+						<li><a class="btn"
+											href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
 					</c:if>
 					<c:if test="${showMSG }">
 						<li><a class="btn" href="#sendMessage" data-toggle="modal">Send Message</a></li>
@@ -41,14 +50,17 @@
 			</c:if>
 			<c:if test="${not empty profile.minibio}">
 			<div class="well" style="margin-left: 1.5em;">
-				<p><i>${profile.minibio}</i></p>
+				<p>
+								<i>${profile.minibio}</i>
+							</p>
 			</div>
 			</c:if>
 		</div>
 		<div class="row">
 			<p:central-profile profile="${profile}" user="${user}"></p:central-profile>
-			<div class="span3" style="float: left" >
-				<p:feedback providedList="${providedList}" receivedList="${receivedList}" />		
+			<div class="span3" style="float: left">
+				<p:feedback providedList="${providedList}"
+							receivedList="${receivedList}" />		
 			</div>
 		</div>
 	</div>
