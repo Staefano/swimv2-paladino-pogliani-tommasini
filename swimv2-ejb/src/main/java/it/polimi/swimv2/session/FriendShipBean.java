@@ -74,7 +74,7 @@ public class FriendShipBean implements FriendShipBeanRemote {
 		q.setParameter("user2", receiver);
 
 		try {
-			return (q.getSingleResult() != null);
+			return ((Friendship) q.getSingleResult() != null);
 		} catch (NoResultException nre) {
 			return false;
 		}

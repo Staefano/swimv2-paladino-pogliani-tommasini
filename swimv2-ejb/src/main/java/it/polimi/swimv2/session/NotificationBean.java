@@ -9,6 +9,7 @@ import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
+import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 
 import javax.ejb.Local;
@@ -30,16 +31,19 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) {
-
-		Notification n = new Notification();
-		n.setType(type);
-		n.setSrcUser(asker);
-		n.setTgtuser(receiver);
-		// TODO timestamp
-		manager.persist(n);
+	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws NoFriendshipRequestException {
+		//TODO manca controllo is pending is friend
+		if(!(isPending(asker, receiver) || isFriend(asker, receiver))){
+			Notification n = new Notification();
+			n.setType(type);
+			n.setSrcUser(asker);
+			n.setTgtuser(receiver);
+			// TODO timestamp
+			manager.persist(n);
 		return n;
-
+		}
+		
+		throw new NoFriendshipRequestException();
 	}
 
 	@Override
@@ -156,15 +160,7 @@ public class NotificationBean implements NotificationBeanRemote {
 		}
 	}
 
-	@Override
-	public boolean isPending(User user1, User user2) {
-		Query q = manager.createNamedQuery("Notification.isPending");
-		q.setParameter("user1", user1);
-		q.setParameter("user2", user2);
-		q.setParameter("type", NotificationType.FRIENDSHIP_RECEIVED);
-		int count = ((Long) q.getSingleResult()).intValue();
-		return count == 1;
-	}
+
 
 	@Override
 	public void notifyAdminPromotion(User user) {
@@ -183,6 +179,31 @@ public class NotificationBean implements NotificationBeanRemote {
 		n.setSrcUser(hr.getReceiver());
 		n.setTimestamp(new Timestamp(System.currentTimeMillis()));
 		manager.persist(n);		
+	}
+
+	@Override
+	public boolean isFriend(User asker, User receiver) {
+		Query q = manager.createNamedQuery("Friendship.isFriend");
+		q.setParameter("user1", asker);
+		q.setParameter("user2", receiver);
+
+		try {
+			return (q.getSingleResult() != null);
+		} catch (NoResultException nre) {
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean isPending(User user1, User user2) {
+		Query q = manager.createNamedQuery("Notification.isPending");
+		q.setParameter("user1", user1);
+		q.setParameter("user2", user2);
+		q.setParameter("direct", NotificationType.FRIENDSHIP_RECEIVED_DIRECT);
+		q.setParameter("indirect", NotificationType.FRIENDSHIP_RECEIVED);
+		int count = ((Long) q.getSingleResult()).intValue();
+
+		return count >0;
 	}
 
 }

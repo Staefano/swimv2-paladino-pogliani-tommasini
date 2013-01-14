@@ -11,9 +11,9 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "Notification.findBytgtUser", query = "SELECT x FROM Notification x WHERE x.tgtUser = :user"),
 		@NamedQuery(name = "Notification.findByID", query = "SELECT x FROM Notification x WHERE x.id = :id"),
-		@NamedQuery(name = "Notification.isPending", query = "SELECT COUNT(x) FROM Notification x " +
-				"WHERE (x.srcUser = :user1 AND x.tgtUser =:user2 AND x.type=:type) " +
-				"OR (x.srcUser = :user2 AND x.tgtUser =:user1 AND x.type=:type)" ),
+		@NamedQuery(name = "Notification.isPending", query = "SELECT COUNT(x.id) FROM Notification x " +
+				"WHERE (x.srcUser = :user1 AND x.tgtUser =:user2)" +
+				"OR (x.srcUser = :user2 AND x.tgtUser =:user1)" + "AND ( (x.type=:direct) OR (x.type=:indirect))" ),
 
 
 })

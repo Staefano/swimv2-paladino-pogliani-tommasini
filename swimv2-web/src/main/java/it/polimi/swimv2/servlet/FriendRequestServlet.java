@@ -2,6 +2,7 @@ package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
+import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
@@ -36,29 +37,33 @@ public class FriendRequestServlet extends Controller {
 		String askerID = nav.getParam("asker");
 		String receiverID = nav.getParam("receiver");
 		String type = nav.getParam("type");
+
 		if (!(askerID.equals(receiverID))) {
 			try {
-				
+
 				User receiver = ubr.getUserByID(Integer.parseInt(receiverID));
 				User asker = ubr.getUserByID(Integer.parseInt(askerID));
-				if(type.equals("direct")){
-					
-					nbr.notifyFriendshipRequest(asker, receiver, NotificationType.FRIENDSHIP_RECEIVED_DIRECT);
-				}else if(type.equals("indirect")){
-					nbr.notifyFriendshipRequest(asker, receiver, NotificationType.FRIENDSHIP_RECEIVED);
+			
+					if (type.equals("direct"))
 
-					
-				}
-				
+						nbr.notifyFriendshipRequest(asker, receiver,
+								NotificationType.FRIENDSHIP_RECEIVED_DIRECT);
+					else if (type.equals("indirect")) {
+						nbr.notifyFriendshipRequest(asker, receiver,
+								NotificationType.FRIENDSHIP_RECEIVED);
+
+					}
+
 				nav.fwd(BASEPATH);
 
 			} catch (NoSuchUserException nsue) {
 
-				// TODO gestirla
 				nav.sendNotFound();
+			} catch (NoFriendshipRequestException e) {
+				nav.sendNotFound();
+
 			}
 		} else {
-			// TODO gestirla
 			nav.sendNotFound();
 
 		}
