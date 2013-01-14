@@ -37,8 +37,8 @@ public class UserProfileServlet extends Controller {
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));
 			
 			if(isLoggedIn) {
-				boolean friendRequestAllowed = friendshipBean.isRequestAllowed(nav.getLoggedUser(), u);
-				nav.setAttribute("showFR", friendRequestAllowed);
+				nav.setAttribute("showFR", friendshipBean.isRequestAllowed(nav.getLoggedUser(), u));
+				nav.setAttribute("showMSG", friendshipBean.isFriend(nav.getLoggedUser(), u));
 			}
 			nav.fwd(PROFILE_JSP);
 		} catch (NoSuchUserException nsue) {

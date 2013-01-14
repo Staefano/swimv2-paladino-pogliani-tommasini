@@ -2,8 +2,8 @@ package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
-import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
+import it.polimi.swimv2.session.exceptions.OperationFailedException;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -59,7 +59,7 @@ public class FriendRequestServlet extends Controller {
 			} catch (NoSuchUserException nsue) {
 
 				nav.sendNotFound();
-			} catch (NoFriendshipRequestException e) {
+			} catch (OperationFailedException e) {
 				nav.sendNotFound();
 
 			}

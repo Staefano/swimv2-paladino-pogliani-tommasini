@@ -9,6 +9,7 @@ import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
 import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
+import it.polimi.swimv2.session.exceptions.OperationFailedException;
 
 public interface NotificationBeanRemote {
 
@@ -20,7 +21,7 @@ public interface NotificationBeanRemote {
 
 	Notification notifyFriendshipAccepted(User replier, String notificationID);
 
-	Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws NoFriendshipRequestException;
+	Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws OperationFailedException;
 
 	Notification notifyAbilityRequest(User asker);
 	

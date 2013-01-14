@@ -10,6 +10,7 @@ import it.polimi.swimv2.entity.Notification;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.NotificationType;
 import it.polimi.swimv2.session.exceptions.NoFriendshipRequestException;
+import it.polimi.swimv2.session.exceptions.OperationFailedException;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 
 import javax.ejb.Local;
@@ -31,7 +32,7 @@ public class NotificationBean implements NotificationBeanRemote {
 	}
 
 	@Override
-	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws NoFriendshipRequestException {
+	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws OperationFailedException {
 		//TODO manca controllo is pending is friend
 		if(!(isPending(asker, receiver) || isFriend(asker, receiver))){
 			Notification n = new Notification();
@@ -43,7 +44,7 @@ public class NotificationBean implements NotificationBeanRemote {
 		return n;
 		}
 		
-		throw new NoFriendshipRequestException();
+		throw new OperationFailedException("The user are already friend or there is an old pending friend request");
 	}
 
 	@Override

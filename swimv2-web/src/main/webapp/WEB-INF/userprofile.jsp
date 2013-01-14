@@ -26,7 +26,9 @@
 					<c:if test="${showFR}">
 						<li><a class="btn" href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
 					</c:if>
+					<c:if test="${showMSG }">
 						<li><a class="btn" href="#sendMessage" data-toggle="modal">Send Message</a></li>
+					</c:if>
 						<li><a class="btn" href="helprequest?receiver=${profile.id}">Ask help!</a></li>
 					</ul>
 				</c:when>
