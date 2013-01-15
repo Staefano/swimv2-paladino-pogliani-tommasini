@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = "Friendship.getByUser", query = "SELECT x FROM Friendship x WHERE x.user1 = :user OR x.user2 = :user"),
-		@NamedQuery(name = "Friendship.isDirect", query = "SELECT x FROM Friendship x WHERE (x.user1 = :user1 AND x.user2 = :user2 AND isDirect=:isDirect) OR (x.user1 = :user2 AND x.user2 = :user1 AND isDirect=:isDirect)"),
+		@NamedQuery(name = "Friendship.isDirect", query = "SELECT x FROM Friendship x WHERE (x.user1 = :user1 AND x.user2 = :user2 AND x.direct=:isDirect) OR (x.user1 = :user2 AND x.user2 = :user1 AND x.direct=:isDirect)"),
 
 		@NamedQuery(name = "Friendship.isFriend", query = "SELECT x FROM Friendship x WHERE (x.user1 = :user1 AND x.user2 = :user2) OR (x.user1 = :user2 AND x.user2 = :user1)")
 })
@@ -29,7 +29,7 @@ public class Friendship implements Serializable {
 	@JoinColumn(name = "user2", insertable = false, updatable = false)
 	private User user2;
 
-	private boolean isDirect;
+	private boolean direct;
 	
 	
 	private static final long serialVersionUID = 1L;
@@ -71,11 +71,11 @@ public class Friendship implements Serializable {
 	}
 
 	public boolean isDirect() {
-		return this.isDirect;
+		return this.direct;
 	}
 
 	public void setDirect(boolean isDirect) {
-		this.isDirect = isDirect;
+		this.direct = isDirect;
 	}
 
 	@Override
@@ -116,7 +116,7 @@ public class Friendship implements Serializable {
 	@Override
 	public String toString() {
 		return "Friendship [user1=" + user1Id + ", user2=" + user2
-				+ ", is_direct=" + isDirect + "]";
+				+ ", is_direct=" + direct + "]";
 	}
 
 
