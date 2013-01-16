@@ -10,6 +10,12 @@
 			<span class="add-on"><i class="icon-search"></i></span> 
 			<input name="abilities" class="span5" type="text"
 				placeholder="cooker, plumber">
+			<label class="inline add-on" >
+				<input type="radio" name="scope" value="all" checked="checked"> all the users 
+			</label>
+			<label class="inline add-on" >
+				<input type="radio" name="scope" value="friends"> friends only 
+			</label>
 			<button type="submit" class="btn btn-primary">Find help!</button>
 		</form>
 	</jsp:attribute>

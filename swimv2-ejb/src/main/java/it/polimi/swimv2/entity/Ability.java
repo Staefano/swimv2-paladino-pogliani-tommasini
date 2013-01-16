@@ -14,6 +14,14 @@ public class Ability implements Serializable {
 	private String name;
 	private static final long serialVersionUID = 1L;
 
+	public Ability() {
+		
+	}
+	
+	public Ability(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return this.name;
 	}

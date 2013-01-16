@@ -7,9 +7,19 @@
 		<h1>Search for help!</h1>
 	</jsp:attribute>
 	<jsp:body>
-		<form class="form-search">
-			<input type="text" name="abilities" class="span6 input-medium search-query" value="${abilities}">
-			<button type="submit" class="btn">Search</button>
+		<form class="input-prepend input-append" action="search" method="get">
+			<span class="add-on"><i class="icon-search"></i></span> 
+			<input name="abilities" class="span5" type="text"
+				placeholder="cooker, plumber" value="${abilities}">
+			<c:if test="${not empty user}">
+			<label class="inline add-on" >
+				<input type="radio" name="scope" value="all" checked="checked"> all the users 
+			</label>
+			<label class="inline add-on" >
+				<input type="radio" name="scope" value="friends"> friends only 
+			</label>
+			</c:if>
+			<button type="submit" class="btn btn-primary">Find help!</button>
 		</form>
 	
 		<c:choose>

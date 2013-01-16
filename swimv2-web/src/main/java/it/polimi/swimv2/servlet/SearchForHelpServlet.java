@@ -22,9 +22,15 @@ public class SearchForHelpServlet extends Controller {
 	
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-		// TODO pagination, anyone?
 		String queryString = nav.getParam("abilities");
-		List<User> results = bean.searchForHelp(generateListOfAbilities(queryString));
+		String scope = nav.getParam("scope");
+		List<User> results;
+		List<String> abilities = generateListOfAbilities(queryString);
+		if("friends".equals(scope) && nav.getLoggedUser() != null) {
+			results = bean.searchForHelpAmongFriends(nav.getLoggedUser(), abilities);
+		} else {
+			results = bean.searchForHelp(abilities);
+		}
 		nav.setAttribute("abilities",  nav.getParam("abilities")); // revalidate and rebuild the string?
 		if (results == null || results.size() == 0) {
 			nav.setAttribute("found", false);
