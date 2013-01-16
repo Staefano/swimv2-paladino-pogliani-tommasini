@@ -47,12 +47,13 @@ public class HelpRequestBean implements HelpRequestRemote {
 	@Override
 	public void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException {
-		// for simplicity at the web tier level, if comment == null, does nothing
+		// for simplicity at the web tier level, if comment == null, does
+		// nothing
 		Comment c = new Comment();
-		if(!hr.isOpened()) {
+		if (!hr.isOpened()) {
 			throw new ClosedHelpRequestException();
 		}
-		if(comment != null && !comment.trim().isEmpty()) {
+		if (comment != null && !comment.trim().isEmpty()) {
 			c.setSender(sender);
 			c.setHelprequest(hr);
 			c.setText(comment);
@@ -60,7 +61,8 @@ public class HelpRequestBean implements HelpRequestRemote {
 		}
 	}
 
-	@Override @SuppressWarnings("unchecked")
+	@Override
+	@SuppressWarnings("unchecked")
 	public List<Comment> getComments(HelpRequest hr) {
 		Query q = manager.createNamedQuery("Comment.getByHelpRequest");
 		q.setParameter("hr", hr);
@@ -75,7 +77,7 @@ public class HelpRequestBean implements HelpRequestRemote {
 
 			Feedback f = new Feedback();
 			f.setEvaluation(value);
-			f.setString(comment);
+			f.setComment(comment);
 			if (user.equals(hr.getReceiver())) {
 				f.setRole(Role.ASKER);
 				hr.setAskerFeedback(f);
@@ -102,20 +104,19 @@ public class HelpRequestBean implements HelpRequestRemote {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getOpenProvidedHR(User u) {
-		
+
 		Query q = manager.createNamedQuery("HelpRequest.findOpenedByHelper");
-		q.setParameter("helper", u); 
+		q.setParameter("helper", u);
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
 		q.setParameter("zombie", RequestStatus.ZOMBIE);
 
-		try{
+		try {
 			return (List<HelpRequest>) q.getResultList();
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			return null;
 		}
-		
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -123,65 +124,65 @@ public class HelpRequestBean implements HelpRequestRemote {
 	public List<HelpRequest> getClosedProvidedHR(User u) {
 
 		Query q = manager.createNamedQuery("HelpRequest.findClosedByHelper");
-		q.setParameter("helper", u); 
+		q.setParameter("helper", u);
 		q.setParameter("closed", RequestStatus.CLOSED);
 
-		try{
+		try {
 			return (List<HelpRequest>) q.getResultList();
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			return null;
 		}
-	
-	
+
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getOpenRequestedHR(User u) {
 		Query q = manager.createNamedQuery("HelpRequest.findOpenedByAsker");
-		q.setParameter("asker", u); 
+		q.setParameter("asker", u);
 		q.setParameter("accepted", RequestStatus.ACCEPTED);
 		q.setParameter("waiting", RequestStatus.WAITING);
 		q.setParameter("zombie", RequestStatus.ZOMBIE);
-		
-		try{
+
+		try {
 			return (List<HelpRequest>) q.getResultList();
-		}catch(NoResultException nre){
+		} catch (NoResultException nre) {
 			return null;
 		}
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<HelpRequest> getClosedRequestedHR(User u) {
 		Query q = manager.createNamedQuery("HelpRequest.findClosedByAsker");
-		q.setParameter("asker", u); 
+		q.setParameter("asker", u);
 		q.setParameter("closed", RequestStatus.CLOSED);
-		try{
+		try {
 			return (List<HelpRequest>) q.getResultList();
-		} catch(NoResultException nre) {
+		} catch (NoResultException nre) {
 			return null;
 		}
-	
+
 	}
 
 	@Override
 	public HelpRequest findByID(int id) throws NoSouchHRException {
 		Query q = manager.createNamedQuery("HelpRequest.findHRByID");
-		q.setParameter("id", id); 
-		
-		try{
+		q.setParameter("id", id);
+
+		try {
 			return (HelpRequest) q.getSingleResult();
-			
-		}catch(NoResultException nre){
+
+		} catch (NoResultException nre) {
 			throw new NoSouchHRException();
 		}
 	}
 
 	@Override
 	public void refuseHR(HelpRequest hr) throws NoSouchHRException {
-		Query commentQuery = manager.createNamedQuery("Comment.getByHelpRequest");
+		Query commentQuery = manager
+				.createNamedQuery("Comment.getByHelpRequest");
 		commentQuery.setParameter("hr", hr);
 
 		Query hrQuery = manager.createNamedQuery("HelpRequest.findHRByID");
@@ -189,12 +190,14 @@ public class HelpRequestBean implements HelpRequestRemote {
 		try {
 			manager.remove(hrQuery.getSingleResult());
 			@SuppressWarnings("unchecked")
-			List<Comment> commentList = (List<Comment>) commentQuery.getResultList();
+			List<Comment> commentList = (List<Comment>) commentQuery
+					.getResultList();
 			for (Comment comment : commentList) {
 				manager.remove(comment);
 			}
 		} catch (NoResultException nre) {
-			// Notification Bean: The HelpRequest doesn't not exit, deleting has failed
+			// Notification Bean: The HelpRequest doesn't not exit, deleting has
+			// failed
 		}
 	}
 
@@ -205,33 +208,43 @@ public class HelpRequestBean implements HelpRequestRemote {
 	}
 
 	@Override
-	public void addFeedback(HelpRequest hr, int evaluation, String comment, Role role)
-			throws ClosedHelpRequestException {
-		
-		if(hr.getStatus() != RequestStatus.CLOSED) {
+	public void addFeedback(HelpRequest hr, int evaluation, String comment,
+			Role role) throws ClosedHelpRequestException {
+
+		if (hr.getStatus() != RequestStatus.CLOSED) {
 			Feedback f = new Feedback();
 			f.setEvaluation(evaluation);
-			f.setString(comment);
+			f.setComment(comment);
 			f.setRole(role);
-			
-			if(role.equals(Role.ASKER)){
-				
-				hr.setAskerFeedback(f);
-				hr.setStatus(RequestStatus.ZOMBIE);
-	
-			}else if(role.equals(Role.HELPER)){
+
+			if (role.equals(Role.ASKER)) {
 				hr.setReceiverFeedback(f);
+				hr.setStatus(RequestStatus.ZOMBIE);
+				incrementFeedback(hr.getReceiver(), evaluation);
+			} else if (role.equals(Role.HELPER)) {
+				hr.setAskerFeedback(f);
 				hr.setStatus(RequestStatus.CLOSED);
-	
+				incrementFeedback(hr.getSender(), evaluation);
 			}
-			
-			 manager.persist(f);
-			 manager.merge(hr);
-		}
-		else {
+
+			manager.persist(f);
+			manager.merge(hr);
+		} else {
 			throw new ClosedHelpRequestException();
 		}
-		
+
+	}
+
+	private void incrementFeedback(User user, int evaluation) {
+
+		if (evaluation == 0) {
+			user.addNegFB();
+		} else if (evaluation == 1) {
+			user.addNeuFB();
+		} else if (evaluation == 2) {
+			user.addPosFB();
+		}
+		manager.merge(user);
 	}
 
 }

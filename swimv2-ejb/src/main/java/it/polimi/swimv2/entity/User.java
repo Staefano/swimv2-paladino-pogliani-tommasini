@@ -12,10 +12,8 @@ import javax.persistence.*;
 @NamedQueries({
 		@NamedQuery(name = "User.findByEmail", query = "SELECT x FROM User x WHERE x.email = :email"),
 		@NamedQuery(name = "User.getUserByID", query = "SELECT x FROM User x WHERE x.id = :id"),
-		@NamedQuery(name = "User.searchUser", query = "SELECT x FROM User x WHERE " +
-				"CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) LIKE :name")
-})
-
+		@NamedQuery(name = "User.searchUser", query = "SELECT x FROM User x WHERE "
+				+ "CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) LIKE :name") })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
@@ -35,10 +33,18 @@ public class User implements Serializable {
 	private String minibio;
 	private String description;
 	private UserRole role;
-	
+
+	// feedback
+	@Column(columnDefinition = "integer default 0")
+	private int posFB;
+	@Column(columnDefinition = "integer default 0")
+	private int neuFB;
+	@Column(columnDefinition = "integer default 0")
+	private int negFB;
+
 	@OneToOne
 	private UserImage image;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	// manytomany unidirezionale dato che ability non tiene traccia dell'user
@@ -129,20 +135,70 @@ public class User implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public UserImage getImage() {
 		return this.image;
 	}
-	
+
 	public void setImage(UserImage image) {
 		this.image = image;
 	}
 
 	public boolean isAdmin() {
-		if(role == UserRole.ADMIN) {
+		if (role == UserRole.ADMIN) {
 			return true;
 		}
 		return false;
+	}
+
+	public int getPosFB() {
+		return posFB;
+	}
+
+	public void setPosFB(int posFB) {
+		this.posFB = posFB;
+	}
+
+	public int getNeuFB() {
+		return neuFB;
+	}
+
+	public void setNeuFB(int neuFB) {
+		this.neuFB = neuFB;
+	}
+
+	public int getNegFB() {
+		return negFB;
+	}
+
+	public void setNegFB(int negFB) {
+		this.negFB = negFB;
+	}
+	
+	public void addPosFB() {
+		posFB += 1;
+	}
+	
+	public void addNeuFB() {
+		neuFB += 1;
+	}
+
+	public void addNegFB() {
+		negFB += 1;
+	}
+
+	@Transient
+	public float reputation() {
+		if( posFB == 0 && neuFB == 0 && negFB == 0) {
+			return 0;
+		}
+		
+		return ((posFB - negFB) / (posFB + neuFB + negFB));
+	}
+
+	@Transient
+	public int experience() {
+		return (posFB + neuFB + negFB);
 	}
 
 	@Override

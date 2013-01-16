@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.List;
 
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.remote.HelpRequestRemote;
 import it.polimi.swimv2.session.remote.MessageManagerBeanRemote;
 import it.polimi.swimv2.session.remote.NotificationBeanRemote;
+import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
@@ -30,6 +32,9 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 	@EJB
 	private HelpRequestRemote hrBean;
 
+	@EJB
+	private UserBeanRemote userBean;
+	
     public PersonalAreaServlet() {
         super(AccessRole.USER);
     }
@@ -44,6 +49,15 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 		nav.setAttribute("usersWithUnread",  usersWithUnread);
 		nav.setAttribute("openProvidingHR", hrBean.getOpenProvidedHR(loggedUser));
 		nav.setAttribute("openReceivingHR", hrBean.getOpenRequestedHR(loggedUser));
+		
+		try {
+			User logged = nav.getLoggedUser();
+			nav.setLogin(userBean.getUserByID(logged.getId()));
+		} catch (NoSuchUserException e) {
+		}
+		
+		nav.setAttribute("xp", loggedUser.experience());
+		nav.setAttribute("rep", loggedUser.reputation());
 
 		nav.fwd(PERSONALAREA_JSP);
 	}

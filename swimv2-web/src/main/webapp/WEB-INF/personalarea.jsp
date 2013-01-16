@@ -33,7 +33,7 @@
 							<c:if test="${empty openProvidingHR}">
 								No open help request.
 							</c:if>
-							<c:forEach var="hr" items="${openProvidingHR}" begin="0" end="2">
+							<c:forEach var="hr" items="${openProvidingHR}">
 								<t:providing-hr hr="${hr}"/>
 						</c:forEach>
 						</div>
@@ -41,7 +41,7 @@
 							<c:if test="${empty openReceivingHR}">
 								No open help request.
 							</c:if>
-							<c:forEach var="hr" items="${openReceivingHR}" begin="0" end="2">
+							<c:forEach var="hr" items="${openReceivingHR}">
 								<t:asking-hr hr="${hr}"/>						
 						</c:forEach>
 						</div>

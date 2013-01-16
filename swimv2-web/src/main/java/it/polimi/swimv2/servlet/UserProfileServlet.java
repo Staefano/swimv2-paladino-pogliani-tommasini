@@ -32,6 +32,8 @@ public class UserProfileServlet extends Controller {
 		try {
 			User u = ubr.getUserByID(Integer.parseInt(id));
 			nav.setAttribute("profile", u);
+			//nav.setAttribute("xp", u);
+			//nav.setAttribute("rep", u);
 			nav.setAttribute("friendsList", friendshipBean.getFriends(u));
 			nav.setAttribute("providedList", ubr.getProvidedHelpRequest(u));
 			nav.setAttribute("receivedList", ubr.getReceivedHelpRequest(u));

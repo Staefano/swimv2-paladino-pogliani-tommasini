@@ -12,15 +12,15 @@
 					
 
 					<label class="radio inline">
-						<input type="radio" name="evaluation" id="optionsRadios1" value="1" checked>
+						<input type="radio" name="evaluation" id="optionsRadios1" value="0" checked>
 							<i class="icon-minus"></i>
 					</label>
 					<label class="radio inline">
-						<input type="radio" name="evaluation" id="optionsRadios2" value="2">
+						<input type="radio" name="evaluation" id="optionsRadios2" value="1">
 							<i class="icon-asterisk"></i>
 					</label>
 					<label class="radio inline">
-						<input type="radio" name="evaluation" id="optionsRadios2" value="3">
+						<input type="radio" name="evaluation" id="optionsRadios2" value="2">
 							<i class="icon-plus"></i>
 					</label>
 

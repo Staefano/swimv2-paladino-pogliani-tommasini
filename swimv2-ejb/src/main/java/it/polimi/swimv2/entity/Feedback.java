@@ -11,7 +11,7 @@ public class Feedback implements Serializable {
 	@GeneratedValue
 	private int id;
 	private int evaluation;
-	private String string;
+	private String comment;
 	private Role role;
 	private static final long serialVersionUID = 1L;
 
@@ -35,12 +35,12 @@ public class Feedback implements Serializable {
 		this.evaluation = evaluation;
 	}
 
-	public String getString() {
-		return this.string;
+	public String getComment() {
+		return this.comment;
 	}
 
-	public void setString(String string) {
-		this.string = string;
+	public void setComment(String string) {
+		this.comment = string;
 	}
 
 	public Role getRole() {
@@ -54,7 +54,7 @@ public class Feedback implements Serializable {
 	@Override
 	public String toString() {
 		return "Feedback [id=" + id + ", evaluation=" + evaluation
-				+ ", String=" + string + ", role=" + role + "]";
+				+ ", String=" + comment + ", role=" + role + "]";
 	}
 	
 	@Override

@@ -7,6 +7,10 @@
 <div class="span2">
 	<img class="img-polaroid"
 		src="${pageContext.request.contextPath}/images/profile?user=${user.id}" />
+		<div class="container">
+			<div class="span1"><h4>${xp}</h4></div>
+			<div class="span1"><h4>${rep}</h4></div>
+		</div>
 	<div class="progress">
 		<div class="bar bar-success" style="width: 60%;"></div>
 		<div class="bar bar-warning" style="width: 30%;"></div>

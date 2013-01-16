@@ -16,49 +16,50 @@ import javax.servlet.ServletException;
 
 public class FeedbackServlet extends Controller implements Servlet {
 	private static final long serialVersionUID = 1L;
-      
-	@EJB 
+
+	@EJB
 	private HelpRequestRemote hrBean;
-    
-    public FeedbackServlet() {
-        super(AccessRole.USER);
-    }
+	
+	public FeedbackServlet() {
+		super(AccessRole.USER);
+	}
 
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
-	
-			String requestId = nav.getParam("hr_id");
-			String role = nav.getParam("role");
-			int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
-			String comment = nav.getParam("comment");
-			
-			try {
-					if(role.equals("helper")){
-						hrBean.addFeedback(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.HELPER);
-					}else if(role.equals("asker")){
-						hrBean.addFeedback(hrBean.findByID(Integer.parseInt(requestId)), evaluation, comment, Role.ASKER);
 
-					}
+		String requestId = nav.getParam("hr_id");
+		String role = nav.getParam("role");
+		int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
+		String comment = nav.getParam("comment");
 
-			} catch (NoSouchHRException e) {
-				// TODO Auto-generated catch block
-			} catch (ClosedHelpRequestException e) {
-				// TODO Auto-generated catch block
+		try {
+			if (role.equals("helper")) {
+				hrBean.addFeedback(
+						hrBean.findByID(Integer.parseInt(requestId)),
+						evaluation, comment, Role.HELPER);
+			} else if (role.equals("asker")) {
+				hrBean.addFeedback(
+						hrBean.findByID(Integer.parseInt(requestId)),
+						evaluation, comment, Role.ASKER);
 			}
 
-			nav.fwd(BASEPATH);
-			
+		} catch (NoSouchHRException e) {
+			// TODO Auto-generated catch block
+		} catch (ClosedHelpRequestException e) {
+			// TODO Auto-generated catch block
+		}
+
+		nav.fwd(BASEPATH);
+
 	}
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-		
+
 		nav.setAttribute("hr", nav.getParam("hr_id"));
 		nav.setAttribute("role", nav.getParam("role"));
 		nav.fwd("WEB-INF/feedbackform.jsp");
-		
-		
-		
+
 	}
 
 }
