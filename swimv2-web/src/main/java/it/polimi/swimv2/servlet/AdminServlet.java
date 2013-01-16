@@ -54,7 +54,7 @@ public class AdminServlet extends Controller {
 				abilityBean.addNewAbility(request.getAbility());
 			}
 			notificationBean.notifyAbilityChoice(request, choice);
-			abilityBean.removeAbilityRequest(request, choice);
+			abilityBean.removeAbilityRequest(request);
 			nav.setAttribute("message", choice);
 			nav.setAttribute("abName", abName);
 		}

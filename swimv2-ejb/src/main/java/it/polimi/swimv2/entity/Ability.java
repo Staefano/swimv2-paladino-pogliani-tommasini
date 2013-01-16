@@ -5,7 +5,8 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-		@NamedQuery(name = "Ability.searchAbility", query = "SELECT a FROM Ability a WHERE TRIM(a.name) LIKE :name")
+		@NamedQuery(name = "Ability.searchAbility", query = "SELECT a FROM Ability a WHERE TRIM(a.name) LIKE :name"),
+		@NamedQuery(name = "Ability.searchByName", query = "SELECT a FROM Ability a WHERE a.name = :name")
 })
 
 public class Ability implements Serializable {

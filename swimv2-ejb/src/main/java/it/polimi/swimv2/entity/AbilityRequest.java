@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
 	@NamedQuery(name="AbilityRequest.findByName",
-			query="SELECT a FROM AbilityRequest a WHERE a.ability = :name")
+			query="SELECT a FROM AbilityRequest a WHERE a.ability = :name"),
+	@NamedQuery(name="AbilityRequest.retrieveAll",
+			query="SELECT a FROM AbilityRequest a ORDER BY a.timestamp DESC")
 })
 
 public class AbilityRequest implements Serializable {

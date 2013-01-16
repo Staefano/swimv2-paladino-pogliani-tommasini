@@ -21,7 +21,7 @@ public interface AbilityBeanRemote {
 
 	AbilityRequest getRequest(int abId);
 	
-	void removeAbilityRequest(AbilityRequest request, String choice);
+	void removeAbilityRequest(AbilityRequest request);
 
 	boolean alreadyExist(String ability);
 	

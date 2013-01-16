@@ -4,12 +4,14 @@ import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.AbilityRequest;
 import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.session.remote.AbilityBeanRemote;
+import it.polimi.swimv2.session.remote.NotificationBeanRemote;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -21,7 +23,10 @@ public class AbilityBean implements AbilityBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
-
+	
+	@EJB
+	private NotificationBeanRemote notificationBean;
+	
 	@Override
 	public void requestAbility(String name, String comment, User user) {
 		AbilityRequest request = new AbilityRequest();
@@ -35,15 +40,30 @@ public class AbilityBean implements AbilityBeanRemote {
 	@Override @SuppressWarnings("unchecked")
 	public List<AbilityRequest> retrievePendingRequests() {
 		Query q = manager
-				.createQuery("SELECT a FROM AbilityRequest a ORDER BY a.timestamp DESC");
+				.createNamedQuery("AbilityRequest.retrieveAll");
 		return q.getResultList();
 	}
 
 	@Override
 	public void addNewAbility(String name) {
+		// aggiungo la nuova ability
 		Ability newAbility = new Ability();
 		newAbility.setName(name);
 		manager.persist(newAbility);
+		
+		
+		// notifico chi aveva richiesto tale ability
+		Query q = manager
+				.createNamedQuery("AbilityRequest.retrieveAll");
+		@SuppressWarnings("unchecked")
+		List<AbilityRequest> reqs = q.getResultList();
+		for (AbilityRequest r : reqs) {
+			if( r.getAbility().equals(name) ) {
+				notificationBean.notifyAbilityAccepted(r);
+				removeAbilityRequest(r);
+			}
+		}
+		
 	}
 
 	@Override
@@ -63,7 +83,7 @@ public class AbilityBean implements AbilityBeanRemote {
 	}
 
 	@Override
-	public void removeAbilityRequest(AbilityRequest request, String choice) {
+	public void removeAbilityRequest(AbilityRequest request) {
 		List<AbilityRequest> reqs = getWithSameName(request);
 		for (AbilityRequest r : reqs) {
 			manager.remove(r);
@@ -74,7 +94,7 @@ public class AbilityBean implements AbilityBeanRemote {
 	@Override
 	public boolean alreadyExist(String ability) {
 		Query q = manager
-				.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
+				.createNamedQuery("Ability.searchByName");
 		q.setParameter("name", ability);
 
 		try {
@@ -91,7 +111,7 @@ public class AbilityBean implements AbilityBeanRemote {
 
 		List<Ability> abilities = new ArrayList<Ability>();
 		Query q = manager
-				.createQuery("SELECT a FROM Ability a WHERE a.name=:name");
+				.createNamedQuery("Ability.searchByName");
 		for (String aName : abilityNames) {
 			
 			q.setParameter("name", aName);
