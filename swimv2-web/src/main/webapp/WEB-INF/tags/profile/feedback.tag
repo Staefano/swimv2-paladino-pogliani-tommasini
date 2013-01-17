@@ -17,6 +17,7 @@
 								You don't have any feedback.
 							</c:if>
 				<c:forEach var="hrp" items="${providedList}">
+					<c:if test="${ not empty hrp.receiverFeedback }">
 					<p>
 						<c:if test="${hrp.receiverFeedback.evaluation == '0'}">
 							<dl>
@@ -37,13 +38,15 @@
 							</dl>
 						</c:if>
 					</p>
+					</c:if>
 				</c:forEach>
 			</div>
 			<div class="tab-pane" id="tab2">
 				<c:if test="${empty receivedList }">
-								You don't have any feedback.
-							</c:if>
+					You don't have any feedback.
+				</c:if>
 				<c:forEach var="hrr" items="${receivedList}">
+					<c:if test="${not empty hrr.askerFeedback}">
 					<p>
 						<c:if test="${hrr.askerFeedback.evaluation == '0'}">
 							<dl>
@@ -64,6 +67,7 @@
 							</dl>
 						</c:if>
 					</p>
+					</c:if>
 				</c:forEach>
 			</div>
 		</div>

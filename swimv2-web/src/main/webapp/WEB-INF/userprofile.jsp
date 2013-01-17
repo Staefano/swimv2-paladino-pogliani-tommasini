@@ -28,12 +28,10 @@
 				<c:when test="${user != profile}">
 					<ul class="swim-page-navigation pull-right">
 					<c:if test="${user.admin && !profile.admin }">
-						<li><a class="btn btn-success"
-											href="promote?profileId=${profile.id}">Promote to Admin</a></li>
+						<li><a class="btn btn-success" href="promote?profileId=${profile.id}">Promote to Admin</a></li>
 					</c:if>
 					<c:if test="${showFR}">
-						<li><a class="btn"
-											href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
+						<li><a class="btn" href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=direct">Add as friend</a></li>
 					</c:if>
 					<c:if test="${showMSG }">
 						<li><a class="btn" href="#sendMessage" data-toggle="modal">Send Message</a></li>
@@ -50,17 +48,14 @@
 			</c:if>
 			<c:if test="${not empty profile.minibio}">
 			<div class="well" style="margin-left: 1.5em;">
-				<p>
-								<i>${profile.minibio}</i>
-							</p>
+				<p><i>${profile.minibio}</i></p>
 			</div>
 			</c:if>
 		</div>
 		<div class="row">
 			<p:central-profile profile="${profile}" user="${user}"></p:central-profile>
 			<div class="span3" style="float: left">
-				<p:feedback providedList="${providedList}"
-							receivedList="${receivedList}" />		
+				<p:feedback providedList="${providedList}" receivedList="${receivedList}" />		
 			</div>
 		</div>
 	</div>
