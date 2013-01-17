@@ -2,11 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@attribute name="user" required="true" type="it.polimi.swimv2.entity.User" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <div class="thumbnail" style="margin-bottom: 0.3em;">
-  <!-- TODO image and the rest... -->
   <div class="caption" style="overflow: hidden;">
-  	<img class="img-polaroid pull-left" style="clear: both; margin-right: 1em; max-width: 100px;" src="${pageContext.servletContext.contextPath}/images/profile?user=${user.id}">
+  	<div class="pull-left" style="clear: both; margin-right: 1em; max-width: 120px;">
+  		<img class="img-polaroid" width="110px;" src="${pageContext.request.contextPath}/images/profile?user=${user.id}" />
+			<t:progressbar user="${user}" />
+  	</div>
+  	<div style="font-size: 1.4em; font-weight: bold; float: left; height: 100%; margin-right: 1em;">
+  		<p style="margin-top: 1em;">${user.experience}</p>
+  		<p style="margin-top: 2em;">${user.reputation}</p>
+	</div>
     <h3><a href="profile?id=${user.id}">${user.name} ${user.surname}</a></h3>
     <p>${user.minibio}</p>
   </div>

@@ -136,9 +136,12 @@
 					</div>
 				</div>
 		
-				<div class="span1"></div>
-			
-				<t:userinfo user="${user}" />
+				<div class="span3">
+					<div style="width: 160px; margin: 0 auto;">
+					<t:userinfo user="${user}" width="150px"/>
+					<p>${user.minibio}</p>
+					</div>
+				</div>
 			
 			</div>
 		</div>

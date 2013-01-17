@@ -17,6 +17,7 @@
 	<div class="container">
 	<div class="row">
 		<div class="span3">
+			<t:userinfo user="${profile}" width="210px"/>
 			<p:left-badge profile="${profile}" />
 			<c:if test="${showFirends || user==profile}">
 				<p:friendlist profile="${profile}" friends="${friendsList}" />

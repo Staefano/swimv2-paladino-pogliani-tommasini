@@ -189,14 +189,16 @@ public class HelpRequestBean implements HelpRequestRemote {
 		feedback.setRole(role);
 		feedback.setComment(comment);
 		if(role.equals(Role.ASKER)) {
+			// I'm the asker ==> I put feedback on the receiver
 			request.setReceiverFeedback(feedback);
 			request.setStatus(RequestStatus.ZOMBIE);
 		} else if(role.equals(Role.HELPER)) {
+			// I'm the receiver ==> I put feedback on the asker
 			request.setAskerFeedback(feedback);
 			request.setStatus(RequestStatus.CLOSED);
 		}
 		// add the feedback to the user to pre-compute aggregate values
-		User user = role == Role.ASKER ? request.getSender() : request.getReceiver(); 
+		User user = role == Role.ASKER ? request.getReceiver() : request.getSender(); 
 		user.addFeedback(evaluation, role);
 		// save it all
 		manager.persist(feedback);

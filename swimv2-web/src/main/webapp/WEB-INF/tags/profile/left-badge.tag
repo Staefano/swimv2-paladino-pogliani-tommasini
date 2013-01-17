@@ -6,7 +6,6 @@
 
 <%@attribute name="profile" required="true" type="it.polimi.swimv2.entity.User" %>
 
-<img class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${profile.id}" />
 <ul style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
 	<li><i class="icon-user"></i> ${profile.name} ${profile.surname}</li>
 	<li><i class="icon-envelope"></i> <a href="mailto:${profile.email}">${profile.email}</a></li>

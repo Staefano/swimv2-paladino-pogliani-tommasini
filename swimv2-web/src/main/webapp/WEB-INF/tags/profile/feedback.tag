@@ -18,26 +18,21 @@
 							</c:if>
 				<c:forEach var="hrp" items="${providedList}">
 					<c:if test="${ not empty hrp.receiverFeedback }">
-					<p>
-						<c:if test="${hrp.receiverFeedback.evaluation == '0'}">
-							<dl>
-								<dt><i class="icon-minus"></i> ${hrp.subject}</dt>
-								<dd><small>${hrp.receiverFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-						<c:if test="${hrp.receiverFeedback.evaluation == '1'}">
-							<dl>
-								<dt><i class="icon-asterisk"></i> ${hrp.subject}</dt>
-								<dd><small>${hrp.receiverFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-						<c:if test="${hrp.receiverFeedback.evaluation == '2'}">
-							<dl>
-								<dt><i class="icon-plus"></i> ${hrp.subject}</dt>
-								<dd><small>${hrp.receiverFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-					</p>
+					<dl>
+						<dt><c:choose>
+							<c:when test="${hrp.receiverFeedback.evaluation == 'NEGATIVE'}">
+								<i class="icon-minus"></i>
+							</c:when>
+							<c:when test="${hrp.receiverFeedback.evaluation == 'NEUTRAL'}">
+								<i class="icon-asterisk"></i>
+							</c:when>
+							<c:when test="${hrp.receiverFeedback.evaluation == 'POSITIVE'}"> 
+								<i class="icon-plus"></i>
+							</c:when>
+						</c:choose>
+						${hrp.subject}</dt>
+						<dd><small>${hrp.receiverFeedback.comment}</small></dd>
+					</dl>
 					</c:if>
 				</c:forEach>
 			</div>
@@ -47,26 +42,21 @@
 				</c:if>
 				<c:forEach var="hrr" items="${receivedList}">
 					<c:if test="${not empty hrr.askerFeedback}">
-					<p>
-						<c:if test="${hrr.askerFeedback.evaluation == '0'}">
-							<dl>
-								<dt><i class="icon-minus"></i> ${hrr.subject}</dt>
-								<dd><small>${hrr.askerFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-						<c:if test="${hrr.askerFeedback.evaluation == '1'}">
-							<dl>
-								<dt><i class="icon-asterisk"></i> ${hrr.subject}</dt>
-								<dd><small>${hrr.askerFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-						<c:if test="${hrr.askerFeedback.evaluation == '2'}">
-							<dl>
-								<dt><i class="icon-plus"></i> ${hrr.subject}</dt>
-								<dd><small>${hrr.askerFeedback.comment}</small></dd>
-							</dl>
-						</c:if>
-					</p>
+					<dl>
+						<dt><c:choose>
+							<c:when test="${hrr.askerFeedback.evaluation == 'NEGATIVE'}">
+								<i class="icon-minus"></i>
+							</c:when>
+							<c:when test="${hrr.askerFeedback.evaluation == 'NEUTRAL'}">
+								<i class="icon-asterisk"></i>
+							</c:when>
+							<c:when test="${hrr.askerFeedback.evaluation == 'POSITIVE'}"> 
+								<i class="icon-plus"></i>
+							</c:when>
+						</c:choose>
+						${hrr.subject}</dt>
+						<dd><small>${hrr.askerFeedback.comment}</small></dd>
+					</dl>
 					</c:if>
 				</c:forEach>
 			</div>
