@@ -1,5 +1,7 @@
 package it.polimi.swimv2.entity;
 
+import it.polimi.swimv2.enums.FeedbackValue;
+import it.polimi.swimv2.enums.Role;
 import it.polimi.swimv2.enums.UserRole;
 
 import java.io.Serializable;
@@ -41,6 +43,8 @@ public class User implements Serializable {
 	private int neuFB;
 	@Column(columnDefinition = "integer default 0")
 	private int negFB;
+	@Column(columnDefinition = "integer default 0")
+	private int experience;
 
 	@OneToOne
 	private UserImage image;
@@ -175,30 +179,37 @@ public class User implements Serializable {
 		this.negFB = negFB;
 	}
 	
-	public void addPosFB() {
-		posFB += 1;
+	public int getExperience() {
+		return experience;
 	}
 	
-	public void addNeuFB() {
-		neuFB += 1;
+	public void setExperience(int experience) {
+		this.experience = experience;
 	}
-
-	public void addNegFB() {
-		negFB += 1;
-	}
-
-	@Transient
-	public float reputation() {
-		if( posFB == 0 && neuFB == 0 && negFB == 0) {
-			return 0;
+	
+	/* helper methods */
+	public void addFeedback(FeedbackValue evaluation, Role role) {
+		if(role == Role.HELPER) {
+			setExperience(getExperience() + 1);
 		}
-		
-		return ((posFB - negFB) / (posFB + neuFB + negFB));
+		// incrementa # feedback
+		if(evaluation == FeedbackValue.NEGATIVE) {
+			negFB += 1;
+		} else if(evaluation == FeedbackValue.POSITIVE) {
+			posFB += 1;
+		} else {
+			neuFB += 1;
+		}
 	}
 
 	@Transient
-	public int experience() {
-		return (posFB + neuFB + negFB);
+	public float getReputation() {
+		int sum = posFB + neuFB + negFB;
+		if(sum == 0) {
+			return 0;
+		} else {
+			return (float) (posFB - negFB) / sum;
+		}
 	}
 
 	@Override

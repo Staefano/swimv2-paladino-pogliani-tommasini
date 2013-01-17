@@ -8,5 +8,5 @@ package it.polimi.swimv2.enums;
  * - CLOSED: the request is closed. Both users left a feedback.
  */
 public enum RequestStatus {
-	WAITING, ACCEPTED, DENIED, ZOMBIE, CLOSED
+	WAITING, ACCEPTED, DENIED, ZOMBIE, CLOSED;
 }

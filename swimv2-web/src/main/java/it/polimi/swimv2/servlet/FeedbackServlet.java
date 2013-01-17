@@ -1,5 +1,6 @@
 package it.polimi.swimv2.servlet;
 
+import it.polimi.swimv2.enums.FeedbackValue;
 import it.polimi.swimv2.enums.Role;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
@@ -29,7 +30,8 @@ public class FeedbackServlet extends Controller implements Servlet {
 
 		String requestId = nav.getParam("hr_id");
 		String role = nav.getParam("role");
-		int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
+		// int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
+		FeedbackValue evaluation = FeedbackValue.stringToValue((String) nav.getParam("evaluation"));
 		String comment = nav.getParam("comment");
 
 		try {

@@ -6,6 +6,7 @@ import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.Comment;
 import it.polimi.swimv2.entity.HelpRequest;
 import it.polimi.swimv2.entity.User;
+import it.polimi.swimv2.enums.FeedbackValue;
 import it.polimi.swimv2.enums.Role;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
@@ -17,14 +18,17 @@ public interface HelpRequestRemote {
 
 	List<Comment> getComments(HelpRequest hr);
 
+	/*
 	void giveFeedback(int value, String comment, HelpRequest hr, User user)
-			throws ClosedHelpRequestException;
+			throws ClosedHelpRequestException; */
 
 	void addComment(HelpRequest hr, String comment, User sender)
 			throws ClosedHelpRequestException;
 	
-	void addFeedback(HelpRequest hr, int evaluation, String comment, Role role)
-			throws ClosedHelpRequestException;
+	/*void addFeedback(HelpRequest hr, int evaluation, String comment, Role role)
+			throws ClosedHelpRequestException;*/
+	void addFeedback(HelpRequest request, FeedbackValue evaluation, String comment,
+			Role role) throws ClosedHelpRequestException;
 
 
 	void refuseHR(HelpRequest hr) throws NoSouchHRException;

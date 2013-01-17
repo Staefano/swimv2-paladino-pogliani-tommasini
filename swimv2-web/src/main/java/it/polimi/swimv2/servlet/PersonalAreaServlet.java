@@ -56,8 +56,8 @@ public class PersonalAreaServlet extends Controller implements Servlet {
 		} catch (NoSuchUserException e) {
 		}
 		
-		nav.setAttribute("xp", loggedUser.experience());
-		nav.setAttribute("rep", loggedUser.reputation());
+		nav.setAttribute("xp", loggedUser.getExperience());
+		nav.setAttribute("rep", loggedUser.getReputation());
 
 		nav.fwd(PERSONALAREA_JSP);
 	}

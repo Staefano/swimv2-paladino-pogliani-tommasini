@@ -8,6 +8,7 @@ import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
 import it.polimi.swimv2.session.remote.HelpRequestRemote;
 import it.polimi.swimv2.entity.HelpRequest;
+import it.polimi.swimv2.enums.FeedbackValue;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.Role;
 
@@ -67,38 +68,6 @@ public class HelpRequestBean implements HelpRequestRemote {
 		Query q = manager.createNamedQuery("Comment.getByHelpRequest");
 		q.setParameter("hr", hr);
 		return q.getResultList();
-	}
-
-	@Override
-	public void giveFeedback(int value, String comment, HelpRequest hr,
-			User user) throws ClosedHelpRequestException {
-
-		if (hr.isOpened()) {
-
-			Feedback f = new Feedback();
-			f.setEvaluation(value);
-			f.setComment(comment);
-			if (user.equals(hr.getReceiver())) {
-				f.setRole(Role.ASKER);
-				hr.setAskerFeedback(f);
-				// If the user who is giving the feedback is the receiver of the
-				// hr
-				// the feedbackrole should be "asker"
-			} else if (user.equals(hr.getSender())) {
-				f.setRole(Role.HELPER);
-				hr.setReceiverFeedback(f);
-				// If the user who is giving the feedback is the sender of the
-				// hr
-				// the feedbackrole should be "helper"
-			}
-
-			manager.persist(f);
-			manager.merge(hr);
-
-		} else {
-			throw new ClosedHelpRequestException();
-		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -206,45 +175,34 @@ public class HelpRequestBean implements HelpRequestRemote {
 		hr.setStatus(RequestStatus.ACCEPTED);
 		manager.merge(hr);
 	}
-
+	
 	@Override
-	public void addFeedback(HelpRequest hr, int evaluation, String comment,
-			Role role) throws ClosedHelpRequestException {
-
-		if (hr.getStatus() != RequestStatus.CLOSED) {
-			Feedback f = new Feedback();
-			f.setEvaluation(evaluation);
-			f.setComment(comment);
-			f.setRole(role);
-
-			if (role.equals(Role.ASKER)) {
-				hr.setReceiverFeedback(f);
-				hr.setStatus(RequestStatus.ZOMBIE);
-				incrementFeedback(hr.getReceiver(), evaluation);
-			} else if (role.equals(Role.HELPER)) {
-				hr.setAskerFeedback(f);
-				hr.setStatus(RequestStatus.CLOSED);
-				incrementFeedback(hr.getSender(), evaluation);
-			}
-
-			manager.persist(f);
-			manager.merge(hr);
-		} else {
+	public void addFeedback(HelpRequest request, FeedbackValue evaluation,
+			String comment, Role role) throws ClosedHelpRequestException {
+		
+		if(!request.canPlaceFeedback(role)) {
 			throw new ClosedHelpRequestException();
 		}
 
-	}
-
-	private void incrementFeedback(User user, int evaluation) {
-
-		if (evaluation == 0) {
-			user.addNegFB();
-		} else if (evaluation == 1) {
-			user.addNeuFB();
-		} else if (evaluation == 2) {
-			user.addPosFB();
+		Feedback feedback = new Feedback();
+		feedback.setEvaluation(evaluation);
+		feedback.setRole(role);
+		feedback.setComment(comment);
+		if(role.equals(Role.ASKER)) {
+			request.setReceiverFeedback(feedback);
+			request.setStatus(RequestStatus.ZOMBIE);
+		} else if(role.equals(Role.HELPER)) {
+			request.setAskerFeedback(feedback);
+			request.setStatus(RequestStatus.CLOSED);
 		}
+		// add the feedback to the user to pre-compute aggregate values
+		User user = role == Role.ASKER ? request.getSender() : request.getReceiver(); 
+		user.addFeedback(evaluation, role);
+		// save it all
+		manager.persist(feedback);
+		manager.merge(request);
 		manager.merge(user);
+		
 	}
 
 }

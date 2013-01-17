@@ -1,5 +1,6 @@
 package it.polimi.swimv2.entity;
 
+import it.polimi.swimv2.enums.FeedbackValue;
 import it.polimi.swimv2.enums.Role;
 import java.io.Serializable;
 import javax.persistence.*;
@@ -10,7 +11,9 @@ public class Feedback implements Serializable {
 	@Id
 	@GeneratedValue
 	private int id;
-	private int evaluation;
+	
+	private FeedbackValue evaluation;
+	
 	private String comment;
 	private Role role;
 	private static final long serialVersionUID = 1L;
@@ -27,12 +30,12 @@ public class Feedback implements Serializable {
 		this.id = id;
 	}
 
-	public int getEvaluation() {
+	public FeedbackValue getEvaluation() {
 		return this.evaluation;
 	}
 
-	public void setEvaluation(int evaluation) {
-		this.evaluation = evaluation;
+	public void setEvaluation(FeedbackValue evaluation2) {
+		this.evaluation = evaluation2;
 	}
 
 	public String getComment() {
