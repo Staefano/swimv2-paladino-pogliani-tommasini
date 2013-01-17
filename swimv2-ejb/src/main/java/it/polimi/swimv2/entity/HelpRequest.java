@@ -1,7 +1,6 @@
 package it.polimi.swimv2.entity;
 
 import it.polimi.swimv2.enums.RequestStatus;
-import it.polimi.swimv2.enums.Role;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -169,8 +168,8 @@ public class HelpRequest implements Serializable {
 				.equals(RequestStatus.ACCEPTED));
 	}
 
-	public boolean canPlaceFeedback(Role role) {
-			return (role == Role.ASKER && status == RequestStatus.ACCEPTED) || 
-					(role == Role.HELPER && status == RequestStatus.ZOMBIE);
+	public boolean canPlaceFeedback(User user) {
+			return (sender.equals(user) && status == RequestStatus.ACCEPTED) || 
+					(receiver.equals(user) && status == RequestStatus.ZOMBIE);
 	}
 }

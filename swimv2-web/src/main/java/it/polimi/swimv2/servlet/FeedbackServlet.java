@@ -1,7 +1,6 @@
 package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.enums.FeedbackValue;
-import it.polimi.swimv2.enums.Role;
 import it.polimi.swimv2.session.exceptions.ClosedHelpRequestException;
 import it.polimi.swimv2.session.exceptions.NoSouchHRException;
 import it.polimi.swimv2.session.remote.HelpRequestRemote;
@@ -29,22 +28,13 @@ public class FeedbackServlet extends Controller implements Servlet {
 	protected void post(Navigation nav) throws IOException, ServletException {
 
 		String requestId = nav.getParam("hr_id");
-		String role = nav.getParam("role");
-		// int evaluation = Integer.parseInt((String) nav.getParam("evaluation"));
 		FeedbackValue evaluation = FeedbackValue.stringToValue((String) nav.getParam("evaluation"));
 		String comment = nav.getParam("comment");
 
 		try {
-			if (role.equals("helper")) {
-				hrBean.addFeedback(
-						hrBean.findByID(Integer.parseInt(requestId)),
-						evaluation, comment, Role.HELPER);
-			} else if (role.equals("asker")) {
-				hrBean.addFeedback(
-						hrBean.findByID(Integer.parseInt(requestId)),
-						evaluation, comment, Role.ASKER);
-			}
-
+			hrBean.addFeedback(
+					hrBean.findByID(Integer.parseInt(requestId)),
+					evaluation, comment, nav.getLoggedUser());
 		} catch (NoSouchHRException e) {
 			// TODO Auto-generated catch block
 		} catch (ClosedHelpRequestException e) {

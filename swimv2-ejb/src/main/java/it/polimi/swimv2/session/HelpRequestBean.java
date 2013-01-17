@@ -178,33 +178,37 @@ public class HelpRequestBean implements HelpRequestRemote {
 	
 	@Override
 	public void addFeedback(HelpRequest request, FeedbackValue evaluation,
-			String comment, Role role) throws ClosedHelpRequestException {
-		
-		if(!request.canPlaceFeedback(role)) {
+			String comment, User user) throws ClosedHelpRequestException {
+		// NB user is the user who IS CURRENTLY LOGGED IN (i.e., who is giving the feedback!)
+		if(!request.canPlaceFeedback(user)) {
 			throw new ClosedHelpRequestException();
 		}
 
 		Feedback feedback = new Feedback();
 		feedback.setEvaluation(evaluation);
-		feedback.setRole(role);
 		feedback.setComment(comment);
-		if(role.equals(Role.ASKER)) {
-			// I'm the asker ==> I put feedback on the receiver
+		Role role;
+		User other;
+
+		if(request.getSender().equals(user)) {
+			role = Role.HELPER;
 			request.setReceiverFeedback(feedback);
 			request.setStatus(RequestStatus.ZOMBIE);
-		} else if(role.equals(Role.HELPER)) {
-			// I'm the receiver ==> I put feedback on the asker
+			other = request.getReceiver();
+		} else {
+			role = Role.ASKER;
 			request.setAskerFeedback(feedback);
 			request.setStatus(RequestStatus.CLOSED);
+			other = request.getSender();
 		}
+		feedback.setRole(role);
 		// add the feedback to the user to pre-compute aggregate values
-		User user = role == Role.ASKER ? request.getReceiver() : request.getSender(); 
-		user.addFeedback(evaluation, role);
+		
+		other.addFeedback(evaluation, role);
 		// save it all
 		manager.persist(feedback);
 		manager.merge(request);
-		manager.merge(user);
-		
+		manager.merge(other);
 	}
 
 }

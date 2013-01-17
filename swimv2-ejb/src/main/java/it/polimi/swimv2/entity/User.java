@@ -203,13 +203,9 @@ public class User implements Serializable {
 	}
 
 	@Transient
-	public float getReputation() {
+	public int getReputation() {
 		int sum = posFB + neuFB + negFB;
-		if(sum == 0) {
-			return 0;
-		} else {
-			return (float) (posFB - negFB) / sum;
-		}
+		return (sum == 0) ? 0 : (int) ((float) ((posFB - negFB) * 5) / sum) + 5;
 	}
 
 	@Override
