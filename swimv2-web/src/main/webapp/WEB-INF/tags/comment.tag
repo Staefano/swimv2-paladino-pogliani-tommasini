@@ -6,8 +6,14 @@
 <div class="thumbnail">
   <!-- TODO image and the rest... -->
   <div class="caption">
-	<p><b>${comment.sender.name }</b>	- <b>${comment.sender.surname }</b><br>
-			${comment.text}</p>
+	<c:choose>
+		<c:when test="${user == comment.sender}">
+			<p><b>You</b><br> ${comment.text}</p>
+		</c:when>
+		<c:otherwise>
+			<p><a href="profile?id=${comment.sender.id}">${comment.sender.name} ${comment.sender.surname }</a> <br> ${comment.text}</p>
+		</c:otherwise>
+	</c:choose>	
   </div>
 </div>		
 		
