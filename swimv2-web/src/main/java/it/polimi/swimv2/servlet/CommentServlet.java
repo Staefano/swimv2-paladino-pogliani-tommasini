@@ -27,52 +27,40 @@ public class CommentServlet extends Controller {
         super(AccessRole.USER);
     }
     
+    private static final String COMMENTS_JSP = "WEB-INF/comments.jsp";
+    
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-
 		String requestId = nav.getParam("hr_id");
 		try {
 			HelpRequest hr = hrBean.findByID(Integer.parseInt(requestId));
 			List<it.polimi.swimv2.entity.Comment> comments = hrBean.getComments(hr);
 			nav.setAttribute("comments", comments);
 			nav.setAttribute("hr", hr);
-			nav.fwd("WEB-INF/comments.jsp");
-			
+			nav.fwd(COMMENTS_JSP);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		} catch (NoSouchHRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		}
-		
 	}
 	
     
 	@Override
 	protected void post(Navigation nav) throws IOException, ServletException {
-		
 		String requestId = nav.getParam("hr_id");
 		try {
 			HelpRequest hr = hrBean.findByID(Integer.parseInt(requestId));
 			String comment = nav.getParam("comment");
 			hrBean.addComment(hr, comment, nav.getLoggedUser());
-			List<it.polimi.swimv2.entity.Comment> comments = hrBean.getComments(hr);
-			nav.setAttribute("comments", comments);
-			nav.setAttribute("hr", hr);
-			nav.fwd("WEB-INF/comments.jsp");
+			nav.redirect("/comment?hr_id=" + requestId);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		} catch (NoSouchHRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		} catch (ClosedHelpRequestException e) {
-			
+			nav.setAttribute("error", "ClosedRequest");
+			nav.fwd(COMMENTS_JSP);
 		}
-		
-		
 	}
-
-
 }

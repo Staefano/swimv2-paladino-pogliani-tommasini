@@ -15,6 +15,9 @@
 	<jsp:body>
 	
 	<div class="container">
+		<c:if test="${error == 'ClosedRequest'}">
+			<div class="alert alert-error">You can't comment on this request because it's closed! Open another help request or send a message, if you need to contact the other person.</div>
+		</c:if>
 		<div class="row">
 			<div class="span9">
 				<div class="row">

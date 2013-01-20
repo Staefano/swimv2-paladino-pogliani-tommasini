@@ -76,45 +76,45 @@
 							You don't have notifications.
 						</c:if>
 						<c:forEach var="n" items="${notifications}" begin="0" end="2">
-						<div class="well">
 							<p>
 							<c:if test="${n.type=='HELP_REJECTED'}">
-								Your Help Request to <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> was refused
+								The user <a href="profile?id=${n.srcUser.id}">${n.srcUser.name}  ${n.srcUser.surname}</a> refused your help request.
 							</c:if>
 							<c:if test="${n.type=='ADMIN_PROMOTION'}">
-								You have been promoted to Admin!
+								You have been promoted to Administrator!
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_ACCEPTED' || n.type=='FRIENDSHIP_ACCEPTED_DIRECT' }">
-								Your friendship request to user <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved <br>
+								Your friendship request to user <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved. <br>
 								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							<c:if test="${n.type=='ABILITY_ACCCEPTED'}">
-								Your ability request was approved now you can add ${n.ability } to your ability
+								Your ability request was approved. Now you can add ${n.ability} to your abilities.
 							</c:if>
 							<c:if test="${n.type=='ABILITY_REJECTED'}">
-								Your ability request was rejected  ${n.ability } is not a valid ability in SWIMv2
+								Your request to add ${n.ability} as an ability was rejected.
 							</c:if>
-							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}">
-								Friendship NOT DIRECT Request from  <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> 
-									<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a><br>
+							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}"> <%-- indirect friendship --%>
+								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>. 
+								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
-								Friendship DIRECT Request from  <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>
-									<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a><br>
+								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
+								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							</p>
 							<%-- BUTTONS --%>
 							<%-- Mark as read button for all notifications but friendship received --%>
 							<c:choose>
 							<c:when test="${n.type == FRIENDSHIP_RECEIVED || n.type == FRIENDSHIP_RECEIVED_DIRECT }">
+							<p>
 								<a class="btn btn-success" href="friendship?notification_id=${n.id}&answer=accepted">Approve</a>
 				                <a class="btn btn-danger" href="friendship?notification_id=${n.id}&answer=refused">Refuse</a>
+				            </p>
 							</c:when>
 							<c:otherwise>
-								<a class="btn btn-success" href="readnotification?notification_id=${n.id}">Mark as Read</a>
+								<p style="text-align: right;"><a href="readnotification?notification_id=${n.id}">Mark as Read</a></p>
 							</c:otherwise>
 							</c:choose>
-						</div>
 						</c:forEach>
 					</div>
 					</div>
