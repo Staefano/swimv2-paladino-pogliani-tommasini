@@ -30,6 +30,8 @@ public class FriendSuggestionServlet extends Controller {
         super(AccessRole.USER);
     }
 
+    private static final String FRIENDSUGGESTIONS_JSP = "WEB-INF/friendsuggestions.jsp";
+    
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
 		String userId  = nav.getParam("id");
@@ -38,13 +40,11 @@ public class FriendSuggestionServlet extends Controller {
 			u = userBean.getUserByID(Integer.parseInt(userId));
 			List<User> friends = frshpBean.getFriends(u);
 			nav.setAttribute("friends", friends);
-			nav.fwd("WEB-INF/friendsuggestions.jsp");
+			nav.fwd(FRIENDSUGGESTIONS_JSP);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		} catch (NoSuchUserException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		}		
 	}
 

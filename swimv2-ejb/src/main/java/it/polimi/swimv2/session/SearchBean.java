@@ -25,11 +25,13 @@ public class SearchBean implements SearchBeanRemote {
 	
 	@Override @SuppressWarnings("unchecked")
 	public List<User> searchForHelp(List<String> abilities) {
-		String query = "SELECT u FROM User u where 1=1";
+		StringBuilder builder = new StringBuilder("SELECT u FROM User u where 1=1");
 		for(int i = 1; i <= abilities.size(); i++) {
-			query += " AND ?" + i + " MEMBER OF u.abilities";
+			builder.append(" AND ?");
+			builder.append(i);
+			builder.append(" MEMBER OF u.abilities");
 		}
-		Query q = manager.createQuery(query);
+		Query q = manager.createQuery(builder.toString());
 		for(int i = 1; i <= abilities.size(); i++) {
 			q.setParameter(i, abilities.get(i-1));
 		}

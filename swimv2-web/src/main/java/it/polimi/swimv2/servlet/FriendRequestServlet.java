@@ -38,35 +38,25 @@ public class FriendRequestServlet extends Controller {
 		String receiverID = nav.getParam("receiver");
 		String type = nav.getParam("type");
 
-		if (!(askerID.equals(receiverID))) {
+		if (!askerID.equals(receiverID)) {
 			try {
-
 				User receiver = ubr.getUserByID(Integer.parseInt(receiverID));
 				User asker = ubr.getUserByID(Integer.parseInt(askerID));
-			
-					if (type.equals("direct"))
-
-						nbr.notifyFriendshipRequest(asker, receiver,
-								NotificationType.FRIENDSHIP_RECEIVED_DIRECT);
-					else if (type.equals("indirect")) {
-						nbr.notifyFriendshipRequest(asker, receiver,
-								NotificationType.FRIENDSHIP_RECEIVED);
-
-					}
-
+				if (type.equals("direct")) {
+					nbr.notifyFriendshipRequest(asker, receiver,
+							NotificationType.FRIENDSHIP_RECEIVED_DIRECT);
+				} else if (type.equals("indirect")) {
+					nbr.notifyFriendshipRequest(asker, receiver,
+							NotificationType.FRIENDSHIP_RECEIVED);
+				}
 				nav.fwd(BASEPATH);
-
 			} catch (NoSuchUserException nsue) {
-
 				nav.sendNotFound();
 			} catch (OperationFailedException e) {
 				nav.sendNotFound();
-
 			}
 		} else {
-			nav.sendNotFound();
-
+			nav.sendNotFound(); // TODO qui e' sbagliato mandare un 404...
 		}
-
 	}
 }

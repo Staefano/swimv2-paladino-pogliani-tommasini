@@ -32,7 +32,6 @@ public class HelpRequestManagerServlet extends Controller {
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-
 		String choice = nav.getParam("choice");
 		String requestId = nav.getParam("hr_id");
 
@@ -45,17 +44,12 @@ public class HelpRequestManagerServlet extends Controller {
 				notificationBean.notifyRefusedHelpRe(hr);
 				hrBean.refuseHR(hr);
 			}
-
+			nav.fwd(BASEPATH);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		} catch (NoSouchHRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			nav.sendNotFound();
 		}
-
-		nav.fwd(BASEPATH);
-
 	}
 
 }

@@ -87,11 +87,11 @@ public class Message implements Serializable {
 	}
 
 	public Timestamp getTimestamp() {
-		return this.timestamp;
+		return (Timestamp) this.timestamp.clone();
 	}
 
 	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+		this.timestamp = (Timestamp) timestamp.clone();
 	}
 
 	public String getText() {

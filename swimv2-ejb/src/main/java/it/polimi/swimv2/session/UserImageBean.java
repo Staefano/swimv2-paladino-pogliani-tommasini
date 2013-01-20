@@ -42,7 +42,7 @@ public class UserImageBean implements UserImageBeanRemote {
 				return num.intValue();
 			}
 		} catch(NoResultException e) {
-			throw new NoResultFoundException();
+			throw new NoResultFoundException(e);
 		}
 	}
 	

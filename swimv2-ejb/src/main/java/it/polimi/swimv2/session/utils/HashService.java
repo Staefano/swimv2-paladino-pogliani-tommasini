@@ -23,10 +23,10 @@ public class HashService {
 			return Hex.encodeHexString(digest.digest());
 		} catch (NoSuchAlgorithmException e) {
 			throw new ServerErrorException(
-					"Error hashing password - no such algorithm");
+					"Error hashing password - no such algorithm", e);
 		} catch (UnsupportedEncodingException e) {
 			throw new ServerErrorException(
-					"Error hashing password - no such encoding");
+					"Error hashing password - no such encoding", e);
 		}
 	}
 

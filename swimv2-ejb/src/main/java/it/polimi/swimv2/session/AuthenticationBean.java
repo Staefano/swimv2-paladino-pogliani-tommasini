@@ -141,7 +141,7 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 		try {
 			return (PendingToken) q.getSingleResult();
 		} catch(NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 	

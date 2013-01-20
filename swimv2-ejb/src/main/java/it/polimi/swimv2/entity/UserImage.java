@@ -44,7 +44,7 @@ public class UserImage implements Serializable{
 	}
 	
 	public void setImage(byte[] image) {
-		this.image = image.clone();
+		this.image = image;
 	}
 	
 }

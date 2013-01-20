@@ -143,8 +143,8 @@ public class HelpRequestBean implements HelpRequestRemote {
 		try {
 			return (HelpRequest) q.getSingleResult();
 
-		} catch (NoResultException nre) {
-			throw new NoSouchHRException();
+		} catch (NoResultException e) {
+			throw new NoSouchHRException(e);
 		}
 	}
 

@@ -52,9 +52,8 @@ public class EditProfileServlet extends Controller implements Servlet {
 		try {
 			form = nav.getMultipart();
 			form.process();
-		} catch (NavigationException e1) {
-			// for now just throw 500 error (servlet exception)
-			throw new ServletException();
+		} catch (NavigationException e) {
+			throw new ServletException(e); // error HTTP 500
 		}
 
 		String name = form.getValue("name");
@@ -98,7 +97,7 @@ public class EditProfileServlet extends Controller implements Servlet {
 			byte[] resized = ImageUtils.getScaledInstance(AVATAR_WIDTH_PX, AVATAR_HEIGHT_PX, img);
 			return imageBean.setImage(user.getId(), resized);
 		} catch (IOException e) {
-			throw new NoImageUploadedException();
+			throw new NoImageUploadedException(e);
 		}
 	}
 

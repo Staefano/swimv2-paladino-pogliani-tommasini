@@ -8,7 +8,6 @@ import it.polimi.swimv2.entity.User;
 import it.polimi.swimv2.enums.RequestStatus;
 import it.polimi.swimv2.enums.UserRole;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
-import it.polimi.swimv2.session.remote.AbilityBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
 
 import java.sql.Date;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -30,9 +28,6 @@ public class UserBean implements UserBeanRemote {
 
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
-	
-	@EJB
-	private AbilityBeanRemote abilityBean;
 	
 	@Override
 	public List<Feedback> getHelperFeedbacks(User u) throws NoSuchUserException {
@@ -54,7 +49,7 @@ public class UserBean implements UserBeanRemote {
 			return feedbackList;
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -78,7 +73,7 @@ public class UserBean implements UserBeanRemote {
 			return feedbackList;
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -91,7 +86,7 @@ public class UserBean implements UserBeanRemote {
 			q.setParameter("user", u);
 			return (List<Notification>) q.getResultList();
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 
 	}
@@ -107,7 +102,7 @@ public class UserBean implements UserBeanRemote {
 			return (List<HelpRequest>) q.getResultList();
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 
 	}
@@ -123,7 +118,7 @@ public class UserBean implements UserBeanRemote {
 			return (List<HelpRequest>) q.getResultList();
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -134,7 +129,7 @@ public class UserBean implements UserBeanRemote {
 		try {
 			return (User) q.getSingleResult();
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -156,7 +151,7 @@ public class UserBean implements UserBeanRemote {
 			return (List<HelpRequest>) q.getResultList();
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -170,7 +165,7 @@ public class UserBean implements UserBeanRemote {
 			return (List<HelpRequest>) q.getResultList();
 
 		} catch (NoResultException nre) {
-			throw new NoSuchUserException();
+			throw new NoSuchUserException(nre);
 		}
 	}
 
@@ -196,7 +191,7 @@ public class UserBean implements UserBeanRemote {
 			Date date = new Date(t);
 			u.setBirthdate(date);
 		} catch (ParseException iae) {
-			// don't do anything, timestamp is null... in this case we can't
+			// don't do anything, timestamp is null... in this case we can	
 			// silently fail without reporting to the user
 		}
 		return manager.merge(u);

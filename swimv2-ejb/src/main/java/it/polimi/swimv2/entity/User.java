@@ -101,11 +101,11 @@ public class User implements Serializable {
 	}
 
 	public Date getBirthdate() {
-		return this.birthdate;
+		return (Date) this.birthdate.clone();
 	}
 
 	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+		this.birthdate = (Date) birthdate.clone();
 	}
 
 	public String getWebsite() {
