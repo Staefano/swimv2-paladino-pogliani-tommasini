@@ -42,40 +42,10 @@
 			</div>
 			<div class="span3">
 				<c:if test="${user == hr.receiver}">
-					<c:if test="${hr.status == 'WAITING'}">
-						<b>Status:</b> you should answer this hr <br>
-						<a	href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> 
-						<a href="helprequestanswer?hr_id=${hr.id}&choice=approved">
-							<button class="btn btn-success" type="button">Accept </button></a>
-					    
-					    <a href="helprequestanswer?hr_id=${hr.id}&choice=refused">
-					    	<button class="btn btn-danger" type="button">Refuse </button></a>
-					</c:if>
-					
-					<c:if test="${hr.status == 'ACCEPTED'}">
-						<b>Status:</b> complete the work to receive the feedback<br>
-					</c:if>
-					
-					<c:if test="${hr.status == 'ZOMBIE'}">
-						<b>Status:</b>all work is done, you should give the feedback to the user you help
-						<a href="feedback?hr_id=${hr.id}&role=helper">
-							<button class="btn btn-success" type="button">Leave the Feedback</button></a>
-					</c:if>
+					<t:providing-hr hr="${hr}" />
 				</c:if>
 				<c:if test="${user == hr.sender}">
-					<c:if test="${hr.status == 'WAITING'}">
-						<b>Status:</b> waiting for a reply... <br>
-					</c:if>
-					
-					<c:if test="${hr.status == 'ACCEPTED'}">
-						<b>Status:</b> the hr was accepted <br>
-						<a href="feedback?hr_id=${hr.id}&role=asker">
-							<button class="btn btn-success" type="button">Close and give a Feedback</button></a>
-					</c:if>
-					
-					<c:if test="${hr.status == 'ZOMBIE'}">
-						<b>Status:</b> the user is waiting for your feedback <br>
-					</c:if>
+					<t:asking-hr hr="${hr}" />
 				</c:if>
 			</div>
 		</div>

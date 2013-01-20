@@ -34,16 +34,20 @@
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openProvidingHR}">
+								<b><a href="profile?id=${hr.sender.id}">${hr.sender.name} ${hr.sender.surname}</a> asked you help about ${hr.subject}</b>. 
+								<a href="comment?hr_id=${hr.id}">View comments</a>
 								<t:providing-hr hr="${hr}"/>
-						</c:forEach>
+							</c:forEach>
 						</div>
 						<div class="tab-pane" id="tab2">
 							<c:if test="${empty openReceivingHR}">
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openReceivingHR}">
-								<t:asking-hr hr="${hr}"/>						
-						</c:forEach>
+								<b>You asked <a href="profile?id=${hr.receiver.id}">${hr.receiver.name} ${hr.receiver.surname}</a> help about ${hr.subject}</b>
+								<a href="comment?hr_id=${hr.id}">View comments</a>
+								<t:asking-hr hr="${hr}"/>
+							</c:forEach>
 						</div>
 					</div>
 					
