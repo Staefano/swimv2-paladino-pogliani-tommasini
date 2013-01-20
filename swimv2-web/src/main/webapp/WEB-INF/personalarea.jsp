@@ -99,7 +99,6 @@
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}"> <%-- indirect friendship --%>
 								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>. 
-								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
 								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
