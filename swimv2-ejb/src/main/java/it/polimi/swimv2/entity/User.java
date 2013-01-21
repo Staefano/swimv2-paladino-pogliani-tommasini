@@ -33,10 +33,13 @@ public class User implements Serializable {
 	private String website;
 	private String location;
 	private String minibio;
+	
+	@Lob
 	private String description;
+	
 	private UserRole role;
 
-	// feedback
+	// feedback (precomputed aggregate values)
 	@Column(columnDefinition = "integer default 0")
 	private int posFB;
 	@Column(columnDefinition = "integer default 0")
@@ -155,44 +158,27 @@ public class User implements Serializable {
 		return false;
 	}
 
+	
 	public int getPosFB() {
 		return posFB;
-	}
-
-	public void setPosFB(int posFB) {
-		this.posFB = posFB;
 	}
 
 	public int getNeuFB() {
 		return neuFB;
 	}
 
-	public void setNeuFB(int neuFB) {
-		this.neuFB = neuFB;
-	}
-
 	public int getNegFB() {
 		return negFB;
-	}
-
-	public void setNegFB(int negFB) {
-		this.negFB = negFB;
 	}
 	
 	public int getExperience() {
 		return experience;
 	}
-	
-	public void setExperience(int experience) {
-		this.experience = experience;
-	}
-	
-	/* helper methods */
+
 	public void addFeedback(FeedbackValue evaluation, Role role) {
 		if(role == Role.HELPER) {
-			setExperience(getExperience() + 1);
+			experience += 1;
 		}
-		// incrementa # feedback
 		if(evaluation == FeedbackValue.NEGATIVE) {
 			negFB += 1;
 		} else if(evaluation == FeedbackValue.POSITIVE) {
