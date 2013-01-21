@@ -118,11 +118,11 @@ public class HelpRequest implements Serializable {
 	}
 
 	public Timestamp getTimestamp() {
-		return (Timestamp) timestamp.clone();
+		return timestamp;
 	}
 
 	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = (Timestamp) timestamp.clone();
+		this.timestamp = timestamp;
 	}
 	
 	public Set<Ability> getAbilities() {
