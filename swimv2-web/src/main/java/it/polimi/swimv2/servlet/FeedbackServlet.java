@@ -36,12 +36,11 @@ public class FeedbackServlet extends Controller implements Servlet {
 					hrBean.findByID(Integer.parseInt(requestId)),
 					evaluation, comment, nav.getLoggedUser());
 		} catch (NoSouchHRException e) {
-			// TODO Auto-generated catch block
+			// do nothing
 		} catch (ClosedHelpRequestException e) {
-			// TODO Auto-generated catch block
+			// do nothing
 		}
-
-		nav.fwd(BASEPATH);
+		nav.redirect("/");
 
 	}
 
