@@ -46,11 +46,7 @@ public class FeedbackServlet extends Controller implements Servlet {
 
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
-
-		nav.setAttribute("hr", nav.getParam("hr_id"));
-		nav.setAttribute("role", nav.getParam("role"));
-		nav.fwd("WEB-INF/feedbackform.jsp");
-
+		
 	}
 
 }

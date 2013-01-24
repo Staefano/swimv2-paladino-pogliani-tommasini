@@ -29,8 +29,11 @@
 							<c:when test="${hrp.receiverFeedback.evaluation == 'POSITIVE'}"> 
 								<i class="icon-plus"></i>
 							</c:when>
-						</c:choose>
+						</c:choose>	
 						${hrp.subject}</dt>
+						<c:forEach var="ab" items="${hrp.abilities}">
+							<dd><span class="badge badge-info">${ab.name}</span></dd>
+						</c:forEach>
 						<dd><small>${hrp.receiverFeedback.comment}</small></dd>
 					</dl>
 					</c:if>

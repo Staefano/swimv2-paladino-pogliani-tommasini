@@ -53,7 +53,7 @@ public class HelpRequest implements Serializable {
 
 	// manytomany unidirezionale dato che ability non tiene traccia della
 	// helprequest
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "HelpRequestAbility", joinColumns = { @JoinColumn(name = "request") }, inverseJoinColumns = { @JoinColumn(name = "ability") })
 	private Set<Ability> abilities;
 
