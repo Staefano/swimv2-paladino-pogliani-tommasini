@@ -11,6 +11,10 @@
 		<c:if test="${user == hr.receiver }">
 			<h3> between you and ${hr.sender.name} ${hr.sender.surname}</h3>
 		</c:if>
+		<p><b>Involved Abilities:</b></p>
+		<c:forEach var="ab" items="${hr.abilities}">
+			<span class="badge badge-info">${ab.name}</span>
+		</c:forEach>
 	</jsp:attribute>
 	<jsp:body>
 	

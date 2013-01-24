@@ -32,7 +32,7 @@
 						</c:choose>	
 						${hrp.subject}</dt>
 						<c:forEach var="ab" items="${hrp.abilities}">
-							<dd><span class="badge badge-info">${ab.name}</span></dd>
+							<dd><p class="muted"><small>${ab.name}</small></p></dd>
 						</c:forEach>
 						<dd><small>${hrp.receiverFeedback.comment}</small></dd>
 					</dl>
