@@ -33,6 +33,7 @@
 				</div>
 			</c:when>
 			<c:otherwise>
+			<p class="muted">Click on the abilities to add them.</p>
 			<c:forEach items="${abilitiesList}" var="curAbility">
 					<a href="searchability?abId=${curAbility.name}&searchAb=${param.searchAb}">
 						<span class="badge badge-info">${curAbility.name}</span></a>
@@ -43,7 +44,7 @@
 		
 		
 		
-		<br>
+		<hr>
 		<c:if test="${message == 'success'}">
 			<div class="alert alert-success">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
