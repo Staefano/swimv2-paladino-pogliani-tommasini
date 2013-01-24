@@ -29,18 +29,23 @@ public class FriendSuggestionServlet extends Controller {
     public FriendSuggestionServlet() {
         super(AccessRole.USER);
     }
-
-    private static final String FRIENDSUGGESTIONS_JSP = "WEB-INF/friendsuggestions.jsp";
     
 	@Override
 	protected void get(Navigation nav) throws IOException, ServletException {
+		
 		String userId  = nav.getParam("id");
+		User loggedUser = nav.getLoggedUser();
 		User u;
 		try {
 			u = userBean.getUserByID(Integer.parseInt(userId));
 			List<User> friends = frshpBean.getFriends(u);
-			nav.setAttribute("friends", friends);
-			nav.fwd(FRIENDSUGGESTIONS_JSP);
+			if(friends == null || friends.size() == 0) {
+				nav.setAttribute("outcome", "noUserFound");
+			} else {
+				friends.remove(loggedUser);
+			}
+			nav.setAttribute("usersList", friends);
+			nav.fwd("/WEB-INF/peoplesearchresults.jsp");
 		} catch (NumberFormatException e) {
 			nav.sendNotFound();
 		} catch (NoSuchUserException e) {
