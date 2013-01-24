@@ -19,7 +19,7 @@
 	<c:choose>
 		<c:when test="${error == 'imageupload'}">
 		<div class="alert alert-error"> Cannot upload your profile picture. The file should be an image (jpg or png) 
-			with a maximum size of 5MB. </div>
+			with a maximum size of 7MB. </div>
 		</c:when>
 		<c:when test="${error == 'form' }">
 			<div class="alert alert-error"> Error changing profile data. </div>
