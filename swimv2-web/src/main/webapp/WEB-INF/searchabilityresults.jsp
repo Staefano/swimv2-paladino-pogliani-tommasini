@@ -13,7 +13,7 @@
 			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb">
 		</form>
 		</div>
-		
+		<br>
 		<div>
 		<c:if test="${result == 'added'}">
 			<div class="alert alert-success">
@@ -34,12 +34,8 @@
 			</c:when>
 			<c:otherwise>
 			<c:forEach items="${abilitiesList}" var="curAbility">
-				<div class="well well-small">
-					${curAbility.name} 
 					<a href="searchability?abId=${curAbility.name}&searchAb=${param.searchAb}">
-						<button class="btn btn-mini btn-primary" type="button">Add!</button>
-					</a>
-				</div>
+						<span class="badge badge-info">${curAbility.name}</span></a>
 			</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -47,7 +43,7 @@
 		
 		
 		
-		
+		<br>
 		<c:if test="${message == 'success'}">
 			<div class="alert alert-success">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -62,15 +58,14 @@
 		</c:if>
 		
 		<div class="well well-small">
-			Your precious ability doesn't exist? Request it!
+			<p><b>Your precious ability doesn't exist? Request it!</b></p>
 			<form class="form-horizontal" method="post" action="searchability">
 		  		<div class="control-group">
 		  			<input type="text" placeholder="Ability Name"
 						class="input-medium search-query" name="name">
 		  		</div>
 		  		<div class="control-group">
-		  			<input type="text" placeholder="Short Comment"
-						class="input-medium search-query" name="comment">
+		  			<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..."></textarea>
 		  		</div>
 		  		<button type="submit" class="btn btn-small btn-primary">Send Request</button>
 			</form>
