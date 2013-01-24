@@ -43,9 +43,15 @@
 			<div class="span3">
 				<c:if test="${user == hr.receiver}">
 					<t:providing-hr hr="${hr}" />
+					<c:if test="${hr.status == 'ZOMBIE'}">
+						<t:feedbackform hr="${hr}" role="helper" />
+					</c:if>
 				</c:if>
 				<c:if test="${user == hr.sender}">
 					<t:asking-hr hr="${hr}" />
+					<c:if test="${hr.status == 'ACCEPTED'}">
+						<t:feedbackform hr="${hr}" role="asker" />
+					</c:if>
 				</c:if>
 			</div>
 		</div>

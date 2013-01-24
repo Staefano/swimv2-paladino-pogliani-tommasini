@@ -14,6 +14,6 @@
 	</c:if>
 	<c:if test="${hr.status == 'ZOMBIE'}">
 		<b>Status:</b> all work is done. Give feedback to the user you helped!<br>
-		<a href="feedback?hr_id=${hr.id}&role=helper" class="btn btn-success">Leave the feedback</a>
 	</c:if>
+
 </p>
