@@ -169,7 +169,11 @@ public class HelpRequest implements Serializable {
 	}
 
 	public boolean canPlaceFeedback(User user) {
-			return (sender.equals(user) && status == RequestStatus.ACCEPTED) || 
-					(receiver.equals(user) && status == RequestStatus.ZOMBIE);
+		if(sender.equals(user)) {
+			return status == RequestStatus.ACCEPTED && askerFeedback != null;
+		} else if(receiver.equals(user)) {
+			return status == RequestStatus.ZOMBIE && receiverFeedback != null;
+		}
+		return false;
 	}
 }
