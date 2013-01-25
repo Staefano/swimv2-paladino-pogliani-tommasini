@@ -18,7 +18,16 @@ public interface SearchBeanRemote {
 	 * @return a list of User object representing all the users who declared at
 	 *         least one of the specified abilities
 	 */
-	List<User> searchForHelp(List<String> abilities);
+	List<User> searchForHelp(List<String> abilities, int page, int pageSize);
+	
+	/**
+	 * Count users with the specified abilities
+	 * 
+	 * @param abilities
+	 *            a list of strings representing abilities. The search performs
+	 *            exact matching.
+	 */	
+	long countSearchForHelp(List<String> abilities);
 
 	/**
 	 * Search users with the specified abilities among the network of friends of
@@ -31,6 +40,11 @@ public interface SearchBeanRemote {
 	 * @return a list of User object representing all the users who declared at
 	 *         least one of the specified abilities
 	 */
-	List<User> searchForHelpAmongFriends(User u, List<String> abilities);
+	List<User> searchForHelpAmongFriends(User u, List<String> abilities, int page, int pageSize);
+	
+	/**
+	 * Count the number of friends who have declared the specified abilities
+	 */
+	long countSearchForHelpAmongFriends(User u, List<String> abilities);
 
 }

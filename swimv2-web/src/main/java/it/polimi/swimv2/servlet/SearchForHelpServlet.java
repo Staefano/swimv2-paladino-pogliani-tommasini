@@ -15,6 +15,8 @@ public class SearchForHelpServlet extends Controller {
 
 	private static final long serialVersionUID = 1103591206119674852L;
 
+	private static final int PAGESIZE = 5;
+	
 	@EJB
 	private SearchBeanRemote bean;
 
@@ -24,13 +26,27 @@ public class SearchForHelpServlet extends Controller {
 	protected void get(Navigation nav) throws IOException, ServletException {
 		String queryString = nav.getParam("abilities");
 		String scope = nav.getParam("scope");
+		int pageNumber;
+		try {
+			pageNumber = Integer.parseInt((String) nav.getParam("page"));
+		} catch(NumberFormatException e) {
+			pageNumber = 1;
+		}
+		
 		List<User> results;
 		List<String> abilities = generateListOfAbilities(queryString);
+		long resultsNumber = 0;
 		if("friends".equals(scope) && nav.getLoggedUser() != null) {
-			results = bean.searchForHelpAmongFriends(nav.getLoggedUser(), abilities);
+			results = bean.searchForHelpAmongFriends(nav.getLoggedUser(), abilities, pageNumber, PAGESIZE);
+			resultsNumber = bean.countSearchForHelpAmongFriends(nav.getLoggedUser(), abilities);
 		} else {
-			results = bean.searchForHelp(abilities);
+			results = bean.searchForHelp(abilities, pageNumber, PAGESIZE);
+			resultsNumber = bean.countSearchForHelp(abilities);
 		}
+		
+		long pageMax = resultsNumber / PAGESIZE + (resultsNumber % PAGESIZE > 0 ? 1 : 0);
+		nav.setAttribute("pageMax", pageMax);
+		nav.setAttribute("curPage", pageNumber);
 		nav.setAttribute("abilities",  nav.getParam("abilities")); // revalidate and rebuild the string?
 		if (results == null || results.size() == 0) {
 			nav.setAttribute("found", false);
