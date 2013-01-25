@@ -23,7 +23,7 @@
 				
 		<label>Which abilities of ${receiver.name} ${receiver.surname} do you need?</label>
 		<c:forEach var="a" items="${abilities}">
-			<label class="checkbox inline"><input type="checkbox" name="ability" value="${a.name}"> ${a.name} </label>
+			<label class="checkbox inline"><input type="checkbox" name="ability" value="${a.name}"> <span class="badge badge-info">${a.name}</span> </label>
 		</c:forEach>
 		<br><br>
 		<label>Comment</label>

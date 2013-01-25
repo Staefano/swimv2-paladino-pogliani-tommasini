@@ -66,7 +66,7 @@
 	
 	<div>
 		<label for="description">Extended description</label>
-		<textarea name="description" class="input-block-level" rows="10" maxlength="10042">${user.description}</textarea>
+		<textarea name="description" class="input-block-level" rows="7" maxlength="10042">${user.description}</textarea>
 	</div>
 	
 	<div class="form-actions">
