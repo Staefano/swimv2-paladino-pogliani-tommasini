@@ -36,12 +36,13 @@
 					</c:choose>
 				</c:forEach>
 				</div>
-		
-				<form class="form-horizontal"  name="newcomment" method="post" action="comment">
+				
+				<hr>
+				<form name="newcomment" method="post" action="comment">
+					<label>Add a new comment</label>
 					<input type="hidden" name="hr_id" value="${hr.id }">
-					<p><b>Comment:</b></p>
-					<textarea name="comment" rows="4" cols="50" maxlength="255"></textarea>
-					<input type="submit"  value="Comment">
+					<textarea class="input-block-level" name="comment" rows="4" cols="50" maxlength="255"></textarea>
+					<input type="submit" class="btn" value="Send">
 				</form>	
 			</div>
 			<div class="span3">

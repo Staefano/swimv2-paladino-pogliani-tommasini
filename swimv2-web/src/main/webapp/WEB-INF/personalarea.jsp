@@ -34,8 +34,8 @@
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openProvidingHR}">
-								<b><a href="profile?id=${hr.sender.id}">${hr.sender.name} ${hr.sender.surname}</a> asked you help about ${hr.subject}</b>. 
-								<a href="comment?hr_id=${hr.id}">View comments</a>
+								<b><a href="profile?id=${hr.sender.id}">${hr.sender.name} ${hr.sender.surname}</a> asked you 
+									help about <a href="comment?hr_id=${hr.id}">${hr.subject}</a></b>.
 								<t:providing-hr hr="${hr}"/>
 							</c:forEach>
 						</div>
@@ -44,8 +44,8 @@
 								No open help request.
 							</c:if>
 							<c:forEach var="hr" items="${openReceivingHR}">
-								<b>You asked <a href="profile?id=${hr.receiver.id}">${hr.receiver.name} ${hr.receiver.surname}</a> help about ${hr.subject}</b>
-								<a href="comment?hr_id=${hr.id}">View comments</a>
+								<b>You asked <a href="profile?id=${hr.receiver.id}">${hr.receiver.name} ${hr.receiver.surname}</a> 
+									help about <a href="comment?hr_id=${hr.id}">${hr.subject}</a></b>.
 								<t:asking-hr hr="${hr}"/>
 							</c:forEach>
 						</div>

@@ -4,12 +4,8 @@
 <%@attribute name="hr" required="true" type="it.polimi.swimv2.entity.HelpRequest"%>
 <%@attribute name="role" required="true" type="String"%>
 
-
 <form name="feedbackform" method="post" action="feedback">
-	<input type="hidden" name="hr_id" value="${hr.id}">
-	<input type="hidden" name="role" value="${role}">
-	<hr>
-	<p><b>Leave the Feedback:</b></p>
+	<legend>Close request</legend>
 	<label class="radio inline">
 		<input type="radio" name="evaluation" id="optionsRadios1" value="0" checked>
 			<i class="icon-minus"></i>
@@ -23,6 +19,10 @@
 			<i class="icon-plus"></i>
 	</label>
 	
-	<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..." maxlength="255"></textarea><br>
-	<input type="submit" value="Submit" id="Submit">
+	<textarea name="comment" rows="4" cols="50" style="margin-top: 0.5em;" 
+		placeholder="Write here a comment..." maxlength="255"></textarea>
+	
+	<input type="hidden" name="hr_id" value="${hr.id}">
+	<input type="hidden" name="role" value="${role}">
+	<input type="submit" class="btn btn-primary" value="Leave feedback" id="Submit">
 </form>
