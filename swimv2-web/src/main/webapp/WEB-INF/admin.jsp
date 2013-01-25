@@ -22,7 +22,7 @@
 		</c:if>
 		
 		<form class="form-search" method="get" action="admin">
-  			<input type="text" class="input-medium search-query" name="ability">
+  			<input type="text" class="input-medium search-query" name="ability" maxlength="42">
   			<button type="submit" class="btn btn-primary">Add New Ability</button>
 		</form>
 		

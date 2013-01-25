@@ -21,10 +21,9 @@
 			by inserting your personal data.
 			<form method="post" style="margin-top: 1em;">
 				<fieldset>
-					<label>Name *</label> <input type="text" name="name"
-						placeholder="John" required> <label>Surname *</label> <input
-						type="text" name="surname" placeholder="Smith" required> <input
-						type="hidden" name="token" value="${token}">
+					<label>Name *</label> <input type="text" name="name" placeholder="John" required maxlength="255">
+					<label>Surname *</label> <input type="text" name="surname" placeholder="Smith" required maxlength="255">
+					<input type="hidden" name="token" value="${token}">
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
@@ -36,7 +35,7 @@
 			<form method="post" style="margin-top: 1em;">
 				<fieldset>
 					<label>Password</label>
-					<input type="password" name="password" required>
+					<input type="password" name="password" required maxlength="255">
 					<input type="hidden" name="token" value="${token}">
 					<div class="form-actions">
 						<button type="submit" class="btn btn-primary">Submit</button>

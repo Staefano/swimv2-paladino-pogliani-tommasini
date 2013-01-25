@@ -19,7 +19,7 @@
 	<c:choose>
 		<c:when test="${error == 'imageupload'}">
 		<div class="alert alert-error"> Cannot upload your profile picture. The file should be an image (jpg or png) 
-			with a maximum size of 5MB. </div>
+			with a maximum size of 7MB. </div>
 		</c:when>
 		<c:when test="${error == 'form' }">
 			<div class="alert alert-error"> Error changing profile data. </div>
@@ -31,25 +31,25 @@
 		<div class="span5">
 		
 		<label for="name">Name *</label>
-		<input type="text" name="name" class="input-block-level" value="${user.name}" required>
+		<input type="text" name="name" class="input-block-level" value="${user.name}" required maxlength="42">
 		
 		<label for="surname">Surname *</label>
-		<input type="text" name="surname" class="input-block-level" value="${user.surname}" required>
+		<input type="text" name="surname" class="input-block-level" value="${user.surname}" required maxlength="42">
 		
 		<label for="website">Website</label>
 		<div class="input-prepend">
   			<span class="add-on">http://</span>
-  			<input type="text" name="website" value="${user.website}">
+  			<input type="text" name="website" value="${user.website}" maxlength="60">
 		</div>
 		
 		<label for="birthdate">Date of birth</label>
 		<input type="text" name="birthdate" id="birthdate" class="input-block-level" value="<fmt:formatDate value="${user.birthdate}" pattern="dd/MM/yyyy" />">
 		
 		<label for="location">Where do you live?</label>
-		<input type="text" name="location" class="input-block-level" value="${user.location}">
+		<input type="text" name="location" class="input-block-level" value="${user.location}" maxlength="42">
 		
 		<label for="minibio">Type a line describing yourself</label> 
-		<textarea name="minibio" class="input-block-level" rows="5">${user.minibio}</textarea>
+		<textarea name="minibio" class="input-block-level" rows="5" maxlength="255">${user.minibio}</textarea>
 		
 		</div>
 
@@ -60,12 +60,15 @@
 		<label class="checkbox"><input type="checkbox" name="removeImage" value="yes">Remove my image</label>
 		<img style="display: block; margin: 0.7em auto;"class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${user.id}" />
 		
-		<label for="description">Extended description</label>
-		<textarea name="description" class="input-block-level" rows="7">${user.description}</textarea>
 		</div>
 		
-		
 	</div>
+	
+	<div>
+		<label for="description">Extended description</label>
+		<textarea name="description" class="input-block-level" rows="7" maxlength="10042">${user.description}</textarea>
+	</div>
+	
 	<div class="form-actions">
 			<button type="submit" class="btn btn-primary">Submit</button>
 	</div>

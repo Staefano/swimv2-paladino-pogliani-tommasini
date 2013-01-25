@@ -8,21 +8,21 @@
 	</jsp:attribute>
 	<jsp:body>
 		<c:choose>
-		<c:when test="${outcome == 'emptyField'}">
-			<div class="alert alert-block">
-  				Insert, into the above field, the name of the user you are looking for!
-			</div>
-		</c:when>
-		<c:when test="${outcome == 'noUserFound'}">
-			<div class="alert alert-block">
-  				No user found!
-			</div>
-		</c:when>
-		<c:otherwise>
-		<c:forEach items="${usersList}" var="curUser">
-			<t:single-result user="${curUser}" />
-		</c:forEach>
-		</c:otherwise>
+			<c:when test="${outcome == 'emptyField'}">
+				<div class="alert alert-block">
+	  				Insert, into the above field, the name of the user you are looking for!
+				</div>
+			</c:when>
+			<c:when test="${outcome == 'noUserFound'}">
+				<div class="alert alert-block">
+	  				No user found!
+				</div>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${usersList}" var="curUser">
+					<t:single-result user="${curUser}" />
+				</c:forEach>
+			</c:otherwise>
 		</c:choose>
 
 	</jsp:body>

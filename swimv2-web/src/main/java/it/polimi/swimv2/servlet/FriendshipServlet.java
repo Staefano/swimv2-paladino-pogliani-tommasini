@@ -11,9 +11,6 @@ import it.polimi.swimv2.webutils.AccessRole;
 import it.polimi.swimv2.webutils.Controller;
 import it.polimi.swimv2.webutils.Navigation;
 
-/**
- * Servlet implementation class FriendshipServlet
- */
 public class FriendshipServlet extends Controller {
 	private static final long serialVersionUID = 1L;
 
@@ -23,20 +20,8 @@ public class FriendshipServlet extends Controller {
 	@EJB 
 	private FriendShipBeanRemote friendshipBean;
 	
-	/**
-	 * @see Controller#Controller()
-	 */
 	public FriendshipServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see Controller#Controller(AccessRole)
-	 */
-	public FriendshipServlet(AccessRole role) {
-		super(role);
-		// TODO Auto-generated constructor stub
+		super(AccessRole.USER);
 	}
 
 	@Override
@@ -44,20 +29,17 @@ public class FriendshipServlet extends Controller {
 
 		String answer = nav.getParam("answer");
 		String notification = nav.getParam("notification_id");
-
-		if (answer.equals("accepted")) {
-
-			
-			friendshipBean.createFriendship(notification, nav.getLoggedUser());
-			notificationBean.notifyFriendshipAccepted(nav.getLoggedUser(),notification);
-			nav.fwd(BASEPATH);
 		
-		
-		} else if (answer.equals("refused")) {
-			
-			notificationBean.deleteNotification(notification);
-			nav.fwd(BASEPATH);
-
+		if(notification == null || "".equals(notification)) {
+			nav.redirect("/");
+		} else {
+			if (answer.equals("accepted")) {
+				friendshipBean.createFriendship(notification, nav.getLoggedUser());
+				notificationBean.notifyFriendshipAccepted(nav.getLoggedUser(), notification);
+			} else if (answer.equals("refused")) {
+				notificationBean.deleteNotification(notification);
+			}
+			nav.redirect("/");
 		}
 	}
 

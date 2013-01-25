@@ -16,7 +16,7 @@
 				<c:if test="${empty providedList}">
 								You don't have any feedback.
 							</c:if>
-				<c:forEach var="hrp" items="${providedList}">
+				<c:forEach var="hrp" items="${providedList}" begin="0" end="10">
 					<c:if test="${ not empty hrp.receiverFeedback }">
 					<dl>
 						<dt><c:choose>
@@ -29,8 +29,13 @@
 							<c:when test="${hrp.receiverFeedback.evaluation == 'POSITIVE'}"> 
 								<i class="icon-plus"></i>
 							</c:when>
-						</c:choose>
+						</c:choose>	
 						${hrp.subject}</dt>
+						<dd><p class="muted">
+							<c:forEach var="ab" items="${hrp.abilities}">
+								<small>${ab.name},</small>
+							</c:forEach>
+						</p></dd>
 						<dd><small>${hrp.receiverFeedback.comment}</small></dd>
 					</dl>
 					</c:if>

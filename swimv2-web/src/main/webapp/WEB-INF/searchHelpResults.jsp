@@ -10,7 +10,7 @@
 		<form class="input-prepend input-append" action="search" method="get">
 			<span class="add-on"><i class="icon-search"></i></span> 
 			<input name="abilities" class="span5" type="text"
-				placeholder="cooker, plumber" value="${abilities}">
+				placeholder="cooker, plumber" value="${abilities}" maxlength="255">
 			<c:if test="${not empty user}">
 			<label class="inline add-on" >
 				<input type="radio" name="scope" value="all" checked="checked"> all the users 

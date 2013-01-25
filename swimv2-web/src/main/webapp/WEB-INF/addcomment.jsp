@@ -10,7 +10,7 @@
 		<p>
 			<b>Comment:</b>
 		</p>
-		<textarea name="comment" rows="4" cols="50">
+		<textarea name="comment" rows="4" cols="50" maxlength="255">
 		</textarea>
 			<br>
 		

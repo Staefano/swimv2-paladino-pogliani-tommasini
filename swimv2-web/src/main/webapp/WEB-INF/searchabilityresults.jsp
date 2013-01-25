@@ -10,10 +10,10 @@
 		
 		<div class="container">
 		<form class="navbar-search pull-left" action="searchability" method="get">
-			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb">
+			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb" maxlength="255">
 		</form>
 		</div>
-		
+		<br>
 		<div>
 		<c:if test="${result == 'added'}">
 			<div class="alert alert-success">
@@ -33,13 +33,10 @@
 				</div>
 			</c:when>
 			<c:otherwise>
+			<p class="muted">Click on the abilities to add them.</p>
 			<c:forEach items="${abilitiesList}" var="curAbility">
-				<div class="well well-small">
-					${curAbility.name} 
 					<a href="searchability?abId=${curAbility.name}&searchAb=${param.searchAb}">
-						<button class="btn btn-mini btn-primary" type="button">Add!</button>
-					</a>
-				</div>
+						<span class="badge badge-info">${curAbility.name}</span></a>
 			</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -47,7 +44,7 @@
 		
 		
 		
-		
+		<hr>
 		<c:if test="${message == 'success'}">
 			<div class="alert alert-success">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -62,15 +59,14 @@
 		</c:if>
 		
 		<div class="well well-small">
-			Your precious ability doesn't exist? Request it!
+			<p><b>Your precious ability doesn't exist? Request it!</b></p>
 			<form class="form-horizontal" method="post" action="searchability">
 		  		<div class="control-group">
 		  			<input type="text" placeholder="Ability Name"
-						class="input-medium search-query" name="name">
+						class="input-medium search-query" name="name" maxlength="42">
 		  		</div>
 		  		<div class="control-group">
-		  			<input type="text" placeholder="Short Comment"
-						class="input-medium search-query" name="comment">
+		  			<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..." maxlength="255"></textarea>
 		  		</div>
 		  		<button type="submit" class="btn btn-small btn-primary">Send Request</button>
 			</form>

@@ -30,7 +30,7 @@ public class EditProfileServlet extends Controller implements Servlet {
 	@EJB
 	private UserImageBeanRemote imageBean;
 
-	private static final long MAX_ALLOWED_SIZE = 1024 * 1024 * 5; // 5 MB
+	private static final long MAX_ALLOWED_SIZE = 1024 * 1024 * 7; // 7 MB
 	private static final int AVATAR_WIDTH_PX = 200;
 	private static final int AVATAR_HEIGHT_PX = 200;
 

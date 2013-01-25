@@ -11,6 +11,10 @@
 		<c:if test="${user == hr.receiver }">
 			<h3> between you and ${hr.sender.name} ${hr.sender.surname}</h3>
 		</c:if>
+		<p><b>Involved Abilities:</b></p>
+		<c:forEach var="ab" items="${hr.abilities}">
+			<span class="badge badge-info">${ab.name}</span>
+		</c:forEach>
 	</jsp:attribute>
 	<jsp:body>
 	
@@ -36,16 +40,22 @@
 				<form class="form-horizontal"  name="newcomment" method="post" action="comment">
 					<input type="hidden" name="hr_id" value="${hr.id }">
 					<p><b>Comment:</b></p>
-					<textarea name="comment" rows="4" cols="50"></textarea>
+					<textarea name="comment" rows="4" cols="50" maxlength="255"></textarea>
 					<input type="submit"  value="Comment">
 				</form>	
 			</div>
 			<div class="span3">
 				<c:if test="${user == hr.receiver}">
 					<t:providing-hr hr="${hr}" />
+					<c:if test="${hr.status == 'ZOMBIE'}">
+						<t:feedbackform hr="${hr}" role="helper" />
+					</c:if>
 				</c:if>
 				<c:if test="${user == hr.sender}">
 					<t:asking-hr hr="${hr}" />
+					<c:if test="${hr.status == 'ACCEPTED'}">
+						<t:feedbackform hr="${hr}" role="asker" />
+					</c:if>
 				</c:if>
 			</div>
 		</div>

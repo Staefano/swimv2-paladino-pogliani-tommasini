@@ -31,7 +31,7 @@ public class PeopleSearchResultsServlet extends Controller {
 			List<User> users = userBean.searchUser(queryString);
 			nav.setAttribute("usersList", users);
 			if(users == null || users.size() == 0) {
-				nav.setAttribute("oucome", "noUserFound");
+				nav.setAttribute("outcome", "noUserFound");
 			}
 		}
 		nav.fwd("/WEB-INF/peoplesearchresults.jsp");

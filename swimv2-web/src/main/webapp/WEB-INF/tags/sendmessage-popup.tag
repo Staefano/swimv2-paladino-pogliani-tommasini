@@ -12,7 +12,7 @@
 	</div>
 	<form method="post" action="messages">
 		<div class="modal-body">
-			<textarea name="text" class="input-block-level" style="height: 8em;"></textarea>
+			<textarea name="text" class="input-block-level" style="height: 8em;" maxlength="255"></textarea>
 			<input type="hidden" name="to" value="${to.id}">
 		</div>
 		<div class="modal-footer">

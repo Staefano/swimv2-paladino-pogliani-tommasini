@@ -44,7 +44,7 @@ public class HelpRequestManagerServlet extends Controller {
 				notificationBean.notifyRefusedHelpRe(hr);
 				hrBean.refuseHR(hr);
 			}
-			nav.fwd(BASEPATH);
+			nav.redirect("/"); // non e' bellissimo, bisognerebbe fare fwd al referrer
 		} catch (NumberFormatException e) {
 			nav.sendNotFound();
 		} catch (NoSouchHRException e) {

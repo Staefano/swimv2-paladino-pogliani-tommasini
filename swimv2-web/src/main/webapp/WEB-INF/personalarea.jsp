@@ -9,7 +9,7 @@
 		<form class="input-prepend input-append" action="search" method="get">
 			<span class="add-on"><i class="icon-search"></i></span> 
 			<input name="abilities" class="span5" type="text"
-				placeholder="cooker, plumber">
+				placeholder="cooker, plumber" maxlength="255">
 			<label class="inline add-on" >
 				<input type="radio" name="scope" value="all" checked="checked"> all the users 
 			</label>
@@ -98,11 +98,19 @@
 								Your request to add ${n.ability} as an ability was rejected.
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}"> <%-- indirect friendship --%>
-								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>. 
+								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>. 		
+									<p><a href="friendship?notification_id=${n.id}&answer=accepted">		
+										<button class="btn btn-success" type="button">Approve </button></a>		
+					                <a href="friendship?notification_id=${n.id}&answer=refused">		
+					                	<button class="btn btn-danger" type="button">Refuse </button></a></p>
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
 								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
 								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
+								<p><a href="friendship?notification_id=${n.id}&answer=accepted">		
+									<button class="btn btn-success" type="button">Approve </button></a>		
+					            <a href="friendship?notification_id=${n.id}&answer=refused">		
+					                <button class="btn btn-danger" type="button">Refuse </button></a></p>
 							</c:if>
 							</p>
 							<%-- BUTTONS --%>
