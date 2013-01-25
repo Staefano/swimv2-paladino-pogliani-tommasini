@@ -43,7 +43,6 @@ public class SearchForHelpServlet extends Controller {
 			results = bean.searchForHelp(abilities, pageNumber, PAGESIZE);
 			resultsNumber = bean.countSearchForHelp(abilities);
 		}
-		
 		long pageMax = resultsNumber / PAGESIZE + (resultsNumber % PAGESIZE > 0 ? 1 : 0);
 		nav.setAttribute("pageMax", pageMax);
 		nav.setAttribute("curPage", pageNumber);

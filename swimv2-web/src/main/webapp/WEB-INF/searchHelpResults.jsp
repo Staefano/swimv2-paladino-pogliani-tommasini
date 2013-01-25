@@ -44,13 +44,13 @@
 		
 		<div class="pagination pagination-centered">
   			<ul>
-  				<c:if test="${curPage == 1}"><li class="disabled"><a href="#">Prev</a></li></c:if>
-  				<c:if test="${curPage != 1}"><li><a href="search?abilities=${abilities}&scope=${param.scope}&page=${curPage - 1}">Prev</a></li></c:if>
+  				<c:if test="${curPage <= 1}"><li class="disabled"><a href="#">Prev</a></li></c:if>
+  				<c:if test="${curPage > 1}"><li><a href="search?abilities=${abilities}&scope=${param.scope}&page=${curPage - 1}">Prev</a></li></c:if>
   				<c:forEach var="i" begin="1" end="${pageMax}">
   				<li <c:if test="${i == curPage}">class="active"</c:if>><a href="search?abilities=${abilities}&scope=${param.scope}&page=${i}">${i}</a></li>
   				</c:forEach>
-  				<c:if test="${curPage == pageMax}"><li class="disabled"><a href="#">Next</a></li></c:if>
-  				<c:if test="${curPage != pageMax}"><li><a href="search?abilities=${abilities}&scope=${param.scope}&page=${curPage + 1}">Next</a></li></c:if>
+  				<c:if test="${curPage >= pageMax}"><li class="disabled"><a href="#">Next</a></li></c:if>
+  				<c:if test="${curPage < pageMax}"><li><a href="search?abilities=${abilities}&scope=${param.scope}&page=${curPage + 1}">Next</a></li></c:if>
   			</ul>
 		</div>
 	</jsp:body>
