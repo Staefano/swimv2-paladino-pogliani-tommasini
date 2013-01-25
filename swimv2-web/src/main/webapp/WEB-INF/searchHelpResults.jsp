@@ -27,7 +27,7 @@
 				<c:forEach items="${results}" var="curUser">
                 	<t:single-result user="${curUser}">
                 		<jsp:attribute name="buttons">
-                			<c:if test="${not empty user}">
+                			<c:if test="${not empty user && user != curUser}">
                 				<a class="btn" href="helprequest?receiver=${curUser.id}">Ask help!</a>
                 			</c:if>
 			  			</jsp:attribute>
