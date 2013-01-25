@@ -14,7 +14,7 @@
 	</p>
 
 	<c:if test="${user.id == profile.id }">
-		<a href="searchability">Add more...</a>
+		<a href="edit-abilities">Edit...</a>
 	</c:if>
 
 	<c:if test="${not empty profile.description}">

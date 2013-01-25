@@ -46,10 +46,12 @@ public interface UserBeanRemote {
 	
 	void promoteAdmin(User user);
 
-	int addUserAbility(User user, String chosenAb);
+	User addUserAbility(User user, String chosenAb);
 
 	User editProfile(int userId, String name, String surname, String website,
 			String birthdate, String location, String minibio,
 			String description) throws NoSuchUserException;
+
+	User removeUserAbility(User user, String chosenAb);
 
 }

@@ -211,7 +211,7 @@ public class UserBean implements UserBeanRemote {
 	}
 
 	@Override
-	public int addUserAbility(User user, String chosenAb) {
+	public User addUserAbility(User user, String chosenAb) {
 		
 		Query q = manager.createQuery("SELECT a FROM Ability a WHERE a.name = :name");
 		q.setParameter("name", chosenAb);
@@ -221,8 +221,17 @@ public class UserBean implements UserBeanRemote {
 		userAbilities.add(ability);
 		user.setAbilities(userAbilities);
 		manager.merge(user);
-		
-		return user.getId();
+		return user;
+	}
+
+	@Override
+	public User removeUserAbility(User user, String abilityString) {
+		Ability ability = manager.find(Ability.class, abilityString);
+		Set<Ability> set = user.getAbilities();
+		set.remove(ability);
+		user.setAbilities(set);
+		manager.merge(user);
+		return user;
 	}
 
 }

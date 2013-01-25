@@ -49,8 +49,8 @@
     <servlet-class>it.polimi.swimv2.servlet.PromoteAdminServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>SearchAbilityServlet</servlet-name>
-    <servlet-class>it.polimi.swimv2.servlet.SearchAbilityServlet</servlet-class>
+    <servlet-name>EditAbilityServlet</servlet-name>
+    <servlet-class>it.polimi.swimv2.servlet.EditAbilityServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>HelpRequestManagerServlet</servlet-name>
@@ -146,8 +146,8 @@
     <url-pattern>/helprequest</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>SearchAbilityServlet</servlet-name>
-    <url-pattern>/searchability</url-pattern>
+    <servlet-name>EditAbilityServlet</servlet-name>
+    <url-pattern>/edit-abilities</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>CommentServlet</servlet-name>

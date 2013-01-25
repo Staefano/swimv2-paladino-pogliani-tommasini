@@ -2,7 +2,6 @@ package it.polimi.swimv2.servlet;
 
 import it.polimi.swimv2.entity.Ability;
 import it.polimi.swimv2.entity.User;
-import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.remote.AbilityBeanRemote;
 import it.polimi.swimv2.session.remote.UserBeanRemote;
 import it.polimi.swimv2.webutils.AccessRole;
@@ -15,17 +14,19 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 
-public class SearchAbilityServlet extends Controller {
+public class EditAbilityServlet extends Controller {
 
 	private static final long serialVersionUID = 1L;
 
+	private static final String EDITABILITIES_JSP = "/WEB-INF/editabilities.jsp";
+	
 	@EJB
 	private AbilityBeanRemote abilityBean;
 	
 	@EJB
 	private UserBeanRemote userBean;
 
-	public SearchAbilityServlet() {
+	public EditAbilityServlet() {
 		super(AccessRole.USER);
 	}
 
@@ -33,19 +34,22 @@ public class SearchAbilityServlet extends Controller {
 	protected void get(Navigation nav) throws IOException, ServletException {
 
 		User user = nav.getLoggedUser();
+		
+		String action = nav.getParam("action");
+		String chosenAb = nav.getParam("abId");
+		
 
 		// add ability
-		String chosenAb = nav.getParam("abId");
 		if (chosenAb != null) {
-			int newId = userBean.addUserAbility(user, chosenAb);
-			try {
-				nav.setLogin(userBean.getUserByID(newId));
-				user = nav.getLoggedUser();
-			} catch (NoSuchUserException e) {
-				//puo' accadere?
+			if("remove".equals(action)) {
+				user = userBean.removeUserAbility(user, chosenAb);
+				nav.setAttribute("result", "removed");
+			} else {
+				user = userBean.addUserAbility(user, chosenAb);
+				nav.setAttribute("result", "added");
 			}
-			nav.setAttribute("result", "added");
 			nav.setAttribute("chosenAb", chosenAb);
+			nav.setLogin(user);
 		}
 		
 		// ability request
@@ -73,7 +77,8 @@ public class SearchAbilityServlet extends Controller {
 				nav.setAttribute("outcome", "noAbilityFound");
 			}
 		}
-		nav.fwd("/WEB-INF/searchabilityresults.jsp");
+
+		nav.fwd(EDITABILITIES_JSP);
 	}
 
 }
