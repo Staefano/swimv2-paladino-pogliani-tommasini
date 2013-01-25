@@ -16,7 +16,7 @@
 		<p>What kind of ability are you looking for?</p>
 		<form class="input-prepend input-append" action="search" method="get">
 			<span class="add-on"><i class="icon-search"></i></span> 
-			<input name="abilities" class="span5" type="text" placeholder="cooker, plumber">
+			<input name="abilities" class="span5" type="text" placeholder="cooker, plumber" maxlength="255">
 			<button type="submit" class="btn btn-primary">Find help!</button>
 		</form>
 	</div>
@@ -32,8 +32,8 @@
 						<div class="alert alert-error">Wrong username or password</div>
 					</c:if>
 					<fieldset>
-						<input type="email" name="user" placeholder="Username" required>
-						<input type="password" name="password" placeholder="Password" required>
+						<input type="email" name="user" placeholder="Username" required maxlength="255">
+						<input type="password" name="password" placeholder="Password" required maxlength="255">
 						<button type="submit" name="login" class="btn btn-primary">Login</button>
 						<p style="margin-top:0.5em;"><a href="#pwdreset" data-toggle="modal">Change or reset password</a></p>
 					</fieldset>
@@ -62,8 +62,8 @@
 					</c:when>
 				</c:choose>
 				<fieldset>
-					<input type="email" name="email" placeholder="E-mail address" required>
-					<input type="password" name="password" placeholder="Password" required>
+					<input type="email" name="email" placeholder="E-mail address" required maxlength="255">
+					<input type="password" name="password" placeholder="Password" required maxlength="255">
 					<span class="help-block">Complete the fields above to register</span>
 					<button type="submit" class="btn btn-primary">Register</button>
 				</fieldset>
@@ -82,7 +82,7 @@
 		<div class="modal-body">
 			<p>To reset the password (or to change it), type your email address. If you are a registered user,
 	an email will be sent to you containing a link which allows to reset your password.</p>
-			<input type="email" name="email" class="input-xlarge" required>
+			<input type="email" name="email" class="input-xlarge" required maxlength="255">
 		</div>
 		<div class="modal-footer">
 			<button name="reset" class="btn btn-primary">Reset password</button>

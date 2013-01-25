@@ -23,6 +23,6 @@
 			<i class="icon-plus"></i>
 	</label>
 	
-	<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..."></textarea><br>
+	<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..." maxlength="255"></textarea><br>
 	<input type="submit" value="Submit" id="Submit">
 </form>

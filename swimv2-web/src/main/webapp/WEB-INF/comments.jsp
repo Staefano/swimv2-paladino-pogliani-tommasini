@@ -40,7 +40,7 @@
 				<form class="form-horizontal"  name="newcomment" method="post" action="comment">
 					<input type="hidden" name="hr_id" value="${hr.id }">
 					<p><b>Comment:</b></p>
-					<textarea name="comment" rows="4" cols="50"></textarea>
+					<textarea name="comment" rows="4" cols="50" maxlength="255"></textarea>
 					<input type="submit"  value="Comment">
 				</form>	
 			</div>

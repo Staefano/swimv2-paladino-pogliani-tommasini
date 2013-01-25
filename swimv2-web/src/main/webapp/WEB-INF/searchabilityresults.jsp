@@ -10,7 +10,7 @@
 		
 		<div class="container">
 		<form class="navbar-search pull-left" action="searchability" method="get">
-			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb">
+			<input type="text" class="search-query" placeholder="Search ability to add" name="searchAb" maxlength="255">
 		</form>
 		</div>
 		<br>
@@ -63,10 +63,10 @@
 			<form class="form-horizontal" method="post" action="searchability">
 		  		<div class="control-group">
 		  			<input type="text" placeholder="Ability Name"
-						class="input-medium search-query" name="name">
+						class="input-medium search-query" name="name" maxlength="42">
 		  		</div>
 		  		<div class="control-group">
-		  			<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..."></textarea>
+		  			<textarea name="comment" rows="4" cols="50" placeholder="Write here a comment..." maxlength="255"></textarea>
 		  		</div>
 		  		<button type="submit" class="btn btn-small btn-primary">Send Request</button>
 			</form>

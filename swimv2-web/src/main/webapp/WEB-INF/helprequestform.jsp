@@ -19,7 +19,7 @@
 	<form name="helprequest" method="post" action="helprequest" class="offset2 span8">
 	
 		<label>Subject</label>
-		<input type="text" name="subject" class="input-block-level">
+		<input type="text" name="subject" class="input-block-level" maxlength="255">
 				
 		<label>Which abilities of ${receiver.name} ${receiver.surname} do you need?</label>
 		<c:forEach var="a" items="${abilities}">
@@ -27,7 +27,7 @@
 		</c:forEach>
 		<br><br>
 		<label>Comment</label>
-		<textarea class="input-block-level" name="comment" rows="6"></textarea>
+		<textarea class="input-block-level" name="comment" rows="6" maxlength="255"></textarea>
 		
 		<input type="hidden" name="receiver" value="${receiver.id}">
 		<div class="form-actions">

@@ -10,7 +10,7 @@
 			<p class="navbar-text pull-left">Hi, ${user.name} ${user.surname} </p>
 			<form class="navbar-search" style="margin-left: 1em;" action="search-user" method="get">
 				<input type="text" class="search-query" placeholder="Search people"
-					name="search" value="${param.search}">
+					name="search" value="${param.search}" maxlength="510"> <!-- name(255) + surname(255) -->
 			</form>
 			<ul class="nav pull-right">
 				<c:if test="${user.admin}">
