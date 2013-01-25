@@ -49,7 +49,7 @@ public class FriendRequestServlet extends Controller {
 					nbr.notifyFriendshipRequest(asker, receiver,
 							NotificationType.FRIENDSHIP_RECEIVED);
 				}
-				nav.fwd(BASEPATH);
+				nav.redirect("/profile?id=" + receiverID );
 			} catch (NoSuchUserException nsue) {
 				nav.sendNotFound();
 			} catch (OperationFailedException e) {
