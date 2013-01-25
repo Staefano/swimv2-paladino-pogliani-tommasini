@@ -116,7 +116,7 @@
 							<%-- BUTTONS --%>
 							<%-- Mark as read button for all notifications but friendship received --%>
 							<c:choose>
-							<c:when test="${n.type == FRIENDSHIP_RECEIVED || n.type == FRIENDSHIP_RECEIVED_DIRECT }">
+							<c:when test="${n.type == 'FRIENDSHIP_RECEIVED' || n.type == 'FRIENDSHIP_RECEIVED_DIRECT' }">
 							<p>
 								<a class="btn btn-success" href="friendship?notification_id=${n.id}&answer=accepted">Approve</a>
 				                <a class="btn btn-danger" href="friendship?notification_id=${n.id}&answer=refused">Refuse</a>

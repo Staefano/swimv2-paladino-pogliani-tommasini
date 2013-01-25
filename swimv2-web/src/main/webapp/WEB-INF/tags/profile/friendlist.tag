@@ -11,9 +11,7 @@
 	<ul
 		style="list-style-type: none; padding: 0; margin: 0; margin-top: 1em;">
 		<c:forEach var="fr" items="${friendsList}">
-			<c:if test="${user!=fr}">
 				<li><a href="profile?id=${fr.id}">${fr.name} ${fr.surname}</a></li>
-			</c:if>
 		</c:forEach>
 	</ul>
 </div>
