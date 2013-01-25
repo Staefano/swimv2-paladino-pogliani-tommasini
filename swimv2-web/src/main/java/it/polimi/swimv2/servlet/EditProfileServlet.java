@@ -74,7 +74,7 @@ public class EditProfileServlet extends Controller implements Servlet {
 			} else if(form.getFileSize() > 0) {
 				updated = uploadUserImage(updated, form.getFile(), form.getFileSize());
 			}
-			nav.redirect("/");
+			nav.redirect("/profile?id=" + nav.getLoggedUser().getId() );
 		} catch (NoSuchUserException u) {
 			nav.setAttribute("error", "form");
 			nav.fwd(EDITPROFILE_JSP);
