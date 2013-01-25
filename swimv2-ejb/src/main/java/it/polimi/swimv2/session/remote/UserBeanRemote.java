@@ -23,8 +23,21 @@ public interface UserBeanRemote {
 
 	List<HelpRequest> getOpenedHelpRequest(User u) throws NoSuchUserException;
 
-	List<User> searchUser(String queryString);
+	/**
+	 * Search for users in the database
+	 * @param queryString a string that is the name plus surname or part of it
+	 * @param page the number of the result page being returned (that is, are returned
+	 * (at most) pageSize results from the page * pageSize.
+	 * @param pageSize the maximum number of results to be returned
+	 */
+	List<User> searchUser(String queryString, int page, int pageSize);
 
+	/**
+	 * Retrieves the number of users satisfying the specified search criteria
+	 * @param queryString a string that is the name plus surname or part of it
+	 */
+	long countSearchUser(String queryString);
+	
 	List<HelpRequest> getClosedHelpRequest(User u) throws NoSuchUserException;
 
 	List<HelpRequest> getProvidedHelpRequest(User u) throws NoSuchUserException;

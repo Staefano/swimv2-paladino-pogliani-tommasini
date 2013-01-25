@@ -36,18 +36,12 @@ public class UserBean implements UserBeanRemote {
 		Query q = manager.createNamedQuery("HelpRequest.findByHelper");
 		q.setParameter("helper", u);
 		try {
-			// TODO Brutto, da rivedere
 			List<?> helpRequestList = q.getResultList();
-
 			for (Object o : helpRequestList) {
-
 				HelpRequest h = (HelpRequest) o;
 				feedbackList.add(h.getReceiverFeedback());
-
 			}
-
 			return feedbackList;
-
 		} catch (NoResultException nre) {
 			throw new NoSuchUserException(nre);
 		}
@@ -135,10 +129,23 @@ public class UserBean implements UserBeanRemote {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<User> searchUser(String queryString) {
+	public List<User> searchUser(String queryString, int page, int pageSize) {
 		Query q = manager.createNamedQuery("User.searchUser");
 		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
+		/* just to make sure page is not negative so that IllegalArgumentException is not thrown */
+		if(page <= 0) {
+			page = 1;
+		}
+		q.setFirstResult((page - 1) * pageSize);
+		q.setMaxResults(pageSize);
 		return q.getResultList();
+	}
+	
+	@Override
+	public long countSearchUser(String queryString) {
+		Query q = manager.createNamedQuery("User.countSearchUser");
+		q.setParameter("name", '%' + queryString.toLowerCase().trim() + '%');
+		return (Long) q.getSingleResult();
 	}
 
 	@Override

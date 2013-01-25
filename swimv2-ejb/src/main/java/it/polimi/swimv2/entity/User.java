@@ -15,7 +15,9 @@ import javax.persistence.*;
 		@NamedQuery(name = "User.findByEmail", query = "SELECT x FROM User x WHERE x.email = :email"),
 		@NamedQuery(name = "User.getUserByID", query = "SELECT x FROM User x WHERE x.id = :id"),
 		@NamedQuery(name = "User.searchUser", query = "SELECT x FROM User x WHERE "
-				+ "CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) LIKE :name") })
+				+ "CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) LIKE :name ORDER BY x.surname, x.id"),
+		@NamedQuery(name = "User.countSearchUser", query = "SELECT COUNT(x) FROM User x WHERE "
+				+ "CONCAT(TRIM(x.name), CONCAT(' ', TRIM(x.surname))) LIKE :name ORDER BY x.surname, x.id") })
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class User implements Serializable {
 
