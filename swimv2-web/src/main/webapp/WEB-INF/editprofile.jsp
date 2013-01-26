@@ -55,7 +55,7 @@
 
 		<div class="span5 offset1">
 		
-		<label for="file">Profile image (max. 5MB, will be resized and cropped)</label>
+		<label for="file">Profile image (max. 7MB, will be resized and cropped)</label>
 		<input type="file" id="file" name="file">
 		<label class="checkbox"><input type="checkbox" name="removeImage" value="yes">Remove my image</label>
 		<img style="display: block; margin: 0.7em auto;"class="img-polaroid" src="${pageContext.request.contextPath}/images/profile?user=${user.id}" />
