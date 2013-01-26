@@ -54,11 +54,12 @@ public class FriendSuggestionServlet extends Controller {
 			u = userBean.getUserByID(Integer.parseInt(userId));
 			List<User> friends = friendshipBean.getFriends(u);
 			List<User> myFriends = friendshipBean.getFriends(nav.getLoggedUser());
-			if(friends == null || friends.size() == 0) {
-				nav.setAttribute("outcome", "noUserFound");
-			} else {
+			if(friends != null) {
 				friends.remove(loggedUser);
 				friends.removeAll(myFriends);
+			}
+			if(friends == null || friends.size() == 0) {
+				nav.setAttribute("outcome", "noUserFound");
 			}
 			nav.setAttribute("usersList", friends);
 			nav.fwd(SUGGESTIONS_JSP);
