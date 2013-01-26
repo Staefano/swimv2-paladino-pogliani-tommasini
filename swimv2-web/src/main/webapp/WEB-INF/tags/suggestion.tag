@@ -16,7 +16,11 @@
 	</div>
 	<div class="pull-right">
     	<c:if test="${user!=profile}">
-			<a href="friendrequest?asker=${user.id}&receiver=${profile.id}&type=indirect" class="btn">Add as friend</a>
+			<form method="post" action="friendsuggestions">
+				<input type="hidden" name="id" value="${param.id}">
+				<input type="hidden" name="receiver" value="${profile.id}">
+				<input type="submit" name="Submit" value="Add as friend" class="btn">
+			</form>
 		</c:if>
 	</div>
     <h3>${profile.name} ${profile.surname}</h3>
