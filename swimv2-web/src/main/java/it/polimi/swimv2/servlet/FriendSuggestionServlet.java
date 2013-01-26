@@ -24,8 +24,10 @@ public class FriendSuggestionServlet extends Controller {
 	private UserBeanRemote userBean;
 	
 	@EJB
-	private FriendShipBeanRemote frshpBean;
+	private FriendShipBeanRemote friendshipBean;
 
+	private static final String SUGGESTIONS_JSP = "/WEB-INF/friendsuggestions.jsp";
+	
     public FriendSuggestionServlet() {
         super(AccessRole.USER);
     }
@@ -38,14 +40,16 @@ public class FriendSuggestionServlet extends Controller {
 		User u;
 		try {
 			u = userBean.getUserByID(Integer.parseInt(userId));
-			List<User> friends = frshpBean.getFriends(u);
+			List<User> friends = friendshipBean.getFriends(u);
+			List<User> myFriends = friendshipBean.getFriends(nav.getLoggedUser());
 			if(friends == null || friends.size() == 0) {
 				nav.setAttribute("outcome", "noUserFound");
 			} else {
 				friends.remove(loggedUser);
+				friends.removeAll(myFriends);
 			}
 			nav.setAttribute("usersList", friends);
-			nav.fwd("/WEB-INF/friendssuggestions.jsp");
+			nav.fwd(SUGGESTIONS_JSP);
 		} catch (NumberFormatException e) {
 			nav.sendNotFound();
 		} catch (NoSuchUserException e) {
