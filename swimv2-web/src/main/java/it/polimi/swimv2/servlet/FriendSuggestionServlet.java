@@ -45,7 +45,7 @@ public class FriendSuggestionServlet extends Controller {
 				friends.remove(loggedUser);
 			}
 			nav.setAttribute("usersList", friends);
-			nav.fwd("/WEB-INF/peoplesearchresults.jsp");
+			nav.fwd("/WEB-INF/friendssuggestions.jsp");
 		} catch (NumberFormatException e) {
 			nav.sendNotFound();
 		} catch (NoSuchUserException e) {
