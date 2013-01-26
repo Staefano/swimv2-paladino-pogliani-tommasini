@@ -15,7 +15,7 @@
 		</c:when>		 
 		<c:when test="${outcome == 'noUserFound'}">		 
 			<div class="alert alert-block">		 
-  				No user found!		 
+  				No suggestions! 
 			</div>		 
 		</c:when>		 
 		<c:otherwise>		 
