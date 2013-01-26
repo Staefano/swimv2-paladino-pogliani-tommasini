@@ -53,7 +53,7 @@ public interface AbilityBeanRemote {
 	List<Ability> getAbilities(String[] abilityNames);
 
 	/**
-	 * @return the list of ability s
+	 * @return the list of ability that correspond to querrystrings and are not in user abilities
 	 */
 	List<Ability> searchAbility(String queryString, User user);
 	
