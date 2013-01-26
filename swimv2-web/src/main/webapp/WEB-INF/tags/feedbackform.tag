@@ -7,11 +7,11 @@
 <form name="feedbackform" method="post" action="feedback">
 	<legend>Close request</legend>
 	<label class="radio inline">
-		<input type="radio" name="evaluation" id="optionsRadios1" value="0" checked>
+		<input type="radio" name="evaluation" id="optionsRadios1" value="0">
 			<i class="icon-minus"></i>
 	</label>
 	<label class="radio inline">
-		<input type="radio" name="evaluation" id="optionsRadios2" value="1">
+		<input type="radio" name="evaluation" id="optionsRadios2" value="1" checked>
 			<i class="icon-asterisk"></i>
 	</label>
 	<label class="radio inline">
