@@ -54,7 +54,7 @@
 		</div>
 		
 		
-		
+		<br>
 		<div class="well well-small">
 		
 		<c:if test="${message == 'success'}">
