@@ -98,19 +98,11 @@
 								Your request to add ${n.ability} as an ability was rejected.
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}"> <%-- indirect friendship --%>
-								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>. 		
-									<p><a href="friendship?notification_id=${n.id}&answer=accepted">		
-										<button class="btn btn-success" type="button">Approve </button></a>		
-					                <a href="friendship?notification_id=${n.id}&answer=refused">		
-					                	<button class="btn btn-danger" type="button">Refuse </button></a></p>
+								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
 								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
 								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
-								<p><a href="friendship?notification_id=${n.id}&answer=accepted">		
-									<button class="btn btn-success" type="button">Approve </button></a>		
-					            <a href="friendship?notification_id=${n.id}&answer=refused">		
-					                <button class="btn btn-danger" type="button">Refuse </button></a></p>
 							</c:if>
 							</p>
 							<%-- BUTTONS --%>
