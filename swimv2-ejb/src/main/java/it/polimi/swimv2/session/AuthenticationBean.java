@@ -65,9 +65,10 @@ public class AuthenticationBean implements AuthenticationBeanRemote {
 	}
 	
 	@Override
-	public void requestPasswordReset(String email, String uri) throws EmailException {
-		String token = createToken(email, null, TokenType.RESETPASSWORD);
+	public void requestPasswordReset(String email, String uri) throws EmailException, NoSuchUserException {
 		try {
+			fetchUser(email);
+			String token = createToken(email, null, TokenType.RESETPASSWORD);
 			emailer.sendResetEmail(email, token, uri);
 		} catch(MessagingException me) {
 			throw new EmailException(me);

@@ -8,6 +8,12 @@
 	<c:if test="${accessDenied}">
 		<div class="alert alert-error">Permission denied. Please log in again</div>
 	</c:if>
+	<c:if test="${resetRequested}">
+		<div class="alert alert-info">To complete the password reset, use the link we sent you via email!</div>
+	</c:if>
+	<c:if test="${resetFailed}">
+		<div class="alert alert-error">Can't process your password reset request. Your email is not registered on the system or there was an error on the email server.</div>
+	</c:if>
 	<div class="row">
 	<div class="span7 hero-unit">
 		<h1>SWIMv2</h1>

@@ -1,5 +1,6 @@
 package it.polimi.swimv2.servlet;
 
+import it.polimi.swimv2.session.exceptions.EmailException;
 import it.polimi.swimv2.session.exceptions.NoSuchUserException;
 import it.polimi.swimv2.session.exceptions.NotUniqueException;
 import it.polimi.swimv2.session.remote.AuthenticationBeanRemote;
@@ -54,10 +55,12 @@ public class HomeServlet extends Controller {
 		String path = nav.getPath();
 		try {
 			auth.requestPasswordReset(email, path);
-		} catch (Exception e) {
-			// non informiamo l'utente se va storto qualcosa!
+			nav.setAttribute("resetRequested", true);
+		} catch (NoSuchUserException e) {
+			nav.setAttribute("resetFailed", true);
+		} catch (EmailException e) {
+			nav.setAttribute("resetFailed", true);
 		}
-		nav.setAttribute("resetRequested", true);
 		nav.fwd(INDEX_JSP);
 
 	}

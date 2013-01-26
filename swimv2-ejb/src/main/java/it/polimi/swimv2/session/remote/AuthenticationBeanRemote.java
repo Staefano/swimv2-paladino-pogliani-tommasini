@@ -63,6 +63,7 @@ public interface AuthenticationBeanRemote {
 	 * email containing the registration link
 	 * @param email the email of the user who wants to reset his\her password
 	 * @throws EmailException if the email cannot be sent
+	 * @throws NoSuchUserException if the email is not the one of a registered user
 	 */
-	void requestPasswordReset(String email, String uri) throws EmailException;
+	void requestPasswordReset(String email, String uri) throws EmailException, NoSuchUserException;
 }
