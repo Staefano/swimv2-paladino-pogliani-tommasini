@@ -10,6 +10,6 @@
 <t:progressbar user="${user}" />
 
 <p style="font-size: 1.4em; font-weight: bold; text-align: center;">
-	<span style="display: inline-block; width: 40%;">${user.experience}</span>
-	<span style="display: inline-block; width: 40%;">${user.reputation}</span>
+	<span style="display: inline-block; width: 40%;" class="swimv2-tooltip" title="Experience (number of provided helps)">${user.experience}</span>
+	<span style="display: inline-block; width: 40%;" class="swimv2-tooltip" title="Reputation (from 0 to 10)">${user.reputation}</span>
 </p>

@@ -12,8 +12,8 @@
 			<t:progressbar user="${user}" />
   	</div>
   	<div style="font-size: 1.4em; font-weight: bold; float: left; height: 100%; margin-right: 1em;">
-  		<p style="margin-top: 1em;">${user.experience}</p>
-  		<p style="margin-top: 2em;">${user.reputation}</p>
+  		<p style="margin-top: 1em;" class="swimv2-tooltip" title="Experience (number of provided helps)">${user.experience}</p>
+  		<p style="margin-top: 2em;" class="swimv2-tooltip" title="Reputation (from 0 to 10)">${user.reputation}</p>
 	</div>
 	<div class="pull-right">
     	<jsp:invoke fragment="buttons" />

@@ -43,9 +43,12 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.placeholder.min.js"></script>
 	<script type="text/javascript">
+	$(document).ready(function () {
+	    $(".swimv2-tooltip").tooltip();
+	});
 	$(function() {
 		$('input, textarea').placeholder();
-	})
+	});
 	</script>
 	<jsp:invoke fragment="scripts" />
 	</body>
