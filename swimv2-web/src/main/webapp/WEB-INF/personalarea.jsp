@@ -89,7 +89,6 @@
 							</c:if>
 							<c:if test="${n.type=='FRIENDSHIP_ACCEPTED' || n.type=='FRIENDSHIP_ACCEPTED_DIRECT' }">
 								Your friendship request to user <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a> was approved. <br>
-								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							<c:if test="${n.type=='ABILITY_ACCCEPTED'}">
 								Your ability request was approved. Now you can add ${n.ability} to your abilities.
@@ -97,11 +96,10 @@
 							<c:if test="${n.type=='ABILITY_REJECTED'}">
 								Your request to add ${n.ability} as an ability was rejected.
 							</c:if>
-							<c:if test="${n.type=='FRIENDSHIP_RECEIVED'}"> <%-- indirect friendship --%>
+							<c:if test="${n.type=='FRIENDSHIP_RECEIVED' || n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
 								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
 							</c:if>
-							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT'}">
-								You received a friendship request from <a href="profile?id=${n.srcUser.id}">${n.srcUser.name} ${n.srcUser.surname}</a>.
+							<c:if test="${n.type=='FRIENDSHIP_RECEIVED_DIRECT' || n.type=='FRIENDSHIP_ACCEPTED_DIRECT' }">
 								<a href="friendsuggestions?id=${n.srcUser.id}">See friends suggestions...</a>
 							</c:if>
 							</p>
