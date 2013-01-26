@@ -18,7 +18,7 @@
 			<div class="media-body" >
 				<img src="${pageContext.servletContext.contextPath}/images/profile?user=${cur.id}" class="media-object pull-left" style="max-width: 64px; padding-bottom: 10px;">
 				<h3 class="media-heading">${cur.name} ${cur.surname} <c:if test="${sfn:contains(unread, cur)}"><small>has unread messages</small></c:if></h3>
-				<p><a href="${pageContext.servletContext.contextPath}/messages?conversation=${cur.id}">Go to conversation</a></p>
+				<p><a href="${pageContext.servletContext.contextPath}/messages?conversation=${cur.id}">Go to conversation</a></p> 
 			</div>
 		</c:forEach>
 	</div>

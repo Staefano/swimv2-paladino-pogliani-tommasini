@@ -11,22 +11,50 @@ import it.polimi.swimv2.entity.User;
 @Remote
 public interface AbilityBeanRemote {
 		
-	void requestAbility(String name, String comment, User user);
-	
-	List<AbilityRequest> retrievePendingRequests();	
-		
-	void addNewAbility(String name);
-	
-	void rejectAbility(AbilityRequest request);
-
+	/**
+	 * return an ability request by id
+	 */
 	AbilityRequest getRequest(int abId);
 	
-	void removeAbilityRequest(AbilityRequest request);
-
-	boolean alreadyExist(String ability);
+	/**
+	 * add a new abilityrequest with user as asker
+	 */
+	void requestAbility(String name, String comment, User user);
+		
+	/**
+	 * add a new ability in the system
+	 */
+	void addNewAbility(String name);
 	
+	/**
+	 * refuse the request AbilityRequest
+	 */
+	void rejectAbility(AbilityRequest request);
+
+	/**
+	 * remove the abilityrequest from the system
+	 */
+	void removeAbilityRequest(AbilityRequest request);
+	
+	/**
+	 * is true if and Ability a whose name is 
+	 * @param ability
+	 */
+	boolean alreadyExist(String ability);
+
+	/**
+	 * @return the list of the pending abilityrequest
+	 */
+	List<AbilityRequest> retrievePendingRequests();	
+	
+	/**
+	 * @return the list of all abilities
+	 */
 	List<Ability> getAbilities(String[] abilityNames);
 
+	/**
+	 * @return the list of ability s
+	 */
 	List<Ability> searchAbility(String queryString, User user);
 	
 }
