@@ -50,7 +50,6 @@ public abstract class Controller extends HttpServlet {
 				post(nav);
 			}
 		} else {
-			// TODO do something better than redirect to home!
 			nav.redirect("/?error=permission");
 		}
 	}

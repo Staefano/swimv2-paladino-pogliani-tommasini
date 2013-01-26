@@ -33,12 +33,8 @@ public interface NotificationBeanRemote {
 	 * @return the notification to provide
 	 * @throws OperationFailedException
 	 */
-	Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws OperationFailedException;
-
-	/**
-	 * @return the notification of the abilit request by asker
-	 */
-	Notification notifyAbilityRequest(User asker);
+	Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) 
+			throws OperationFailedException;
 	
 	/**
 	 * is true if exist a pending frindrequest bewtween user1 and user2

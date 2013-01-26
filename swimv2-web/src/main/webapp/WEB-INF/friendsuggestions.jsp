@@ -18,7 +18,17 @@
   				No suggestions! 
 			</div>		 
 		</c:when>		 
-		<c:otherwise>		 
+		<c:otherwise>
+		<c:if test="${outcome == 'cannotSend'}">		 
+			<div class="alert alert-block">		 
+  				Can't send the friendship request. Make sure you don't have any other pending request with the same user! 
+			</div>
+		</c:if>
+		<c:if test="${outcome == 'sent'}">		 
+			<div class="alert alert-block alert-success">		 
+  				Friendship request sent successfully!
+			</div>		 
+		</c:if>	 
 		<c:forEach items="${usersList}" var="curUser">		 
 			<t:suggestion profile="${curUser}" />		 
 		</c:forEach>		 

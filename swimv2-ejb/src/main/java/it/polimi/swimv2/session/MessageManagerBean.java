@@ -32,7 +32,6 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 		manager.persist(m);
 	}
 	
-	// TODO support for pagination???
 	@Override @SuppressWarnings("unchecked")
 	public List<Message> getConversation(User current, User other) {
 		Query q = manager.createNamedQuery("Message.findConversation");
@@ -53,7 +52,7 @@ public class MessageManagerBean implements MessageManagerBeanRemote {
 		List<User> l2 = q2.getResultList();
 		for(User u : l2) {
 			if(!l1.contains(u)) {
-				l1.add(u); // TODO preserve ordering
+				l1.add(u);
 			}
 		}
 		return l1;
