@@ -170,9 +170,9 @@ public class HelpRequest implements Serializable {
 
 	public boolean canPlaceFeedback(User user) {
 		if(sender.equals(user)) {
-			return status == RequestStatus.ACCEPTED && askerFeedback != null;
+			return status == RequestStatus.ACCEPTED && receiverFeedback == null;
 		} else if(receiver.equals(user)) {
-			return status == RequestStatus.ZOMBIE && receiverFeedback != null;
+			return status == RequestStatus.ZOMBIE && askerFeedback == null;
 		}
 		return false;
 	}
