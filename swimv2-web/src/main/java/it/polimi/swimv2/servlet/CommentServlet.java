@@ -37,6 +37,7 @@ public class CommentServlet extends Controller {
 			List<it.polimi.swimv2.entity.Comment> comments = hrBean.getComments(hr);
 			nav.setAttribute("comments", comments);
 			nav.setAttribute("hr", hr);
+			nav.setAttribute("isopen", hr.isOpened());
 			nav.fwd(COMMENTS_JSP);
 		} catch (NumberFormatException e) {
 			nav.sendNotFound();
@@ -60,7 +61,7 @@ public class CommentServlet extends Controller {
 			nav.sendNotFound();
 		} catch (ClosedHelpRequestException e) {
 			nav.setAttribute("error", "ClosedRequest");
-			nav.fwd(COMMENTS_JSP);
+			nav.redirect("/comment?hr_id=" + requestId);
 		}
 	}
 }

@@ -40,12 +40,14 @@
 				</div>
 				
 				<hr>
-				<form name="newcomment" method="post" action="comment">
-					<label>Add a new comment</label>
-					<input type="hidden" name="hr_id" value="${hr.id }">
-					<textarea class="input-block-level" name="comment" rows="4" cols="50" maxlength="255"></textarea>
-					<input type="submit" class="btn" value="Send">
-				</form>	
+				<c:if test="${isopen}">
+					<form name="newcomment" method="post" action="comment">
+						<label>Add a new comment</label>
+						<input type="hidden" name="hr_id" value="${hr.id }">
+						<textarea class="input-block-level" name="comment" rows="4" cols="50" maxlength="255"></textarea>
+						<input type="submit" class="btn" value="Send">
+					</form>
+				</c:if>		
 			</div>
 			<div class="span3">
 				<c:if test="${user == hr.receiver}">
