@@ -56,7 +56,7 @@ public class FriendRequestServlet extends Controller {
 				nav.sendNotFound();
 			}
 		} else {
-			nav.sendNotFound(); // TODO qui e' sbagliato mandare un 404...
+			nav.sendNotFound(); /* TODO sarebbe meglio qualche errore piu' significativo di un 404! */
 		}
 	}
 }

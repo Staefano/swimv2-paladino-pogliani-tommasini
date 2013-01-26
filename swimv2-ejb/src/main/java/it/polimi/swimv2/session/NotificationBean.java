@@ -26,10 +26,6 @@ public class NotificationBean implements NotificationBeanRemote {
 	@PersistenceContext(unitName = "swimv2")
 	private EntityManager manager;
 
-	public NotificationBean() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public Notification notifyFriendshipRequest(User asker, User receiver, NotificationType type) throws OperationFailedException {
 		//TODO manca controllo is pending is friend
@@ -69,12 +65,6 @@ public class NotificationBean implements NotificationBeanRemote {
 		manager.remove(request);
 		return n;
 
-	}
-
-	@Override
-	public Notification notifyAbilityRequest(User asker) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -127,7 +117,6 @@ public class NotificationBean implements NotificationBeanRemote {
 			return notifications;
 
 		} catch (NoResultException nre) {
-			// TODO
 			return null;
 		}
 
@@ -141,7 +130,6 @@ public class NotificationBean implements NotificationBeanRemote {
 		try {
 			return (Notification) q.getSingleResult();
 		} catch (NoResultException nre) {
-			// TODO da sistemare
 			return null;
 		}
 	}
@@ -150,17 +138,12 @@ public class NotificationBean implements NotificationBeanRemote {
 	public void deleteNotification(String notificationId) {
 		Query q = manager.createNamedQuery("Notification.findByID");
 		q.setParameter("id", Integer.parseInt(notificationId));
-
 		try {
-
 			manager.remove((Notification) q.getSingleResult());
-
 		} catch (NoResultException nre) {
-			// TODO da sistemare
+			/* don't inform user if something goes wrong */
 		}
 	}
-
-
 
 	@Override
 	public void notifyAdminPromotion(User user) {
