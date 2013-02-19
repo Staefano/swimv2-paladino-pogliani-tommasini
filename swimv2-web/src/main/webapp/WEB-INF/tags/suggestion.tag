@@ -24,6 +24,6 @@
 		</c:if>
 	</div>
     <h3>${profile.name} ${profile.surname}</h3>
-    <p>${user.minibio}</p>
+    <p>${profile.minibio}</p>
   </div>
 </div>
